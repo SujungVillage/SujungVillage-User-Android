@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.LabelVisibilityMode
+import com.google.android.material.tabs.TabLayout
 import kr.co.sujungvillage.Fragment.CommFragment
 import kr.co.sujungvillage.Fragment.HomeFragment
 import kr.co.sujungvillage.Fragment.QnAFragment
@@ -26,7 +28,9 @@ class MainActivity : AppCompatActivity() {
         initNavigationBar()
     }
 
+    // 네비게이션 바 초기 설정 함수
     private fun initNavigationBar() {
+        binding.navigationBar.itemIconTintList = null // 아이콘 색상 그대로 유지
         binding.navigationBar.run {
             setOnNavigationItemSelectedListener {
                 when(it.itemId) {
@@ -45,10 +49,12 @@ class MainActivity : AppCompatActivity() {
                 }
                 true
             }
+            // 홈 프래그먼트에서 시작
             selectedItemId = R.id.home
         }
     }
 
+    // 프래그먼트 전환 함수
     fun changeFragment(fragment: Fragment) {
         supportFragmentManager
             .beginTransaction()

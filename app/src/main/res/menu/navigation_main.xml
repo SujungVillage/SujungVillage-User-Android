@@ -3,24 +3,24 @@
     <item
         android:id="@+id/home"
         android:enabled="true"
-        android:icon="@drawable/icon_home"
+        android:icon="@drawable/selector_icon_home"
         android:title="Home"/>
 
     <item
         android:id="@+id/community"
         android:enabled="true"
-        android:icon="@drawable/icon_community"
+        android:icon="@drawable/selector_icon_community"
         android:title="Community"/>
 
     <item
         android:id="@+id/qna"
         android:enabled="true"
-        android:icon="@drawable/icon_qna"
+        android:icon="@drawable/selector_icon_qna"
         android:title="Q&amp;A"/>
 
     <item
         android:id="@+id/settings"
         android:enabled="true"
-        android:icon="@drawable/icon_setting"
+        android:icon="@drawable/selector_icon_setting"
         android:title="Settings" />
 </menu>
