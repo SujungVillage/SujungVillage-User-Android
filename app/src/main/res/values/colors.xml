@@ -11,9 +11,13 @@
     <!-- user-defined colors -->
     <color name="orange_500">#FFFFA114</color>
 
+    <color name="yellow_100">#FFFFEEBD</color>
     <color name="yellow_500">#FFFFD250</color>
 
     <color name="orange_900">#FFBE6E00</color>
+
+    <color name="gray_200">#FF9A9A9A</color>
+    <color name="gray_300">#FF878787</color>
 
     <color name="nothing">#00FFFFFF</color>
 </resources>
