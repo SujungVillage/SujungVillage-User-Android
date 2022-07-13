@@ -33,7 +33,7 @@
             android:layout_weight="1"
             android:text="두루마리 휴지 나눔!"
             android:textSize="14dp"
-            android:textStyle="semibold"
+            android:textStyle="bold"
             android:textColor="#414141"/>
 
         <TextView

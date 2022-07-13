@@ -14,43 +14,54 @@
          android:orientation="vertical"
         android:background="#F5F5F5">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="114dp"
-            android:background="@drawable/comm_border"
-            android:orientation="horizontal">
+            android:layout_height="99dp"
+            android:background="@drawable/comm_border">
 
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="49dp"
                 android:layout_weight="1"
                 android:entries="@array/기숙사"
                 android:gravity="center"
                 android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/comm_search"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
             <ImageButton
                 android:id="@+id/comm_search"
-                android:layout_width="wrap_content"
+                android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:layout_gravity="center"
-                android:layout_marginRight="20dp"
+                android:layout_marginTop="49dp"
+                android:layout_marginEnd="20dp"
                 android:background="@color/nothing"
                 android:src="@drawable/icon_comm_search"
+                app:layout_constraintEnd_toStartOf="@+id/comm_alarm"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <ImageButton
                 android:id="@+id/comm_alarm"
-                android:layout_width="wrap_content"
+                android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:layout_gravity="center"
-                android:layout_marginRight="20dp"
+                android:layout_marginTop="49dp"
+                android:layout_marginEnd="21dp"
                 android:background="@color/nothing"
-                android:src="@drawable/icon_bell"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_alarm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-        </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ScrollView
             android:layout_width="match_parent"
