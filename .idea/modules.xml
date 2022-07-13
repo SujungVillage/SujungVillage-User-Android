@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SujungVillage.iml" filepath="$PROJECT_DIR$/.idea/modules/SujungVillage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SujungVillage.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SujungVillage.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SujungVillage.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SujungVillage.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SujungVillage.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SujungVillage.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SujungVillage.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SujungVillage.app.unitTest.iml" />
+    </modules>
+  </component>
+</project>
