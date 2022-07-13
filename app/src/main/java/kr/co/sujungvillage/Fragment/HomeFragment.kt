@@ -16,7 +16,7 @@ class HomeFragment : Fragment() {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         // 외박 신청 버튼 연결
-        binding.btnOvernight.setOnClickListener {
+        binding.btnStayout.setOnClickListener {
             var intent = Intent(this.activity, StayoutActivity::class.java)
             startActivity(intent)
         }
