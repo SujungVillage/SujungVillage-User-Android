@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/icon_stayout_checkbox"
+        android:width="12dp"
+        android:height="12dp"
+        android:state_checked="false" />
+    <item
+        android:drawable="@drawable/icon_stayout_checkbox_checked"
+        android:width="12dp"
+        android:height="12dp"
+        android:state_checked="true" />
+</selector>

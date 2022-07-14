@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:elevation="10dp"
-    android:background="@drawable/comm_listitem_border"
+    android:background="@drawable/style_comm_listitem_border"
     android:layout_marginBottom="15dp"
     android:layout_margin="2dp">
 
@@ -19,7 +19,7 @@
             android:layout_width="36dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="9dp"
-            android:background="@drawable/comm_listitem_admin_border"
+            android:background="@drawable/style_comm_listitem_admin_border"
             android:gravity="center"
             android:padding="2dp"
             android:text="관리자"
