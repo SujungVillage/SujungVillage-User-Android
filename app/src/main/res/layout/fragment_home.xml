@@ -18,11 +18,11 @@
             android:id="@+id/btn_alarm"
             android:layout_width="22dp"
             android:layout_height="22dp"
-            android:layout_marginTop="17dp"
+            android:layout_marginTop="41dp"
             android:layout_marginRight="26dp"
             android:background="@color/nothing"
             android:scaleType="fitCenter"
-            android:src="@drawable/icon_alarm"
+            android:src="@drawable/icon_main_alarm"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="35dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="74dp"
             android:layout_marginRight="35dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
@@ -107,6 +107,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
+                    android:id="@+id/linear_home"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
@@ -123,7 +124,7 @@
 
                         <!-- 외박 신청 버튼 -->
                         <LinearLayout
-                            android:id="@+id/linear_overnight"
+                            android:id="@+id/linear_stayout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -131,16 +132,16 @@
                             android:orientation="vertical">
 
                             <ImageButton
-                                android:id="@+id/btn_overnight"
+                                android:id="@+id/btn_stayout"
                                 android:layout_width="45dp"
                                 android:layout_height="45dp"
                                 android:background="@color/nothing"
                                 android:scaleType="fitCenter"
-                                android:src="@drawable/img_overnight"
+                                android:src="@drawable/img_home_stayout"
                                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                             <TextView
-                                android:id="@+id/text_overnight"
+                                android:id="@+id/text_stayout"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
@@ -163,7 +164,7 @@
                                 android:layout_height="45dp"
                                 android:background="@color/nothing"
                                 android:scaleType="fitCenter"
-                                android:src="@drawable/img_roll_call"
+                                android:src="@drawable/img_home_roll_call"
                                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                             <TextView
@@ -190,7 +191,7 @@
                                 android:layout_height="45dp"
                                 android:background="@color/nothing"
                                 android:scaleType="fitCenter"
-                                android:src="@drawable/img_notice"
+                                android:src="@drawable/img_home_notice"
                                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                             <TextView
@@ -217,7 +218,7 @@
                                 android:layout_height="45dp"
                                 android:background="@color/nothing"
                                 android:scaleType="fitCenter"
-                                android:src="@drawable/img_reward"
+                                android:src="@drawable/img_home_reward"
                                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                             <TextView
@@ -235,8 +236,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
                         android:layout_marginTop="30dp"
+                        android:layout_marginRight="15dp"
                         android:background="@color/nothing" />
 
                     <TextView
@@ -245,9 +246,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
                         android:layout_marginBottom="66dp"
+                        android:text="기숙사 이메일 : dormitory@sungshin.ac.kr  |  개발자 contacts : 000-0000-0000"
                         android:textColor="@color/gray_200"
-                        android:textSize="10sp"
-                        android:text="기숙사 이메일 : dormitory@sungshin.ac.kr  |  개발자 contacts : 000-0000-0000" />
+                        android:textSize="10sp" />
 
                 </LinearLayout>
             </ScrollView>
