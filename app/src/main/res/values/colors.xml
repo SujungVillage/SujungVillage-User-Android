@@ -9,12 +9,11 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- user-defined colors -->
-    <color name="orange_500">#FFFFA114</color>
+    <color name="primary">#FFFFA114</color>
+    <color name="p_liight">#FFFFD250</color>
+    <color name="p_dark">#FFBE6E00</color>
 
     <color name="yellow_100">#FFFFEEBD</color>
-    <color name="yellow_500">#FFFFD250</color>
-
-    <color name="orange_900">#FFBE6E00</color>
 
     <color name="gray_100">#FFC5C5C5</color>
     <color name="gray_200">#FF9A9A9A</color>

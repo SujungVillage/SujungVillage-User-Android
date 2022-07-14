@@ -6,6 +6,9 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 
+
+// 키보드 내리기 메서드
+
 fun Fragment.hideKeyboard() {
     view?.let { activity?.hideKeyboard(it) }
 }

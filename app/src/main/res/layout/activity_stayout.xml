@@ -246,7 +246,7 @@
                 android:minWidth="0dp"
                 android:minHeight="0dp"
                 android:text="기본 정보 기억하기"
-                android:textColor="@color/orange_500"
+                android:textColor="@color/primary"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <Button
@@ -255,7 +255,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="133dp"
-                android:backgroundTint="@color/orange_500"
+                android:backgroundTint="@color/primary"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="제출하기"

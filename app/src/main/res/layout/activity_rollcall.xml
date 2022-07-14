@@ -77,7 +77,8 @@
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:textColor="@color/orange_500"
+
+        android:textColor="@color/primary"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <ImageButton
