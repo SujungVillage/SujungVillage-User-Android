@@ -14,7 +14,7 @@
          android:orientation="vertical"
         android:background="#F5F5F5">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="114dp"
             android:background="@drawable/style_comm_border"
@@ -25,33 +25,44 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="49dp"
                 android:layout_weight="1"
                 android:entries="@array/기숙사"
                 android:gravity="center"
                 android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/comm_search"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
             <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
+                android:id="@+id/comm_search"
+                android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:layout_gravity="center"
-                android:layout_marginRight="20dp"
+                android:layout_marginTop="49dp"
+                android:layout_marginEnd="20dp"
                 android:background="@color/nothing"
                 android:src="@drawable/icon_comm_search"
+                app:layout_constraintEnd_toStartOf="@+id/comm_alarm"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/comm_alarm"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:layout_gravity="center"
-                android:layout_marginRight="20dp"
+                android:layout_marginTop="49dp"
+                android:layout_marginEnd="21dp"
                 android:background="@color/nothing"
                 android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 android:src="@drawable/icon_main_alarm"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-        </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ScrollView
             android:layout_width="match_parent"
