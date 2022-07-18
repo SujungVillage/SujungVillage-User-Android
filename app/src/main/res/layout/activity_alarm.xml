@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView1"
         app:tabSelectedTextColor="@color/primary"
         app:tabTextColor="#434343"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
