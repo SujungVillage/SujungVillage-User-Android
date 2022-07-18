@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kr.co.sujungvillage.AlarmActivity
 import kr.co.sujungvillage.R
 import kr.co.sujungvillage.StayoutActivity
 import kr.co.sujungvillage.databinding.FragmentHomeBinding
@@ -18,6 +19,12 @@ class HomeFragment : Fragment() {
         // 외박 신청 버튼 연결
         binding.btnStayout.setOnClickListener {
             var intent = Intent(this.activity, StayoutActivity::class.java)
+            startActivity(intent)
+        }
+
+        //알림 버튼 연결
+        binding.btnAlarm.setOnClickListener {
+            var intent = Intent(this.activity, AlarmActivity::class.java)
             startActivity(intent)
         }
 

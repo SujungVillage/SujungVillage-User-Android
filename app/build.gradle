@@ -50,4 +50,7 @@ dependencies {
     //lottie
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    //tab 기능
+    implementation 'com.google.android.material:material:1.6.1'
 }
