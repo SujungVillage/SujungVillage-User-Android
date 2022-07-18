@@ -12,49 +12,14 @@
         <shape>
             <corners android:radius="20dp"/>
             <padding android:bottom="2dp" />
-            <solid android:color="#06CCCCCC" />
+            <solid android:color="#0CCCCCCC" />
         </shape>
     </item>
     <item>
         <shape>
             <corners android:radius="20dp"/>
             <padding android:bottom="2dp" />
-            <solid android:color="#09CCCCCC" />
-        </shape>
-    </item>
-    <item>
-        <shape>
-            <corners android:radius="20dp"/>
-            <padding android:bottom="2dp" />
-            <solid android:color="#0BCCCCCC" />
-        </shape>
-    </item>
-    <item>
-        <shape>
-            <corners android:radius="20dp"/>
-            <padding android:bottom="2dp" />
-            <solid android:color="#0DCCCCCC" />
-        </shape>
-    </item>
-    <item>
-        <shape>
-            <corners android:radius="20dp"/>
-            <padding android:bottom="2dp" />
-            <solid android:color="#10CCCCCC" />
-        </shape>
-    </item>
-    <item>
-        <shape>
-            <corners android:radius="20dp"/>
-            <padding android:bottom="2dp" />
-            <solid android:color="#12CCCCCC" />
-        </shape>
-    </item>
-    <item>
-        <shape>
-            <corners android:radius="20dp"/>
-            <padding android:bottom="2dp" />
-            <solid android:color="#15CCCCCC" />
+            <solid android:color="#13CCCCCC" />
         </shape>
     </item>
     <item>
@@ -68,7 +33,42 @@
         <shape>
             <corners android:radius="20dp"/>
             <padding android:bottom="2dp" />
-            <solid android:color="#1ACCCCCC" />
+            <solid android:color="#19CCCCCC" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <corners android:radius="20dp"/>
+            <padding android:bottom="2dp" />
+            <solid android:color="#20CCCCCC" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <corners android:radius="20dp"/>
+            <padding android:bottom="2dp" />
+            <solid android:color="#24CCCCCC" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <corners android:radius="20dp"/>
+            <padding android:bottom="2dp" />
+            <solid android:color="#2ACCCCCC" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <corners android:radius="20dp"/>
+            <padding android:bottom="2dp" />
+            <solid android:color="#2ECCCCCC" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <corners android:radius="20dp"/>
+            <padding android:bottom="2dp" />
+            <solid android:color="#35CCCCCC" />
         </shape>
     </item>
 
