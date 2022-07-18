@@ -24,7 +24,7 @@ class StayoutActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener { this.finish() }
 
         // 외박 유형 스피너 연결 및 커스텀
-        binding.spinnerType.adapter = ArrayAdapter.createFromResource(this, R.array.stayout_type, R.layout.item_stayout_type)
+        binding.spinnerType.adapter = ArrayAdapter.createFromResource(this, R.array.stayout_type, R.layout.spinner_stayout_type)
         binding.spinnerType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 when(position) {

@@ -22,7 +22,7 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-        //알림 버튼 연결
+        // 알림 버튼 연결
         binding.btnAlarm.setOnClickListener {
             var intent = Intent(this.activity, AlarmActivity::class.java)
             startActivity(intent)
