@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout/activity_alarm.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_rollcall.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_app_alarm.xml" value="0.3074792243767313" />
+        <entry key="app/src/main/res/layout/fragment_comm_alarm.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_qn_a.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/item_app_alarm_fragment.xml" value="0.30885416666666665" />
+        <entry key="app/src/main/res/layout/listitem_alarm_comm.xml" value="0.4228515625" />
+        <entry key="app/src/main/res/layout/listitem_comm.xml" value="0.3098958333333333" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+</project>
