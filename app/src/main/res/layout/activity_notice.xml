@@ -26,7 +26,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/icon_stayout_back"
+            app:srcCompat="@drawable/icon_back"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <TextView
@@ -90,7 +90,7 @@
                     android:layout_marginLeft="1dp"
                     android:background="@color/nothing"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/icon_next_page"
+                    app:srcCompat="@drawable/icon_notice_next_page"
                     tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
             </LinearLayout>
         </LinearLayout>
