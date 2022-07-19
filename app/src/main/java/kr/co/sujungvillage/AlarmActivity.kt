@@ -29,5 +29,8 @@ class AlarmActivity : AppCompatActivity() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = tabTitleArray[position]
         }.attach()
+
+        // 뒤로가기 버튼 연결
+        binding.btnBack.setOnClickListener { finish() }
     }
 }
