@@ -5,7 +5,7 @@
         <item>장기 외박</item>
     </string-array>
 
-    <string-array name="기숙사">
+    <string-array name="comm_dormitory">
         <item>전체</item>
         <item>성미료</item>
         <item>성미관</item>
