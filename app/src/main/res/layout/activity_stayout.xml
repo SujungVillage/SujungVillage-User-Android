@@ -17,7 +17,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icon_stayout_back"
+        app:srcCompat="@drawable/icon_back"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <TextView
@@ -82,6 +82,7 @@
                         android:layout_width="148dp"
                         android:layout_height="27dp"
                         android:background="@drawable/style_stayout_form"
+                        android:entries="@array/stayout_type"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -118,18 +119,23 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_date"
+                    android:id="@+id/layout_startDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:id="@+id/text_date"
+                        android:id="@+id/text_startDate"
                         android:layout_width="148dp"
                         android:layout_height="27dp"
                         android:background="@drawable/style_stayout_form"
+                        android:gravity="center_vertical"
+                        android:hint="시작 일자"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"
+                        android:textColor="@color/gray_350"
+                        android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -137,7 +143,44 @@
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
                     <ImageView
-                        android:id="@+id/img_calendar"
+                        android:id="@+id/btn_startCalendar"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginRight="8dp"
+                        android:scaleType="fitCenter"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/icon_stayout_calendar" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_endDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/layout_startDate"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <TextView
+                        android:id="@+id/text_endDate"
+                        android:layout_width="148dp"
+                        android:layout_height="27dp"
+                        android:background="@drawable/style_stayout_form"
+                        android:gravity="center_vertical"
+                        android:hint="종료 일자"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"
+                        android:textColor="@color/gray_350"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+                    <ImageView
+                        android:id="@+id/btn_endCalendar"
                         android:layout_width="15dp"
                         android:layout_height="15dp"
                         android:layout_marginRight="8dp"
@@ -165,15 +208,21 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                    <EditText
-                        android:id="@+id/edit_destination"
-                        android:layout_width="148dp"
-                        android:layout_height="27dp"
-                        android:background="@drawable/style_stayout_form"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+                <EditText
+                    android:id="@+id/edit_destination"
+                    android:layout_width="148dp"
+                    android:layout_height="27dp"
+                    android:background="@drawable/style_stayout_form"
+                    android:gravity="center_vertical"
+                    android:hint="행선지"
+                    android:paddingLeft="7dp"
+                    android:paddingRight="7dp"
+                    android:textColor="@color/gray_350"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -198,8 +247,15 @@
                     android:layout_height="73dp"
                     android:background="@drawable/style_stayout_form"
                     android:gravity="top"
+                    android:hint="사유"
                     android:inputType="textMultiLine"
+                    android:paddingLeft="7dp"
+                    android:paddingTop="6dp"
+                    android:paddingRight="7dp"
+                    android:paddingBottom="6dp"
                     android:scrollbars="vertical"
+                    android:textColor="@color/gray_350"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -227,7 +283,12 @@
                     android:layout_width="148dp"
                     android:layout_height="27dp"
                     android:background="@drawable/style_stayout_form"
+                    android:hint="긴급 전화번호"
                     android:inputType="number"
+                    android:paddingLeft="7dp"
+                    android:paddingRight="7dp"
+                    android:textColor="@color/gray_350"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
