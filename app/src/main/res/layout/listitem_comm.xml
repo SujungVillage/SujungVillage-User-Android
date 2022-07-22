@@ -11,7 +11,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
@@ -21,10 +21,12 @@
             android:layout_marginRight="9dp"
             android:background="@drawable/style_comm_listitem_admin_border"
             android:gravity="center"
-            android:padding="2dp"
+            android:padding="3dp"
             android:text="관리자"
             android:textColor="#ffffff"
-            android:textSize="10dp" />
+            android:textSize="10dp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/medium"/>
 
         <TextView
             android:id="@+id/textView"
@@ -34,7 +36,8 @@
             android:text="두루마리 휴지 나눔!"
             android:textSize="14dp"
             android:textStyle="bold"
-            android:textColor="#414141"/>
+            android:textColor="#414141"
+            android:fontFamily="@font/semi_bold"/>
 
         <TextView
             android:id="@+id/textView2"
@@ -44,7 +47,8 @@
             android:gravity="right"
             android:text="2022-07-08"
             android:textSize="10dp"
-            android:textColor="#A5A5A5"/>
+            android:textColor="#A5A5A5"
+            android:fontFamily="@font/regular"/>
     </LinearLayout>
 
     <TextView
@@ -55,6 +59,7 @@
         android:textSize="13dp"
         android:text="내가 쿠팡에서 휴지 주문했는데 생각보다 너무 많아서
 몇 개 나눔하려고 하는데 받을 사람들 댓글달 ..."
-        android:textColor="#6A6A6A"/>
+        android:textColor="#6A6A6A"
+        android:fontFamily="@font/regular"/>
 
 </LinearLayout>
