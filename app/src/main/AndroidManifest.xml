@@ -14,7 +14,12 @@
         android:theme="@style/Theme.SujungVillage"
         tools:targetApi="31">
         <activity
+
             android:name=".CommWriteActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".RewardActivity"
             android:exported="true" />
         <activity
             android:name=".CommDetailActivity"
@@ -44,6 +49,9 @@
             android:name=".StayoutActivity"
             android:exported="true"
             android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
