@@ -31,6 +31,7 @@
         android:text="성미관 게시판"
         android:textColor="@color/black"
         android:textSize="20dp"
+            android:fontFamily="@font/semi_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -56,7 +57,8 @@
                 android:text="근데 오늘 4층 왜이리 시끄러워?"
                 android:textColor="@color/black"
                 android:textSize="14dp"
-                android:paddingHorizontal="40dp"/>
+                android:paddingHorizontal="40dp"
+                android:fontFamily="@font/medium"/>
 
             <TextView
                 android:id="@+id/textView11"
@@ -65,7 +67,8 @@
                 android:text="2022/07/01 20:34"
                 android:textColor="#989898"
                 android:textSize="12dp"
-                android:paddingHorizontal="40dp"/>
+                android:paddingHorizontal="40dp"
+                android:fontFamily="@font/light"/>
 
             <TextView
                 android:id="@+id/textView5"
@@ -75,7 +78,8 @@
                 android:text="하루종일 계속 천장이 울릴 정도로 소음이 심해.. 뭐 공사라도 하는건가?? 공지 못 봤는데"
                 android:textColor="@color/black"
                 android:textSize="13dp"
-                android:paddingHorizontal="40dp"/>
+                android:paddingHorizontal="40dp"
+                android:fontFamily="@font/light"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -104,7 +108,8 @@
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:text="0"
-                    android:textColor="@color/primary" />
+                    android:textColor="@color/primary"
+                    android:fontFamily="@font/regular"/>
 
                 <View
                     android:id="@+id/view"
@@ -119,6 +124,7 @@
                     android:layout_weight="0"
                     android:gravity="right"
                     android:text="삭제하기"
+                    android:fontFamily="@font/regular"
                     android:background="#D9D9D9"/>
 
             </LinearLayout>
@@ -136,7 +142,8 @@
                 android:text="댓글 달기"
                 android:layout_marginTop="19dp"
                 android:textColor="@color/primary"
-                android:paddingHorizontal="40dp"/>
+                android:paddingHorizontal="40dp"
+                android:fontFamily="@font/medium"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -157,19 +164,21 @@
                     android:gravity="center"
                     android:inputType="textPersonName" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/button"
                     android:layout_width="38dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:textSize="12dp"
-                    android:text="등록"
-                    android:minHeight="0dp"
-                    android:minWidth="0dp"
-                    android:paddingHorizontal="3dp"
-                    android:textColor="@color/white"
                     android:layout_marginLeft="10dp"
-                />
+                    android:layout_weight="0"
+                    android:background="@drawable/style_comm_detail_write_button"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="4dp"
+                    android:paddingHorizontal="3dp"
+                    android:text="등록"
+                    android:textColor="@color/white"
+                    android:textSize="12dp"
+                    tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
         </LinearLayout>
