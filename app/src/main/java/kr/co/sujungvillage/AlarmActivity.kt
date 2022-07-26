@@ -4,6 +4,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayoutMediator
+import kr.co.sujungvillage.adapter.ViewPagerAdapter
 import kr.co.sujungvillage.databinding.ActivityAlarmBinding
 
 class AlarmActivity : AppCompatActivity() {
@@ -28,5 +29,8 @@ class AlarmActivity : AppCompatActivity() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = tabTitleArray[position]
         }.attach()
+
+        // 뒤로가기 버튼 연결
+        binding.btnBack.setOnClickListener { finish() }
     }
 }

@@ -35,8 +35,8 @@
             android:id="@+id/btn_alarm"
             android:layout_width="22dp"
             android:layout_height="22dp"
-            android:layout_marginTop="41dp"
-            android:layout_marginRight="26dp"
+            android:layout_marginTop="47dp"
+            android:layout_marginRight="25dp"
             android:background="@color/nothing"
             android:scaleType="fitCenter"
             android:src="@drawable/icon_main_alarm"
@@ -66,10 +66,10 @@
                     android:id="@+id/text_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/bold"
                     android:text="김수룡"
                     android:textColor="@color/white"
-                    android:textSize="34sp"
-                    android:textStyle="bold" />
+                    android:textSize="34sp" />
 
                 <TextView
                     android:id="@+id/text_welcome"
@@ -78,8 +78,8 @@
                     android:layout_marginLeft="1dp"
                     android:text="님 반갑습니다!"
                     android:textColor="@color/white"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/bold"
+                    android:textSize="22sp" />
             </LinearLayout>
 
             <TextView
@@ -88,6 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="11dp"
                 android:text="성미관 기숙사"
+                android:fontFamily="@font/medium"
                 android:textColor="@color/yellow_100" />
 
             <TextView
@@ -96,6 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:text="상점 : 12점    |    벌점 : 6점"
+                android:fontFamily="@font/medium"
                 android:textColor="@color/yellow_100" />
 
         </LinearLayout>
@@ -162,6 +164,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:text="외박 신청"
+                                android:fontFamily="@font/medium"
                                 android:textSize="11sp" />
                         </LinearLayout>
 
@@ -189,6 +192,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:text="점호"
+                                android:fontFamily="@font/medium"
                                 android:textSize="11sp" />
                         </LinearLayout>
 
@@ -216,6 +220,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:text="공지사항"
+                                android:fontFamily="@font/medium"
                                 android:textSize="11sp" />
                         </LinearLayout>
 
@@ -243,6 +248,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:text="상벌점 조회"
+                                android:fontFamily="@font/medium"
                                 android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>

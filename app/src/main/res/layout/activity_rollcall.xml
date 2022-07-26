@@ -100,7 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="90dp"
-        android:background="@drawable/rollcall_submit_border"
+        android:background="@drawable/style_rollcall_submit_border"
         android:paddingHorizontal="42dp"
         android:paddingVertical="14dp"
         android:text="제출하기"

@@ -1,4 +1,4 @@
-package kr.co.sujungvillage
+package kr.co.sujungvillage.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
