@@ -14,6 +14,9 @@ class HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        // lottie 이미지 회전
+        binding.imgWave.rotationX = 180f
+
         // 알림 버튼 연결
         binding.btnAlarm.setOnClickListener {
             var intent = Intent(this.activity, AlarmActivity::class.java)
