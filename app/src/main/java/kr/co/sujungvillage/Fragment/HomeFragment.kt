@@ -16,6 +16,9 @@ class HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        // lottie 이미지 회전
+        binding.imgWave.rotationX = 180f
+
         // 외박 신청 버튼 연결
         binding.btnStayout.setOnClickListener {
             var intent = Intent(this.activity, StayoutActivity::class.java)
