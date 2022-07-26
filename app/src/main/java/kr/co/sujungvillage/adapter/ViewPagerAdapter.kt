@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import kr.co.sujungvillage.Fragment.AppAlarmFragment
-import kr.co.sujungvillage.Fragment.CommAlarmFragment
+import kr.co.sujungvillage.fragment.AppAlarmFragment
+import kr.co.sujungvillage.fragment.CommAlarmFragment
 
 private const val NUM_TABS = 2
 
