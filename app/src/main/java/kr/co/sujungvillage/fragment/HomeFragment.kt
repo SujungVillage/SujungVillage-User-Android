@@ -1,4 +1,4 @@
-package kr.co.sujungvillage.Fragment
+package kr.co.sujungvillage.fragment
 
 import android.content.Intent
 import android.os.Bundle
