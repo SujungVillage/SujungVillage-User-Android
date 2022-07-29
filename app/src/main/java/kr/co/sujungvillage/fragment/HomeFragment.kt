@@ -1,4 +1,4 @@
-package kr.co.sujungvillage.Fragment
+package kr.co.sujungvillage.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +13,9 @@ class HomeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        // lottie 이미지 회전
+        binding.imgWave.rotationX = 180f
 
         // 알림 버튼 연결
         binding.btnAlarm.setOnClickListener {

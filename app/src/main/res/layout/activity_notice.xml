@@ -36,7 +36,7 @@
             android:text="공지사항"
             android:textColor="@color/black_900"
             android:textSize="20sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/semi_bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="50dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_notice"
@@ -66,33 +67,6 @@
                 android:layout_height="match_parent"
                 tools:listitem="@layout/listitem_notice_post" />
 
-            <LinearLayout
-                android:id="@+id/linear_page"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:layout_marginBottom="48dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_page"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/listitem_notice_page" />
-
-                <ImageButton
-                    android:id="@+id/btn_nextPage"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginLeft="1dp"
-                    android:background="@color/nothing"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/icon_notice_next_page"
-                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
