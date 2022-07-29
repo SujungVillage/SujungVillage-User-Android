@@ -1,11 +1,15 @@
 package kr.co.sujungvillage.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import kr.co.sujungvillage.CommWriteActivity
 import kr.co.sujungvillage.R
+import kr.co.sujungvillage.databinding.FragmentCommBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,12 +34,18 @@ class CommFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val binding=FragmentCommBinding.inflate(inflater,container,false)
+        // 글 작성 버튼 연결
+        binding.btnWrite.setOnClickListener {
+            var intent = Intent(this.activity, CommWriteActivity::class.java)
+            startActivity(intent)
+        }
+        // 기숙사 스피너 연결 및 커스텀
+        binding.spinnerDormitory.adapter = ArrayAdapter.createFromResource(requireContext(), R.array.dormitory, R.layout.spinner_comm_dormitory)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_comm, container, false)
+        return binding.root
+        //return inflater.inflate(R.layout.fragment_comm, container, false)이건 지워도 되는건가? 원래 있던 코드.
     }
 
     companion object {
