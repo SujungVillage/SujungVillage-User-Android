@@ -8,6 +8,7 @@
     android:background="@drawable/style_qna_listitem_border"
     android:layout_marginBottom="104dp"
     android:layout_margin="10dp">
+    <!---->
 
     <LinearLayout
         android:layout_width="match_parent"
