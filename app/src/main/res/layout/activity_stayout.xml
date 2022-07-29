@@ -28,7 +28,7 @@
         android:text="외박 신청"
         android:textColor="#111111"
         android:textSize="20sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/semi_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:text="외박 유형"
                     android:textColor="@color/gray_600"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/semi_bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -114,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:text="외박 기간"
                     android:textColor="@color/gray_600"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/semi_bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -132,10 +132,12 @@
                         android:background="@drawable/style_stayout_form"
                         android:gravity="center_vertical"
                         android:hint="시작 일자"
+                        android:textColorHint="@color/gray_350"
+                        android:textColor="@color/gray_600"
                         android:paddingLeft="7dp"
                         android:paddingRight="7dp"
-                        android:textColor="@color/gray_350"
                         android:textSize="12sp"
+                        android:fontFamily="@font/regular"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -171,7 +173,9 @@
                         android:hint="종료 일자"
                         android:paddingLeft="7dp"
                         android:paddingRight="7dp"
-                        android:textColor="@color/gray_350"
+                        android:textColorHint="@color/gray_350"
+                        android:textColor="@color/gray_600"
+                        android:fontFamily="@font/regular"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -204,7 +208,7 @@
                     android:layout_height="wrap_content"
                     android:text="행선지"
                     android:textColor="@color/gray_600"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/semi_bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -217,7 +221,9 @@
                     android:hint="행선지"
                     android:paddingLeft="7dp"
                     android:paddingRight="7dp"
-                    android:textColor="@color/gray_350"
+                    android:textColorHint="@color/gray_350"
+                    android:textColor="@color/gray_600"
+                    android:fontFamily="@font/regular"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -237,7 +243,7 @@
                     android:layout_height="wrap_content"
                     android:text="사유"
                     android:textColor="@color/gray_600"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/semi_bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -254,7 +260,9 @@
                     android:paddingRight="7dp"
                     android:paddingBottom="6dp"
                     android:scrollbars="vertical"
-                    android:textColor="@color/gray_350"
+                    android:textColorHint="@color/gray_350"
+                    android:textColor="@color/gray_600"
+                    android:fontFamily="@font/regular"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -274,7 +282,7 @@
                     android:layout_height="wrap_content"
                     android:text="긴급 전화번호"
                     android:textColor="@color/gray_600"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/semi_bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -287,7 +295,9 @@
                     android:inputType="number"
                     android:paddingLeft="7dp"
                     android:paddingRight="7dp"
-                    android:textColor="@color/gray_350"
+                    android:textColorHint="@color/gray_350"
+                    android:textColor="@color/gray_600"
+                    android:fontFamily="@font/regular"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -307,6 +317,7 @@
                 android:minWidth="0dp"
                 android:minHeight="0dp"
                 android:text="기본 정보 기억하기"
+                android:fontFamily="@font/medium"
                 android:textColor="@color/primary"
                 tools:ignore="TouchTargetSizeCheck" />
 
@@ -322,7 +333,7 @@
                 android:text="제출하기"
                 android:textColor="@color/white"
                 android:textSize="18sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/bold"
                 app:cornerRadius="15dp" />
 
         </LinearLayout>
