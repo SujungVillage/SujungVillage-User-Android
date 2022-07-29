@@ -5,11 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kr.co.sujungvillage.R
 import kr.co.sujungvillage.databinding.FragmentAppAlarmBinding
 
 
-class AppAlarmFragment : Fragment() {
+class AlarmAppFragment : Fragment() {
     private lateinit var binding: FragmentAppAlarmBinding
 
     override fun onCreateView(
@@ -32,7 +31,7 @@ class AppAlarmFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            AppAlarmFragment().apply {
+            AlarmAppFragment().apply {
                 arguments = Bundle().apply {
 
                 }
