@@ -20,7 +20,7 @@
         app:lottie_rawRes="@raw/style_splash_background"/>
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animationView2"
+        android:id="@+id/splash_logo"
         android:layout_width="120dp"
         android:layout_height="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,7 +29,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="false"
-        app:lottie_rawRes="@raw/icon_splash_logo"/>
+        app:lottie_rawRes="@raw/icon_splash_logo"
+        android:transitionName="main_icon"/>
 
 
 

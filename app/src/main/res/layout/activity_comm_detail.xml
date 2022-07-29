@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/btn_back"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginStart="28dp"
@@ -24,16 +24,17 @@
             app:srcCompat="@drawable/icon_back"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
         <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="47dp"
-        android:text="성미관 게시판"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/text_toolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="47dp"
+            android:text="성미관 게시판"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:fontFamily="@font/semi_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -50,32 +51,35 @@
             >
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/text_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="근데 오늘 4층 왜이리 시끄러워?"
                 android:textColor="@color/black"
                 android:textSize="14dp"
-                android:paddingHorizontal="40dp"/>
+                android:paddingHorizontal="40dp"
+                android:fontFamily="@font/medium"/>
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/text_cal_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="2022/07/01 20:34"
                 android:textColor="#989898"
                 android:textSize="12dp"
-                android:paddingHorizontal="40dp"/>
+                android:paddingHorizontal="40dp"
+                android:fontFamily="@font/light"/>
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/text_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="29dp"
                 android:text="하루종일 계속 천장이 울릴 정도로 소음이 심해.. 뭐 공사라도 하는건가?? 공지 못 봤는데"
                 android:textColor="@color/black"
                 android:textSize="13dp"
-                android:paddingHorizontal="40dp"/>
+                android:paddingHorizontal="40dp"
+                android:fontFamily="@font/light"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -98,13 +102,14 @@
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/text_comment_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:text="0"
-                    android:textColor="@color/primary" />
+                    android:textColor="@color/primary"
+                    android:fontFamily="@font/regular"/>
 
                 <View
                     android:id="@+id/view"
@@ -112,14 +117,19 @@
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <TextView
-                    android:id="@+id/textView13"
+                <Button
+                    android:id="@+id/btn_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:gravity="right"
+                    android:backgroundTint="#D9D9D9"
+                    android:fontFamily="@font/regular"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="1dp"
                     android:text="삭제하기"
-                    android:background="#D9D9D9"/>
+                    android:textSize="11dp"
+                    tools:ignore="TouchTargetSizeCheck" />
 
             </LinearLayout>
 
@@ -136,7 +146,8 @@
                 android:text="댓글 달기"
                 android:layout_marginTop="19dp"
                 android:textColor="@color/primary"
-                android:paddingHorizontal="40dp"/>
+                android:paddingHorizontal="40dp"
+                android:fontFamily="@font/medium"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -148,28 +159,29 @@
 
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName2"
+                    android:id="@+id/edit_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:background="@drawable/style_comm_detail_write_border"
-                    android:gravity="center"
                     android:inputType="textPersonName" />
 
-                <Button
-                    android:id="@+id/button"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_comment_submit"
                     android:layout_width="38dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:textSize="12dp"
-                    android:text="등록"
-                    android:minHeight="0dp"
-                    android:minWidth="0dp"
-                    android:paddingHorizontal="3dp"
-                    android:textColor="@color/white"
                     android:layout_marginLeft="10dp"
-                />
+                    android:layout_weight="0"
+                    android:background="@drawable/style_comm_detail_write_button"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="4dp"
+                    android:paddingHorizontal="3dp"
+                    android:text="등록"
+                    android:textColor="@color/white"
+                    android:textSize="12dp"
+                    tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
         </LinearLayout>

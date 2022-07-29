@@ -1,11 +1,10 @@
-package kr.co.sujungvillage.Fragment
+package kr.co.sujungvillage.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kr.co.sujungvillage.R
 import kr.co.sujungvillage.databinding.FragmentAppAlarmBinding
 
 
