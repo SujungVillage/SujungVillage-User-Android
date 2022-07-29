@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/btn_get_img"
         android:layout_width="270dp"
         android:layout_height="267dp"
         android:layout_marginTop="61dp"
@@ -43,7 +43,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/text_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
@@ -51,25 +51,25 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_get_img" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/btn_location"
         android:layout_width="16dp"
         android:layout_height="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="5dp"
         android:background="@color/nothing"
         android:scaleType="fitCenter"
-        app:layout_constraintEnd_toStartOf="@+id/textView8"
+        app:layout_constraintEnd_toStartOf="@+id/text_location"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2"
+        app:layout_constraintTop_toBottomOf="@+id/btn_get_img"
         app:srcCompat="@drawable/icon_rollcall_marker"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/text_location_refresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -79,10 +79,10 @@
         app:layout_constraintStart_toStartOf="parent"
 
         android:textColor="@color/primary"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/text_location" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/btn_location_refresh"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_marginTop="12dp"
@@ -90,25 +90,29 @@
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintStart_toEndOf="@+id/text_location_refresh"
+        app:layout_constraintTop_toBottomOf="@+id/text_location"
         app:srcCompat="@drawable/icon_rollcall_refresh"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="90dp"
-        android:background="@drawable/style_rollcall_submit_border"
-        android:paddingHorizontal="42dp"
-        android:paddingVertical="14dp"
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="146dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/primary"
+        android:fontFamily="@font/bold"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         android:text="제출하기"
         android:textColor="@color/white"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="18sp"
+        app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toBottomOf="@+id/text_location_refresh" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
