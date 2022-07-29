@@ -33,7 +33,6 @@ class AlarmAppFragment : Fragment() {
         fun newInstance(param1: String, param2: String) =
             AlarmAppFragment().apply {
                 arguments = Bundle().apply {
-
                 }
             }
     }
