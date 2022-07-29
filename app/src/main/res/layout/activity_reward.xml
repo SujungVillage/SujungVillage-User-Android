@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="24dp"
-            android:text="12점"
+            android:text="13점"
             android:textColor="@color/primary"
             android:textSize="17dp"
             app:layout_constraintEnd_toEndOf="parent"
