@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.QnAFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -59,7 +60,6 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="#FFFFFF"
                 android:text="FAQ"
-                android:textColor="@color/p_liight"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/MyQ_button"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -67,25 +67,26 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.333" />
 
-            <View
-                android:id="@+id/view_line"
-                android:layout_width="205dp"
-
-                android:layout_height="6dp"
-                android:background="@color/p_liight"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/FAQ_button"
-                app:layout_constraintStart_toStartOf="@+id/FAQ_button" />
-
             <Button
                 android:id="@+id/MyQ_button"
                 android:layout_width="205dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#FFFFFF"
                 android:text="내 질문"
+                android:textColor="@color/p_liight"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/view_line"
+                android:layout_width="205dp"
+
+                android:layout_height="6dp"
+                android:background="@color/p_liight"
+                app:layout_constraintBottom_toBottomOf="@+id/MyQ_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/FAQ_button" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -96,8 +97,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
-                tools:listitem="@layout/listitem_qna_fna"/>
+                tools:listitem="@layout/listitem_qna_myq"/>
         </ScrollView>
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="20dp"
+        android:background="@drawable/style_qna_imagebutton"
+        android:padding="13dp"
+        android:src="@drawable/icon_qna_pencil"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </FrameLayout>
