@@ -29,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
     private var email: String = ""
     private var tokenId: String? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
