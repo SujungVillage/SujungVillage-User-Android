@@ -39,7 +39,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="49dp"
                 android:layout_weight="1"
-                android:entries="@array/comm_dormitory"
+                android:entries="@array/dormitory"
                 android:gravity="center"
                 android:textColor="#F5F5F5"
                 android:text="Q \u0026 A"
