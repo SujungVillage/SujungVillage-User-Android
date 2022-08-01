@@ -36,51 +36,6 @@ class LoginActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        firebaseAuth = FirebaseAuth.getInstance()
-        launcher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult(), ActivityResultCallback { result ->
-                Log.e(TAG, "resultCode : ${result.resultCode}")
-                Log.e(TAG, "result : $result")
-                if (result.resultCode == RESULT_OK) {
-                    val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-                    try {
-                        task.getResult(ApiException::class.java)?.let { account ->
-                            tokenId = account.idToken
-                            if (tokenId != null && tokenId != "") {
-                                val credential: AuthCredential = GoogleAuthProvider.getCredential(account.idToken, null)
-                                firebaseAuth.signInWithCredential(credential)
-                                    .addOnCompleteListener {
-                                        if (firebaseAuth.currentUser != null) {
-                                            val user: FirebaseUser = firebaseAuth.currentUser!!
-                                            email = user.email.toString()
-                                            Log.e(TAG, "email : $email")
-                                            val googleSignInToken = account.idToken ?: ""
-                                            if (googleSignInToken != "") {
-                                                Log.e(TAG, "googleSignInToken : $googleSignInToken")
-                                            } else {
-                                                Log.e(TAG, "googleSignInToken이 null")
-                                            }
-                                        }
-                                    }
-                            }
-                        } ?: throw Exception()
-                    }   catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-                }
-            })
 
-        binding.run { btnGoogleLogin.setOnClickListener {
-                CoroutineScope(Dispatchers.IO).launch {
-                    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestIdToken(getString(R.string.default_web_client_id))
-                        .requestEmail()
-                        .build()
-                    val googleSignInClient = GoogleSignIn.getClient(this@LoginActivity, gso)
-                    val signInIntent: Intent = googleSignInClient.signInIntent
-                    launcher.launch(signInIntent)
-                }
-            }
-        }
     }
 }
