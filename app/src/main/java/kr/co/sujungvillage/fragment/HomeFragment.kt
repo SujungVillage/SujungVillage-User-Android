@@ -40,6 +40,10 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
         // 4. 상벌점 조회 버튼 연결
+        binding.btnReward.setOnClickListener {
+            var intent = Intent(this.activity, RewardActivity::class.java)
+            startActivity(intent)
+        }
 
         return binding.root
     }
