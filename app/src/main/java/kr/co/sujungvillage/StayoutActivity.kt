@@ -45,6 +45,7 @@ class StayoutActivity : AppCompatActivity() {
             override fun onNothingSelected(p0: AdapterView<*>?) { }
         }
 
+        /*
         // (TEST) 외박 신청 API 연결 테스트
         val destination = "천안"
         val reason = "본가"
@@ -60,9 +61,10 @@ class StayoutActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<StayoutCreateResultDTO>, t: Throwable) {
-                Toast.makeText(this@StayoutActivity, "성공", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@StayoutActivity, "실패", Toast.LENGTH_SHORT).show()
                 Log.d("STAYOUT_CREATE", "외박 신청 생성 실패")
             }
         })
+         */
     }
 }
