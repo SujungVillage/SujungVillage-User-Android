@@ -8,13 +8,15 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kr.co.sujungvillage.base.hideKeyboard
-import kr.co.sujungvillage.data.StayoutCodeDTO
 import kr.co.sujungvillage.data.StayoutCreateDTO
+import kr.co.sujungvillage.data.StayoutCreateResultDTO
 import kr.co.sujungvillage.databinding.ActivityStayoutBinding
 import kr.co.sujungvillage.retrofit.RetrofitBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class StayoutActivity : AppCompatActivity() {
@@ -40,28 +42,29 @@ class StayoutActivity : AppCompatActivity() {
                     // position - 0 : 단기 외박, 1 : 장기 외박
                 }
             }
-
             override fun onNothingSelected(p0: AdapterView<*>?) { }
         }
 
         /*
+        // (TEST) 외박 신청 API 연결 테스트
         val destination = "천안"
         val reason = "본가"
         val emergency = "01011111111"
-        val date = "2022-07-29"
-        var stayoutInfo = StayoutCreateDTO(destination, reason, emergency, date)
+        val date = "2022-08-07"
+        val stayoutInfo = StayoutCreateDTO(destination, reason, emergency, date)
 
-        RetrofitBuilder.stayoutApi.applyStayout("1234", stayoutInfo).enqueue(object: Callback<StayoutCodeDTO> {
-            override fun onResponse(call: Call<StayoutCodeDTO>, response: Response<StayoutCodeDTO>) {
+        val userId = "20180001"
+        RetrofitBuilder.stayoutApi.stayoutCreate(userId, stayoutInfo).enqueue(object: Callback<StayoutCreateResultDTO> {
+            override fun onResponse(call: Call<StayoutCreateResultDTO>, response: Response<StayoutCreateResultDTO>) {
                 Toast.makeText(this@StayoutActivity, "성공", Toast.LENGTH_SHORT).show()
                 Log.d("STAYOUT_CREATE", response.body().toString())
             }
 
-            override fun onFailure(call: Call<StayoutCodeDTO>, t: Throwable) {
-                Toast.makeText(this@StayoutActivity, "성공", Toast.LENGTH_SHORT).show()
+            override fun onFailure(call: Call<StayoutCreateResultDTO>, t: Throwable) {
+                Toast.makeText(this@StayoutActivity, "실패", Toast.LENGTH_SHORT).show()
                 Log.d("STAYOUT_CREATE", "외박 신청 생성 실패")
             }
         })
-        */
+         */
     }
 }
