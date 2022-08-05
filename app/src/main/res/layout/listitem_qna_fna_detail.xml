@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:fontFamily="@font/medium"
             android:text="점호 시간과 요일은 언제인가요?"
             android:textSize="17dp" />
 
@@ -44,6 +45,7 @@
         android:id="@+id/fna_detail_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/medium"
         android:padding="20dp"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus consectetur sed urna, id aliquam ut. Orci, varius egestas ac eget a odio nec pellentesque. Pharetra iaculis sit cursus sed. Purus lorem eu sit mattis lectus consequat, imperdiet congue leo. At sit faucibus tincidunt pharetra tellus mattis eu. Congue elementum nec id sem nibh egestas arcu scelerisque." />
 
