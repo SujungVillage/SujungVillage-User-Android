@@ -114,7 +114,7 @@ class StayoutActivity : AppCompatActivity() {
             val reason = binding.editReason.text.toString()
             val emergency = binding.editNumber.text.toString()
             val date = binding.textStartDate.text.toString()
-            // !!! 시작일, 종료일로 입력하도록 수정
+            // ★★★ 시작일, 종료일로 입력하도록 수정
             val stayoutInfo = StayoutCreateDTO(destination, reason, emergency, date)
 
             val userId = "20180001"
