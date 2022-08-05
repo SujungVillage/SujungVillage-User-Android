@@ -13,8 +13,8 @@ data class RollcallCreateDTO(
 data class RollcallCreateResultDTO(
     @SerializedName("id")
     val id: Long,
-    @SerializedName("user")
-    val user: StayoutUser,
+    @SerializedName("userId")
+    val userId: String,
     @SerializedName("imageURL")
     val imgUrl: String,
     @SerializedName("location")
