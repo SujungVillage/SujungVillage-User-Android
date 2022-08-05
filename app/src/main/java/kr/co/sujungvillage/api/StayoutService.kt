@@ -15,3 +15,4 @@ interface StayoutService {
         @Body stayoutInfo: StayoutCreateDTO,
     ): Call<StayoutCreateResultDTO>
 }
+
