@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder
 import kr.co.sujungvillage.BuildConfig.BASE_URL
 import kr.co.sujungvillage.api.CommDetailService
 import kr.co.sujungvillage.api.CommWriteService
+import kr.co.sujungvillage.api.HomeService
 import kr.co.sujungvillage.api.StayoutService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -14,6 +15,8 @@ object RetrofitBuilder {
     var stayoutApi: StayoutService
     var commWriteApi:CommWriteService
     var commDetailApi: CommDetailService
+    var homeApi: HomeService
+
     val gson = GsonBuilder().setLenient().create()
 
     init {
@@ -26,5 +29,6 @@ object RetrofitBuilder {
         stayoutApi = retrofit.create(StayoutService::class.java)
         commWriteApi=retrofit.create(CommWriteService::class.java)
         commDetailApi=retrofit.create(CommDetailService::class.java)
+        homeApi = retrofit.create(HomeService::class.java)
     }
 }

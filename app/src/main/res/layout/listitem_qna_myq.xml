@@ -19,9 +19,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="답변 완료"
             android:background="@drawable/style_qna_listitem_complete"
+            android:fontFamily="@font/medium"
             android:padding="5dp"
+            android:text="답변 완료"
             android:textColor="@color/white"
             android:textSize="12sp" />
 
@@ -30,9 +31,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="10dp"
             android:layout_weight="1"
+            android:fontFamily="@font/medium"
+            android:padding="10dp"
             android:text="층간소음 문제"
+            android:textColor="#838383"
             android:textSize="17dp" />
 
         <ImageButton
