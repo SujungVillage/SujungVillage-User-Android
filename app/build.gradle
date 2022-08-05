@@ -70,4 +70,8 @@ dependencies {
     //코루틴 추가
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
 
+    //gps
+    implementation 'com.google.android.gms:play-services-location:20.0.0'
+
+
 }
