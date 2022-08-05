@@ -61,7 +61,7 @@ class CommWriteActivity : AppCompatActivity() {
 
                         override fun onFailure(call: Call<CommWriteResultDTO>, t: Throwable) {
                             Toast.makeText(this@CommWriteActivity,"실패: ${title}, ${content}",Toast.LENGTH_LONG).show()
-                            Log.d("COMMWRITE","커뮤니티 글 쓰기 실패")
+                            Log.d("COMMWRITE",t.message.toString())
                         }
                     })
                 }

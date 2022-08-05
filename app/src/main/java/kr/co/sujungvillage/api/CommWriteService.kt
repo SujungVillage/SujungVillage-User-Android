@@ -2,8 +2,6 @@ package kr.co.sujungvillage.api
 
 import kr.co.sujungvillage.data.CommWriteDTO
 import kr.co.sujungvillage.data.CommWriteResultDTO
-import kr.co.sujungvillage.data.StayoutCodeDTO
-import kr.co.sujungvillage.data.StayoutCreateDTO
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Header
