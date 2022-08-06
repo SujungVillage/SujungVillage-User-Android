@@ -60,25 +60,30 @@ class RollcallActivity : BaseActivity() {
 
         // 위치 새로고침 버튼 연결
         binding.btnLocationRefresh.setOnClickListener { getCurrentLoc() }
+        binding.textLocationRefresh.setOnClickListener { getCurrentLoc() }
+        binding.linearLocationRefresh.setOnClickListener { getCurrentLoc() }
 
         // 제출하기 버튼 연결 : 점호 신청 후 액티비티 종료
         binding.btnSubmit.setOnClickListener {
             val user_id = "20180001"
+            // 이미지를 촬영하지 않은 경우
             if (imgBitmap.isEmpty()) {
                 Toast.makeText(this, "점호 사진을 촬영해주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            // 현재 위치 주소를 등록하지 않은 경우
+            if (binding.textLocation.text == "현재 위치 정보가 없습니다.") {
+                Toast.makeText(this, "위치 새로고침을 해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val imgUrl = imgBitmap
             val location = binding.textLocation.text.toString()
             var rollcallInfo = RollcallCreateDTO(imgUrl, location)
 
             // 점호 신청 API 연결
-            RetrofitBuilder.rollcallApi.rollcallCreate(user_id, rollcallInfo)
-                .enqueue(object : Callback<RollcallCreateResultDTO> {
-                    override fun onResponse(
-                        call: Call<RollcallCreateResultDTO>,
-                        response: Response<RollcallCreateResultDTO>
-                    ) {
+            RetrofitBuilder.rollcallApi.rollcallCreate(user_id, rollcallInfo).enqueue(object : Callback<RollcallCreateResultDTO> {
+                    override fun onResponse(call: Call<RollcallCreateResultDTO>, response: Response<RollcallCreateResultDTO>) {
                         Log.d("ROLLCALL_CREATE", "id : " + response.body()?.id.toString())
                         Log.d("ROLLCALL_CREATE", "user id : " + response.body()?.userId)
                         Log.d("ROLLCALL_CREATE", "image url : " + response.body()?.imgUrl)
@@ -109,9 +114,7 @@ class RollcallActivity : BaseActivity() {
     // 권한 거부
     override fun permissionDenied(requestCode: Int) {
         when (requestCode) {
-            PERM_CAMERA -> {
-                Toast.makeText(baseContext, "카메라 권한을 승인해야 카메라를 사용할 수 있습니다.", Toast.LENGTH_SHORT).show()
-            }
+            PERM_CAMERA -> Toast.makeText(baseContext, "카메라 권한을 승인해야 카메라를 사용할 수 있습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -134,11 +137,8 @@ class RollcallActivity : BaseActivity() {
                         val baos = ByteArrayOutputStream()
                         bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, baos)
                         imgBitmap = Base64.encodeToString(baos.toByteArray(), Base64.NO_WRAP)
-                        Log.d("IMG_BITMAP_LENGTH", "image bitmap : " + imgBitmap)
-                        Log.d(
-                            "IMG_BITMAP_LENGTH",
-                            "image bitmap length" + imgBitmap.length.toString()
-                        )
+                        Log.d("IMG_BITMAP", "image bitmap : " + imgBitmap)
+                        Log.d("IMG_BITMAP_LENGTH", "image bitmap length" + imgBitmap.length.toString())
                     }
                 }
             }
@@ -167,10 +167,11 @@ class RollcallActivity : BaseActivity() {
                 e.printStackTrace()
                 Log.d("CheckCurrentLocation", "오류발생")
                 Log.d("CheckCurrentLocation", "mResultList : $mResultList")
-
             } catch (e: Exception) {
                 binding.textLocation.text = "오류 발생"
+                return
             }
+
             if (mResultList != null) {
                 Log.d("CheckCurrentLocation", mResultList[0].getAddressLine(0))
                 currentLocation = mResultList[0].getAddressLine(0)
