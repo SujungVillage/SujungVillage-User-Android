@@ -1,4 +1,4 @@
-package kr.co.sujungvillage
+package kr.co.sujungvillage.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

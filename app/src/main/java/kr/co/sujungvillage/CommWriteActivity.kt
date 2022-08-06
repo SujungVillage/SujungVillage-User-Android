@@ -53,7 +53,7 @@ class CommWriteActivity : AppCompatActivity() {
 
                     val commWriteInfo=CommWriteDTO(title,content)
                     val userId="20180001"
-                    RetrofitBuilder.commWriteApi.commWrite(userId,commWriteInfo).enqueue(object: Callback<CommWriteResultDTO>{
+                    RetrofitBuilder.communityApi.commWrite(userId,commWriteInfo).enqueue(object: Callback<CommWriteResultDTO>{
                         override fun onResponse(call: Call<CommWriteResultDTO>, response: Response<CommWriteResultDTO>) {
                             Toast.makeText(this@CommWriteActivity,"성공: ${title}, ${content}",Toast.LENGTH_LONG).show()
                             Log.d("COMMWRITE", response.body().toString())

@@ -62,8 +62,8 @@ class HomeFragment : Fragment() {
 
                 // 유저 정보 반영
                 binding.textName.text = response.body()?.residentInfo?.name
-                binding.textDormitory.text = response.body()?.residentInfo?.dormitory + " 기숙사"
-                binding.textReward.text = "상점 : ${response.body()?.residentInfo?.plusLMP}점    |    벌점 : ${response.body()?.residentInfo?.minusLMP}점"
+                binding.textDormitory.text = response.body()?.residentInfo?.dormitory + " 기숙사 " + response.body()?.residentInfo?.address
+                binding.textRewards.text = "상점 : ${response.body()?.residentInfo?.plusLMP}점    |    벌점 : ${response.body()?.residentInfo?.minusLMP}점"
             }
 
             override fun onFailure(call: Call<HomeInfoResultDTO>, t: Throwable) {
