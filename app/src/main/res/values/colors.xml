@@ -15,11 +15,16 @@
 
     <color name="yellow_100">#FFFFEEBD</color>
 
+    <color name="gray_50">#FFD9D9D9</color>
     <color name="gray_100">#FFC5C5C5</color>
     <color name="gray_200">#FF9A9A9A</color>
     <color name="gray_300">#FF878787</color>
-    <color name="gray400">#5C5C5C</color>
+    <color name="gray_330">#FF838383</color>
+    <color name="gray_350">#FF818181</color>
+    <color name="gray_400">#FF5C5C5C</color>
     <color name="gray_600">#FF434343</color>
+
+    <color name="black_900">#FF111111</color>
 
     <color name="nothing">#00FFFFFF</color>
 </resources>

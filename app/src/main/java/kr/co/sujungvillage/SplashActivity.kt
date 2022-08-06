@@ -1,19 +1,25 @@
 package kr.co.sujungvillage
 
 import android.annotation.SuppressLint
+import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
+import kr.co.sujungvillage.databinding.ActivityLoginBinding
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
+
+    private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        setContentView(binding.root)
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.hide(WindowInsets.Type.statusBars())
@@ -27,9 +33,11 @@ class SplashActivity : AppCompatActivity() {
     }
     private fun loadSplashScreen() {
         android.os.Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+         /*   val intent = Intent(this, LoginActivity::class.java)
+            val options : ActivityOptions = ActivityOptions.makeSceneTransitionAnimation(
+                this, binding.splashLogo, "main_icon")
+            startActivity(intent, options.toBundle())
+            finish()*/
         }, 4600)
     }
 }

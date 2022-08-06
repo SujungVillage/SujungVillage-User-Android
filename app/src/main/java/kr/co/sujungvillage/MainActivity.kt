@@ -1,15 +1,12 @@
 package kr.co.sujungvillage
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.LabelVisibilityMode
-import com.google.android.material.tabs.TabLayout
-import kr.co.sujungvillage.Fragment.CommFragment
-import kr.co.sujungvillage.Fragment.HomeFragment
-import kr.co.sujungvillage.Fragment.QnAFragment
-import kr.co.sujungvillage.Fragment.SettingFragment
+import kr.co.sujungvillage.fragment.CommFragment
+import kr.co.sujungvillage.fragment.HomeFragment
+import kr.co.sujungvillage.fragment.QnAFragment
+import kr.co.sujungvillage.fragment.SettingFragment
 import kr.co.sujungvillage.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

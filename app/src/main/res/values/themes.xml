@@ -15,5 +15,15 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <!-- Customize your theme here. -->
+
+        //화면 전환 액티비티
+        <item name="android:windowActivityTransitions">true</item>
     </style>
+    <style name="Theme.SujungVillage.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.SujungVillage.AppBarOverlay"
+        parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.SujungVillage.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

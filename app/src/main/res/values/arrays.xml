@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="stayout_type">
+        <item>단기 외박</item>
+        <item>장기 외박</item>
+    </string-array>
+
+    <string-array name="dormitory">
+        <item>전체</item>
+        <item>성미료</item>
+        <item>성미관</item>
+        <item>풍림</item>
+        <item>엠시티</item>
+        <item>그레이스</item>
+        <item>이율</item>
+        <item>장수</item>
+    </string-array>
+</resources>
