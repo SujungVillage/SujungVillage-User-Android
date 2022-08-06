@@ -6,14 +6,12 @@ import java.io.Serializable
 data class HomeInfoResultDTO(
     @SerializedName("residentInfo")
     val residentInfo: HomeResidentInfo,
-    @SerializedName("todayRollCallInfo")
-    val todayRollcall: Long,
-    @SerializedName("rollcallDayList")
-    val rollcallDays: List<String>,
-    @SerializedName("appliedRollcallList")
-    val appliedRollcalls: List<HomeRollcall>,
-    @SerializedName("appliedExeatInfoList")
-    val appliedStayout: List<HomeStayout>,
+    @SerializedName("rollcallDays") // 모든 점호 예정일
+    val rollcallDays: List<Int>,
+    @SerializedName("appliedRollcallDays") // 점호 완료일 (점호 예정일과 비교 필요)
+    val appliedDays: List<Int>,
+    @SerializedName("appliedExeatDays") // 외박 신청일
+    val staoutDays: List<Int>,
 ): Serializable {}
 
 data class HomeResidentInfo(
@@ -27,30 +25,4 @@ data class HomeResidentInfo(
     val plusLMP: Long,
     @SerializedName("minusLMP")
     val minusLMP: Long,
-): Serializable {}
-
-data class HomeRollcall(
-    @SerializedName("rollcallId")
-    val id: Long,
-    @SerializedName("imageURL")
-    val img: String,
-    @SerializedName("location")
-    val location: String,
-    @SerializedName("rollcallTime")
-    val time: String,
-    @SerializedName("state")
-    val status: String,
-): Serializable {}
-
-data class HomeStayout(
-    @SerializedName("exeatId")
-    val id: Long,
-    @SerializedName("destination")
-    val destination: String,
-    @SerializedName("reason")
-    val reason: String,
-    @SerializedName("emergencyPhoneNumber")
-    val emergencyNumber: String,
-    @SerializedName("dateToUse")
-    val date: String,
 ): Serializable {}

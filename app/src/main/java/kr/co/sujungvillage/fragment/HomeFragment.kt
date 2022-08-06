@@ -55,11 +55,20 @@ class HomeFragment : Fragment() {
         RetrofitBuilder.homeApi.homeInfo("20180001", "2022", "8").enqueue(object: Callback<HomeInfoResultDTO> {
             override fun onResponse(call: Call<HomeInfoResultDTO>, response: Response<HomeInfoResultDTO>) {
                 Log.d("HOME_INFO", "홈 화면 정보 조회 성공")
-                Log.d("HOME_INFO", response.body().toString())
+                Log.d("HOME_INFO", "user : " + response.body()?.residentInfo.toString())
+                Log.d("HOME_INFO", "roll-call days : " + response.body()?.rollcallDays.toString())
+                Log.d("HOME_INFO", "applied roll-call days : " + response.body()?.appliedDays.toString())
+                Log.d("HOME_INFO", "applied stayout days : " + response.body()?.staoutDays.toString())
+
+                // 유저 정보 반영
+                binding.textName.text = response.body()?.residentInfo?.name
+                binding.textDormitory.text = response.body()?.residentInfo?.dormitory + " 기숙사 " + response.body()?.residentInfo?.address
+                binding.textRewards.text = "상점 : ${response.body()?.residentInfo?.plusLMP}점    |    벌점 : ${response.body()?.residentInfo?.minusLMP}점"
             }
 
             override fun onFailure(call: Call<HomeInfoResultDTO>, t: Throwable) {
                 Log.d("HOME_INFO", "홈 화면 정보 조회 실패")
+                Log.d("HOME_INFO", t.message.toString())
             }
         })
 
