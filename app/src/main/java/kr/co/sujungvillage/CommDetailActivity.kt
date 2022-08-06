@@ -24,7 +24,7 @@ class CommDetailActivity : AppCompatActivity() {
         //Api 연결**어댑터 연결
         var userId="20180001"
         var postId="40"//이전 페이지(commFragment)에서 intent로 넘겨 받음
-        RetrofitBuilder.commDetailApi.commDetail(userId,postId).enqueue(object: Callback<CommDetailResultDTO>{
+        RetrofitBuilder.communityApi.commDetail(userId,postId).enqueue(object: Callback<CommDetailResultDTO>{
             override fun onResponse(call: Call<CommDetailResultDTO>, response: Response<CommDetailResultDTO>) {
                 //어댑터 연결
                 Log.d("COMMDETAIL",response.body().toString())

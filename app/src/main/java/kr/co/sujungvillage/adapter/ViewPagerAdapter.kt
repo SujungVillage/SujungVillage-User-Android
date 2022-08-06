@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import kr.co.sujungvillage.fragment.AppAlarmFragment
-import kr.co.sujungvillage.fragment.CommAlarmFragment
+import kr.co.sujungvillage.fragment.AlarmAppFragment
+import kr.co.sujungvillage.fragment.AlarmCommFragment
 
 private const val NUM_TABS = 2
 
@@ -19,9 +19,9 @@ class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
 
     override fun createFragment(position: Int): Fragment {
         when (position) {
-            0 -> return AppAlarmFragment()
-            1 -> return CommAlarmFragment()
+            0 -> return AlarmAppFragment()
+            1 -> return AlarmCommFragment()
         }
-        return AppAlarmFragment()
+        return AlarmAppFragment()
     }
 }
