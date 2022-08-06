@@ -88,9 +88,9 @@
                     android:id="@+id/text_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="서울특별시 성북구 보문로 34다길 2"
-                    android:textColor="@color/black"
                     android:fontFamily="@font/medium"
+                    android:text="현재 위치 정보가 없습니다."
+                    android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/btn_get_img" />
