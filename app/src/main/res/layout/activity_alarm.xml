@@ -4,7 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFBFBFB"
     tools:context=".AlarmActivity">
+
+    <TextView
+        android:id="@+id/text_toolbarTitle"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:fontFamily="@font/semi_bold"
+        android:gravity="center_horizontal"
+        android:text="알림"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:layout_marginBottom="21dp"
+        android:background="@color/white"
+        android:paddingTop="47dp"
+        app:layout_constraintBottom_toTopOf="@+id/tabLayout"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/btn_back"
@@ -19,27 +35,19 @@
         app:srcCompat="@drawable/icon_back"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="47dp"
-        android:text="알림"
-        android:textSize="20dp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1"
+        app:layout_constraintTop_toBottomOf="@+id/text_toolbarTitle"
         app:tabSelectedTextColor="@color/primary"
+        app:tabIndicatorColor="@color/primary"
         app:tabTextColor="#434343"
+        app:tabIndicatorHeight="5dp"
+        app:tabPaddingBottom="16dp"
+        app:tabTextAppearance="@style/alarm_tab_text"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
         android:background="@drawable/style_alarm_tab"/>
 
@@ -48,6 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_marginTop="-20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout"
         tools:ignore="MissingConstraints" />

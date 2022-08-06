@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import kr.co.sujungvillage.databinding.FragmentAppAlarmBinding
 
-
 class AlarmAppFragment : Fragment() {
     private lateinit var binding: FragmentAppAlarmBinding
 
@@ -33,7 +32,6 @@ class AlarmAppFragment : Fragment() {
         fun newInstance(param1: String, param2: String) =
             AlarmAppFragment().apply {
                 arguments = Bundle().apply {
-
                 }
             }
     }
