@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="공지사항"
-            android:textColor="@color/black_900"
+            android:textColor="@color/black_800"
             android:textSize="20sp"
             android:fontFamily="@font/semi_bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -60,6 +60,16 @@
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:paddingBottom="50dp">
+
+            <TextView
+                android:id="@+id/text_none"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:fontFamily="@font/medium"
+                android:text="존재하는 공지사항이 없습니다."
+                android:visibility="gone"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_notice"

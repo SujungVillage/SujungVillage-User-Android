@@ -58,14 +58,11 @@
                 android:layout_marginTop="15dp"
                 android:orientation="horizontal">
 
-
-
                 <LinearLayout
                     android:id="@+id/linear_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginEnd="30dp"
+                    android:layout_marginHorizontal="45dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -74,7 +71,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/regular"
                         android:text="제목"
-                        android:textColor="@color/black_900"
+                        android:textColor="@color/black_800"
                         android:textSize="14sp" />
 
                     <EditText
@@ -91,6 +88,7 @@
                         android:textColor="@color/gray_600"
                         android:textColorHint="#989898"
                         android:textSize="12sp"
+                        android:maxLength="30"
                         tools:ignore="TouchTargetSizeCheck" />
                 </LinearLayout>
             </LinearLayout>

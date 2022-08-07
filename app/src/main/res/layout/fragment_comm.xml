@@ -26,16 +26,26 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="47dp"
-                android:layout_weight="1"
                 android:entries="@array/dormitory"
                 android:gravity="center"
-                android:textAlignment="center"
-                android:padding="0dp"
+                android:background="@null"
+                android:paddingRight="3dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_search"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="18dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="-20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_comm_write_spinner_btn"
+                app:layout_constraintBottom_toBottomOf="@id/spinner_dormitory"
+                app:layout_constraintEnd_toEndOf="@+id/spinner_dormitory"
+                app:layout_constraintTop_toTopOf="@id/spinner_dormitory" />
 
             <ImageButton
                 android:id="@+id/btn_search"

@@ -253,20 +253,22 @@
                         </LinearLayout>
                     </LinearLayout>
 
-                    <CalendarView
+                    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
                         android:id="@+id/calendar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
+                        android:layout_marginHorizontal="30dp"
                         android:layout_marginTop="30dp"
-                        android:layout_marginRight="15dp"
-                        android:background="@color/nothing" />
+                        app:mcv_dateTextAppearance="@style/calendar_date_text_default"
+                        app:mcv_headerTextAppearance="@style/calendar_header_text_default"
+                        app:mcv_weekDayTextAppearance="@style/calendar_week_text_default"
+                        app:mcv_selectionMode="none" />
 
                     <TextView
                         android:id="@+id/text_contacts"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="-10dp"
                         android:layout_marginBottom="66dp"
                         android:text="기숙사 이메일 : dormitory@sungshin.ac.kr  |  개발자 contacts : 000-0000-0000"
                         android:textColor="@color/gray_200"

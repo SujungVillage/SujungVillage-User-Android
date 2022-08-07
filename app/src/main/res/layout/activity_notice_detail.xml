@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="공지사항"
-            android:textColor="@color/black_900"
+            android:textColor="@color/black_800"
             android:textSize="20sp"
             android:fontFamily="@font/semi_bold"
             app:layout_constraintBottom_toBottomOf="parent"
