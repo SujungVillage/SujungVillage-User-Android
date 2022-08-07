@@ -76,8 +76,9 @@ class HomeFragment : Fragment() {
                 // 캘린더 정보 반영
                 val rollcallDecorator = RollcallDecorator(this@HomeFragment, response.body()!!.rollcallDays)
                 val stayoutDecorator = StayoutDecorator(this@HomeFragment, response.body()!!.staoutDays)
+                val missDecorator = MissDecorator(this@HomeFragment, response.body()!!.rollcallDays, response.body()!!.appliedDays)
                 val todayDecorator = TodayDecorator(this@HomeFragment)
-                binding.calendar.addDecorators(rollcallDecorator, stayoutDecorator, todayDecorator)
+                binding.calendar.addDecorators(rollcallDecorator, stayoutDecorator, missDecorator, todayDecorator)
             }
 
             override fun onFailure(call: Call<HomeInfoResultDTO>, t: Throwable) {
@@ -98,8 +99,9 @@ class HomeFragment : Fragment() {
                     // 캘린더 정보 반영
                     val rollcallDecorator = RollcallDecorator(this@HomeFragment, response.body()!!.rollcallDays)
                     val stayoutDecorator = StayoutDecorator(this@HomeFragment, response.body()!!.staoutDays)
+                    val missDecorator = MissDecorator(this@HomeFragment, response.body()!!.rollcallDays, response.body()!!.appliedDays)
                     val todayDecorator = TodayDecorator(this@HomeFragment)
-                    binding.calendar.addDecorators(rollcallDecorator, stayoutDecorator, todayDecorator)
+                    binding.calendar.addDecorators(rollcallDecorator, stayoutDecorator, missDecorator, todayDecorator)
                 }
 
                 override fun onFailure(call: Call<HomeInfoResultDTO>, t: Throwable) {
@@ -138,6 +140,22 @@ class StayoutDecorator(context: HomeFragment, days: List<Int>): DayViewDecorator
 
     override fun decorate(view: DayViewFacade?) { // 커스텀 설정
         view?.setBackgroundDrawable(stayoutDrawable)
+    }
+}
+
+// 무단 외박일 커스텀 함수
+class MissDecorator(context: HomeFragment, rollcallDays: List<Int>, appliedDays: List<Int>): DayViewDecorator {
+    val missDrawable = context.resources.getDrawable(R.drawable.style_home_cal_miss)
+    val today = CalendarDay.today()
+    val rollcallDays = rollcallDays
+    val appliedDays = appliedDays
+
+    override fun shouldDecorate(day: CalendarDay?): Boolean {
+        return day?.isBefore(today)!! && rollcallDays.contains(day.day) && !appliedDays.contains(day.day)
+    }
+
+    override fun decorate(view: DayViewFacade?) {
+        view?.setBackgroundDrawable(missDrawable)
     }
 }
 
