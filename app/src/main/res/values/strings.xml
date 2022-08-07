@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">SujungVillage</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">수정마을</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_fragment_qna">fragment_qna</string>
     <!-- Strings used for fragments for navigation -->
