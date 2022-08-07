@@ -11,13 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kr.co.sujungvillage.base.hideKeyboard
 import kr.co.sujungvillage.data.StayoutCreateDTO
-import kr.co.sujungvillage.data.StayoutCreateResultDTO
 import kr.co.sujungvillage.databinding.ActivityStayoutBinding
 import kr.co.sujungvillage.retrofit.RetrofitBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -113,19 +111,20 @@ class StayoutActivity : AppCompatActivity() {
             val destination = binding.editDestination.text.toString()
             val reason = binding.editReason.text.toString()
             val emergency = binding.editNumber.text.toString()
-            val date = binding.textStartDate.text.toString()
-            // ★★★ 시작일, 종료일로 입력하도록 수정
-            val stayoutInfo = StayoutCreateDTO(destination, reason, emergency, date)
+            val startDate = binding.textStartDate.text.toString()
+            val endDate = binding.textEndDate.text.toString()
+            val stayoutInfo = StayoutCreateDTO(destination, reason, emergency, startDate, endDate)
 
             val userId = "20180001"
-            RetrofitBuilder.stayoutApi.stayoutCreate(userId, stayoutInfo).enqueue(object: Callback<StayoutCreateResultDTO> {
-                override fun onResponse(call: Call<StayoutCreateResultDTO>, response: Response<StayoutCreateResultDTO>) {
-                    Log.d("STAYOUT_CREATE", "response : " + response.body().toString())
+            RetrofitBuilder.stayoutApi.stayoutCreate(userId, stayoutInfo).enqueue(object: Callback<String> {
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    Log.d("STAYOUT_CREATE", "result : " + response.body())
                 }
 
-                override fun onFailure(call: Call<StayoutCreateResultDTO>, t: Throwable) {
+                override fun onFailure(call: Call<String>, t: Throwable) {
                     Toast.makeText(this@StayoutActivity, "오류가 발생하였습니다.", Toast.LENGTH_SHORT).show()
                     Log.d("STAYOUT_CREATE", "외박 신청 생성 실패")
+                    Log.d("STAYOUT_CREATE", t.message.toString())
                 }
             })
         }

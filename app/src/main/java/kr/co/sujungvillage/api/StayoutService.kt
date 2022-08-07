@@ -1,7 +1,6 @@
 package kr.co.sujungvillage.api
 
 import kr.co.sujungvillage.data.StayoutCreateDTO
-import kr.co.sujungvillage.data.StayoutCreateResultDTO
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Header
@@ -13,6 +12,5 @@ interface StayoutService {
     fun stayoutCreate(
         @Header("user_id") userId: String?,
         @Body stayoutInfo: StayoutCreateDTO,
-    ): Call<StayoutCreateResultDTO>
+    ): Call<String>
 }
-
