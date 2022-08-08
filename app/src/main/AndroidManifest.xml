@@ -20,6 +20,9 @@
             android:name=".AlarmActivity"
             android:exported="true" />
         <activity
+            android:name=".LoginActivity"
+            android:exported="true" />
+        <activity
             android:name=".RollcallActivity"
             android:exported="true" />
         <activity
@@ -27,7 +30,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
