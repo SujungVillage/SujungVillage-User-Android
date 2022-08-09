@@ -44,36 +44,14 @@ data class CommWriteDTO(
 data class CommWriteResultDTO(
     @SerializedName("id")
     val id:Long,
-    @SerializedName("writer")
-    val writer:CommWriteUser,
+    @SerializedName("writerId")
+    val writer:String,
     @SerializedName("title")
     val title:String,
     @SerializedName("content")
     val content:String,
-    @SerializedName("reg_date")
+    @SerializedName("regDate")
     val reg_date:String,
-    @SerializedName("mod_date")
+    @SerializedName("modDate")
     val mod_date:String
-):Serializable {}
-
-data class CommWriteUser(
-    @SerializedName("id")
-    val id:String,
-    @SerializedName("name")
-    val name:String,
-    @SerializedName("phoneNumber")
-    val phoneNumber:String,
-    @SerializedName("domitory")
-    val domitory:CommWriterDormitory,
-    @SerializedName("detailAddress")
-    val detailAddress:String,
-    @SerializedName("authority")
-    val authority:String
-):Serializable {}
-
-data class CommWriterDormitory(
-    @SerializedName("domitoryName")
-    val domitoryName:String,
-    @SerializedName("address")
-    val address:String
 ):Serializable {}
