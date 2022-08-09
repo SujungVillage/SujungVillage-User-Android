@@ -67,9 +67,6 @@
             android:name=".StayoutActivity"
             android:exported="true"
             android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="true" />
     </application>
 
 </manifest>
