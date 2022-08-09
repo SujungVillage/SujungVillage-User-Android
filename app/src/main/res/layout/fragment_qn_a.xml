@@ -102,7 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="8dp"
-                tools:listitem="@layout/listitem_qna_fna"/>
+                tools:listitem="@layout/listitem_qna_faq"/>
         </ScrollView>
     </LinearLayout>
 
