@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NoticeDetailActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_title"
+        android:layout_width="0dp"
+        android:layout_height="123dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="28dp"
+            android:background="@color/nothing"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icon_back"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/text_toolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="공지사항"
+            android:textColor="@color/black_800"
+            android:textSize="20sp"
+            android:fontFamily="@font/semi_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_title"
+        tools:ignore="SpeakableTextPresentCheck">
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:paddingBottom="75dp"
+            android:paddingTop="5dp"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/linear_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_dormitory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/regular"
+                    android:textSize="14sp"
+                    android:textColor="@color/primary"
+                    android:text="전체" />
+
+                <TextView
+                    android:id="@+id/text_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:fontFamily="@font/regular"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:text="2022학년도 2학기 기숙사비 납부 안내 (2022년 입사권자)" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="32dp"
+                android:paddingHorizontal="20dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/style_notice_detail_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/light"
+                android:text="2022년도 2학기 기숙사비 납부를 아래와 같이 안내하오니 기간 내에 기숙사비를 납부하여 주시기 바랍니다.\n\n\n1. 납부기간 : 2022년 7월 22일(금) ~ 7월 26일(화)\n\n  ※ 기한 내 미입금 시 2학기 미거주로 간주하므로, 중도 퇴사 절차를 밟아 주시기 바랍니다.\n\n\n\n2. 은행계좌 : 국민은행 016–25–0010–701 (예금주 : 성신여자대학교)\n\n  (입금자명 : 학생성명 기숙사 예) 김성신 성미관)\n\n  ※ 타인 명의 입금 시 반드시 행정실로 전화 주세요. (02-6077-3401~4)"/>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

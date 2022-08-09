@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="alarm_tab_text">
+        <item name="fontFamily">@font/medium</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="calendar_date_text_default">
+        <item name="fontFamily">@font/medium</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/black_900</item>
+    </style>
+
+    <style name="calendar_header_text_default">
+        <item name="fontFamily">@font/bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black_900</item>
+    </style>
+
+    <style name="calendar_week_text_default">
+        <item name="fontFamily">@font/medium</item>
+        <item name="android:textColor">@color/gray_300</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+</resources>

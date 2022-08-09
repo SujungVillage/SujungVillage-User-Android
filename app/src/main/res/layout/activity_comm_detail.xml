@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CommDetailActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="50dp"
+            android:background="@color/nothing"
+            android:scaleType="fitCenter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icon_back"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        <TextView
+            android:id="@+id/text_toolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="47dp"
+            android:text="성미관 게시판"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:fontFamily="@font/semi_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/text_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="근데 오늘 4층 왜이리 시끄러워?"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:paddingHorizontal="40dp"
+                android:fontFamily="@font/medium"/>
+
+            <TextView
+                android:id="@+id/text_cal_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2022/07/01 20:34"
+                android:textColor="#989898"
+                android:textSize="12dp"
+                android:paddingHorizontal="40dp"
+                android:fontFamily="@font/light"/>
+
+            <TextView
+                android:id="@+id/text_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="29dp"
+                android:text="하루종일 계속 천장이 울릴 정도로 소음이 심해.. 뭐 공사라도 하는건가?? 공지 못 봤는데"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                android:paddingHorizontal="40dp"
+                android:fontFamily="@font/light"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="40dp"
+                android:paddingBottom="12dp"
+                android:background="@drawable/style_comm_detale_comment_border">
+
+                <ImageButton
+                    android:id="@+id/imageButton6"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_gravity="center"
+                    android:background="@color/nothing"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:srcCompat="@drawable/icon_comm_detail_message"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                <TextView
+                    android:id="@+id/text_comment_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:text="0"
+                    android:textColor="@color/primary"
+                    android:fontFamily="@font/regular"/>
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/btn_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:backgroundTint="#D9D9D9"
+                    android:fontFamily="@font/regular"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="1dp"
+                    android:text="삭제하기"
+                    android:textSize="11dp"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/listitem_comm_detail"
+                />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="댓글 달기"
+                android:layout_marginTop="19dp"
+                android:textColor="@color/primary"
+                android:paddingHorizontal="40dp"
+                android:fontFamily="@font/medium"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="19dp"
+                android:layout_marginBottom="19dp"
+                android:paddingHorizontal="40dp">
+
+
+                <EditText
+                    android:id="@+id/edit_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/style_comm_detail_write_border"
+                    android:inputType="textPersonName" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_comment_submit"
+                    android:layout_width="38dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="0"
+                    android:background="@drawable/style_comm_detail_write_button"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:padding="4dp"
+                    android:paddingHorizontal="3dp"
+                    android:text="등록"
+                    android:textColor="@color/white"
+                    android:textSize="12dp"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</LinearLayout>

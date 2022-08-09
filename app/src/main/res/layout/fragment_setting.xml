@@ -5,7 +5,7 @@
     android:id="@+id/frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.SettingFragment" >
+    tools:context=".fragment.SettingFragment" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout"
@@ -49,9 +49,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="17dp"
                     android:text="설정"
-                    android:textColor="@color/black_900"
+                    android:textColor="@color/black_800"
                     android:textSize="20dp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/semi_bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +73,7 @@
                     android:text="김수룡"
                     android:textColor="@color/gray_600"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:fontFamily="@font/semi_bold" />
 
                 <TextView
                     android:id="@+id/text_grade"
@@ -81,6 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
                     android:text="재사생"
+                    android:fontFamily="@font/medium"
                     android:textColor="@color/gray_330" />
             </LinearLayout>
 
@@ -91,6 +92,7 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginRight="17dp"
                 android:text="20210000@sungshin.ac.kr"
+                android:fontFamily="@font/medium"
                 android:textColor="@color/gray_330" />
 
             <LinearLayout
@@ -114,7 +116,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="성미관 | 401호" />
+                    android:text="성미관 | 401호"
+                    android:fontFamily="@font/medium" />
             </LinearLayout>
         </LinearLayout>
 
@@ -150,6 +153,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="알람 설정"
+                        android:fontFamily="@font/medium"
                         android:textColor="@color/gray_600"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -178,6 +182,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="성신 포탈"
+                        android:fontFamily="@font/medium"
                         android:textColor="@color/gray_600"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -209,6 +214,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="앱 사용법"
+                        android:fontFamily="@font/medium"
                         android:textColor="@color/gray_600"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -240,6 +246,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="앱 문의하기"
+                        android:fontFamily="@font/medium"
                         android:textColor="@color/gray_600"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -271,6 +278,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="회원 탈퇴하기"
+                        android:fontFamily="@font/medium"
                         android:textColor="@color/gray_600"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"

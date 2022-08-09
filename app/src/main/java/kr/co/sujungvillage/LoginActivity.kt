@@ -21,35 +21,25 @@ class LoginActivity : AppCompatActivity() {
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
     val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
     private lateinit var resultLauncher : ActivityResultLauncher<Intent>
-
     //val account = GoogleSignIn.getLastSignedInAccount(this)
-
    */
 /* override fun onStart() {
         super.onStart()
-
     }*//*
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.setContentView(binding.root)
-
         binding.signInButton.setOnClickListener {
             signIn()
         }
     }
-
-
     private fun signIn() {
         val signInIntent: Intent = mGoogleSignInClient.signInIntent
         resultLauncher.launch(signInIntent)
     }
-
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == RESULT_OK) {
             // The Task returned from this call is always completed, no need to attach
@@ -58,7 +48,6 @@ class LoginActivity : AppCompatActivity() {
             handleSignInResult(task)
         }
     }
-
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
@@ -66,7 +55,6 @@ class LoginActivity : AppCompatActivity() {
             val familyName = account?.familyName.toString()
             val givenName = account?.givenName.toString()
             val displayName = account?.displayName.toString()
-
             Log.d("account", email)
             Log.d("account", familyName)
             Log.d("account", givenName)

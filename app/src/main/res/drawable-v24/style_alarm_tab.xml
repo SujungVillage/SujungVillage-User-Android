@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- shadow -->
+    <item>
+        <shape>
+            <padding android:bottom="2dp" />
+            <solid android:color="#00CCCCCC" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:bottom="2dp" />
+            <solid android:color="#0CCCCCCC" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:bottom="2dp" />
+            <solid android:color="#13CCCCCC" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:bottom="2dp" />
+            <solid android:color="#17CCCCCC" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:bottom="2dp" />
+            <solid android:color="#19CCCCCC" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:bottom="2dp" />
+            <solid android:color="#20CCCCCC" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:bottom="2dp" />
+            <solid android:color="#24CCCCCC" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:bottom="2dp" />
+            <solid android:color="#2ACCCCCC" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:bottom="2dp" />
+            <solid android:color="#2ECCCCCC" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:bottom="2dp" />
+            <solid android:color="#35CCCCCC" />
+        </shape>
+    </item>
+
+    <!-- background -->
+    <item
+        android:top="-20dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/white" />
+        </shape>
+    </item>
+</layer-list>
