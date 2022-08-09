@@ -32,3 +32,26 @@ data class CommDetailComments(
     @SerializedName("modDate")
     val modDate:String
 ):Serializable{}
+
+data class CommWriteDTO(
+    @SerializedName("title")
+    val title: String,
+    @SerializedName("content")
+    val content: String,
+): Serializable {}
+
+
+data class CommWriteResultDTO(
+    @SerializedName("id")
+    val id:Long,
+    @SerializedName("writerId")
+    val writer:String,
+    @SerializedName("title")
+    val title:String,
+    @SerializedName("content")
+    val content:String,
+    @SerializedName("regDate")
+    val reg_date:String,
+    @SerializedName("modDate")
+    val mod_date:String
+):Serializable {}
