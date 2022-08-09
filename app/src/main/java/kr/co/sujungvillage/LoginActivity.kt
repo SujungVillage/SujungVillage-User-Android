@@ -28,6 +28,9 @@ class LoginActivity : AppCompatActivity() {
         val account = GoogleSignIn.getLastSignedInAccount(this)
         if (account != null){
             mGoogleSignInClient?.signOut()?.addOnCompleteListener(this) {
+                val shared = getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
+                val editor = shared.edit()
+                editor.clear()
                 // 로그아웃 성공
                 Log.d("GOOGLE_LOGIN", "로그인 되어있던 계정 로그아웃 완료")
             }
@@ -102,6 +105,7 @@ class LoginActivity : AppCompatActivity() {
         } catch (e: ApiException) {
             Log.e("GOOGLE_LOGIN", "로그인 오류")
             Log.e("GOOGLE_LOGIN", e.statusCode.toString())
+            Log.e("GOOGLE_LOGIN", e.message.toString())
             Toast.makeText(this, "로그인 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
         }
     }

@@ -189,7 +189,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/btn_portal"
                         android:layout_width="22dp"
                         android:layout_height="22dp"
@@ -221,7 +221,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/btn_manual"
                         android:layout_width="22dp"
                         android:layout_height="22dp"
@@ -253,7 +253,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/btn_inquire"
                         android:layout_width="22dp"
                         android:layout_height="22dp"
@@ -277,15 +277,15 @@
                         android:id="@+id/text_leave"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="회원 탈퇴하기"
                         android:fontFamily="@font/medium"
+                        android:text="로그아웃"
                         android:textColor="@color/gray_600"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/btn_leave"
                         android:layout_width="22dp"
                         android:layout_height="22dp"
