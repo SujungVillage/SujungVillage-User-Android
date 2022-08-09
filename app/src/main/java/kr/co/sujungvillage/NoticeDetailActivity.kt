@@ -1,5 +1,6 @@
 package kr.co.sujungvillage
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,8 +20,9 @@ class NoticeDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        // ★★★ 재사생 학번 불러오기
-        val studentNum = "20190993"
+        // 재사생 학번 불러오기
+        val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
+        val studentNum = shared?.getString("studentNum", "error").toString()
 
         // NoticeActivity에서 공지사항 ID 전달 받기
         val noticeId = intent.getLongExtra("noticeId", -1)

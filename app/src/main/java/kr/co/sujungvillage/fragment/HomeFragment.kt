@@ -1,5 +1,6 @@
 package kr.co.sujungvillage.fragment
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -25,8 +26,9 @@ class HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        // ★★★ 재사생 학번 불러오기
-        val studentNum = "20190993"
+        // 재사생 학번 불러오기
+        val shared = this.activity?.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
+        val studentNum = shared?.getString("studentNum", "error").toString()
 
         // lottie 이미지 회전
         binding.imgWave.rotationX = 180f

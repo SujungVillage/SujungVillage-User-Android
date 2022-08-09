@@ -11,11 +11,12 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import kr.co.sujungvillage.databinding.ActivityLoginBinding
+import kr.co.sujungvillage.databinding.ActivitySplashBinding
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
-    private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
+    private val binding by lazy { ActivitySplashBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,13 +32,15 @@ class SplashActivity : AppCompatActivity() {
         }
         loadSplashScreen()
     }
+
     private fun loadSplashScreen() {
         android.os.Handler(Looper.getMainLooper()).postDelayed({
-         /*   val intent = Intent(this, LoginActivity::class.java)
+            // ★★★ 로그인 토큰이 존재하면 MainActivity로 바로 이동
+         val intent = Intent(this, LoginActivity::class.java)
             val options : ActivityOptions = ActivityOptions.makeSceneTransitionAnimation(
                 this, binding.splashLogo, "main_icon")
             startActivity(intent, options.toBundle())
-            finish()*/
+            finish()
         }, 4600)
     }
 }

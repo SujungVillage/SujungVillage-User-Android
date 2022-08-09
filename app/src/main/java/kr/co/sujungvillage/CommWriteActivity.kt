@@ -1,5 +1,6 @@
 package kr.co.sujungvillage
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -25,8 +26,13 @@ class CommWriteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        // 재사생 학번 불러오기
+        val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
+        val studentNum = shared?.getString("studentNum", "error").toString()
+
         // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener { finish() }
+
         //등록 버튼
         binding.btnUpload.setOnClickListener{
 
@@ -52,8 +58,7 @@ class CommWriteActivity : AppCompatActivity() {
                     Toast.makeText(this,"내용 보내기 ${title}, ${content}",Toast.LENGTH_SHORT).show()
 
                     val commWriteInfo=CommWriteDTO(title,content)
-                    val userId="20180001"
-                    RetrofitBuilder.communityApi.commWrite(userId,commWriteInfo).enqueue(object: Callback<CommWriteResultDTO>{
+                    RetrofitBuilder.communityApi.commWrite(studentNum,commWriteInfo).enqueue(object: Callback<CommWriteResultDTO>{
                         override fun onResponse(call: Call<CommWriteResultDTO>, response: Response<CommWriteResultDTO>) {
                             Toast.makeText(this@CommWriteActivity,"성공: ${title}, ${content}",Toast.LENGTH_LONG).show()
                             Log.d("COMMWRITE", response.body().toString())

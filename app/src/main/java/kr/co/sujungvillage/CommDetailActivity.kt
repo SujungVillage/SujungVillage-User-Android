@@ -1,5 +1,6 @@
 package kr.co.sujungvillage
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,13 +20,17 @@ class CommDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        // 재사생 학번 불러오기
+        val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
+        val studentNum = shared?.getString("studentNum", "error").toString()
+
         // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener { finish() }
-        //Api 연결**어댑터 연결
-        var userId="20180001"
-        var postId:Long//이전 페이지(commFragment)에서 intent로 넘겨 받음
-        postId=60
-        RetrofitBuilder.communityApi.commDetail(userId,postId).enqueue(object: Callback<CommDetailResultDTO>{
+
+        // Api 연결**어댑터 연결
+        var postId = 40L // 이전 페이지(commFragment)에서 intent로 넘겨 받음
+        RetrofitBuilder.communityApi.commDetail(studentNum,postId).enqueue(object: Callback<CommDetailResultDTO>{
+
             override fun onResponse(call: Call<CommDetailResultDTO>, response: Response<CommDetailResultDTO>) {
                 //어댑터 연결
                 Log.d("COMMDETAIL",response.body().toString())
