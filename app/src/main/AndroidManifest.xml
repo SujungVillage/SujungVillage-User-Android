@@ -23,12 +23,10 @@
         <activity
             android:name=".QnAWriteActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".QnADetailActivity"
-            android:exported="false"
-            android:label="@string/title_activity_qn_adetail"
-            android:theme="@style/Theme.SujungVillage.NoActionBar" />
+            android:exported="true" />
         <activity
             android:name=".NoticeDetailActivity"
             android:exported="true" />
@@ -44,7 +42,7 @@
             android:exported="true" />
         <activity
             android:name=".NoticeActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".AlarmActivity"
             android:exported="true" />
