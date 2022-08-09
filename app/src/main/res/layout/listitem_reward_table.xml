@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="30dp">
+
+    <TextView
+        android:id="@+id/date_text"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/style_reward_tableline"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="2022-10-22"
+        android:textColor="#434343" />
+
+    <TextView
+        android:id="@+id/score_text"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:background="@drawable/style_reward_tableline"
+        android:textColor="#434343"
+        android:text="-3" />
+
+    <TextView
+        android:id="@+id/reason_text"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:background="@drawable/style_reward_tableline"
+        android:textColor="#434343"
+        android:text="청소벌점" />
+</LinearLayout>

@@ -10,8 +10,8 @@ interface CommunityService {
     // 커뮤니티 상세 내용 가져오기
     @GET("/api/common/community/getPostDetail")
     fun commDetail(
-        @Header("user_id")userId:String,
-        @Query("post_id")postId:String,
+        @Header("user_id")user_id:String,
+        @Query("postId")postId:Long,
     ): Call<CommDetailResultDTO>
 
     // 커뮤니티 글 쓰기

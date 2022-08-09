@@ -28,12 +28,15 @@ class CommDetailActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener { finish() }
 
         // Api 연결**어댑터 연결
-        var postId="40"//이전 페이지(commFragment)에서 intent로 넘겨 받음
+        var postId = 40L // 이전 페이지(commFragment)에서 intent로 넘겨 받음
         RetrofitBuilder.communityApi.commDetail(studentNum,postId).enqueue(object: Callback<CommDetailResultDTO>{
+
             override fun onResponse(call: Call<CommDetailResultDTO>, response: Response<CommDetailResultDTO>) {
                 //어댑터 연결
                 Log.d("COMMDETAIL",response.body().toString())
-
+                binding.textTitle.text=response.body()?.title
+                binding.textCalDate.text=response.body()?.regDate
+                binding.textContent.text=response.body()?.content
             }
 
             override fun onFailure(call: Call<CommDetailResultDTO>, t: Throwable) {

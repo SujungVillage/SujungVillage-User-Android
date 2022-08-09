@@ -9,6 +9,7 @@ abstract class BaseActivity: AppCompatActivity() {
     abstract fun permissionGranted(requestCode: Int)
     abstract fun permissionDenied(requestCode: Int)
 
+    // 권한 요청을 승인한 경우
     fun requirePermissions(permissions: Array<String>, requestCode: Int) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             permissionGranted(requestCode)
@@ -24,6 +25,7 @@ abstract class BaseActivity: AppCompatActivity() {
         }
     }
 
+    // 권한 요청을 거부한 경우
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
