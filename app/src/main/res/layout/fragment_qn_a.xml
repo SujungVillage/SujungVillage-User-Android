@@ -55,6 +55,22 @@
             android:layout_height="51dp"
             android:elevation="20dp">
 
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/style_alarm_tab"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:tabIndicatorColor="@color/primary"
+                app:tabIndicatorHeight="5dp"
+                app:tabPaddingBottom="16dp"
+                app:tabSelectedTextColor="@color/primary"
+                app:tabTextAppearance="@style/alarm_tab_text"
+                app:tabTextColor="#434343"
+                tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+<!--
             <Button
                 android:id="@+id/FAQ_button"
                 android:layout_width="205dp"
@@ -92,6 +108,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
