@@ -26,7 +26,7 @@ class HomeFragment : Fragment() {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         // ★★★ 재사생 학번 불러오기
-        val studentNum = "20180001"
+        val studentNum = "20190993"
 
         // lottie 이미지 회전
         binding.imgWave.rotationX = 180f
@@ -63,6 +63,7 @@ class HomeFragment : Fragment() {
         RetrofitBuilder.homeApi.homeInfo(studentNum, binding.calendar.currentDate.year.toString(), binding.calendar.currentDate.month.toString()).enqueue(object: Callback<HomeInfoResultDTO> {
             override fun onResponse(call: Call<HomeInfoResultDTO>, response: Response<HomeInfoResultDTO>) {
                 Log.d("HOME_INFO", "홈 화면 정보 조회 성공")
+                Log.d("HOME_INFO", "response : " + response.body()?.toString())
                 Log.d("HOME_INFO", "user : " + response.body()?.residentInfo.toString())
                 Log.d("HOME_INFO", "roll-call days : " + response.body()?.rollcallDays.toString())
                 Log.d("HOME_INFO", "applied roll-call days : " + response.body()?.appliedDays.toString())
@@ -74,9 +75,9 @@ class HomeFragment : Fragment() {
                 binding.textRewards.text = "상점 : ${response.body()?.residentInfo?.plusLMP}점    |    벌점 : ${response.body()?.residentInfo?.minusLMP}점"
 
                 // 캘린더 정보 반영
-                val rollcallDecorator = RollcallDecorator(this@HomeFragment, response.body()!!.rollcallDays)
-                val stayoutDecorator = StayoutDecorator(this@HomeFragment, response.body()!!.staoutDays)
-                val missDecorator = MissDecorator(this@HomeFragment, response.body()!!.rollcallDays, response.body()!!.appliedDays)
+                val rollcallDecorator = RollcallDecorator(this@HomeFragment, response.body()!!.rollcallDays, binding.calendar.currentDate.month)
+                val stayoutDecorator = StayoutDecorator(this@HomeFragment, response.body()!!.staoutDays, binding.calendar.currentDate.month)
+                val missDecorator = MissDecorator(this@HomeFragment, response.body()!!.rollcallDays, response.body()!!.appliedDays, binding.calendar.currentDate.month)
                 val todayDecorator = TodayDecorator(this@HomeFragment)
                 binding.calendar.addDecorators(rollcallDecorator, stayoutDecorator, missDecorator, todayDecorator)
             }
@@ -97,9 +98,9 @@ class HomeFragment : Fragment() {
                     Log.d("HOME_INFO", "applied stayout days : " + response.body()?.staoutDays.toString())
 
                     // 캘린더 정보 반영
-                    val rollcallDecorator = RollcallDecorator(this@HomeFragment, response.body()!!.rollcallDays)
-                    val stayoutDecorator = StayoutDecorator(this@HomeFragment, response.body()!!.staoutDays)
-                    val missDecorator = MissDecorator(this@HomeFragment, response.body()!!.rollcallDays, response.body()!!.appliedDays)
+                    val rollcallDecorator = RollcallDecorator(this@HomeFragment, response.body()!!.rollcallDays, date.month)
+                    val stayoutDecorator = StayoutDecorator(this@HomeFragment, response.body()!!.staoutDays, date.month)
+                    val missDecorator = MissDecorator(this@HomeFragment, response.body()!!.rollcallDays, response.body()!!.appliedDays, date.month)
                     val todayDecorator = TodayDecorator(this@HomeFragment)
                     binding.calendar.addDecorators(rollcallDecorator, stayoutDecorator, missDecorator, todayDecorator)
                 }
@@ -116,12 +117,13 @@ class HomeFragment : Fragment() {
 }
 
 // 점호일 커스텀 함수
-class RollcallDecorator(context: HomeFragment, days: List<Int>): DayViewDecorator {
+class RollcallDecorator(context: HomeFragment, days: List<Int>, month: Int): DayViewDecorator {
     val rollcallDrawable = context.resources.getDrawable(R.drawable.style_home_cal_rollcall)
     val days = days
+    val month = month
 
     override fun shouldDecorate(day: CalendarDay?): Boolean { // 커스텀 여부 반환
-        return days.contains(day?.day)
+        return days.contains(day?.day) && day?.month == month
     }
 
     override fun decorate(view: DayViewFacade?) { // 커스텀 설정
@@ -130,12 +132,13 @@ class RollcallDecorator(context: HomeFragment, days: List<Int>): DayViewDecorato
 }
 
 // 외박 신청일 커스텀 함수
-class StayoutDecorator(context: HomeFragment, days: List<Int>): DayViewDecorator {
+class StayoutDecorator(context: HomeFragment, days: List<Int>, month: Int): DayViewDecorator {
     val stayoutDrawable = context.resources.getDrawable(R.drawable.style_home_cal_stayout)
     val days = days
+    val month = month
 
     override fun shouldDecorate(day: CalendarDay?): Boolean { // 커스텀 여부 반환
-        return days.contains(day?.day)
+        return days.contains(day?.day) && day?.month == month
     }
 
     override fun decorate(view: DayViewFacade?) { // 커스텀 설정
@@ -144,14 +147,15 @@ class StayoutDecorator(context: HomeFragment, days: List<Int>): DayViewDecorator
 }
 
 // 무단 외박일 커스텀 함수
-class MissDecorator(context: HomeFragment, rollcallDays: List<Int>, appliedDays: List<Int>): DayViewDecorator {
+class MissDecorator(context: HomeFragment, rollcallDays: List<Int>, appliedDays: List<Int>, month: Int): DayViewDecorator {
     val missDrawable = context.resources.getDrawable(R.drawable.style_home_cal_miss)
     val today = CalendarDay.today()
     val rollcallDays = rollcallDays
     val appliedDays = appliedDays
+    val month = month
 
     override fun shouldDecorate(day: CalendarDay?): Boolean {
-        return day?.isBefore(today)!! && rollcallDays.contains(day.day) && !appliedDays.contains(day.day)
+        return day?.isBefore(today)!! && day?.month == month && rollcallDays.contains(day.day) && !appliedDays.contains(day.day)
     }
 
     override fun decorate(view: DayViewFacade?) {
@@ -162,7 +166,7 @@ class MissDecorator(context: HomeFragment, rollcallDays: List<Int>, appliedDays:
 // 오늘 커스텀 함수
 class TodayDecorator(context: HomeFragment): DayViewDecorator {
     override fun shouldDecorate(day: CalendarDay?): Boolean { // 커스텀 여부 반환
-        return return day?.equals(CalendarDay.today())!!
+        return day?.equals(CalendarDay.today())!!
     }
 
     override fun decorate(view: DayViewFacade?) { // 커스텀 설정

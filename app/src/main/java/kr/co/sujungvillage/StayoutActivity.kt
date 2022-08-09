@@ -30,6 +30,9 @@ class StayoutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        // ★★★ 재사생 학번 불러오기
+        val studentNum = "20180001"
+
         // 키보드 내리기
         binding.layout.setOnClickListener { this.hideKeyboard() }
         binding.linearForm.setOnClickListener { this.hideKeyboard() }
@@ -115,8 +118,7 @@ class StayoutActivity : AppCompatActivity() {
             val endDate = binding.textEndDate.text.toString()
             val stayoutInfo = StayoutCreateDTO(destination, reason, emergency, startDate, endDate)
 
-            val userId = "20180001"
-            RetrofitBuilder.stayoutApi.stayoutCreate(userId, stayoutInfo).enqueue(object: Callback<String> {
+            RetrofitBuilder.stayoutApi.stayoutCreate(studentNum, stayoutInfo).enqueue(object: Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     Log.d("STAYOUT_CREATE", "result : " + response.body())
                 }

@@ -17,7 +17,7 @@ data class HomeInfoResultDTO(
 data class HomeResidentInfo(
     @SerializedName("name")
     val name: String,
-    @SerializedName("dormitoryName")
+    @SerializedName("domitoryName")
     val dormitory: String,
     @SerializedName("detailedAddress")
     val address: String,
