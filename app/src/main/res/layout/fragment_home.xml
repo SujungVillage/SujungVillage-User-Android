@@ -262,7 +262,8 @@
                         app:mcv_dateTextAppearance="@style/calendar_date_text_default"
                         app:mcv_headerTextAppearance="@style/calendar_header_text_default"
                         app:mcv_weekDayTextAppearance="@style/calendar_week_text_default"
-                        app:mcv_selectionMode="none" />
+                        app:mcv_selectionColor="@color/nothing"
+                        app:mcv_selectionMode="single" />
 
                     <TextView
                         android:id="@+id/text_contacts"

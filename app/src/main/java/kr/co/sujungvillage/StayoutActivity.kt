@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kr.co.sujungvillage.base.hideKeyboard
+import kr.co.sujungvillage.data.StayoutCheckResultDTO
 import kr.co.sujungvillage.data.StayoutCreateDTO
 import kr.co.sujungvillage.databinding.ActivityStayoutBinding
 import kr.co.sujungvillage.retrofit.RetrofitBuilder
@@ -120,12 +121,16 @@ class StayoutActivity : AppCompatActivity() {
             val endDate = binding.textEndDate.text.toString()
             val stayoutInfo = StayoutCreateDTO(destination, reason, emergency, startDate, endDate)
 
-            RetrofitBuilder.stayoutApi.stayoutCreate(studentNum, stayoutInfo).enqueue(object: Callback<String> {
-                override fun onResponse(call: Call<String>, response: Response<String>) {
+            RetrofitBuilder.stayoutApi.stayoutCreate(studentNum, stayoutInfo).enqueue(object: Callback<List<StayoutCheckResultDTO>> {
+                override fun onResponse(call: Call<List<StayoutCheckResultDTO>>, response: Response<List<StayoutCheckResultDTO>>) {
+                    Log.d("STAYOUT_CREATE", "외박 신청 성공")
                     Log.d("STAYOUT_CREATE", "result : " + response.body())
+
+                    Toast.makeText(this@StayoutActivity, "외박 신청되었습니다.", Toast.LENGTH_SHORT).show()
+                    finish()
                 }
 
-                override fun onFailure(call: Call<String>, t: Throwable) {
+                override fun onFailure(call: Call<List<StayoutCheckResultDTO>>, t: Throwable) {
                     Toast.makeText(this@StayoutActivity, "오류가 발생하였습니다.", Toast.LENGTH_SHORT).show()
                     Log.d("STAYOUT_CREATE", "외박 신청 생성 실패")
                     Log.d("STAYOUT_CREATE", t.message.toString())
