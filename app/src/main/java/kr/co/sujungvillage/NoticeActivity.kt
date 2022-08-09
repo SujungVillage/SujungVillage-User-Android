@@ -23,11 +23,14 @@ class NoticeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        // ★★★ 재사생 학번 불러오기
+        val studentNum = "20190993"
+
         // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener { finish() }
 
         // 공지사항 리스트 조회 API 연결
-        RetrofitBuilder.noticeApi.noticeRequest("20180001").enqueue(object: Callback<List<NoticeRequestResultDTO>> {
+        RetrofitBuilder.noticeApi.noticeRequest(studentNum).enqueue(object: Callback<List<NoticeRequestResultDTO>> {
             override fun onResponse(call: Call<List<NoticeRequestResultDTO>>, response: Response<List<NoticeRequestResultDTO>>) {
                 Log.d("NOTICE_REQUEST", "size of notice list : " + response.body()?.size.toString())
 
