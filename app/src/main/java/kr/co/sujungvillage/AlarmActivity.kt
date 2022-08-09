@@ -4,7 +4,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayoutMediator
-import kr.co.sujungvillage.adapter.ViewPagerAdapter
+import kr.co.sujungvillage.adapter.AlarmPagerAdapter
 import kr.co.sujungvillage.databinding.ActivityAlarmBinding
 
 class AlarmActivity : AppCompatActivity() {
@@ -22,9 +22,7 @@ class AlarmActivity : AppCompatActivity() {
         val viewPager = binding.viewPager
         val tabLayout = binding.tabLayout
 
-        tabLayout.setSelectedTabIndicatorColor(Color.rgb(255, 161, 20))
-
-        viewPager.adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
+        viewPager.adapter = AlarmPagerAdapter(supportFragmentManager, lifecycle)
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = tabTitleArray[position]

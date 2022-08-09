@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/p_liight"
+    android:background="@color/p_light"
     tools:context=".LoginActivity">
 
     <ImageView
@@ -23,11 +23,13 @@
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btn_signIn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="58dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="30dp"
-        android:layout_marginHorizontal="20dp"/>
+        android:outlineSpotShadowColor="@color/nothing"
+        android:outlineAmbientShadowColor="@color/nothing"
+        android:layout_marginBottom="35dp"
+        android:layout_marginHorizontal="35dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

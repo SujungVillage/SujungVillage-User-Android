@@ -9,9 +9,9 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- user-defined colors -->
-    <color name="primary">#FFFFA114</color>
-    <color name="p_liight">#FFFFD250</color>
     <color name="p_dark">#FFBE6E00</color>
+    <color name="primary">#FFFFA114</color>
+    <color name="p_light">#FFFFD250</color>
 
     <color name="yellow_100">#FFFFEEBD</color>
     <color name="yellow_200">#FFE8D49C</color>
