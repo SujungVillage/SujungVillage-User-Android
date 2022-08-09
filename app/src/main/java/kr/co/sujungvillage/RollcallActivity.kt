@@ -50,6 +50,10 @@ class RollcallActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        // 재사생 학번 불러오기
+        val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
+        val studentNum = shared?.getString("studentNum", "error").toString()
+
         // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener { finish() }
 
@@ -65,7 +69,6 @@ class RollcallActivity : BaseActivity() {
 
         // 제출하기 버튼 연결 : 점호 신청 후 액티비티 종료
         binding.btnSubmit.setOnClickListener {
-            val user_id = "20180001"
             // 이미지를 촬영하지 않은 경우
             if (imgBitmap.isEmpty()) {
                 Toast.makeText(this, "점호 사진을 촬영해주세요.", Toast.LENGTH_SHORT).show()
@@ -82,7 +85,7 @@ class RollcallActivity : BaseActivity() {
             var rollcallInfo = RollcallCreateDTO(imgUrl, location)
 
             // 점호 신청 API 연결
-            RetrofitBuilder.rollcallApi.rollcallCreate(user_id, rollcallInfo).enqueue(object : Callback<RollcallCreateResultDTO> {
+            RetrofitBuilder.rollcallApi.rollcallCreate(studentNum, rollcallInfo).enqueue(object : Callback<RollcallCreateResultDTO> {
                     override fun onResponse(call: Call<RollcallCreateResultDTO>, response: Response<RollcallCreateResultDTO>) {
                         Log.d("ROLLCALL_CREATE", "id : " + response.body()?.id.toString())
                         Log.d("ROLLCALL_CREATE", "user id : " + response.body()?.userId)

@@ -1,5 +1,6 @@
 package kr.co.sujungvillage.fragment
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -14,14 +15,16 @@ import kr.co.sujungvillage.retrofit.RetrofitBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class SettingFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentSettingBinding.inflate(layoutInflater)
 
-        // 사용자 학번 가져오기
-        val studentNum = "20180001"
+        // 재사생 학번 불러오기
+        val shared = this.activity?.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
+        val studentNum = shared?.getString("studentNum", "error").toString()
 
         // 알림 버튼 연결
         binding.btnAlarm.setOnClickListener {
@@ -30,7 +33,7 @@ class SettingFragment : Fragment() {
         }
 
         // 설정 화면 정보 조회 API 연결 (홈 화면 정보 조회 API 활용)
-        RetrofitBuilder.homeApi.homeInfo("20180001", "2022", "8").enqueue(object:
+        RetrofitBuilder.homeApi.homeInfo(studentNum, Calendar.YEAR.toString(), Calendar.MONTH.toString()).enqueue(object:
             Callback<HomeInfoResultDTO> {
             override fun onResponse(call: Call<HomeInfoResultDTO>, response: Response<HomeInfoResultDTO>) {
                 Log.d("SETTING_INFO", "설정 화면 정보 조회 성공")
