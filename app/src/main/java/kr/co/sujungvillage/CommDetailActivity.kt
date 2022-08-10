@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,13 +28,15 @@ class CommDetailActivity : AppCompatActivity() {
 
         // 재사생 학번 불러오기
         val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
-        val studentNum = shared?.getString("studentNum", "20180001").toString()
+        val studentNum = shared?.getString("studentNum", "error").toString()
 
-        // 뒤로가기 버튼 연결
+        //CommFragment 에서 postId 전달 받기
+        val postId=intent.getLongExtra("postId",-1)
+       // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener { finish() }
 
         // Api 연결
-        var postId = 60L // 이전 페이지(commFragment)에서 intent로 넘겨 받음
+//        var postId = 60L // 이전 페이지(commFragment)에서 intent로 넘겨 받음
         refresh(studentNum,postId)
 
         //댓글 전송 버튼 클릭시
@@ -66,9 +69,22 @@ class CommDetailActivity : AppCompatActivity() {
             override fun onResponse(call: Call<CommDetailResultDTO>, response: Response<CommDetailResultDTO>) {
                 Log.d("COMM_DETAIL",response.body().toString())
                 binding.textTitle.text=response.body()?.title
-                binding.textCalDate.text="${response.body()?.regDate?.subSequence(0,4)}/${response.body()?.regDate?.subSequence(5, 7)}/${response.body()?.regDate?.subSequence(8, 10)} ${(response.body()?.regDate?.subSequence(11,13).toString().toInt()+9)%24}:${(response.body()?.regDate?.subSequence(14,16).toString().toInt())}"
+                val hour=response.body()?.regDate?.subSequence(11,13).toString().toInt()
+                var hourResult=hour.toString()
+                if (hour<10){
+                    hourResult="0${hour}"
+                }
+                val min=(response.body()?.regDate?.subSequence(14,16).toString().toInt())
+                var minResult=min.toString()
+                if(min<10){
+                    minResult="0${min}"
+                }
+                binding.textCalDate.text="${response.body()?.regDate?.subSequence(0,4)}/${response.body()?.regDate?.subSequence(5, 7)}/${response.body()?.regDate?.subSequence(8, 10)} ${hourResult}:${minResult}"
                 binding.textContent.text=response.body()?.content
-
+                //글 작성자 id 와 studentNum이 같으면 삭제 버튼 보이게
+                if(studentNum==response.body()?.writerId){
+                    binding.btnDelete.visibility= View.VISIBLE
+                }
                 //어댑터 연결
                 val commentList:MutableList<CommDetailCommentsRequest> = mutableListOf()
                 var commentCount=0

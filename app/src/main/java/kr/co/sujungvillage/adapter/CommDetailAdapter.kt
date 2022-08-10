@@ -26,8 +26,18 @@ class CommDetailAdapter() :RecyclerView.Adapter<CommDetailHolder>(){
 }
 class CommDetailHolder(val binding:ListitemCommDetailBinding):RecyclerView.ViewHolder(binding.root){
     fun setCommDetail(commDetail: CommDetailCommentsRequest){
-        binding.textName.text="${commDetail.writerId}"//익명처리해야함.
-        binding.textCalDate.text="${commDetail.regDate?.subSequence(0,4)}/${commDetail.regDate?.subSequence(5, 7)}/${commDetail.regDate?.subSequence(8, 10)} ${(commDetail.regDate?.subSequence(11,13).toString().toInt()+9)%24}:${(commDetail.regDate?.subSequence(14,16).toString().toInt())}"
+        binding.textName.text="익명"//익명처리해야함.
+        val hour=commDetail.regDate?.subSequence(11,13).toString().toInt()
+        var hourResult=hour.toString()
+        if (hour<10){
+            hourResult="0${hour}"
+        }
+        val min=(commDetail.regDate?.subSequence(14,16).toString().toInt())
+        var minResult=min.toString()
+        if(min<10){
+            minResult="0${min}"
+        }
+        binding.textCalDate.text="${commDetail.regDate?.subSequence(0,4)}/${commDetail.regDate?.subSequence(5, 7)}/${commDetail.regDate?.subSequence(8, 10)} ${hourResult}:${minResult}"
         binding.textContent.text="${commDetail.content}"
     }
 }
