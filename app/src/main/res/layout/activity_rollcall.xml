@@ -49,6 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:paddingHorizontal="40dp"
             android:orientation="vertical">
 
             <ImageView
@@ -90,6 +91,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/medium"
+                    android:lines="1"
+                    android:ellipsize="end"
                     android:text="현재 위치 정보가 없습니다."
                     android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"

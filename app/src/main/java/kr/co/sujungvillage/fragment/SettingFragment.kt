@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kr.co.sujungvillage.AlarmActivity
+import kr.co.sujungvillage.LoginActivity
 import kr.co.sujungvillage.data.HomeInfoResultDTO
 import kr.co.sujungvillage.databinding.FragmentSettingBinding
 import kr.co.sujungvillage.retrofit.RetrofitBuilder
@@ -50,6 +52,14 @@ class SettingFragment : Fragment() {
                 Log.d("HOME_INFO", t.message.toString())
             }
         })
+
+        // 로그아웃 버튼 연결
+        binding.layoutLeave.setOnClickListener {
+            Toast.makeText(this.activity, "로그아웃되었습니다.", Toast.LENGTH_SHORT).show()
+            var intent = Intent(this.activity, LoginActivity::class.java)
+            startActivity(intent)
+            this.activity?.finish()
+        }
 
         return binding.root
     }

@@ -1,20 +1,22 @@
 package kr.co.sujungvillage.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kr.co.sujungvillage.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import kr.co.sujungvillage.QnAWriteActivity
+import kr.co.sujungvillage.adapter.QnAMyqAdapter
 import kr.co.sujungvillage.data.MyqGetResultDTO
 import kr.co.sujungvillage.databinding.FragmentQnAMyqBinding
 import kr.co.sujungvillage.retrofit.RetrofitBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 class QnAMyqFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -30,10 +32,15 @@ class QnAMyqFragment : Fragment() {
                 Log.d("MY_QUESTION_GET", "내 질문 리스트 조회 성공")
                 Log.d("MY_QUESTION_GET", "response : " + response.body().toString())
 
+                // 어댑터 연결
                 val myqList: MutableList<MyqGetResultDTO> = mutableListOf()
                 for (info in response.body()!!) {
                     myqList.add(MyqGetResultDTO(info.id, info.userId, info.title, info.isAnswered))
                 }
+                var adapter = QnAMyqAdapter()
+                adapter.myqList = myqList
+                binding.recycleQuestion.adapter = adapter
+                binding.recycleQuestion.layoutManager = LinearLayoutManager(activity)
             }
 
             override fun onFailure(call: Call<List<MyqGetResultDTO>>, t: Throwable) {
@@ -41,6 +48,12 @@ class QnAMyqFragment : Fragment() {
                 Log.e("MY_QUESTION_GET", t.message.toString())
             }
         })
+
+        // 글쓰기 버튼 연결
+        binding.btnWrite.setOnClickListener {
+            var intent = Intent(this.activity, QnAWriteActivity::class.java)
+            startActivity(intent)
+        }
 
         return binding.root
     }

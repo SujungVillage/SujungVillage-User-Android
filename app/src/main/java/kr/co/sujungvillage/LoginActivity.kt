@@ -12,6 +12,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import kr.co.sujungvillage.BuildConfig.CLIENT_ID
 import kr.co.sujungvillage.databinding.ActivityLoginBinding
 
 
@@ -28,6 +29,9 @@ class LoginActivity : AppCompatActivity() {
         val account = GoogleSignIn.getLastSignedInAccount(this)
         if (account != null){
             mGoogleSignInClient?.signOut()?.addOnCompleteListener(this) {
+                val shared = getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
+                val editor = shared.edit()
+                editor.clear()
                 // 로그아웃 성공
                 Log.d("GOOGLE_LOGIN", "로그인 되어있던 계정 로그아웃 완료")
             }
@@ -41,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
         // 사용자 이메일 주소 요청
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             // Auth Web Application Client ID인데 노출되면 안 될 것 같아서 필요하게 되면 연락 요망
-            // .requestIdToken("XXX")
+            .requestIdToken(CLIENT_ID)
             .requestEmail()
             .build()
 
@@ -102,6 +106,7 @@ class LoginActivity : AppCompatActivity() {
         } catch (e: ApiException) {
             Log.e("GOOGLE_LOGIN", "로그인 오류")
             Log.e("GOOGLE_LOGIN", e.statusCode.toString())
+            Log.e("GOOGLE_LOGIN", e.message.toString())
             Toast.makeText(this, "로그인 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
         }
     }

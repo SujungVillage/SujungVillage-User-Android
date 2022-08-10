@@ -24,3 +24,14 @@ data class RollcallCreateResultDTO(
     @SerializedName("state")
     val state: String,
 ): Serializable {}
+
+data class RollcallCheckResultDTO(
+    @SerializedName("id")
+    val id: Long,
+    @SerializedName("start")
+    val start: String,
+    @SerializedName("end")
+    val end: String,
+    @SerializedName("domitoryName")
+    val dormitory: String,
+): Serializable {}

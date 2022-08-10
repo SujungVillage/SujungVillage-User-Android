@@ -1,5 +1,6 @@
 package kr.co.sujungvillage.fragment
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.tabs.TabLayoutMediator
+import kr.co.sujungvillage.AlarmActivity
 import kr.co.sujungvillage.adapter.QnAPagerAdapter
 import kr.co.sujungvillage.databinding.ActivityAlarmBinding
 import kr.co.sujungvillage.databinding.FragmentQnABinding
@@ -22,14 +24,18 @@ class QnAFragment : Fragment() {
         // 프래그먼트 전환 상황을 저장하지 않음 (아니면 오류 발생)
         binding.viewPager.isSaveEnabled = false
 
-        // viewPager와 tabLayout 설정이 되어 있지 않은 경우 설정
-        if (binding.viewPager.adapter == null) {
-            binding.viewPager.adapter = this.activity?.let { QnAPagerAdapter(childFragmentManager, lifecycle) }
-
-            TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-                tab.text = tabTitleArray[position]
-            }.attach()
+        // 알림 버튼 연결
+        binding.btnAlarm.setOnClickListener {
+            var intent = Intent(this.activity, AlarmActivity::class.java)
+            startActivity(intent)
         }
+
+        // viewPager와 tabLayout 연결
+        binding.viewPager.adapter = this.activity?.let { QnAPagerAdapter(childFragmentManager, lifecycle) }
+
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = tabTitleArray[position]
+        }.attach()
 
         return binding.root
     }
