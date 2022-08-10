@@ -1,8 +1,8 @@
 package kr.co.sujungvillage.api
 
-import kr.co.sujungvillage.data.StayoutCancelResultDTO
 import kr.co.sujungvillage.data.StayoutCheckResultDTO
 import kr.co.sujungvillage.data.StayoutCreateDTO
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -22,9 +22,9 @@ interface StayoutService {
     ): Call<StayoutCheckResultDTO>
 
     // 외박 취소
-    @POST("/api/student/cancelExeat")
+    @DELETE("/api/student/cancleExeat")
     fun stayoutCancel(
         @Header("user_id") userId: String,
         @Query("date") date: String,
-    ): Call<StayoutCancelResultDTO>
+    ): Call<Void>
 }

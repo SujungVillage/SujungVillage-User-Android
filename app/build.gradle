@@ -24,6 +24,7 @@ android {
 
         // local variables
         buildConfigField "String", "BASE_URL", properties['base_url']
+        buildConfigField "String", "CLIENT_ID", properties['client_id']
     }
 
     buildTypes {
