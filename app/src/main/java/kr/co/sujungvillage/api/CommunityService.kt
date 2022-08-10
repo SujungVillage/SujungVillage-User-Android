@@ -20,7 +20,7 @@ interface CommunityService {
     ): Call<CommWriteResultDTO>
 
     //커뮤니티 댓글 쓰기
-    @POST("/api/common/community/writeCommen")
+    @POST("/api/common/community/writeComment")
     fun commComment(
         @Header("user_id") user_id: String,
         @Body commCommentInfo:CommDetailCommentsWriteDTO

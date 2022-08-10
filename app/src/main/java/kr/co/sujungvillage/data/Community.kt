@@ -37,7 +37,7 @@ data class CommDetailResultDTO(
     @SerializedName("modDate")
     val modDate:String,
     @SerializedName("comments")
-    val comments:List<CommDetailCommentsRequest>
+    val comments:MutableList<CommDetailCommentsRequest>
 ):Serializable{}
 
 data class CommDetailCommentsRequest(
