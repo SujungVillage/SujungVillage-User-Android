@@ -5,8 +5,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@drawable/style_qna_listitem_border"
-    android:layout_marginBottom="104dp"
-    android:layout_margin="10dp">
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginBottom="30dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         android:padding="20dp">
 
         <ImageButton
-            android:id="@+id/qna_imageButton"
+            android:id="@+id/btn_detail"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
@@ -25,28 +25,27 @@
 
         <TextView
             android:id="@+id/text_qna_fna"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
+            android:layout_marginLeft="7dp"
+            android:lines="1"
+            android:ellipsize="end"
             android:fontFamily="@font/medium"
-            android:text="점호 시간과 요일은 언제인가요?"
+            android:text="점호 시간과 요일은 언제인가요? 답변 부탁드립니다."
             android:textSize="17dp" />
 
     </LinearLayout>
-
-    <View
-        android:id="@+id/view_line_fna_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="3dp"
-        android:background="#FFEAAE" />
 
     <TextView
         android:id="@+id/fna_detail_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:fontFamily="@font/medium"
-        android:padding="20dp"
+        android:paddingHorizontal="28dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="24dp"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus consectetur sed urna, id aliquam ut. Orci, varius egestas ac eget a odio nec pellentesque. Pharetra iaculis sit cursus sed. Purus lorem eu sit mattis lectus consequat, imperdiet congue leo. At sit faucibus tincidunt pharetra tellus mattis eu. Congue elementum nec id sem nibh egestas arcu scelerisque." />
 
 </LinearLayout>

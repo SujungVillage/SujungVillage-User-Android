@@ -1,19 +1,25 @@
 package kr.co.sujungvillage.fragment
 
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.style.ForegroundColorSpan
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 import kr.co.sujungvillage.*
 import kr.co.sujungvillage.data.HomeInfoResultDTO
+import kr.co.sujungvillage.data.RollcallCheckResultDTO
+import kr.co.sujungvillage.data.StayoutCheckResultDTO
 import kr.co.sujungvillage.databinding.FragmentHomeBinding
 import kr.co.sujungvillage.retrofit.RetrofitBuilder
 import retrofit2.Call
@@ -25,8 +31,9 @@ class HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        // ★★★ 재사생 학번 불러오기
-        val studentNum = "20190993"
+        // 재사생 학번 불러오기
+        val shared = this.activity?.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
+        val studentNum = shared?.getString("studentNum", "error").toString()
 
         // lottie 이미지 회전
         binding.imgWave.rotationX = 180f
@@ -108,6 +115,93 @@ class HomeFragment : Fragment() {
                 override fun onFailure(call: Call<HomeInfoResultDTO>, t: Throwable) {
                     Log.d("HOME_INFO", "캘린더 정보 조회 실패")
                     Log.d("HOME_INFO", t.message.toString())
+                }
+            })
+        }
+
+        // 날짜 클릭 이벤트
+        binding.calendar.setOnDateChangedListener { widget, date, selected ->
+            val year = date.year.toString()
+            val month = if (date.month.toString().length == 2) date.month.toString() else "0${date.month.toString()}"
+            val day = if (date.day.toString().length == 2) date.day.toString() else "0${date.day.toString()}"
+            val clickDate = "${year}-${month}-${day}"
+            Log.d("DATE_TEST", clickDate)
+
+            // 외박 신청 조회 API 연결
+            RetrofitBuilder.stayoutApi.stayoutCheck(studentNum, clickDate).enqueue(object: Callback<StayoutCheckResultDTO> {
+                override fun onResponse(call: Call<StayoutCheckResultDTO>, response: Response<StayoutCheckResultDTO>) {
+                    // null 값이 반환되면 무시
+                    if (response.body()?.id == null) {
+                        Log.d("STAYOUT_CHECK", "외박 신청이 없는 날짜입니다.")
+
+                        // 점호일 조회 API 연결
+                        RetrofitBuilder.rollcallApi.rollcallCheck(studentNum, clickDate).enqueue(object: Callback<RollcallCheckResultDTO> {
+                            override fun onResponse(call: Call<RollcallCheckResultDTO>, response: Response<RollcallCheckResultDTO>) {
+                                Log.d("ROLLCALL_CHECK", "response : " + response.body().toString())
+                                Log.d("ROLLCALL_CHECK", "error code & body : " + response.code() + " " + response.errorBody())
+
+                                // null 값이 반환되면 무시
+                                if (response.body()?.id == null) {
+                                    Log.d("ROLLCALL_CHECK", "점호가 없는 날짜입니다.")
+                                    return
+                                }
+
+                                // 점호일이면 Alert Dialog 생성
+                                val builder = AlertDialog.Builder(context)
+                                builder.setTitle("${response.body()?.start?.subSequence(0, 10)} 점호")
+                                builder.setMessage("시작 시간 : ${response.body()?.start?.subSequence(11, 19)}" +
+                                        "\n종료 시간 : ${response.body()?.end?.subSequence(11, 19)}" +
+                                        "\n점호 대상 : ${response.body()?.dormitory.toString()} 기숙사")
+                                builder.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, i ->
+                                    dialog.cancel()
+                                })
+                                builder.show()
+                            }
+
+                            override fun onFailure(call: Call<RollcallCheckResultDTO>, t: Throwable) {
+                                Log.e("ROLLCALL_CHECK", "점호일 조회 실패")
+                                Log.e("ROLLCALL_CHECK", t.message.toString())
+                            }
+                        })
+                        return
+                    }
+
+                    // 외박 예정일이면 Alert Dialog 생성
+                    val builder = AlertDialog.Builder(context)
+                    builder.setTitle("${response.body()?.date} 외박\n")
+                    builder.setMessage("행선지 : ${response.body()?.destination}" +
+                            "\n사유 : ${response.body()?.reason}" +
+                            "\n긴급 전화번호 : ${response.body()?.emergencyNumber}")
+                    builder.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, i ->
+                        dialog.cancel()
+                    })
+                    // 오늘 또는 오늘 이후 날짜만 외박 취소 가능
+                    if (date.isAfter(CalendarDay.today()) || date.equals(CalendarDay.today())) {
+                        builder.setNegativeButton("외박 취소", DialogInterface.OnClickListener { dialog, i ->
+                            // 외박 취소 API 연결
+                            RetrofitBuilder.stayoutApi.stayoutCancel(studentNum, clickDate).enqueue(object : Callback<Void> {
+                                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                                        Log.d("STAYOUT_CANCEL", "외박 취소 성공")
+                                        Log.d("STAYOUT_CANCEL", "response : " + response.body().toString())
+                                        Log.d("STAYOUT_CANCEL", "code : " + response.code().toString())
+                                        Log.d("STAYOUT_CANCEL", "error body : " + response.errorBody().toString())
+                                        dialog.cancel()
+                                        Toast.makeText(this@HomeFragment.activity, "외박이 취소되었습니다.", Toast.LENGTH_SHORT).show()
+                                    }
+
+                                    override fun onFailure(call: Call<Void>, t: Throwable) {
+                                        Log.e("STAYOUT_CANCEL", "외박 취소 실패")
+                                        Log.e("STAYOUT_CANCEL", t.message.toString())
+                                    }
+                                })
+                            })
+                    }
+                    builder.show()
+                }
+
+                override fun onFailure(call: Call<StayoutCheckResultDTO>, t: Throwable) {
+                    Log.e("STAYOUT_CHECK", "외박 신청 조회 실패")
+                    Log.e("STAYOUT_CHECK", t.message.toString())
                 }
             })
         }

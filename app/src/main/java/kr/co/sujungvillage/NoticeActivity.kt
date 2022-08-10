@@ -1,5 +1,6 @@
 package kr.co.sujungvillage
 
+import android.content.Context
 import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,8 +24,9 @@ class NoticeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        // ★★★ 재사생 학번 불러오기
-        val studentNum = "20190993"
+        // 재사생 학번 불러오기
+        val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
+        val studentNum = shared?.getString("studentNum", "error").toString()
 
         // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener { finish() }

@@ -16,3 +16,18 @@ data class StayoutCreateDTO(
     @SerializedName("dateToEnd")
     val endDate: String,
 ): Serializable {}
+
+data class StayoutCheckResultDTO(
+    @SerializedName("id")
+    val id: Long,
+    @SerializedName("userId")
+    val userId: String,
+    @SerializedName("destination")
+    val destination: String,
+    @SerializedName("reason")
+    val reason: String,
+    @SerializedName("emergencyPhoneNumber")
+    val emergencyNumber: String,
+    @SerializedName("dateToUse")
+    val date: String,
+): Serializable {}

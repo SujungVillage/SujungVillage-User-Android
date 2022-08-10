@@ -1,6 +1,7 @@
 package kr.co.sujungvillage
 
 import android.app.DatePickerDialog
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,7 +10,9 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.prolificinteractive.materialcalendarview.CalendarDay
 import kr.co.sujungvillage.base.hideKeyboard
+import kr.co.sujungvillage.data.StayoutCheckResultDTO
 import kr.co.sujungvillage.data.StayoutCreateDTO
 import kr.co.sujungvillage.databinding.ActivityStayoutBinding
 import kr.co.sujungvillage.retrofit.RetrofitBuilder
@@ -30,8 +33,9 @@ class StayoutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        // ★★★ 재사생 학번 불러오기
-        val studentNum = "20180001"
+        // 재사생 학번 불러오기
+        val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
+        val studentNum = shared?.getString("studentNum", "error").toString()
 
         // 키보드 내리기
         binding.layout.setOnClickListener { this.hideKeyboard() }
@@ -99,6 +103,11 @@ class StayoutActivity : AppCompatActivity() {
                 Toast.makeText(this, "긴급 전화번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            // 오늘 이전 날짜를 선택한 경우
+            if (startDate.subSequence(8, 10).toString().toInt() < CalendarDay.today().day) {
+                Toast.makeText(this, "오늘부터 외박이 가능합니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             // 종료일과 시작일의 연도와 달이 동일하지 않은 경우
             if (startDate.subSequence(0, 7) != endDate.subSequence(0, 7)) {
                 Toast.makeText(this, "종료일과 시작일이 같은 달이어야 합니다.", Toast.LENGTH_SHORT).show()
@@ -118,12 +127,16 @@ class StayoutActivity : AppCompatActivity() {
             val endDate = binding.textEndDate.text.toString()
             val stayoutInfo = StayoutCreateDTO(destination, reason, emergency, startDate, endDate)
 
-            RetrofitBuilder.stayoutApi.stayoutCreate(studentNum, stayoutInfo).enqueue(object: Callback<String> {
-                override fun onResponse(call: Call<String>, response: Response<String>) {
+            RetrofitBuilder.stayoutApi.stayoutCreate(studentNum, stayoutInfo).enqueue(object: Callback<List<StayoutCheckResultDTO>> {
+                override fun onResponse(call: Call<List<StayoutCheckResultDTO>>, response: Response<List<StayoutCheckResultDTO>>) {
+                    Log.d("STAYOUT_CREATE", "외박 신청 성공")
                     Log.d("STAYOUT_CREATE", "result : " + response.body())
+
+                    Toast.makeText(this@StayoutActivity, "외박 신청되었습니다.", Toast.LENGTH_SHORT).show()
+                    finish()
                 }
 
-                override fun onFailure(call: Call<String>, t: Throwable) {
+                override fun onFailure(call: Call<List<StayoutCheckResultDTO>>, t: Throwable) {
                     Toast.makeText(this@StayoutActivity, "오류가 발생하였습니다.", Toast.LENGTH_SHORT).show()
                     Log.d("STAYOUT_CREATE", "외박 신청 생성 실패")
                     Log.d("STAYOUT_CREATE", t.message.toString())

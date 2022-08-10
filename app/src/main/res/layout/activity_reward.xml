@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
 
         <ImageButton
-            android:id="@+id/imageButton_back"
+            android:id="@+id/btnBack"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginStart="28dp"
@@ -35,148 +35,137 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="20dp">
-
-        <TextView
-            android:id="@+id/total_reward"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="43dp"
-            android:layout_marginTop="24dp"
-            android:text="총 상점: "
-            android:textColor="#434343"
-            android:textSize="17dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/total_penalty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="43dp"
-            android:layout_marginTop="20dp"
-            android:text="총 벌점: "
-            android:textColor="#434343"
-            android:textSize="17dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/total_reward" />
-
-        <TextView
-            android:id="@+id/textView20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="24dp"
-            android:text="13점"
-            android:textColor="@color/primary"
-            android:textSize="17dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/total_reward"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView21"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="20dp"
-            android:text="8점"
-            android:textColor="@color/primary"
-            android:textSize="17dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/total_penalty"
-            app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp">
+        android:layout_height="match_parent">
 
-        <TableLayout
-            android:layout_width="355dp"
-            android:layout_height="476dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:stretchColumns="*"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="20dp">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/style_reward_table_border">
-
-                <TextView
-                    android:id="@+id/reward_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="날짜"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:id="@+id/reward_score"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="점수"
-                    android:textColor="@color/white" />
-
-                <TextView
-                    android:id="@+id/reward_reason"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="사유"
-                    android:textColor="@color/white" />
-
-            </TableRow>
-
-            <TableRow
+            <TextView
+                android:id="@+id/total_reward"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/style_reward_table_border_line">
+                android:layout_marginStart="43dp"
+                android:layout_marginTop="24dp"
+                android:text="총 상점: "
+                android:textColor="#434343"
+                android:textSize="17dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/reward_date1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="2022.10.22" />
-
-                <TextView
-                    android:id="@+id/reward_score1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="-3" />
-
-                <TextView
-                    android:id="@+id/reward_reason1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="" />
-            </TableRow>
-
-            <TableRow
+            <TextView
+                android:id="@+id/total_penalty"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </TableLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="43dp"
+                android:layout_marginTop="20dp"
+                android:text="총 벌점: "
+                android:textColor="#434343"
+                android:textSize="17dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/total_reward" />
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="24dp"
+                android:text="13점"
+                android:textColor="@color/primary"
+                android:textSize="17dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/total_reward"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:text="8점"
+                android:textColor="@color/primary"
+                android:textSize="17dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/total_penalty"
+                app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="28dp"
+                android:orientation="horizontal"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView21">
+
+                <TextView
+                    android:id="@+id/table_date"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/style_reward_tableline_top"
+                    android:fontFamily="@font/bold"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="날짜"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/table_score"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/style_reward_tableline_top"
+                    android:fontFamily="@font/bold"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="점수"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/table_reason"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/style_reward_tableline_top"
+                    android:fontFamily="@font/bold"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="사유"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+                    tools:ignore="TextContrastCheck" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+                tools:listitem="@layout/listitem_reward_table" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 
 </LinearLayout>
