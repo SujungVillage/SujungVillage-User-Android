@@ -8,11 +8,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
     // 사용할 API 인터페이스 선언
-    var stayoutApi: StayoutService
+
     var communityApi: CommunityService
     var homeApi: HomeService
-    var rollcallApi: RollcallService
     var noticeApi: NoticeService
+    var qnaApi: QnAService
+    var rollcallApi: RollcallService
+    var stayoutApi: StayoutService
 
     val gson = GsonBuilder().setLenient().create()
 
@@ -23,10 +25,11 @@ object RetrofitBuilder {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 
-        stayoutApi = retrofit.create(StayoutService::class.java)
         communityApi = retrofit.create(CommunityService::class.java)
         homeApi = retrofit.create(HomeService::class.java)
-        rollcallApi = retrofit.create(RollcallService::class.java)
         noticeApi = retrofit.create(NoticeService::class.java)
+        qnaApi = retrofit.create(QnAService::class.java)
+        rollcallApi = retrofit.create(RollcallService::class.java)
+        stayoutApi = retrofit.create(StayoutService::class.java)
     }
 }
