@@ -1,7 +1,6 @@
 package kr.co.sujungvillage
 
 import android.content.Context
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log

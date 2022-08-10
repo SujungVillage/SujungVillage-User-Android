@@ -86,15 +86,15 @@
 
                 <TextView
                     android:id="@+id/btn_delete"
-                    android:layout_width="45dp"
-                    android:layout_height="14dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="26dp"
                     android:layout_marginEnd="30dp"
                     android:background="#D9D9D9"
+                    android:padding="1dp"
                     android:text="삭제하기"
                     android:textSize="11sp"
                     android:fontFamily="@font/regular"
-                    android:padding="2dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.804"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -134,7 +134,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/myq_detail_admin_date"
+                    android:id="@+id/text_answerDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
@@ -159,7 +159,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/myq_detail_admin_date" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_answerDate" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>

@@ -45,7 +45,7 @@
             android:layout_gravity="center"
             android:scaleType="fitCenter"
             android:background="@color/nothing"
-            app:srcCompat="@drawable/icon_qna_button"
+            app:srcCompat="@drawable/icon_qna_faq_close"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
 </LinearLayout>
