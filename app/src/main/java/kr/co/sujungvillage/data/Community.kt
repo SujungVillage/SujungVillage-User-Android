@@ -3,6 +3,17 @@ package kr.co.sujungvillage.data
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
+data class CommDTO(
+    @SerializedName("id")
+    val id:Long,
+    @SerializedName("title")
+    val title:String,
+    @SerializedName("writerDomitoryName")
+    val dormitory:String,
+    @SerializedName("regDate")
+    val regDate:String
+):Serializable{}
+
 data class CommDetailCommentsWriteDTO(
     @SerializedName("postId")
     val postId:Long,
