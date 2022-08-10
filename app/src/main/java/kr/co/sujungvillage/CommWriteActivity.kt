@@ -55,18 +55,15 @@ class CommWriteActivity : AppCompatActivity() {
                 }
                 else{
                     //서버에 보내기
-                    Toast.makeText(this,"내용 보내기 ${title}, ${content}",Toast.LENGTH_SHORT).show()
-
                     val commWriteInfo=CommWriteDTO(title,content)
                     RetrofitBuilder.communityApi.commWrite(studentNum,commWriteInfo).enqueue(object: Callback<CommWriteResultDTO>{
                         override fun onResponse(call: Call<CommWriteResultDTO>, response: Response<CommWriteResultDTO>) {
-                            Toast.makeText(this@CommWriteActivity,"성공: ${title}, ${content}",Toast.LENGTH_LONG).show()
-                            Log.d("COMMWRITE", response.body().toString())
+                            Log.d("COMM_WRITE", response.body().toString())
+                            finish()
                         }
 
                         override fun onFailure(call: Call<CommWriteResultDTO>, t: Throwable) {
-                            Toast.makeText(this@CommWriteActivity,"실패: ${title}, ${content}",Toast.LENGTH_LONG).show()
-                            Log.d("COMMWRITE",t.message.toString())
+                            Log.d("COMMW_RITE",t.message.toString())
                         }
                     })
                 }
