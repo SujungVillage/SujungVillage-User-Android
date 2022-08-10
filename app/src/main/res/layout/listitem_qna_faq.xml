@@ -14,17 +14,17 @@
         android:orientation="horizontal"
         android:padding="20dp">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/btn_detail"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:background="@color/nothing"
             android:rotation="90"
-            app:srcCompat="@drawable/icon_qna_button" />
+            app:srcCompat="@drawable/icon_qna_faq_close" />
 
         <TextView
-            android:id="@+id/text_qna_fna"
+            android:id="@+id/text_question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -38,10 +38,11 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/fna_detail_text"
+        android:id="@+id/text_answer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
+        android:background="@drawable/style_qna_faq_middle_line"
         android:fontFamily="@font/medium"
         android:paddingHorizontal="28dp"
         android:paddingTop="16dp"

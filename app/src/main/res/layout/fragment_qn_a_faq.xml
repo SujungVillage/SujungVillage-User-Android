@@ -5,28 +5,27 @@
     android:id="@+id/frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.QnAFragment">
+    tools:context=".fragment.QnAFaqFragment">
 
-    <LinearLayout
-        android:id="@+id/linear"
+    <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#F5F5F5"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <ScrollView
-            android:id="@+id/scroll"
+        <LinearLayout
+            android:id="@+id/linear"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:background="#F5F5F5"
+            android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recylce_faq"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:paddingTop="20dp"
-                android:paddingBottom="80dp"
+                android:paddingBottom="30dp"
                 tools:listitem="@layout/listitem_qna_faq" />
-        </ScrollView>
-    </LinearLayout>
-
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>
