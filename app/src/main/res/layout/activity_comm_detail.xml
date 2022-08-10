@@ -134,6 +134,7 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerComment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:listitem="@layout/listitem_comm_detail"
@@ -165,7 +166,8 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:background="@drawable/style_comm_detail_write_border"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_comment_submit"
