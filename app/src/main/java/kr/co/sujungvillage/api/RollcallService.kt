@@ -15,7 +15,7 @@ interface RollcallService {
     ): Call<RollcallCreateResultDTO>
 
     // 점호일 조회
-    @GET("/api/student/getRollcallDateInfo")
+    @GET("/api/admin/getRollcallDateInfo")
     fun rollcallCheck(
         @Header("user_id") userId: String,
         @Query("date") date:String,

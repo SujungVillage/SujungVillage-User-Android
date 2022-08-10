@@ -12,6 +12,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import kr.co.sujungvillage.BuildConfig.CLIENT_ID
 import kr.co.sujungvillage.databinding.ActivityLoginBinding
 
 
@@ -44,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
         // 사용자 이메일 주소 요청
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             // Auth Web Application Client ID인데 노출되면 안 될 것 같아서 필요하게 되면 연락 요망
-            // .requestIdToken("XXX")
+            .requestIdToken(CLIENT_ID)
             .requestEmail()
             .build()
 

@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.prolificinteractive.materialcalendarview.CalendarDay
 import kr.co.sujungvillage.base.hideKeyboard
 import kr.co.sujungvillage.data.StayoutCheckResultDTO
 import kr.co.sujungvillage.data.StayoutCreateDTO
@@ -100,6 +101,11 @@ class StayoutActivity : AppCompatActivity() {
                 return@setOnClickListener
             } else if (binding.editNumber.text.isEmpty()) {
                 Toast.makeText(this, "긴급 전화번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            // 오늘 이전 날짜를 선택한 경우
+            if (startDate.subSequence(8, 10).toString().toInt() < CalendarDay.today().day) {
+                Toast.makeText(this, "오늘부터 외박이 가능합니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             // 종료일과 시작일의 연도와 달이 동일하지 않은 경우

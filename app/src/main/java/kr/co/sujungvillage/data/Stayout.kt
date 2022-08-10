@@ -31,8 +31,3 @@ data class StayoutCheckResultDTO(
     @SerializedName("dateToUse")
     val date: String,
 ): Serializable {}
-
-data class StayoutCancelResultDTO(
-    @SerializedName("Content-Length")
-    val length: Long,
-): Serializable {}
