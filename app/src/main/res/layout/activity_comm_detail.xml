@@ -160,7 +160,12 @@
                 <EditText
                     android:id="@+id/edit_comment"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
+                    android:textSize="12dp"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/light"
+                    android:paddingHorizontal="10dp"
+                    android:textColor="#FF111111"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:background="@drawable/style_comm_detail_write_border"
@@ -170,7 +175,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_comment_submit"
                     android:layout_width="38dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0"
                     android:background="@drawable/style_comm_detail_write_button"
