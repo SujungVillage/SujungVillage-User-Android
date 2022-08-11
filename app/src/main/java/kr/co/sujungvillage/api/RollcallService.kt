@@ -1,5 +1,6 @@
 package kr.co.sujungvillage.api
 
+import kr.co.sujungvillage.data.AppliedRollcallCheckResultDTO
 import kr.co.sujungvillage.data.RollcallCheckResultDTO
 import kr.co.sujungvillage.data.RollcallCreateDTO
 import kr.co.sujungvillage.data.RollcallCreateResultDTO
@@ -20,4 +21,11 @@ interface RollcallService {
         @Header("user_id") userId: String,
         @Query("date") date:String,
     ): Call<RollcallCheckResultDTO>
+
+    // 점호 신청 조회
+    @GET("/api/student/rollcall/getAppliedRollcallInfo")
+    fun appliedRollcallCheck(
+        @Header("user_id") userId: String,
+        @Query("date") date: String,
+    ): Call<AppliedRollcallCheckResultDTO>
 }

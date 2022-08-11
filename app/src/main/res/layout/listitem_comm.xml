@@ -3,11 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:paddingStart="26dp"
+    android:paddingEnd="20dp"
+    android:paddingTop="18dp"
+    android:paddingBottom="25dp"
     android:elevation="10dp"
     android:background="@drawable/style_comm_listitem_border"
-    android:layout_marginBottom="15dp"
-    android:layout_margin="2dp">
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,6 +37,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:lines="1"
+            android:ellipsize="end"
             android:text="두루마리 휴지 나눔!"
             android:textSize="14dp"
             android:fontFamily="@font/semi_bold"
@@ -43,7 +48,6 @@
             android:id="@+id/text_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:gravity="right"
             android:text="2022-07-08"
             android:textSize="10dp"
@@ -56,10 +60,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:lines="2"
+        android:layout_marginEnd="6dp"
+        android:ellipsize="end"
         android:textSize="13dp"
         android:fontFamily="@font/regular"
         android:text="내가 쿠팡에서 휴지 주문했는데 생각보다 너무 많아서
-몇 개 나눔하려고 하는데 받을 사람들 댓글달 ..."
+몇 개 나눔하려고 하는데 받을 사람들 댓글달아주면 나눠줄게. 참고로 성미관임! 다른 기숙사들은 안 될 듯..."
         android:textColor="#6A6A6A" />
 
 </LinearLayout>

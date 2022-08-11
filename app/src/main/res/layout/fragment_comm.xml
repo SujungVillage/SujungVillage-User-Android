@@ -9,8 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-         android:orientation="vertical"
-        android:background="#F5F5F5">
+        android:background="#F5F5F5"
+        android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -24,9 +24,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="47dp"
+                android:background="@null"
                 android:entries="@array/dormitory"
                 android:gravity="center"
-                android:background="@null"
                 android:paddingRight="3dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -66,9 +66,9 @@
                 android:layout_marginEnd="25dp"
                 android:background="@color/nothing"
                 android:scaleType="fitCenter"
+                android:src="@drawable/icon_main_alarm"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/icon_main_alarm"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
 
@@ -76,15 +76,22 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycle_comm"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp"
-                android:paddingBottom="80dp"
-                tools:listitem="@layout/listitem_comm" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="-3dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycle_comm"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="80dp"
+                    android:paddingHorizontal="16dp"
+                    android:clipToPadding="false"
+                    tools:listitem="@layout/listitem_comm" />
+            </LinearLayout>
         </ScrollView>
 
     </LinearLayout>
@@ -100,6 +107,6 @@
         android:padding="13dp"
         android:scaleType="fitCenter"
         android:src="@drawable/icon_comm_write"
-        tools:ignore="SpeakableTextPresentCheck"  />
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </FrameLayout>

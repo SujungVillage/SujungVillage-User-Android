@@ -35,3 +35,18 @@ data class RollcallCheckResultDTO(
     @SerializedName("domitoryName")
     val dormitory: String,
 ): Serializable {}
+
+data class AppliedRollcallCheckResultDTO(
+    @SerializedName("id")
+    val id: Long,
+    @SerializedName("userId")
+    val userId: String,
+    @SerializedName("imageURL")
+    val imgUrl: String,
+    @SerializedName("location")
+    val location: String,
+    @SerializedName("rollcallDateTime")
+    val date: String,
+    @SerializedName("state")
+    val state: String,
+): Serializable {}

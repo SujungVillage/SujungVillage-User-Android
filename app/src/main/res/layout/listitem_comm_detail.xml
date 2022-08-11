@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/style_comm_detale_comment_border"
+    android:orientation="vertical"
+    android:paddingHorizontal="40dp"
+    android:paddingVertical="14dp">
+
+    <TextView
+        android:id="@+id/text_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingVertical="14dp"
-    android:paddingHorizontal="40dp"
-    android:background="@drawable/style_comm_detale_comment_border">
+        android:fontFamily="@font/medium"
+        android:text="익명1"
+        android:textColor="@color/black"
+        android:textSize="13dp" />
 
-     <TextView
-            android:id="@+id/text_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="13dp"
-            android:textColor="@color/black"
-            android:text="익명1"
-         android:fontFamily="@font/medium"/>
+    <TextView
+        android:id="@+id/text_cal_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="6dp"
+        android:fontFamily="@font/light"
+        android:text="2022/07/13 20:46"
+        android:textColor="#989898"
+        android:textSize="10dp" />
 
-        <TextView
-            android:id="@+id/text_cal_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="10dp"
-            android:textColor="#989898"
-            android:text="2022/07/13 20:46"
-            android:layout_marginBottom="4dp"
-            android:fontFamily="@font/light"/>
-
-        <TextView
-            android:id="@+id/text_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="12dp"
-            android:textColor="@color/black"
-            android:text="그니까 나도 오늘 너무 시끄러웠어"
-            android:fontFamily="@font/light"/>
-    </LinearLayout>
+    <TextView
+        android:id="@+id/text_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/light"
+        android:text="그니까 나도 오늘 너무 시끄러웠어"
+        android:textColor="@color/black"
+        android:textSize="12dp" />
+</LinearLayout>

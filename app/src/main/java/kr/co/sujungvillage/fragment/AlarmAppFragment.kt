@@ -5,13 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kr.co.sujungvillage.databinding.FragmentAppAlarmBinding
+import kr.co.sujungvillage.databinding.FragmentAlarmAppBinding
 
 class AlarmAppFragment : Fragment() {
-    private lateinit var binding: FragmentAppAlarmBinding
+    private lateinit var binding: FragmentAlarmAppBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = FragmentAppAlarmBinding.inflate(inflater,container,false)
+        val binding = FragmentAlarmAppBinding.inflate(inflater,container,false)
         return binding.root
     }
 }
