@@ -24,7 +24,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
-                android:paddingBottom="30dp"
+                android:paddingBottom="80dp"
+                android:clipToPadding="false"
                 tools:listitem="@layout/listitem_qna_faq" />
         </LinearLayout>
     </ScrollView>
