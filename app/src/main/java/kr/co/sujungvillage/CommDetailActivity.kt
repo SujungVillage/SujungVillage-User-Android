@@ -30,16 +30,23 @@ class CommDetailActivity : AppCompatActivity() {
         val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
         val studentNum = shared?.getString("studentNum", "error").toString()
 
-        //CommFragment 에서 postId 전달 받기
-        val postId=intent.getLongExtra("postId",-1)
-       // 뒤로가기 버튼 연결
+        // 이전 페이지 CommFragment 에서 postId 전달 받기
+        val postId = intent.getLongExtra("postId",-1)
+
+        // 키보드 내리기
+        binding.layoutToolbar.setOnClickListener { this.hideKeyboard() }
+        binding.linearPost.setOnClickListener { this.hideKeyboard() }
+        binding.linearButton.setOnClickListener { this.hideKeyboard() }
+        binding.linearComment.setOnClickListener { this.hideKeyboard() }
+        binding.recyclerComment.setOnClickListener { this.hideKeyboard() }
+
+        // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener { finish() }
 
         // Api 연결
-//        var postId = 60L // 이전 페이지(commFragment)에서 intent로 넘겨 받음
         refresh(studentNum,postId)
 
-        //댓글 전송 버튼 클릭시
+        // 댓글 전송 버튼 클릭시
         binding.btnCommentSubmit.setOnClickListener{
             val comment=binding.editComment.text.toString().trim()
             binding.editComment.text.clear()//edittext 지우기
@@ -52,12 +59,12 @@ class CommDetailActivity : AppCompatActivity() {
                 val commCommentInfo= CommDetailCommentsWriteDTO(postId,comment)
                 RetrofitBuilder.communityApi.commComment(studentNum,commCommentInfo).enqueue(object:Callback<CommDetailCommentWriteResultDTO>{
                     override fun onResponse(call: Call<CommDetailCommentWriteResultDTO>, response: Response<CommDetailCommentWriteResultDTO>) {
-                        Log.d("COMM_COMMENT",response.body().toString())
+                        Log.d("COMM_COMMENT", response.body().toString())
                         refresh(studentNum,postId)
                     }
 
                     override fun onFailure(call: Call<CommDetailCommentWriteResultDTO>, t: Throwable) {
-                        Log.d("COMM_COMMENT",t.message.toString())
+                        Log.e("COMM_COMMENT", t.message.toString())
                     }
                 })
             }
@@ -102,7 +109,7 @@ class CommDetailActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<CommDetailResultDTO>, t: Throwable) {
-                Log.d("COMM_DETAIL",t.message.toString())
+                Log.e("COMM_DETAIL", t.message.toString())
             }
         })
     }

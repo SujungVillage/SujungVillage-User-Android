@@ -31,7 +31,9 @@ class LoginActivity : AppCompatActivity() {
             mGoogleSignInClient?.signOut()?.addOnCompleteListener(this) {
                 val shared = getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
                 val editor = shared.edit()
-                editor.clear()
+                editor.remove("token")
+                editor.remove("studentNum")
+                editor.apply()
                 // 로그아웃 성공
                 Log.d("GOOGLE_LOGIN", "로그인 되어있던 계정 로그아웃 완료")
             }
@@ -87,8 +89,9 @@ class LoginActivity : AppCompatActivity() {
                 // ★★★ 토큰 로컬에 저장하고 로그인 API 연결 (학번은 저장 완료)
                 val shared = getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
                 val editor = shared.edit()
-                editor.clear() // 에디터 초기화
+                editor.remove("studentNum")
                 editor.putString("studentNum", account.email!!.subSequence(0, 8).toString())
+                editor.putString("token", account.idToken)
                 editor.apply()
 
                 var intent = Intent(this, MainActivity::class.java)

@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import kr.co.sujungvillage.base.hideKeyboard
 import kr.co.sujungvillage.data.CommWriteDTO
 import kr.co.sujungvillage.data.CommWriteResultDTO
 import kr.co.sujungvillage.databinding.ActivityCommDetailBinding
@@ -30,17 +31,22 @@ class CommWriteActivity : AppCompatActivity() {
         val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
         val studentNum = shared?.getString("studentNum", "error").toString()
 
+        // 키보드 내리기
+        binding.layout.setOnClickListener { this.hideKeyboard() }
+        binding.linear.setOnClickListener { this.hideKeyboard() }
+        binding.linearInfo.setOnClickListener { this.hideKeyboard() }
+
         // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener { finish() }
 
-        //등록 버튼
+        // 등록 버튼 연결
         binding.btnUpload.setOnClickListener{
 
-            //버튼 클릭시 제목과 내용 받아오기.
+            // 버튼 클릭시 제목과 내용 받아오기.
             val title= binding.editTitle.text.toString().trim()//앞뒤 공백 제거
             val content=binding.editContent.text.toString().trim()//앞뒤 공백 제거
 
-            //내용이 null인지 확인 필요
+            // 내용이 null인지 확인 필요
             if(title.isEmpty()){
                 if(content.isEmpty()){
                     Toast.makeText(this,"제목과 내용을 입력하세요. ${title}, ${content}",Toast.LENGTH_SHORT).show()

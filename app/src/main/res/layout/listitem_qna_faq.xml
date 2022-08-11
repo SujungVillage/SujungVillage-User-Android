@@ -42,7 +42,7 @@
         android:id="@+id/text_answer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
         android:background="@drawable/style_qna_faq_middle_line"
         android:fontFamily="@font/medium"
         android:layout_marginTop="-3dp"
