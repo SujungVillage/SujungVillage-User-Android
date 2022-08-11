@@ -69,6 +69,7 @@ class StayoutActivity : AppCompatActivity() {
                 binding.textStartDate.setTextColor(ContextCompat.getColor(this, R.color.gray_600))
                 if (endDate.isEmpty()) {
                     binding.textEndDate.text = startDate
+                    endDate = startDate
                     binding.textEndDate.setTextColor(ContextCompat.getColor(this, R.color.gray_600))
                 }
             }
@@ -89,6 +90,14 @@ class StayoutActivity : AppCompatActivity() {
                 binding.textEndDate.setTextColor(ContextCompat.getColor(this, R.color.gray_600))
             }
             DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
+        }
+
+        // 기본 정보 기억하기 초기화
+        if (shared.getBoolean("stayout", false)) {
+            binding.checkRemember.isChecked = true
+            binding.editDestination.setText(shared.getString("stayoutDestination", ""))
+            binding.editReason.setText(shared.getString("stayoutReason", ""))
+            binding.editNumber.setText(shared.getString("stayoutNumber", ""))
         }
 
         // 신청하기 버튼 연결
@@ -135,6 +144,21 @@ class StayoutActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<List<StayoutCheckResultDTO>>, response: Response<List<StayoutCheckResultDTO>>) {
                     Log.d("STAYOUT_CREATE", "외박 신청 성공")
                     Log.d("STAYOUT_CREATE", "result : " + response.body())
+
+                    // 기본 정보(행선지, 사유, 긴급 전화번호) 로컬에 저장
+                    // 기본 정보를 기억하는 경우
+                    val editor = shared?.edit()
+                    if (binding.checkRemember.isChecked) {
+                        editor?.putBoolean("stayout", true)
+                        editor?.putString("stayoutDestination", binding.editDestination.text.toString())
+                        editor?.putString("stayoutReason", binding.editReason.text.toString())
+                        editor?.putString("stayoutNumber", binding.editNumber.text.toString())
+                    }
+                    // 기본 정보를 기억하지 않는 경우
+                    else {
+                        editor?.putBoolean("stayout", false)
+                    }
+                    editor?.apply()
 
                     Toast.makeText(this@StayoutActivity, "외박 신청되었습니다.", Toast.LENGTH_SHORT).show()
                     finish()
