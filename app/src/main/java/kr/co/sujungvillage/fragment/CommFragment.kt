@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.sujungvillage.AlarmActivity
 import kr.co.sujungvillage.CommWriteActivity
 import kr.co.sujungvillage.R
-import kr.co.sujungvillage.adapter.commAdapter
+import kr.co.sujungvillage.adapter.CommAdapter
 import kr.co.sujungvillage.data.CommDTO
 import kr.co.sujungvillage.databinding.FragmentCommBinding
 import kr.co.sujungvillage.retrofit.RetrofitBuilder
@@ -55,7 +55,7 @@ class CommFragment : Fragment() {
                     var comm=CommDTO(post.id,post.title,post.dormitory,post.regDate)
                     commList.add(comm)
                 }
-                val adapter=commAdapter()
+                val adapter=CommAdapter()
                 adapter.commList=commList
                 binding.recycleComm.adapter=adapter
                 binding.recycleComm.layoutManager=LinearLayoutManager(activity)//프래그먼트에선 this 대신 activity 써줌

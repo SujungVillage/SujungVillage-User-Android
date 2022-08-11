@@ -11,7 +11,7 @@ import kr.co.sujungvillage.data.CommDTO
 import kr.co.sujungvillage.databinding.ListitemCommBinding
 import kr.co.sujungvillage.fragment.CommFragment
 
-class commAdapter : RecyclerView.Adapter<CommHolder>() {
+class CommAdapter : RecyclerView.Adapter<CommHolder>() {
     var commList = mutableListOf<CommDTO>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommHolder {

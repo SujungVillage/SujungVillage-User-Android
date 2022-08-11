@@ -3,6 +3,7 @@ package kr.co.sujungvillage.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kr.co.sujungvillage.base.hideKeyboard
 import kr.co.sujungvillage.data.CommDetailCommentsRequest
 import kr.co.sujungvillage.databinding.ListitemCommDetailBinding
 
@@ -24,20 +25,18 @@ class CommDetailAdapter() :RecyclerView.Adapter<CommDetailHolder>(){
     }
 
 }
-class CommDetailHolder(val binding:ListitemCommDetailBinding):RecyclerView.ViewHolder(binding.root){
+class CommDetailHolder(val binding:ListitemCommDetailBinding): RecyclerView.ViewHolder(binding.root){
     fun setCommDetail(commDetail: CommDetailCommentsRequest){
-        binding.textName.text="익명"//익명처리해야함.
+        binding.textName.text="익명" // 익명 처리해야함.
         val hour=commDetail.regDate?.subSequence(11,13).toString().toInt()
         var hourResult=hour.toString()
-        if (hour<10){
-            hourResult="0${hour}"
-        }
+        if (hour < 10){ hourResult="0${hour}" }
         val min=(commDetail.regDate?.subSequence(14,16).toString().toInt())
         var minResult=min.toString()
-        if(min<10){
-            minResult="0${min}"
-        }
+        if(min < 10){ minResult="0${min}" }
         binding.textCalDate.text="${commDetail.regDate?.subSequence(0,4)}/${commDetail.regDate?.subSequence(5, 7)}/${commDetail.regDate?.subSequence(8, 10)} ${hourResult}:${minResult}"
         binding.textContent.text="${commDetail.content}"
+
+        binding.root.setOnClickListener { binding.root.context.hideKeyboard(itemView) }
     }
 }
