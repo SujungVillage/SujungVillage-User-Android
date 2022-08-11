@@ -1,6 +1,7 @@
 package kr.co.sujungvillage.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.sujungvillage.base.hideKeyboard
@@ -36,7 +37,10 @@ class CommDetailHolder(val binding:ListitemCommDetailBinding): RecyclerView.View
         if(min < 10){ minResult="0${min}" }
         binding.textCalDate.text="${commDetail.regDate?.subSequence(0,4)}/${commDetail.regDate?.subSequence(5, 7)}/${commDetail.regDate?.subSequence(8, 10)} ${hourResult}:${minResult}"
         binding.textContent.text="${commDetail.content}"
-
+        //관리자인지 아닌지 마크 띄우기
+        if(commDetail.id.toString().toInt()>=99990000){//관리자인 경우
+            binding.textAdmin.visibility= View.VISIBLE
+        }
         binding.root.setOnClickListener { binding.root.context.hideKeyboard(itemView) }
     }
 }
