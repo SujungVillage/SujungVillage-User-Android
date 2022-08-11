@@ -67,6 +67,10 @@ class StayoutActivity : AppCompatActivity() {
                 else startDate += "-${day}"
                 binding.textStartDate.text = startDate
                 binding.textStartDate.setTextColor(ContextCompat.getColor(this, R.color.gray_600))
+                if (endDate.isEmpty()) {
+                    binding.textEndDate.text = startDate
+                    binding.textEndDate.setTextColor(ContextCompat.getColor(this, R.color.gray_600))
+                }
             }
             DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
         }
