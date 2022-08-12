@@ -2,26 +2,19 @@ package kr.co.sujungvillage
 
 import android.content.Context
 import android.content.pm.PackageManager
-import android.location.Geocoder
-import android.location.Location
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Looper
 import androidx.core.app.ActivityCompat
 import kr.co.sujungvillage.databinding.ActivityRollcallBinding
-import android.location.Address
-import android.location.LocationManager
 import java.io.IOException
 import java.util.*
 import android.Manifest
 import android.content.Intent
 import android.graphics.Bitmap
+import android.location.*
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import kr.co.sujungvillage.base.BaseActivity
 import kr.co.sujungvillage.data.RollcallCreateDTO
 import kr.co.sujungvillage.data.RollcallCreateResultDTO
@@ -86,20 +79,26 @@ class RollcallActivity : BaseActivity() {
             var rollcallInfo = RollcallCreateDTO(imgUrl, location)
 
             // 점호 신청 API 연결
-            RetrofitBuilder.rollcallApi.rollcallCreate(token, rollcallInfo).enqueue(object : Callback<RollcallCreateResultDTO> {
-                    override fun onResponse(call: Call<RollcallCreateResultDTO>, response: Response<RollcallCreateResultDTO>) {
+            RetrofitBuilder.rollcallApi.rollcallCreate(token, rollcallInfo)
+                .enqueue(object : Callback<RollcallCreateResultDTO> {
+                    override fun onResponse(
+                        call: Call<RollcallCreateResultDTO>,
+                        response: Response<RollcallCreateResultDTO>
+                    ) {
                         Log.d("ROLLCALL_CREATE", "점호 신청 성공")
                         Log.d("ROLLCALL_CREATE", "code : " + response.code().toString())
                         Log.d("ROLLCALL_CREATE", "error body : " + response.errorBody().toString())
                         Log.d("ROLLCALL_CREATE", "message : " + response.message())
                         Log.d("ROLLCALL_CREATE", "response : " + response.body().toString())
 
-                        Toast.makeText(this@RollcallActivity, "점호가 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@RollcallActivity, "점호가 완료되었습니다.", Toast.LENGTH_SHORT)
+                            .show()
                         finish()
                     }
 
                     override fun onFailure(call: Call<RollcallCreateResultDTO>, t: Throwable) {
-                        Toast.makeText(this@RollcallActivity, "오류가 발생하였습니다.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@RollcallActivity, "오류가 발생하였습니다.", Toast.LENGTH_SHORT)
+                            .show()
                         Log.e("ROLLCALL_CREATE", "점호 신청 실패")
                         Log.e("ROLLCALL_CREATE", t.message.toString())
                     }
@@ -118,7 +117,11 @@ class RollcallActivity : BaseActivity() {
     // 권한 거부
     override fun permissionDenied(requestCode: Int) {
         when (requestCode) {
-            PERM_CAMERA -> Toast.makeText(baseContext, "카메라 권한을 승인해야 카메라를 사용할 수 있습니다.", Toast.LENGTH_SHORT).show()
+            PERM_CAMERA -> Toast.makeText(
+                baseContext,
+                "카메라 권한을 승인해야 카메라를 사용할 수 있습니다.",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -142,7 +145,10 @@ class RollcallActivity : BaseActivity() {
                         bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, baos)
                         imgBitmap = Base64.encodeToString(baos.toByteArray(), Base64.NO_WRAP)
                         Log.d("IMG_BITMAP", "image bitmap : " + imgBitmap)
-                        Log.d("IMG_BITMAP_LENGTH", "image bitmap length" + imgBitmap.length.toString())
+                        Log.d(
+                            "IMG_BITMAP_LENGTH",
+                            "image bitmap length" + imgBitmap.length.toString()
+                        )
                     }
                 }
             }
@@ -150,8 +156,7 @@ class RollcallActivity : BaseActivity() {
 
     // 현재 위치 반환 함수
     private fun getCurrentLoc() {
-        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager?
-        var userLocation: Location = getLatLng()
+        var userLocation: Location? = getLatLng()
         if (userLocation != null) {
             latitude = userLocation.latitude
             longitude = userLocation.longitude
@@ -159,12 +164,9 @@ class RollcallActivity : BaseActivity() {
 
             var mGeocoder = Geocoder(applicationContext, Locale.KOREAN)
 
-//            if (mGeocoder != null) Log.d("CheckCurrentLocation", "null 아님")
-//            else Log.d("CheckCurrentLocation", "null 값임")
-
             var mResultList: List<Address>? = null
             try {
-                mResultList = mGeocoder.getFromLocation(latitude!!, longitude!!, 1,)
+                mResultList = mGeocoder.getFromLocation(latitude!!, longitude!!, 1)
                 Log.d("CheckCurrentLocation", "mResultList : $mResultList")
 
             } catch (e: IOException) {
@@ -186,22 +188,30 @@ class RollcallActivity : BaseActivity() {
         }
     }
 
-    private fun getLatLng(): Location {
+    private fun getLatLng(): Location? {
         var currentLatLng: Location? = null
-        if (ActivityCompat.checkSelfPermission(applicationContext, android.Manifest.permission.ACCESS_FINE_LOCATION
+        if (ActivityCompat.checkSelfPermission(
+                applicationContext, android.Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
-            && ActivityCompat.checkSelfPermission(applicationContext, android.Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+            && ActivityCompat.checkSelfPermission(
+                applicationContext, android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 this.REQUEST_CODE_LOCATION
             )
             getLatLng()
         } else {
+            val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
             val locationProvider = LocationManager.GPS_PROVIDER
-            currentLatLng = locationManager?.getLastKnownLocation(locationProvider)
+            currentLatLng = locationManager.getLastKnownLocation(locationProvider)
+            if (currentLatLng == null) {
+                binding.textLocation.text = "서울 성북구 보문로34가길 8"
+            }
         }
-        return currentLatLng!!
+        return currentLatLng
     }
 }
 

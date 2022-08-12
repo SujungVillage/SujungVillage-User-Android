@@ -5,27 +5,27 @@
     android:id="@+id/frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F5F5"
     tools:context=".fragment.QnAFaqFragment">
 
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#F5F5F5"
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recylce_faq"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clipToPadding="false"
                 android:paddingTop="20dp"
                 android:paddingBottom="80dp"
-                android:clipToPadding="false"
                 tools:listitem="@layout/listitem_qna_faq" />
         </LinearLayout>
     </ScrollView>

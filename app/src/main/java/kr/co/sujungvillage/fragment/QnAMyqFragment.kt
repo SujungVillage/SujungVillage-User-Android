@@ -25,9 +25,10 @@ class QnAMyqFragment : Fragment() {
         // 재사생 학번 불러오기
         val shared = this.activity?.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
         val studentNum = shared?.getString("studentNum", "error").toString()
+        val token = shared?.getString("token", "error").toString()
 
         // 내 질문 리스트 조회 API 연결
-        RetrofitBuilder.qnaApi.myqGet(studentNum).enqueue(object: Callback<List<MyqGetResultDTO>> {
+        RetrofitBuilder.qnaApi.myqGet(token).enqueue(object: Callback<List<MyqGetResultDTO>> {
             override fun onResponse(call: Call<List<MyqGetResultDTO>>, response: Response<List<MyqGetResultDTO>>) {
                 Log.d("MY_QUESTION_GET", "내 질문 리스트 조회 성공")
                 Log.d("MY_QUESTION_GET", "response : " + response.body().toString())
@@ -35,7 +36,7 @@ class QnAMyqFragment : Fragment() {
                 // 어댑터 연결
                 val myqList: MutableList<MyqGetResultDTO> = mutableListOf()
                 for (info in response.body()!!) {
-                    myqList.add(MyqGetResultDTO(info.id, info.userId, info.title, info.isAnswered))
+                    myqList.add(MyqGetResultDTO(info.id, info.title, info.date, info.isAnswered))
                 }
                 var adapter = QnAMyqAdapter()
                 adapter.myqList = myqList
