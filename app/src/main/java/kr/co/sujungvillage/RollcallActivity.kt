@@ -46,10 +46,7 @@ class RollcallActivity : BaseActivity() {
         // 재사생 학번 불러오기
         val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
         val studentNum = shared?.getString("studentNum", "error").toString()
-        val token = shared?.getString(
-            "token",
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiMjAxOTA5OTMiLCJleHAiOjE2NjA0MTAzMTl9.GGRyQI2l1KD7-CUCcDWCUyFPmhIJTHHhKqayrZh2f5o"
-        ).toString()
+        val token = shared?.getString("token", "error").toString()
 
         // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener { finish() }
