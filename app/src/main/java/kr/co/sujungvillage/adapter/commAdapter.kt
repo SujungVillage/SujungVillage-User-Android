@@ -1,6 +1,7 @@
 package kr.co.sujungvillage.adapter
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import kr.co.sujungvillage.CommDetailActivity
 import kr.co.sujungvillage.data.CommDTO
 import kr.co.sujungvillage.databinding.ListitemCommBinding
 import kr.co.sujungvillage.fragment.CommFragment
+import kr.co.sujungvillage.fragment.CommFragment.Companion.dormitory
+
 
 class CommAdapter : RecyclerView.Adapter<CommHolder>() {
     var commList = mutableListOf<CommDTO>()
@@ -34,7 +37,7 @@ class CommHolder(val binding: ListitemCommBinding): RecyclerView.ViewHolder(bind
         binding.textTitle.text="${comm.title}"
         binding.textDate.text="${comm.regDate.subSequence(0,4)}.${comm.regDate.subSequence(5,7)}.${comm.regDate.subSequence(8,10)}"
         //내용 연결하기
-        //binding.textContent.text
+        binding.textContent.text="${comm.content}"
         //관리자인지 아닌지 마크 띄우기
         if(comm.id.toString().toInt()>=99990000){//관리자인 경우
             binding.textAdmin.visibility= View.VISIBLE
@@ -43,6 +46,7 @@ class CommHolder(val binding: ListitemCommBinding): RecyclerView.ViewHolder(bind
         binding.root.setOnClickListener {
             val intent = Intent(binding.root.context, CommDetailActivity::class.java)
             intent.putExtra("postId", comm.id)
+            intent.putExtra("dormitory",dormitory)
             ContextCompat.startActivity(binding.root.context, intent, null)
         }
     }

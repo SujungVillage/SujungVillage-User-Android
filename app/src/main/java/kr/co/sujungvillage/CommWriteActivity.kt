@@ -30,6 +30,7 @@ class CommWriteActivity : AppCompatActivity() {
         // 재사생 학번 불러오기
         val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
         val studentNum = shared?.getString("studentNum", "error").toString()
+        val token = shared?.getString("token", "error").toString()
 
         // 키보드 내리기
         binding.layout.setOnClickListener { this.hideKeyboard() }
@@ -62,7 +63,7 @@ class CommWriteActivity : AppCompatActivity() {
                 else{
                     //서버에 보내기
                     val commWriteInfo=CommWriteDTO(title,content)
-                    RetrofitBuilder.communityApi.commWrite(studentNum,commWriteInfo).enqueue(object: Callback<CommWriteResultDTO>{
+                    RetrofitBuilder.communityApi.commWrite(token,commWriteInfo).enqueue(object: Callback<CommWriteResultDTO>{
                         override fun onResponse(call: Call<CommWriteResultDTO>, response: Response<CommWriteResultDTO>) {
                             Log.d("COMM_WRITE", response.body().toString())
                             finish()
