@@ -53,6 +53,7 @@ class RollcallActivity : BaseActivity() {
         // 재사생 학번 불러오기
         val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
         val studentNum = shared?.getString("studentNum", "error").toString()
+        val token = shared?.getString("token", "error").toString()
 
         // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener { finish() }
@@ -85,14 +86,13 @@ class RollcallActivity : BaseActivity() {
             var rollcallInfo = RollcallCreateDTO(imgUrl, location)
 
             // 점호 신청 API 연결
-            RetrofitBuilder.rollcallApi.rollcallCreate(studentNum, rollcallInfo).enqueue(object : Callback<RollcallCreateResultDTO> {
+            RetrofitBuilder.rollcallApi.rollcallCreate(token, rollcallInfo).enqueue(object : Callback<RollcallCreateResultDTO> {
                     override fun onResponse(call: Call<RollcallCreateResultDTO>, response: Response<RollcallCreateResultDTO>) {
-                        Log.d("ROLLCALL_CREATE", "id : " + response.body()?.id.toString())
-                        Log.d("ROLLCALL_CREATE", "user id : " + response.body()?.userId)
-                        Log.d("ROLLCALL_CREATE", "image url : " + response.body()?.imgUrl)
-                        Log.d("ROLLCALL_CREATE", "location : " + response.body()?.location)
-                        Log.d("ROLLCALL_CREATE", "time : " + response.body()?.time)
-                        Log.d("ROLLCALL_CREATE", "state : " + response.body()?.state)
+                        Log.d("ROLLCALL_CREATE", "점호 신청 성공")
+                        Log.d("ROLLCALL_CREATE", "code : " + response.code().toString())
+                        Log.d("ROLLCALL_CREATE", "error body : " + response.errorBody().toString())
+                        Log.d("ROLLCALL_CREATE", "message : " + response.message())
+                        Log.d("ROLLCALL_CREATE", "response : " + response.body().toString())
 
                         Toast.makeText(this@RollcallActivity, "점호가 완료되었습니다.", Toast.LENGTH_SHORT).show()
                         finish()
@@ -100,7 +100,8 @@ class RollcallActivity : BaseActivity() {
 
                     override fun onFailure(call: Call<RollcallCreateResultDTO>, t: Throwable) {
                         Toast.makeText(this@RollcallActivity, "오류가 발생하였습니다.", Toast.LENGTH_SHORT).show()
-                        Log.d("ROLLCALL_CREATE", "점호 신청 실패")
+                        Log.e("ROLLCALL_CREATE", "점호 신청 실패")
+                        Log.e("ROLLCALL_CREATE", t.message.toString())
                     }
                 })
         }

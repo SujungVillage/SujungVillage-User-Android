@@ -9,10 +9,11 @@ import retrofit2.http.Header
 import retrofit2.http.Query
 
 interface NoticeService {
-    // 공지사항 리스트 조회
-    @GET("/api/common/getAnnouncementList")
+    // 공지사항 제목 리스트 조회
+    @GET("/api/common/announcement/getAnnouncementTitles")
     fun noticeRequest(
-        @Header("user_id") userId: String,
+        @Header("jwt_token") userId: String,
+        @Query("dormitoryName") dormitory: String,
     ): Call<List<NoticeRequestResultDTO>>
 
     // 공지사항 상세 조회

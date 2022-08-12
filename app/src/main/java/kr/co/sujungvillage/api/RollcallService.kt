@@ -9,23 +9,23 @@ import retrofit2.http.*
 
 interface RollcallService {
     // 점호 신청
-    @POST("/api/student/applyRollcall")
+    @POST("/api/student/rollcall/applyRollcall")
     fun rollcallCreate(
-        @Header("user_id") userId: String,
+        @Header("jwt_token") token: String,
         @Body rollcallInfo: RollcallCreateDTO,
     ): Call<RollcallCreateResultDTO>
 
     // 점호일 조회
-    @GET("/api/admin/getRollcallDateInfo")
+    @GET("/api/common/rollcall/getRollcallDateInfo")
     fun rollcallCheck(
-        @Header("user_id") userId: String,
-        @Query("date") date:String,
+        @Header("jwt_token") token: String,
+        @Query("rollcallDateId") rollcallId: Long,
     ): Call<RollcallCheckResultDTO>
 
     // 점호 신청 조회
-    @GET("/api/student/rollcall/getAppliedRollcallInfo")
+    @GET("/api/common/rollcall/getAppliedRollcallInfo")
     fun appliedRollcallCheck(
-        @Header("user_id") userId: String,
-        @Query("date") date: String,
+        @Header("jwt_token") token: String,
+        @Query("rollcallId") rollcallId: Long,
     ): Call<AppliedRollcallCheckResultDTO>
 }

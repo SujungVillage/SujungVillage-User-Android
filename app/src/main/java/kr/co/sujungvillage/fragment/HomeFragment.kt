@@ -27,14 +27,17 @@ import retrofit2.Response
 
 class HomeFragment : Fragment() {
 
-    var dayRollcall: List<HomeDay>? = null
-    var dayStayout: List<HomeDay>? = null
-    var dayApplied: List<HomeDay>? = null
+    var dayRollcall: MutableList<Int>? = mutableListOf()
+    var idRollcall: MutableList<Long>? = mutableListOf()
+    var dayStayout: MutableList<Int>? = mutableListOf()
+    var idStayout: MutableList<Long>? = mutableListOf()
+    var dayApplied: MutableList<Int>? = mutableListOf()
+    var idApplied: MutableList<Long>? = mutableListOf()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        // 재사생 학번 불러오기
+        // 재사생 학번, 토큰 불러오기
         val shared = this.activity?.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
         val studentNum = shared?.getString("studentNum", "error").toString()
         val token = shared?.getString("token", "error").toString()
@@ -74,17 +77,28 @@ class HomeFragment : Fragment() {
         RetrofitBuilder.homeApi.homeInfo(token, binding.calendar.currentDate.year.toString(), binding.calendar.currentDate.month.toString()).enqueue(object: Callback<HomeInfoResultDTO> {
             override fun onResponse(call: Call<HomeInfoResultDTO>, response: Response<HomeInfoResultDTO>) {
                 Log.d("HOME_INFO", "홈 화면 정보 조회 성공")
-                Log.d("HOME_INFO", "code : " + response.code().toString())
-                Log.d("HOME_INFO", "error body : " + response.errorBody())
-                Log.d("HOME_INFO", "message : " + response.message())
-                Log.d("HOME_INFO", "response : " + response.body()?.toString())
                 Log.d("HOME_INFO", "user : " + response.body()?.residentInfo.toString())
                 Log.d("HOME_INFO", "roll-call days : " + response.body()?.rollcallDays.toString())
                 Log.d("HOME_INFO", "applied roll-call days : " + response.body()?.appliedDays.toString())
                 Log.d("HOME_INFO", "applied stayout days : " + response.body()?.stayoutDays.toString())
-                dayRollcall = response.body()?.rollcallDays
-                dayStayout = response.body()?.stayoutDays
-                dayApplied = response.body()?.appliedDays
+                dayRollcall?.clear()
+                idRollcall?.clear()
+                for (rollcallDay in response.body()?.rollcallDays!!) {
+                    dayRollcall?.add(rollcallDay.day)
+                    idRollcall?.add(rollcallDay.id)
+                }
+                dayStayout?.clear()
+                idStayout?.clear()
+                for (stayoutDay in response.body()?.stayoutDays!!) {
+                    dayStayout?.add(stayoutDay.day)
+                    idStayout?.add(stayoutDay.id)
+                }
+                dayApplied?.clear()
+                idApplied?.clear()
+                for (appliedDay in response.body()?.appliedDays!!) {
+                    dayApplied?.add(appliedDay.day)
+                    idApplied?.add(appliedDay.id)
+                }
 
                 // 유저 정보 반영
                 binding.textName.text = response.body()?.residentInfo?.name
@@ -92,12 +106,12 @@ class HomeFragment : Fragment() {
                 binding.textRewards.text = "상점 : ${response.body()?.residentInfo?.plusLMP}점    |    벌점 : ${response.body()?.residentInfo?.minusLMP}점"
 
                 // 캘린더 정보 반영
-//                val defaultDecorator = DefaultDecorator(this@HomeFragment)
-//                val todayDecorator = TodayDecorator(this@HomeFragment, response.body()!!.stayoutDays)
-//                val rollcallDecorator = RollcallDecorator(this@HomeFragment, response.body()!!.rollcallDays, binding.calendar.currentDate.month)
-//                val stayoutDecorator = StayoutDecorator(this@HomeFragment, response.body()!!.stayoutDays, binding.calendar.currentDate.month)
-//                val missDecorator = MissDecorator(this@HomeFragment, response.body()!!.rollcallDays, response.body()!!.appliedDays, binding.calendar.currentDate.month)
-//                binding.calendar.addDecorators(defaultDecorator, todayDecorator, rollcallDecorator, stayoutDecorator, missDecorator)
+                val defaultDecorator = DefaultDecorator(this@HomeFragment)
+                val todayDecorator = TodayDecorator(this@HomeFragment, dayStayout)
+                val rollcallDecorator = RollcallDecorator(this@HomeFragment, dayRollcall, binding.calendar.currentDate.month)
+                val stayoutDecorator = StayoutDecorator(this@HomeFragment, dayStayout, binding.calendar.currentDate.month)
+                val missDecorator = MissDecorator(this@HomeFragment, dayRollcall, dayApplied, binding.calendar.currentDate.month)
+                binding.calendar.addDecorators(defaultDecorator, todayDecorator, rollcallDecorator, stayoutDecorator, missDecorator)
             }
 
             override fun onFailure(call: Call<HomeInfoResultDTO>, t: Throwable) {
@@ -108,22 +122,37 @@ class HomeFragment : Fragment() {
 
         // 캘린더 좌우 버튼 연결 (홈 화면 정보 조회 API 활용)
         binding.calendar.setOnMonthChangedListener { widget, date ->
-            RetrofitBuilder.homeApi.homeInfo(studentNum, date.year.toString(), date.month.toString()).enqueue(object: Callback<HomeInfoResultDTO> {
+            RetrofitBuilder.homeApi.homeInfo(token, date.year.toString(), date.month.toString()).enqueue(object: Callback<HomeInfoResultDTO> {
                 override fun onResponse(call: Call<HomeInfoResultDTO>, response: Response<HomeInfoResultDTO>) {
                     Log.d("HOME_INFO", "캘린더 정보 조회 성공")
                     Log.d("HOME_INFO", "roll-call days : " + response.body()?.rollcallDays.toString())
                     Log.d("HOME_INFO", "applied roll-call days : " + response.body()?.appliedDays.toString())
                     Log.d("HOME_INFO", "applied stayout days : " + response.body()?.stayoutDays.toString())
-                    dayRollcall = response.body()?.rollcallDays
-                    dayStayout = response.body()?.stayoutDays
-                    dayApplied = response.body()?.appliedDays
+                    dayRollcall?.clear()
+                    idRollcall?.clear()
+                    for (rollcallDay in response.body()?.rollcallDays!!) {
+                        dayRollcall?.add(rollcallDay.day)
+                        idRollcall?.add(rollcallDay.id)
+                    }
+                    dayStayout?.clear()
+                    idStayout?.clear()
+                    for (stayoutDay in response.body()?.stayoutDays!!) {
+                        dayStayout?.add(stayoutDay.day)
+                        idStayout?.add(stayoutDay.id)
+                    }
+                    dayApplied?.clear()
+                    idApplied?.clear()
+                    for (appliedDay in response.body()?.appliedDays!!) {
+                        dayApplied?.add(appliedDay.day)
+                        idApplied?.add(appliedDay.id)
+                    }
 
                     // 캘린더 정보 반영
                     val defaultDecorator = DefaultDecorator(this@HomeFragment)
-                    val todayDecorator = TodayDecorator(this@HomeFragment, response.body()!!.stayoutDays)
-                    val rollcallDecorator = RollcallDecorator(this@HomeFragment, response.body()!!.rollcallDays, date.month)
-                    val stayoutDecorator = StayoutDecorator(this@HomeFragment, response.body()!!.stayoutDays, date.month)
-                    val missDecorator = MissDecorator(this@HomeFragment, response.body()!!.rollcallDays, response.body()!!.appliedDays, date.month)
+                    val todayDecorator = TodayDecorator(this@HomeFragment, dayStayout)
+                    val rollcallDecorator = RollcallDecorator(this@HomeFragment, dayRollcall, binding.calendar.currentDate.month)
+                    val stayoutDecorator = StayoutDecorator(this@HomeFragment, dayStayout, binding.calendar.currentDate.month)
+                    val missDecorator = MissDecorator(this@HomeFragment, dayRollcall, dayApplied, binding.calendar.currentDate.month)
                     binding.calendar.addDecorators(defaultDecorator, todayDecorator, rollcallDecorator, stayoutDecorator, missDecorator)
                 }
 
@@ -136,17 +165,11 @@ class HomeFragment : Fragment() {
 
         // 날짜 클릭 이벤트
         binding.calendar.setOnDateChangedListener { widget, date, selected ->
-            val year = date.year.toString()
-            val month = if (date.month.toString().length == 2) date.month.toString() else "0${date.month.toString()}"
-            val day = if (date.day.toString().length == 2) date.day.toString() else "0${date.day.toString()}"
-            val clickDate = "${year}-${month}-${day}"
-            Log.d("DATE_TEST", clickDate)
-
             // 외박 신청 날짜를 클릭한 경우
-//            if (dayStayout?.contains(date.day) == true) {
-            if (true) {
+            if (dayStayout?.contains(date.day) == true) {
                 // 외박 신청 조회 API 연결
-                RetrofitBuilder.stayoutApi.stayoutCheck(studentNum, clickDate).enqueue(object: Callback<StayoutCheckResultDTO> {
+                val stayoutId = idStayout!!.get(dayStayout!!.indexOf(date.day))
+                RetrofitBuilder.stayoutApi.stayoutCheck(token, stayoutId).enqueue(object: Callback<StayoutCheckResultDTO> {
                     override fun onResponse(call: Call<StayoutCheckResultDTO>, response: Response<StayoutCheckResultDTO>) {
                         // null 값이 반환되면 무시
                         if (response.body()?.id == null) {
@@ -167,12 +190,10 @@ class HomeFragment : Fragment() {
                         if (date.isAfter(CalendarDay.today()) || date.equals(CalendarDay.today())) {
                             builder.setNegativeButton("외박 취소", DialogInterface.OnClickListener { dialog, i ->
                                 // 외박 취소 API 연결
-                                RetrofitBuilder.stayoutApi.stayoutCancel(studentNum, clickDate).enqueue(object : Callback<Void> {
+                                RetrofitBuilder.stayoutApi.stayoutCancel(token, stayoutId).enqueue(object : Callback<Void> {
                                     override fun onResponse(call: Call<Void>, response: Response<Void>) {
                                         Log.d("STAYOUT_CANCEL", "외박 취소 성공")
                                         Log.d("STAYOUT_CANCEL", "response : " + response.body().toString())
-                                        Log.d("STAYOUT_CANCEL", "code : " + response.code().toString())
-                                        Log.d("STAYOUT_CANCEL", "error body : " + response.errorBody().toString())
                                         dialog.cancel()
                                         Toast.makeText(this@HomeFragment.activity, "외박이 취소되었습니다.", Toast.LENGTH_SHORT).show()
                                     }
@@ -195,20 +216,22 @@ class HomeFragment : Fragment() {
             }
 
             // 점호 날짜를 클릭한 경우
-//            else if (dayRollcall?.contains(date.day) == true) {
-            else if (true) {
+            else if (dayRollcall?.contains(date.day) == true) {
                 // 점호에 참여한 경우
-//                if (dayApplied?.contains(date.day) == true) {
-                if (true) {
-                    RetrofitBuilder.rollcallApi.appliedRollcallCheck(studentNum, clickDate).enqueue(object: Callback<AppliedRollcallCheckResultDTO> {
+                if (dayApplied?.contains(date.day) == true) {
+                    // 점호 신청 조회 API 연결
+                    val appliedId = idApplied!!.get(dayApplied!!.indexOf(date.day))
+                    RetrofitBuilder.rollcallApi.appliedRollcallCheck(token, appliedId!!).enqueue(object: Callback<AppliedRollcallCheckResultDTO> {
                         override fun onResponse(call: Call<AppliedRollcallCheckResultDTO>, response: Response<AppliedRollcallCheckResultDTO>) {
                             Log.d("APPLIED_ROLLCALL_CHECK", "점호 신청 조회")
                             Log.d("APPLIED_ROLLCALL_CHECK", "response : " + response.body().toString())
+                            Log.d("APPLIED_ROLLCALL_CHECK", "code : " + response.code().toString())
+                            Log.d("APPLIED_ROLLCALL_CHECK", "message : " + response.message().toString())
 
                             // 점호 참여 Alert Dialog 생성
                             val builder = AlertDialog.Builder(context)
-                            builder.setTitle("${clickDate} 점호")
-                            builder.setMessage("참여 시각 : ${response.body()?.date}" +
+                            builder.setTitle("${date.date} 점호")
+                            builder.setMessage("참여 시각 : ${response.body()?.date?.subSequence(0, 10)} ${response.body()?.date?.subSequence(11, 19)}" +
                                 "\n참여 위치 : ${response.body()?.location}")
                             builder.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, i ->
                                 dialog.cancel()
@@ -217,7 +240,8 @@ class HomeFragment : Fragment() {
                         }
 
                         override fun onFailure(call: Call<AppliedRollcallCheckResultDTO>, t: Throwable) {
-                            Log.e("APPLIED_ROLLCALL_CHECK", "점호 신청 실패")
+                            Log.e("APPLIED_ROLLCALL_CHECK", "점호 신청 조회 실패")
+                            Log.e("APPLIED_ROLLCALL_CHECK", t.message.toString())
                         }
                     })
                     return@setOnDateChangedListener
@@ -227,7 +251,7 @@ class HomeFragment : Fragment() {
                 if (date.isBefore(CalendarDay.today())) {
                     // 무단 외박 Alert Dialog 생성
                     val builder = AlertDialog.Builder(context)
-                    builder.setTitle("${clickDate} 점호")
+                    builder.setTitle("${date.date} 점호")
                     builder.setMessage("해당 점호에 불참하셨습니다.")
                     builder.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, i ->
                         dialog.cancel()
@@ -237,7 +261,8 @@ class HomeFragment : Fragment() {
                 }
 
                 // 점호일 조회 API 연결
-                RetrofitBuilder.rollcallApi.rollcallCheck(studentNum, clickDate).enqueue(object: Callback<RollcallCheckResultDTO> {
+                val rollcallId = idRollcall!!.get(dayRollcall!!.indexOf(date.day))
+                RetrofitBuilder.rollcallApi.rollcallCheck(token, rollcallId!!).enqueue(object: Callback<RollcallCheckResultDTO> {
                     override fun onResponse(call: Call<RollcallCheckResultDTO>, response: Response<RollcallCheckResultDTO>) {
                         Log.d("ROLLCALL_CHECK", "response : " + response.body().toString())
                         Log.d("ROLLCALL_CHECK", "error code & body : " + response.code() + " " + response.errorBody())
@@ -286,7 +311,7 @@ class DefaultDecorator(context: HomeFragment): DayViewDecorator {
 }
 
 // 오늘 커스텀 함수
-class TodayDecorator(context: HomeFragment, stayoutDays: List<HomeDay>): DayViewDecorator {
+class TodayDecorator(context: HomeFragment, stayoutDays: MutableList<Int>?): DayViewDecorator {
     val stayoutDays = stayoutDays
 
     override fun shouldDecorate(day: CalendarDay?): Boolean { // 커스텀 여부 반환
@@ -294,22 +319,19 @@ class TodayDecorator(context: HomeFragment, stayoutDays: List<HomeDay>): DayView
     }
 
     override fun decorate(view: DayViewFacade?) { // 커스텀 설정
-//        if (stayoutDays.contains(CalendarDay.today().day)) view?.addSpan(object:ForegroundColorSpan(Color.parseColor("#FFFFFFFF")) {})
-//        else view?.addSpan(object:ForegroundColorSpan(Color.parseColor("#FFFFA114")) {})
-        view?.addSpan(object:ForegroundColorSpan(Color.parseColor("#FFFFA114")) {})
+        if (stayoutDays?.contains(CalendarDay.today().day) == true) view?.addSpan(object:ForegroundColorSpan(Color.parseColor("#FFFFFFFF")) {})
+        else view?.addSpan(object:ForegroundColorSpan(Color.parseColor("#FFFFA114")) {})
     }
 }
 
 // 점호일 커스텀 함수
-class RollcallDecorator(context: HomeFragment, days: List<HomeDay>, month: Int): DayViewDecorator {
+class RollcallDecorator(context: HomeFragment, rollcallDays: MutableList<Int>?, month: Int): DayViewDecorator {
     val rollcallDrawable = context.resources.getDrawable(R.drawable.style_home_cal_rollcall)
-    val days = days
-
+    val rollcallDays = rollcallDays
     val month = month
 
     override fun shouldDecorate(day: CalendarDay?): Boolean { // 커스텀 여부 반환
-        return false
-//        return days.contains(day?.day) && day?.month == month
+        return rollcallDays?.contains(day!!.day) == true && day?.month == month
     }
     override fun decorate(view: DayViewFacade?) { // 커스텀 설정
         view?.setBackgroundDrawable(rollcallDrawable)
@@ -317,15 +339,13 @@ class RollcallDecorator(context: HomeFragment, days: List<HomeDay>, month: Int):
 }
 
 // 외박 신청일 커스텀 함수
-class StayoutDecorator(context: HomeFragment, days: List<HomeDay>, month: Int): DayViewDecorator {
+class StayoutDecorator(context: HomeFragment, stayoutDays: MutableList<Int>?, month: Int): DayViewDecorator {
     val stayoutDrawable = context.resources.getDrawable(R.drawable.style_home_cal_stayout)
-    val days = days
-
+    val stayoutDays = stayoutDays
     val month = month
 
     override fun shouldDecorate(day: CalendarDay?): Boolean { // 커스텀 여부 반환
-        return false
-//        return days.contains(day?.day) && day?.month == month
+        return stayoutDays?.contains(day?.day) == true && day?.month == month
     }
     override fun decorate(view: DayViewFacade?) { // 커스텀 설정
         view?.setBackgroundDrawable(stayoutDrawable)
@@ -333,17 +353,15 @@ class StayoutDecorator(context: HomeFragment, days: List<HomeDay>, month: Int): 
 }
 
 // 무단 외박일 커스텀 함수
-class MissDecorator(context: HomeFragment, rollcallDays: List<HomeDay>, appliedDays: List<HomeDay>, month: Int): DayViewDecorator {
+class MissDecorator(context: HomeFragment, rollcallDays: MutableList<Int>?, appliedDays: MutableList<Int>?, month: Int): DayViewDecorator {
     val missDrawable = context.resources.getDrawable(R.drawable.style_home_cal_miss)
     val today = CalendarDay.today()
     val rollcallDays = rollcallDays
     val appliedDays = appliedDays
-
     val month = month
 
     override fun shouldDecorate(day: CalendarDay?): Boolean {
-        return false
-//        return day?.isBefore(today)!! && day?.month == month && rollcallDays.contains(day.day) && !appliedDays.contains(day.day)
+        return day?.isBefore(today)!! && day?.month == month && rollcallDays?.contains(day.day) == true && !appliedDays?.contains(day.day)!!
     }
     override fun decorate(view: DayViewFacade?) {
         view?.setBackgroundDrawable(missDrawable)

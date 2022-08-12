@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".fragment.HomeFragment">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
@@ -67,7 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/bold"
-                    android:text="김수룡"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="34sp" />
 
@@ -87,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="11dp"
-                android:text="성미관 기숙사"
+                android:text=""
                 android:fontFamily="@font/medium"
                 android:textColor="@color/yellow_100" />
 
@@ -96,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="상점 : 12점    |    벌점 : 6점"
+                android:text=""
                 android:fontFamily="@font/medium"
                 android:textColor="@color/yellow_100" />
 
@@ -271,7 +270,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="-10dp"
                         android:layout_marginBottom="66dp"
-                        android:text="기숙사 이메일 : dormitory@sungshin.ac.kr  |  개발자 contacts : 000-0000-0000"
+                        android:text="기숙사 : dormitory@sungshin.ac.kr  |  개발자 : sujungvillage@gmail.com"
                         android:textColor="@color/gray_200"
                         android:textSize="10sp" />
 
