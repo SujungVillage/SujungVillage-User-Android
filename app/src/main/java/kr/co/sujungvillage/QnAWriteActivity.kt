@@ -25,6 +25,7 @@ class QnAWriteActivity : AppCompatActivity() {
         // 재사생 학번 불러오기
         val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
         val studentNum = shared?.getString("studentNum", "error").toString()
+        val token = shared?.getString("token", "error").toString()
 
         // 키보드 내리기
         binding.layout.setOnClickListener { this.hideKeyboard() }
@@ -47,11 +48,11 @@ class QnAWriteActivity : AppCompatActivity() {
 
             var title = binding.editTitle.text.toString()
             var content = binding.editContent.text.toString()
-            // ★★★ 익명 여부도 추가
-            val questionInfo = MyqWriteDTO(title, content)
+            var anonymous = binding.checkboxAnonymous.isChecked
+            val questionInfo = MyqWriteDTO(title, content, anonymous)
 
             // 질문 작성 API 연결
-            RetrofitBuilder.qnaApi.myqWrite(studentNum, questionInfo).enqueue(object : Callback<MyqWriteResultDTO> {
+            RetrofitBuilder.qnaApi.myqWrite(token, questionInfo).enqueue(object : Callback<MyqWriteResultDTO> {
                 override fun onResponse(call: Call<MyqWriteResultDTO>, response: Response<MyqWriteResultDTO>) {
                     Log.d("MY_QUESTION_WRITE", "질문 작성 성공")
                     Log.d("MY_QUESTION_WRITE", response.body().toString())

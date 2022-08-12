@@ -85,33 +85,44 @@
                     app:layout_constraintTop_toBottomOf="@+id/text_title" />
 
                 <TextView
+                    android:id="@+id/text_writer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:text="작성자 : 익명"
+                    android:textSize="12sp"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/light"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_date" />
+
+                <TextView
                     android:id="@+id/btn_delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="26dp"
                     android:layout_marginEnd="30dp"
+                    android:layout_marginBottom="3dp"
                     android:background="#D9D9D9"
+                    android:fontFamily="@font/regular"
                     android:padding="1dp"
                     android:text="삭제하기"
                     android:textSize="11sp"
-                    android:fontFamily="@font/regular"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.804"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintBottom_toBottomOf="@+id/text_writer"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
                 <TextView
                     android:id="@+id/text_content"
                     android:layout_width="323dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="41dp"
-                    android:layout_marginTop="29dp"
+                    android:layout_marginTop="20dp"
                     android:text="403호가 매일 밤마다 쿵쿵 뛰는 소리가 너무 심합니다.. 저번에 쪽지도 한 번 붙여봤는데 하루 이틀만 조용하더 니 지금 또 시끄럽습니다.. 403호에게 따로 주의주셨으 면 좋겠습니다."
                     android:textColor="#111111"
                     android:fontFamily="@font/light"
                     android:textSize="13sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_date" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_writer" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

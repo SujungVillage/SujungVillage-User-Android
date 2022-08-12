@@ -6,28 +6,35 @@ import retrofit2.http.*
 
 interface QnAService {
     // FAQ 질문 리스트 조회
-    @GET("/api/common/QnA/getAllFaqQuestion")
+    @GET("/api/common/qna/getAllFaq")
     fun faqGet(
-        @Header("user_id") userId: String,
+        @Header("jwt_token") token: String,
     ): Call<List<FaqGetResultDTO>>
 
     // 내 질문 조회
-    @GET("/api/student/QnA/getMyQuestions")
+    @GET("/api/student/qna/getMyQnas")
     fun myqGet(
-        @Header("user_id") userId: String,
+        @Header("jwt_token") token: String,
     ): Call<List<MyqGetResultDTO>>
 
     // 내 질문 상세 조회
-    @GET("/api/common/QnA/getDetailedQnA")
+    @GET("/api/common/qna/getQna")
     fun myqDetailGet(
-        @Header("user_id") userId: Number,
-        @Query("questionId") questionId: Number,
+        @Header("jwt_token") token: String,
+        @Query("questionId") questionId: Long,
     ): Call<MyqDetailGetResultDTO>
 
     // 질문 작성
-    @POST("/api/student/QnA/writeQuestion")
+    @POST("/api/student/qna/writeQuestion")
     fun myqWrite(
-        @Header("user_id") userId: String,
+        @Header("jwt_token") token: String,
         @Body questionInfo: MyqWriteDTO,
     ): Call<MyqWriteResultDTO>
+
+    // 질문 삭제
+    @DELETE("/api/common/qna/deleteQuestion")
+    fun myqDelete(
+        @Header("jwt_token") token: String,
+        @Query("questionId") questionId: Long,
+    ): Call<Void>
 }

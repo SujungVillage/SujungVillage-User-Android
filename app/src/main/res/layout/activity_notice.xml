@@ -75,6 +75,7 @@
                 android:id="@+id/recycler_notice"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:clipToPadding="false"
                 tools:listitem="@layout/listitem_notice_post" />
 
         </LinearLayout>
