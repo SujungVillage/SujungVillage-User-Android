@@ -8,8 +8,6 @@ data class NoticeRequestResultDTO(
     val id: Long,
     @SerializedName("title")
     val title: String,
-    @SerializedName("domitoryName")
-    val dormitory: String,
     @SerializedName("regDate")
     val date: String,
 ): Serializable {}

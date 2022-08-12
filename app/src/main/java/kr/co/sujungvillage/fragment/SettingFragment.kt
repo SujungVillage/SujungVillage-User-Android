@@ -28,6 +28,7 @@ class SettingFragment : Fragment() {
         // 재사생 학번 불러오기
         val shared = this.activity?.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
         val studentNum = shared?.getString("studentNum", "error").toString()
+        val token = shared?.getString("token", "error").toString()
 
         // 알림 버튼 연결
         binding.btnAlarm.setOnClickListener {
@@ -41,7 +42,7 @@ class SettingFragment : Fragment() {
         }
 
         // 설정 화면 정보 조회 API 연결 (홈 화면 정보 조회 API 활용)
-        RetrofitBuilder.homeApi.homeInfo(studentNum, Calendar.YEAR.toString(), Calendar.MONTH.toString()).enqueue(object:
+        RetrofitBuilder.homeApi.homeInfo(token, Calendar.YEAR.toString(), Calendar.MONTH.toString()).enqueue(object:
             Callback<HomeInfoResultDTO> {
             override fun onResponse(call: Call<HomeInfoResultDTO>, response: Response<HomeInfoResultDTO>) {
                 Log.d("SETTING_INFO", "설정 화면 정보 조회 성공")
