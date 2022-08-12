@@ -5,6 +5,14 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface CommunityService {
+    //커뮤니티 검색 결과 가져오기
+    @GET("/api/common/community/searchPost")
+    fun commSearch(
+        @Header("jwt_token") user_id:String,
+        @Query("dormitoryName")dormitory:String,
+        @Query("keyword")keyword:String
+    ):Call<List<CommDTO>>
+
     //커뮤니티 글 가져오기
     @GET("/api/common/community/getAllPost")
     fun comm(

@@ -59,6 +59,20 @@
                 tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <ImageButton
+                android:id="@+id/btn_delete"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="52dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/nothing"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_delete"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toStartOf="@+id/btn_alarm"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+            <ImageButton
                 android:id="@+id/btn_alarm"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
@@ -71,9 +85,33 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
+            <EditText
+                android:id="@+id/edit_search"
+                android:layout_width="222dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="43dp"
+                android:background="@drawable/style_comm_search"
+                android:ems="10"
+                android:hint=""
+                android:inputType="textPersonName"
+                android:padding="4dp"
+                android:textColor="@color/primary"
+                android:textSize="13dp"
+                android:visibility="invisible"
+                android:lines="1"
+                android:imeOptions="actionSearch"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
+        <TextView
+            android:id="@+id/text_exist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="게시글이 없습니다."
+            android:visibility="gone"/>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -91,8 +129,12 @@
                     android:paddingHorizontal="16dp"
                     android:clipToPadding="false"
                     tools:listitem="@layout/listitem_comm" />
+
             </LinearLayout>
+
         </ScrollView>
+
+
 
     </LinearLayout>
 
