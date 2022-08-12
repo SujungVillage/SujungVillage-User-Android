@@ -105,7 +105,7 @@
                 android:gravity="top"
                 android:hint="내용을 입력해주세요."
                 android:inputType="textMultiLine"
-                android:maxLines="2000"
+                android:maxLength="2000"
                 android:padding="27dp"
                 android:textColor="@color/gray_600"
                 android:textColorHint="#989898"
