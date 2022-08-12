@@ -25,9 +25,10 @@ class QnAFaqFragment : Fragment() {
         // 재사생 학번 불러오기
         val shared = this.activity?.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
         val studentNum = shared?.getString("studentNum", "error").toString()
+        val token = shared?.getString("token", "error").toString()
 
         // FAQ 리스트 조회 API 연결
-        RetrofitBuilder.qnaApi.faqGet(studentNum).enqueue(object : Callback<List<FaqGetResultDTO>> {
+        RetrofitBuilder.qnaApi.faqGet(token).enqueue(object : Callback<List<FaqGetResultDTO>> {
             override fun onResponse(call: Call<List<FaqGetResultDTO>>, response: Response<List<FaqGetResultDTO>>) {
                 Log.d("FAQ_GET", "FAQ 리스트 조회 성공")
                 Log.d("FAQ_GET", response.body().toString())
@@ -35,7 +36,7 @@ class QnAFaqFragment : Fragment() {
                 // 어댑터 연결
                 val faqList: MutableList<FaqGetResultDTO> = mutableListOf()
                 for (info in response.body()!!) {
-                    faqList.add(FaqGetResultDTO(info.id, info.question, info.dormitory))
+                    faqList.add(FaqGetResultDTO(info.id, info.userId, info.question, info.answer, info.date, info.modDate))
                 }
                 val adapter = QnAFaqAdapter()
                 adapter.faqList = faqList

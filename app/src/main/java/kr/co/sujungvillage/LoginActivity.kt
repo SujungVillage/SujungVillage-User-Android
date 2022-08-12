@@ -126,6 +126,7 @@ class LoginActivity : AppCompatActivity() {
             }
         } catch (e: ApiException) {
             Log.e("GOOGLE_LOGIN", "로그인 오류")
+            Log.e("GOOGLE_LOGIN", e.toString())
             Log.e("GOOGLE_LOGIN", e.statusCode.toString())
             Log.e("GOOGLE_LOGIN", e.message.toString())
             Toast.makeText(this, "로그인 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()

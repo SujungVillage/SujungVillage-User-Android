@@ -6,20 +6,25 @@ import java.io.Serializable
 data class FaqGetResultDTO(
     @SerializedName("id")
     val id: Long,
+    @SerializedName("writerId")
+    val userId: String,
     @SerializedName("question")
     val question: String,
-    @SerializedName("domitoryName")
-    val dormitory: String,
-    // ★★★ answer 추가
+    @SerializedName("answer")
+    val answer: String,
+    @SerializedName("regDate")
+    val date: String,
+    @SerializedName("modDate")
+    val modDate: String,
 ): Serializable {}
 
 data class MyqGetResultDTO(
     @SerializedName("questionId")
     val id: Long,
-    @SerializedName("queristId")
-    val userId: String,
     @SerializedName("title")
     val title: String,
+    @SerializedName("redDate")
+    val date: String,
     @SerializedName("answered")
     val isAnswered: Boolean,
 ): Serializable {}
@@ -42,6 +47,8 @@ data class QnAQuestion(
     val title: String,
     @SerializedName("content")
     val content: String,
+    @SerializedName("anonymous")
+    val isAnonymous: Boolean,
     @SerializedName("reqDate")
     val reqDate: String,
     @SerializedName("modDate")
@@ -66,7 +73,8 @@ data class MyqWriteDTO(
     val title: String,
     @SerializedName("content")
     val content: String,
-    // ★★★ 익명 여부 추가
+    @SerializedName("anonymous")
+    val isAnonymous: Boolean,
 ): Serializable {}
 
 data class MyqWriteResultDTO(
@@ -80,6 +88,8 @@ data class MyqWriteResultDTO(
     val title: String,
     @SerializedName("content")
     val content: String,
+    @SerializedName("anonymous")
+    val isAnonymous: Boolean,
     @SerializedName("reqDate")
     val reqDate: String,
     @SerializedName("modDate")

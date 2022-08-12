@@ -30,7 +30,7 @@ class QnAFaqAdapter: RecyclerView.Adapter<QnAFaqHolder>() {
 class QnAFaqHolder(val binding: ListitemQnaFaqBinding): RecyclerView.ViewHolder(binding.root) {
     fun setFaq(faq: FaqGetResultDTO) {
         binding.textQuestion.text = faq.question
-        // ★★★ answer 연결
+        binding.textAnswer.text = faq.answer
 
         // FAQ 열고 닫기
         binding.root.setOnClickListener {
