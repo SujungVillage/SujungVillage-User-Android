@@ -29,6 +29,7 @@ class CommDetailActivity : AppCompatActivity() {
         // 재사생 학번 불러오기
         val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
         val studentNum = shared?.getString("studentNum", "error").toString()
+        val token = shared?.getString("token", "error").toString()
 
         // 이전 페이지 CommFragment 에서 postId 전달 받기
         val postId = intent.getLongExtra("postId",-1)
@@ -97,7 +98,7 @@ class CommDetailActivity : AppCompatActivity() {
                 var commentCount=0
                 for(info in response.body()?.comments!!){
                     commentCount++
-                    var comment=CommDetailCommentsRequest(info.id,info.writerId,info.content,info.regDate,info.modDate)
+                    var comment=CommDetailCommentsRequest(info.id,info.postId,info.writerId,info.content,info.regDate,info.modDate)
                     commentList.add(comment)
                 }
                 var adapter=CommDetailAdapter()

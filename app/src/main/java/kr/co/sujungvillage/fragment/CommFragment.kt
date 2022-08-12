@@ -4,11 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.sujungvillage.AlarmActivity
 import kr.co.sujungvillage.CommWriteActivity
@@ -29,6 +30,7 @@ class CommFragment : Fragment() {
         // 재사생 학번 불러오기
         val shared = this.activity?.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
         val studentNum = shared?.getString("studentNum", "20180001").toString()
+        val token = shared?.getString("token", "error").toString()
 
         // 알림 버튼 연결
         binding.btnAlarm.setOnClickListener {
@@ -38,21 +40,22 @@ class CommFragment : Fragment() {
 
         // 기숙사 스피너 연결 및 커스텀
         binding.spinnerDormitory.adapter = ArrayAdapter.createFromResource(requireContext(), R.array.dormitory, R.layout.spinner_comm_dormitory)
-
+        val dormitory: String = binding.spinnerDormitory.getSelectedItem().toString()
+        Log.d("COMM_FRAG",dormitory)
         // 글 작성 버튼 연결
         binding.btnWrite.setOnClickListener {
             var intent = Intent(this.activity, CommWriteActivity::class.java)
             startActivity(intent)
         }
 
-        RetrofitBuilder.communityApi.comm(studentNum).enqueue(object: Callback<List<CommDTO>>{
+        RetrofitBuilder.communityApi.comm(token,dormitory).enqueue(object: Callback<List<CommDTO>>{
             override fun onResponse(call: Call<List<CommDTO>>, response: Response<List<CommDTO>>) {
                 if(response.body()?.size==0){
 
                 }
                 val commList:MutableList<CommDTO> = mutableListOf()
                 for(post in response.body()!!){
-                    var comm=CommDTO(post.id,post.title,post.dormitory,post.regDate)
+                    var comm=CommDTO(post.id,post.title,post.content,post.regDate)
                     commList.add(comm)
                 }
                 val adapter=CommAdapter()

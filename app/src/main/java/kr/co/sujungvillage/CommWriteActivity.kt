@@ -30,6 +30,7 @@ class CommWriteActivity : AppCompatActivity() {
         // 재사생 학번 불러오기
         val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
         val studentNum = shared?.getString("studentNum", "error").toString()
+        val token = shared?.getString("token", "error").toString()
 
         // 키보드 내리기
         binding.layout.setOnClickListener { this.hideKeyboard() }
