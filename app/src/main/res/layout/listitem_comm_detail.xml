@@ -27,12 +27,26 @@
             android:layout_gravity="center" />
         <TextView
             android:id="@+id/text_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/medium"
             android:text="익명1"
+            android:layout_weight="1"
             android:textColor="@color/black"
             android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/text_comment_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/light"
+            android:textSize="10dp"
+            android:text="댓글삭제"
+            android:textColor="#989898"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:visibility="invisible"
+            android:padding="1dp"/>
     </LinearLayout>
 
     <TextView

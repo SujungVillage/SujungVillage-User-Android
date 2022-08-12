@@ -1,11 +1,13 @@
 package kr.co.sujungvillage
 
 import android.content.Context
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.sujungvillage.adapter.CommDetailAdapter
@@ -19,17 +21,20 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class CommDetailActivity : AppCompatActivity() {
+    companion object{
+        var studentNum=""
+        var token=""
+    }
 
     val binding by lazy { ActivityCommDetailBinding.inflate(layoutInflater) }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         // 재사생 학번 불러오기
         val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
-        val studentNum = shared?.getString("studentNum", "error").toString()
-        val token = shared?.getString("token", "error").toString()
+        studentNum = shared?.getString("studentNum", "error").toString()
+        token = shared?.getString("token", "error").toString()
 
         // 이전 페이지 CommFragment 에서 postId 전달 받기
         val postId = intent.getLongExtra("postId",-1)
@@ -48,6 +53,28 @@ class CommDetailActivity : AppCompatActivity() {
 
         // Api 연결
         refresh(token,studentNum,postId)
+        //글 삭제 버튼 연결
+        binding.btnDelete.setOnClickListener{
+            //경고창 띄우기
+            val builder=AlertDialog.Builder(this)
+            builder.setTitle("정말 삭제하시겠습니까?")
+                .setPositiveButton("확인",DialogInterface.OnClickListener{dialog,id->
+                    RetrofitBuilder.communityApi.commDelete(token,postId).enqueue(object :Callback<Void>{
+                        override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                            Log.d("COMM_DELETE",response.body().toString())
+                            finish()
+                        }
+                        override fun onFailure(call: Call<Void>, t: Throwable) {
+                            Log.d("COMM_DELETE",t.message.toString())
+                        }
+                    })
+                })
+                .setNegativeButton("취소",
+                    DialogInterface.OnClickListener{dialog,id->
+                        Log.d("COMM_DELETE","글 삭제 취소")
+                    })
+            builder.show()
+        }
 
         // 댓글 전송 버튼 클릭시
         binding.btnCommentSubmit.setOnClickListener{
@@ -78,30 +105,43 @@ class CommDetailActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<CommDetailResultDTO>, response: Response<CommDetailResultDTO>) {
                 Log.d("COMM_DETAIL",response.body().toString())
-                Log.d("COMM_DETAIL",response.code().toString())
-                Log.d("COMM_DETAIL",response.message())
-                binding.textTitle.text=response.body()?.title
-                binding.textCalDate.text="${response.body()?.regDate?.subSequence(0,4)}/${response.body()?.regDate?.subSequence(5, 7)}/${response.body()?.regDate?.subSequence(8, 10)} ${response.body()?.regDate?.subSequence(11,13).toString()}:${response.body()?.regDate?.subSequence(14,16).toString()}"
-                binding.textContent.text=response.body()?.content
-                //글 작성자 id 와 studentNum이 같으면 삭제 버튼 보이게
-                if(studentNum==response.body()?.writerId){
-                    binding.btnDelete.visibility= View.VISIBLE
-                }
-                //어댑터 연결
+                if(response.isSuccessful){
+                    binding.textTitle.text=response.body()?.title
+                    binding.textCalDate.text="${response.body()?.regDate?.subSequence(0,4)}/${response.body()?.regDate?.subSequence(5, 7)}/${response.body()?.regDate?.subSequence(8, 10)} ${response.body()?.regDate?.subSequence(11,13).toString()}:${response.body()?.regDate?.subSequence(14,16).toString()}"
+                    binding.textContent.text=response.body()?.content
+                    //관리자이면 관리자 마크 보이게
+                    if(response.body()?.id.toString().toInt()>=99990000){//관리자인 경우
+                        binding.textAdmin.visibility=View.VISIBLE
+                    }
+                    //글 작성자 id 와 studentNum이 같으면 삭제 버튼 보이게
+                    if(studentNum==response.body()?.writerId){
+                        binding.btnDelete.visibility= View.VISIBLE
+                    }
+                    //어댑터 연결
 
-                val commentList:MutableList<CommDetailCommentsRequest> = mutableListOf()
-                var commentCount=0
-                for(info in response.body()?.comments!!){
-                    commentCount++
-                    var comment=CommDetailCommentsRequest(info.id,info.postId,info.writerId,info.content,info.regDate,info.modDate)
-                    commentList.add(comment)
-                }
-                var adapter=CommDetailAdapter()
-                adapter.commDetailList=commentList
-                binding.recyclerComment.adapter=adapter
-                binding.recyclerComment.layoutManager=LinearLayoutManager(this@CommDetailActivity)
+                    val commentList:MutableList<CommDetailCommentsRequest> = mutableListOf()
+                    var commentCount=0
+                    for(info in response.body()?.comments!!){
+                        commentCount++
+                        var comment=CommDetailCommentsRequest(info.id,info.postId,info.writerId,info.content,info.regDate,info.modDate)
+                        commentList.add(comment)
+                    }
+                    var adapter=CommDetailAdapter(this@CommDetailActivity)
+                    adapter.commDetailList=commentList
+                    binding.recyclerComment.adapter=adapter
+                    binding.recyclerComment.layoutManager=LinearLayoutManager(this@CommDetailActivity)
 
-                binding.textCommentCount.text=commentCount.toString()
+                    binding.textCommentCount.text=commentCount.toString()
+                }
+                else{
+                    val builder=AlertDialog.Builder(this@CommDetailActivity)
+                    builder.setTitle("글이 존재하지 않습니다.")
+                        .setPositiveButton("확인",DialogInterface.OnClickListener{dialog,id->
+                            Log.d("COMM_DETAIL","글이 존재하지 않음")
+                            finish()
+                    })
+                        builder.show()
+                }
             }
 
             override fun onFailure(call: Call<CommDetailResultDTO>, t: Throwable) {

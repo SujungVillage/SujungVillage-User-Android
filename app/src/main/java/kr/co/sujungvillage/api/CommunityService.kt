@@ -5,6 +5,20 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface CommunityService {
+    //커뮤니티 댓글 삭제
+    @DELETE("/api/common/community/deleteComment")
+    fun commCommentDelete(
+        @Header("jwt_token")user_id:String,
+        @Query("commentId")CommentId:Long
+    ):Call<Void>
+
+    //커뮤니티 글 삭제
+    @DELETE("/api/common/community/deletePost")
+    fun commDelete(
+        @Header("jwt_token")user_id:String,
+        @Query("postId")postId:Long
+    ):Call<Void>
+
     //커뮤니티 검색 결과 가져오기
     @GET("/api/common/community/searchPost")
     fun commSearch(
