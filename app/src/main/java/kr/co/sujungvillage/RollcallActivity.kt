@@ -2,9 +2,6 @@ package kr.co.sujungvillage
 
 import android.content.Context
 import android.content.pm.PackageManager
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Looper
 import androidx.core.app.ActivityCompat
 import kr.co.sujungvillage.databinding.ActivityRollcallBinding
 import java.io.IOException
@@ -18,7 +15,6 @@ import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import kr.co.sujungvillage.base.BaseActivity
 import kr.co.sujungvillage.data.RollcallCreateDTO
 import kr.co.sujungvillage.data.RollcallCreateResultDTO
