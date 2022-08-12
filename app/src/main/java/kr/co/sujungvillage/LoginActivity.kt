@@ -13,7 +13,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import kr.co.sujungvillage.BuildConfig.CLIENT_ID
+import kr.co.sujungvillage.data.LoginDTO
+import kr.co.sujungvillage.data.LoginResultDTO
 import kr.co.sujungvillage.databinding.ActivityLoginBinding
+import kr.co.sujungvillage.retrofit.RetrofitBuilder
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class LoginActivity : AppCompatActivity() {
@@ -46,7 +52,6 @@ class LoginActivity : AppCompatActivity() {
 
         // 사용자 이메일 주소 요청
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            // Auth Web Application Client ID인데 노출되면 안 될 것 같아서 필요하게 되면 연락 요망
             .requestIdToken(CLIENT_ID)
             .requestEmail()
             .build()
@@ -86,17 +91,29 @@ class LoginActivity : AppCompatActivity() {
                 Log.d("GOOGLE_LOGIN", "id : " + account.id)
                 Log.d("GOOGLE_LOGIN", "token : " + account.idToken)
 
-                // ★★★ 토큰 로컬에 저장하고 로그인 API 연결 (학번은 저장 완료)
-                val shared = getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
-                val editor = shared.edit()
-                editor.remove("studentNum")
-                editor.putString("studentNum", account.email!!.subSequence(0, 8).toString())
-                editor.putString("token", account.idToken)
-                editor.apply()
+                // 재사생 로그인 API 연결
+                RetrofitBuilder.loginApi.login(LoginDTO(account.idToken.toString())).enqueue(object: Callback<LoginResultDTO> {
+                    override fun onResponse(call: Call<LoginResultDTO>, response: Response<LoginResultDTO>) {
+                        Log.d("LOGIN", "로그인 성공")
+                        Log.d("LOGIN", "token : " + response.body()?.token.toString())
+                        Log.d("LOGIN", "code : " + response.code())
 
-                var intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+                        // 토큰, 학번 로컬에 저장하고 메인 화면으로 이동
+                        val shared = getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
+                        val editor = shared.edit()
+                        editor.putString("studentNum", account.email!!.subSequence(0, 8).toString())
+                        editor.putString("token", response.body()?.token)
+                        editor.apply()
+
+                        var intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+
+                    override fun onFailure(call: Call<LoginResultDTO>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+                })
             }
             // 성신 구글 계정이 아닌 경우
             else {
