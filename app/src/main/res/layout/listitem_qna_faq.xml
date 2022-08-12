@@ -47,7 +47,7 @@
         android:fontFamily="@font/medium"
         android:layout_marginTop="-3dp"
         android:paddingHorizontal="28dp"
-        android:paddingTop="16dp"
+        android:paddingTop="20dp"
         android:paddingBottom="24dp"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus consectetur sed urna, id aliquam ut. Orci, varius egestas ac eget a odio nec pellentesque. Pharetra iaculis sit cursus sed. Purus lorem eu sit mattis lectus consequat, imperdiet congue leo. At sit faucibus tincidunt pharetra tellus mattis eu. Congue elementum nec id sem nibh egestas arcu scelerisque." />
 

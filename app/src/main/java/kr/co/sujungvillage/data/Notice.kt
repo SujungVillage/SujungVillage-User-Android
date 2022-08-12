@@ -15,16 +15,16 @@ data class NoticeRequestResultDTO(
 data class NoticeDetailResultDTO(
     @SerializedName("id")
     val id: Long,
-    @SerializedName("writerName")
-    val name: String,
+    @SerializedName("writerId")
+    val userId: String,
     @SerializedName("title")
     val title: String,
     @SerializedName("content")
     val content: String,
-    @SerializedName("domitoryName")
-    val dormitory: String,
     @SerializedName("regDate")
     val regDate: String,
     @SerializedName("modDate")
     val modDate: String,
+    @SerializedName("dormitoryName")
+    val dormitory: String,
 ): Serializable {}

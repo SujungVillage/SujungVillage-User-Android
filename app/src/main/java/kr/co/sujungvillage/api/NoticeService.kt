@@ -12,14 +12,14 @@ interface NoticeService {
     // 공지사항 제목 리스트 조회
     @GET("/api/common/announcement/getAnnouncementTitles")
     fun noticeRequest(
-        @Header("jwt_token") userId: String,
+        @Header("jwt_token") token: String,
         @Query("dormitoryName") dormitory: String,
     ): Call<List<NoticeRequestResultDTO>>
 
     // 공지사항 상세 조회
-    @GET("/api/common/getDetailedAnnouncement")
+    @GET("/api/common/announcement/getAnnouncement")
     fun noticeDetailRequest(
-        @Header("user_id") userId: String,
+        @Header("jwt_token") token: String,
         @Query("announcementId") noticeId: Long,
     ): Call<NoticeDetailResultDTO>
 }
