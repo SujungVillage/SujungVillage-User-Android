@@ -8,23 +8,23 @@ import retrofit2.http.*
 
 interface StayoutService {
     // 외박 신청
-    @POST("/api/student/applyExeat")
+    @POST("/api/student/exeat/applyExeat")
     fun stayoutCreate(
-        @Header("user_id") userId: String?,
+        @Header("jwt_token") token: String?,
         @Body stayoutInfo: StayoutCreateDTO,
     ): Call<List<StayoutCheckResultDTO>>
 
     // 외박 신청 조회
-    @GET("/api/student/getAppliedExeatInfo")
+    @GET("/api/student/exeat/getAppliedExeat")
     fun stayoutCheck(
-        @Header("user_id") userId: String,
-        @Query("date") date: String,
+        @Header("jwt_token") token: String,
+        @Query("exeatId") stayoutId: Long,
     ): Call<StayoutCheckResultDTO>
 
     // 외박 취소
-    @DELETE("/api/student/cancleExeat")
+    @DELETE("/api/student/exeat/cancelExeat")
     fun stayoutCancel(
-        @Header("user_id") userId: String,
-        @Query("date") date: String,
+        @Header("jwt_token") token: String,
+        @Query("exeatId") stayoutId: Long,
     ): Call<Void>
 }

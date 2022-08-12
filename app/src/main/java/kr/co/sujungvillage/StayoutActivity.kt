@@ -36,6 +36,7 @@ class StayoutActivity : AppCompatActivity() {
         // 재사생 학번 불러오기
         val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
         val studentNum = shared?.getString("studentNum", "error").toString()
+        val token = shared?.getString("token", "error").toString()
 
         // 키보드 내리기
         binding.layout.setOnClickListener { this.hideKeyboard() }
@@ -140,7 +141,7 @@ class StayoutActivity : AppCompatActivity() {
             val endDate = binding.textEndDate.text.toString()
             val stayoutInfo = StayoutCreateDTO(destination, reason, emergency, startDate, endDate)
 
-            RetrofitBuilder.stayoutApi.stayoutCreate(studentNum, stayoutInfo).enqueue(object: Callback<List<StayoutCheckResultDTO>> {
+            RetrofitBuilder.stayoutApi.stayoutCreate(token, stayoutInfo).enqueue(object: Callback<List<StayoutCheckResultDTO>> {
                 override fun onResponse(call: Call<List<StayoutCheckResultDTO>>, response: Response<List<StayoutCheckResultDTO>>) {
                     Log.d("STAYOUT_CREATE", "외박 신청 성공")
                     Log.d("STAYOUT_CREATE", "result : " + response.body())
