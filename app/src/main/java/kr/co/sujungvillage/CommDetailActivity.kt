@@ -29,10 +29,11 @@ class CommDetailActivity : AppCompatActivity() {
         // 재사생 학번 불러오기
         val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
         val studentNum = shared?.getString("studentNum", "error").toString()
+        val token = shared?.getString("token", "error").toString()
 
         // 이전 페이지 CommFragment 에서 postId 전달 받기
         val postId = intent.getLongExtra("postId",-1)
-
+        val dormitory=intent.getStringExtra("dormitory")
         // 키보드 내리기
         binding.layoutToolbar.setOnClickListener { this.hideKeyboard() }
         binding.linearPost.setOnClickListener { this.hideKeyboard() }
@@ -40,11 +41,13 @@ class CommDetailActivity : AppCompatActivity() {
         binding.linearComment.setOnClickListener { this.hideKeyboard() }
         binding.recyclerComment.setOnClickListener { this.hideKeyboard() }
 
+        //툴바 타이틀 설정
+        binding.textToolbarTitle.text="${dormitory} 게시판"
         // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener { finish() }
 
         // Api 연결
-        refresh(studentNum,postId)
+        refresh(token,studentNum,postId)
 
         // 댓글 전송 버튼 클릭시
         binding.btnCommentSubmit.setOnClickListener{
@@ -57,10 +60,10 @@ class CommDetailActivity : AppCompatActivity() {
             }
             else{//POST
                 val commCommentInfo= CommDetailCommentsWriteDTO(postId,comment)
-                RetrofitBuilder.communityApi.commComment(studentNum,commCommentInfo).enqueue(object:Callback<CommDetailCommentWriteResultDTO>{
+                RetrofitBuilder.communityApi.commComment(token,commCommentInfo).enqueue(object:Callback<CommDetailCommentWriteResultDTO>{
                     override fun onResponse(call: Call<CommDetailCommentWriteResultDTO>, response: Response<CommDetailCommentWriteResultDTO>) {
                         Log.d("COMM_COMMENT", response.body().toString())
-                        refresh(studentNum,postId)
+                        refresh(token,studentNum,postId)
                     }
 
                     override fun onFailure(call: Call<CommDetailCommentWriteResultDTO>, t: Throwable) {
@@ -70,34 +73,27 @@ class CommDetailActivity : AppCompatActivity() {
             }
         }
     }
-    private fun refresh(studentNum:String,postId:Long){
-        RetrofitBuilder.communityApi.commDetail(studentNum,postId).enqueue(object: Callback<CommDetailResultDTO>{
+    private fun refresh(token:String,studentNum:String,postId:Long){
+        RetrofitBuilder.communityApi.commDetail(token,postId).enqueue(object: Callback<CommDetailResultDTO>{
 
             override fun onResponse(call: Call<CommDetailResultDTO>, response: Response<CommDetailResultDTO>) {
                 Log.d("COMM_DETAIL",response.body().toString())
+                Log.d("COMM_DETAIL",response.code().toString())
+                Log.d("COMM_DETAIL",response.message())
                 binding.textTitle.text=response.body()?.title
-                val hour=response.body()?.regDate?.subSequence(11,13).toString().toInt()
-                var hourResult=hour.toString()
-                if (hour<10){
-                    hourResult="0${hour}"
-                }
-                val min=(response.body()?.regDate?.subSequence(14,16).toString().toInt())
-                var minResult=min.toString()
-                if(min<10){
-                    minResult="0${min}"
-                }
-                binding.textCalDate.text="${response.body()?.regDate?.subSequence(0,4)}/${response.body()?.regDate?.subSequence(5, 7)}/${response.body()?.regDate?.subSequence(8, 10)} ${hourResult}:${minResult}"
+                binding.textCalDate.text="${response.body()?.regDate?.subSequence(0,4)}/${response.body()?.regDate?.subSequence(5, 7)}/${response.body()?.regDate?.subSequence(8, 10)} ${response.body()?.regDate?.subSequence(11,13).toString()}:${response.body()?.regDate?.subSequence(14,16).toString()}"
                 binding.textContent.text=response.body()?.content
                 //글 작성자 id 와 studentNum이 같으면 삭제 버튼 보이게
                 if(studentNum==response.body()?.writerId){
                     binding.btnDelete.visibility= View.VISIBLE
                 }
                 //어댑터 연결
+
                 val commentList:MutableList<CommDetailCommentsRequest> = mutableListOf()
                 var commentCount=0
                 for(info in response.body()?.comments!!){
                     commentCount++
-                    var comment=CommDetailCommentsRequest(info.id,info.writerId,info.content,info.regDate,info.modDate)
+                    var comment=CommDetailCommentsRequest(info.id,info.postId,info.writerId,info.content,info.regDate,info.modDate)
                     commentList.add(comment)
                 }
                 var adapter=CommDetailAdapter()
