@@ -111,7 +111,8 @@ class LoginActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<LoginResultDTO>, t: Throwable) {
-                        TODO("Not yet implemented")
+                        Log.d("LOGIN", "로그인 실패")
+                        Log.d("LOGIN", t.message.toString())
                     }
                 })
             }
