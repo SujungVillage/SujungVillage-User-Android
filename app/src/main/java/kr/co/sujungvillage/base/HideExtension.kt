@@ -28,7 +28,7 @@ fun Context.hideKeyboard(view: View) {
 // extension function to convert bitmap to byte array
 fun Bitmap.toByteArray():ByteArray{
     ByteArrayOutputStream().apply {
-        compress(Bitmap.CompressFormat.JPEG,10,this)
+        compress(Bitmap.CompressFormat.JPEG,100,this)
         return toByteArray()
     }
 }
