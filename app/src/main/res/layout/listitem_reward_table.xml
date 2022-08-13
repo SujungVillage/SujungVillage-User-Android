@@ -1,37 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="30dp"
-    android:layout_marginRight="30dp">
+    android:layout_width="match_parent"
+    android:layout_height="38dp">
 
     <TextView
-        android:id="@+id/date_text"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/style_reward_tableline"
+        android:id="@+id/text_date"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:background="@drawable/style_reward_table_left"
+        android:fontFamily="@font/regular"
         android:gravity="center"
-        android:padding="8dp"
         android:text="2022-10-22"
-        android:textColor="#434343" />
+        android:textColor="@color/gray_600"
+        android:textSize="12sp" />
 
     <TextView
-        android:id="@+id/score_text"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/text_score"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.5"
+        android:background="@drawable/style_reward_table_mid"
+        android:fontFamily="@font/regular"
         android:gravity="center"
-        android:padding="8dp"
-        android:background="@drawable/style_reward_tableline"
-        android:textColor="#434343"
-        android:text="-3" />
+        android:text="-3"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp" />
 
     <TextView
-        android:id="@+id/reason_text"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/text_reason"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="6"
+        android:background="@drawable/style_reward_table_right"
+        android:fontFamily="@font/regular"
         android:gravity="center"
-        android:padding="8dp"
-        android:background="@drawable/style_reward_tableline"
-        android:textColor="#434343"
-        android:text="청소벌점" />
+        android:text="청소벌점"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp" />
 </LinearLayout>
