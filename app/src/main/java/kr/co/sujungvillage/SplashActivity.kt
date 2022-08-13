@@ -20,11 +20,11 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.hide(WindowInsets.Type.statusBars())
         } else {
             window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN ,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
@@ -34,9 +34,10 @@ class SplashActivity : AppCompatActivity() {
     private fun loadSplashScreen() {
         android.os.Handler(Looper.getMainLooper()).postDelayed({
             // ★★★ 로그인 토큰이 존재하면 MainActivity로 바로 이동
-         val intent = Intent(this, LoginActivity::class.java)
-            val options : ActivityOptions = ActivityOptions.makeSceneTransitionAnimation(
-                this, binding.splashLogo, "main_icon")
+            val intent = Intent(this, LoginActivity::class.java)
+            val options: ActivityOptions = ActivityOptions.makeSceneTransitionAnimation(
+                this, binding.splashLogo, "main_icon"
+            )
             startActivity(intent, options.toBundle())
             finish()
         }, 4600)

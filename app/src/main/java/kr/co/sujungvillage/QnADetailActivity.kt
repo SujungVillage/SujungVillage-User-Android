@@ -26,7 +26,6 @@ class QnADetailActivity : AppCompatActivity() {
 
         // 재사생 학번 불러오기
         val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
-        val studentNum = shared?.getString("studentNum", "error").toString()
         val token = shared?.getString("token", "error").toString()
 
         // 이전 페이지(QnAMyqFragment)에서 questionId 전달 받기
@@ -77,6 +76,8 @@ class QnADetailActivity : AppCompatActivity() {
                     binding.layoutAnswer.visibility = View.GONE
                     binding.layoutQuestion.setBackgroundResource(R.drawable.style_qna_detail_answer)
                     return
+                } else {
+                    binding.btnDelete.visibility = View.GONE
                 }
 
                 binding.textAnswerDate.text = "${response.body()?.answer?.regDate?.subSequence(0, 10)} ${response.body()?.answer?.regDate?.subSequence(11, 16)}"

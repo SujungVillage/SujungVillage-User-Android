@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kr.co.sujungvillage.CommDetailActivity.Companion.token
 import kr.co.sujungvillage.R
 import kr.co.sujungvillage.adapter.QnAFaqAdapter
 import kr.co.sujungvillage.data.FaqGetResultDTO
@@ -24,9 +26,21 @@ class QnAFaqFragment : Fragment() {
 
         // 재사생 학번 불러오기
         val shared = this.activity?.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
-        val studentNum = shared?.getString("studentNum", "error").toString()
         val token = shared?.getString("token", "error").toString()
 
+        // FAQ 리스트 불러오기
+        loadFaqData(token, binding.recycleFaq)
+
+        // Swipe Refresh 버튼 연결
+        binding.swipe.setOnRefreshListener {
+            loadFaqData(token, binding.recycleFaq)
+            binding.swipe.isRefreshing = false
+        }
+
+        return binding.root
+    }
+
+    fun loadFaqData(token: String, recycleFaq: RecyclerView) {
         // FAQ 리스트 조회 API 연결
         RetrofitBuilder.qnaApi.faqGet(token).enqueue(object : Callback<List<FaqGetResultDTO>> {
             override fun onResponse(call: Call<List<FaqGetResultDTO>>, response: Response<List<FaqGetResultDTO>>) {
@@ -40,8 +54,8 @@ class QnAFaqFragment : Fragment() {
                 }
                 val adapter = QnAFaqAdapter()
                 adapter.faqList = faqList
-                binding.recylceFaq.adapter = adapter
-                binding.recylceFaq.layoutManager = LinearLayoutManager(activity)
+                recycleFaq.adapter = adapter
+                recycleFaq.layoutManager = LinearLayoutManager(activity)
             }
 
             override fun onFailure(call: Call<List<FaqGetResultDTO>>, t: Throwable) {
@@ -49,7 +63,5 @@ class QnAFaqFragment : Fragment() {
                 Log.e("FAQ_GET", t.message.toString())
             }
         })
-
-        return binding.root
     }
 }
