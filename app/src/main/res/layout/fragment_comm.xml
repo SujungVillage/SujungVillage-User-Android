@@ -2,17 +2,20 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.CommFragment">
 
     <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#F5F5F5"
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_toolbar"
             android:layout_width="match_parent"
             android:layout_height="119dp"
             android:background="@drawable/style_comm_border"
@@ -62,7 +65,7 @@
                 android:id="@+id/btn_delete"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:layout_marginTop="52dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginEnd="20dp"
                 android:background="@color/nothing"
                 android:scaleType="fitCenter"
@@ -87,37 +90,46 @@
 
             <EditText
                 android:id="@+id/edit_search"
-                android:layout_width="222dp"
+                android:layout_width="0dp"
                 android:layout_height="34dp"
+                android:layout_marginStart="40dp"
                 android:layout_marginTop="43dp"
+                android:layout_marginEnd="17dp"
                 android:background="@drawable/style_comm_search"
                 android:ems="10"
-                android:hint=""
+                android:imeOptions="actionSearch"
                 android:inputType="textPersonName"
-                android:padding="4dp"
+                android:lines="1"
+                android:hint="검색어를 입력하세요."
+                android:textColorHint="@color/gray_350"
+                android:paddingHorizontal="12dp"
                 android:textColor="@color/primary"
                 android:textSize="13dp"
                 android:visibility="invisible"
-                android:lines="1"
-                android:imeOptions="actionSearch"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_delete"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <TextView
             android:id="@+id/text_exist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="게시글이 없습니다."
-            android:visibility="gone"/>
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:text="작성된 게시글이 없습니다."
+            android:visibility="gone" />
+
         <ScrollView
+            android:id="@+id/scroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="-3dp">
 
             <LinearLayout
+                android:id="@+id/linear_post"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -125,15 +137,14 @@
                     android:id="@+id/recycle_comm"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingBottom="80dp"
-                    android:paddingHorizontal="16dp"
                     android:clipToPadding="false"
+                    android:paddingHorizontal="16dp"
+                    android:paddingBottom="80dp"
                     tools:listitem="@layout/listitem_comm" />
 
             </LinearLayout>
 
         </ScrollView>
-
 
 
     </LinearLayout>
