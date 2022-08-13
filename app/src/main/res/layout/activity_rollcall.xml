@@ -61,7 +61,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_toolbarTitle"
                 android:src="@drawable/img_rollcall_camera"
-                android:scaleType="fitCenter"
+                android:scaleType="fitXY"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <LinearLayout

@@ -16,6 +16,7 @@ import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import kr.co.sujungvillage.base.BaseActivity
+import kr.co.sujungvillage.base.toBitmap
 import kr.co.sujungvillage.base.toByteArray
 import kr.co.sujungvillage.data.RollcallCreateDTO
 import kr.co.sujungvillage.data.RollcallCreateResultDTO
