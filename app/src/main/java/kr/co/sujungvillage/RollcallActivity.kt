@@ -16,6 +16,7 @@ import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import kr.co.sujungvillage.base.BaseActivity
+import kr.co.sujungvillage.base.toByteArray
 import kr.co.sujungvillage.data.RollcallCreateDTO
 import kr.co.sujungvillage.data.RollcallCreateResultDTO
 import kr.co.sujungvillage.retrofit.RetrofitBuilder
@@ -33,8 +34,7 @@ class RollcallActivity : BaseActivity() {
     private val REQ_CAMERA = 101 // 카메라 촬영 요청
     private val REQUEST_CODE_LOCATION: Int = 2 // 위치 반환 요청
 
-    var imgBitmap = ""
-    var locationManager: LocationManager? = null
+    var imgByteArr : ByteArray? = null
     var currentLocation: String = ""
     var latitude: Double? = null
     var longitude: Double? = null
@@ -64,7 +64,7 @@ class RollcallActivity : BaseActivity() {
         // 제출하기 버튼 연결 : 점호 신청 후 액티비티 종료
         binding.btnSubmit.setOnClickListener {
             // 이미지를 촬영하지 않은 경우
-            if (imgBitmap.isEmpty()) {
+            if (imgByteArr?.isEmpty() == true) {
                 Toast.makeText(this, "점호 사진을 촬영해주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -74,17 +74,13 @@ class RollcallActivity : BaseActivity() {
                 return@setOnClickListener
             }
 
-            val imgUrl = imgBitmap
+            val imgUrl = imgByteArr.toString()
             val location = binding.textLocation.text.toString()
             var rollcallInfo = RollcallCreateDTO(imgUrl, location)
 
             // 점호 신청 API 연결
-            RetrofitBuilder.rollcallApi.rollcallCreate(token, rollcallInfo)
-                .enqueue(object : Callback<RollcallCreateResultDTO> {
-                    override fun onResponse(
-                        call: Call<RollcallCreateResultDTO>,
-                        response: Response<RollcallCreateResultDTO>
-                    ) {
+            RetrofitBuilder.rollcallApi.rollcallCreate(token, rollcallInfo).enqueue(object : Callback<RollcallCreateResultDTO> {
+                    override fun onResponse(call: Call<RollcallCreateResultDTO>, response: Response<RollcallCreateResultDTO>) {
                         Log.d("ROLLCALL_CREATE", "점호 신청 성공")
                         Log.d("ROLLCALL_CREATE", "code : " + response.code().toString())
                         Log.d("ROLLCALL_CREATE", "error body : " + response.errorBody().toString())
@@ -140,15 +136,17 @@ class RollcallActivity : BaseActivity() {
                         val bitmap = data?.extras?.get("data") as Bitmap
                         binding.btnGetImg.setImageBitmap(bitmap)
 
+                        imgByteArr = bitmap.toByteArray()
+
                         // bitmap을 Base64 기반의 String으로 변환 (인코딩)
-                        val baos = ByteArrayOutputStream()
-                        bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-                        imgBitmap = Base64.encodeToString(baos.toByteArray(), Base64.NO_WRAP)
-                        Log.d("IMG_BITMAP", "image bitmap : " + imgBitmap)
-                        Log.d(
-                            "IMG_BITMAP_LENGTH",
-                            "image bitmap length" + imgBitmap.length.toString()
-                        )
+//                        val baos = ByteArrayOutputStream()
+//                        bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+//                        imgBitmap = Base64.encodeToString(baos.toByteArray(), Base64.NO_WRAP)
+//                        Log.d("IMG_BITMAP", "image bitmap : " + imgBitmap)
+//                        Log.d(
+//                            "IMG_BITMAP_LENGTH",
+//                            "image bitmap length" + imgBitmap.length.toString()
+//                        )
                     }
                 }
             }
