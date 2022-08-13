@@ -37,7 +37,7 @@ class QnADetailActivity : AppCompatActivity() {
         // 삭제하기 버튼 연결
         binding.btnDelete.setOnClickListener {
             val builder = AlertDialog.Builder(this)
-            builder.setMessage("정말 삭제하시겠습니까?")
+            builder.setTitle("정말 삭제하시겠습니까?")
             builder.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, i ->
                 // 질문 삭제 API 연결
                 RetrofitBuilder.qnaApi.myqDelete(token, questionId).enqueue(object: Callback<Void> {
