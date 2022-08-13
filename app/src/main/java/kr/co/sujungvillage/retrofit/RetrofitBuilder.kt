@@ -16,6 +16,7 @@ object RetrofitBuilder {
     var rollcallApi: RollcallService
     var stayoutApi: StayoutService
     var loginApi: LoginService
+    var rewardApi: RewardService
 
     val gson = GsonBuilder().setLenient().create()
 
@@ -33,5 +34,6 @@ object RetrofitBuilder {
         rollcallApi = retrofit.create(RollcallService::class.java)
         stayoutApi = retrofit.create(StayoutService::class.java)
         loginApi = retrofit.create(LoginService::class.java)
+        rewardApi = retrofit.create(RewardService::class.java)
     }
 }

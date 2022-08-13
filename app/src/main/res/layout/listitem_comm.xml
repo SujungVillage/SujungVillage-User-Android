@@ -6,7 +6,7 @@
     android:paddingStart="26dp"
     android:paddingEnd="20dp"
     android:paddingTop="18dp"
-    android:paddingBottom="25dp"
+    android:paddingBottom="23dp"
     android:elevation="10dp"
     android:background="@drawable/style_comm_listitem_border"
     android:layout_marginTop="16dp"
@@ -61,13 +61,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:minLines="1"
         android:lines="2"
         android:layout_marginEnd="6dp"
         android:ellipsize="end"
         android:textSize="13dp"
         android:fontFamily="@font/regular"
-        android:text="내가 쿠팡에서 휴지 주문했는데 생각보다 너무 많아서
-몇 개 나눔하려고 하는데 받을 사람들 댓글달아주면 나눠줄게. 참고로 성미관임! 다른 기숙사들은 안 될 듯..."
+        android:text="내가 쿠팡에서 휴지를 너무 많이 사서 원하는 사람 있으면 댓글 달아줘 나눠줄게."
         android:textColor="#6A6A6A"
         android:maxLines="2"/>
 
