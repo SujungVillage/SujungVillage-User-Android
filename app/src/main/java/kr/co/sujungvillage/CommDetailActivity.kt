@@ -24,6 +24,7 @@ class CommDetailActivity : AppCompatActivity() {
     companion object{
         var studentNum=""
         var token=""
+        var commentIndex: MutableList<String>? = null
     }
 
     val binding by lazy { ActivityCommDetailBinding.inflate(layoutInflater) }
@@ -39,6 +40,7 @@ class CommDetailActivity : AppCompatActivity() {
         // 이전 페이지 CommFragment 에서 postId 전달 받기
         val postId = intent.getLongExtra("postId",-1)
         val dormitory=intent.getStringExtra("dormitory")
+
         // 키보드 내리기
         binding.layoutToolbar.setOnClickListener { this.hideKeyboard() }
         binding.linearPost.setOnClickListener { this.hideKeyboard() }
@@ -65,7 +67,7 @@ class CommDetailActivity : AppCompatActivity() {
                             finish()
                         }
                         override fun onFailure(call: Call<Void>, t: Throwable) {
-                            Log.d("COMM_DELETE",t.message.toString())
+                            Log.e("COMM_DELETE",t.message.toString())
                         }
                     })
                 })
@@ -102,27 +104,31 @@ class CommDetailActivity : AppCompatActivity() {
     }
     private fun refresh(token:String,studentNum:String,postId:Long){
         RetrofitBuilder.communityApi.commDetail(token,postId).enqueue(object: Callback<CommDetailResultDTO>{
-
             override fun onResponse(call: Call<CommDetailResultDTO>, response: Response<CommDetailResultDTO>) {
                 Log.d("COMM_DETAIL",response.body().toString())
                 if(response.isSuccessful){
+                    commentIndex = mutableListOf()
+
                     binding.textTitle.text=response.body()?.title
                     binding.textCalDate.text="${response.body()?.regDate?.subSequence(0,4)}/${response.body()?.regDate?.subSequence(5, 7)}/${response.body()?.regDate?.subSequence(8, 10)} ${response.body()?.regDate?.subSequence(11,13).toString()}:${response.body()?.regDate?.subSequence(14,16).toString()}"
                     binding.textContent.text=response.body()?.content
+
                     //관리자이면 관리자 마크 보이게
                     if(response.body()?.id.toString().toInt()>=99990000){//관리자인 경우
                         binding.textAdmin.visibility=View.VISIBLE
                     }
+
                     //글 작성자 id 와 studentNum이 같으면 삭제 버튼 보이게
                     if(studentNum==response.body()?.writerId){
                         binding.btnDelete.visibility= View.VISIBLE
                     }
-                    //어댑터 연결
 
+                    // 어댑터 연결
                     val commentList:MutableList<CommDetailCommentsRequest> = mutableListOf()
                     var commentCount=0
                     for(info in response.body()?.comments!!){
                         commentCount++
+                        if (!commentIndex?.contains(info.writerId)!!) commentIndex!!.add(info.writerId)
                         var comment=CommDetailCommentsRequest(info.id,info.postId,info.writerId,info.content,info.regDate,info.modDate)
                         commentList.add(comment)
                     }

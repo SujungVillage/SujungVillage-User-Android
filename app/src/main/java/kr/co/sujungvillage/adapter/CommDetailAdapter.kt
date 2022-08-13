@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import kr.co.sujungvillage.CommDetailActivity.Companion.commentIndex
 import kr.co.sujungvillage.CommDetailActivity.Companion.studentNum
 import kr.co.sujungvillage.CommDetailActivity.Companion.token
 import kr.co.sujungvillage.base.hideKeyboard
@@ -38,17 +39,19 @@ class CommDetailAdapter(val context:Context) :RecyclerView.Adapter<CommDetailHol
 }
 class CommDetailHolder(val binding:ListitemCommDetailBinding,val context: Context): RecyclerView.ViewHolder(binding.root){
     fun setCommDetail(commDetail: CommDetailCommentsRequest){
-        binding.textName.text="익명" // 익명 처리해야함.
+        binding.textName.text="익명${commentIndex.indexOf(commDetail.writerId) + 1}" // 익명 처리해야함.
         val hour=commDetail.regDate?.subSequence(11,13).toString().toInt()
         val min=(commDetail.regDate?.subSequence(14,16).toString().toInt())
 
         binding.textCalDate.text="${commDetail.regDate?.subSequence(0,4)}/${commDetail.regDate?.subSequence(5, 7)}/${commDetail.regDate?.subSequence(8, 10)} ${hour}:${min}"
         binding.textContent.text="${commDetail.content}"
+
         //관리자인지 아닌지 마크 띄우기
         if(commDetail.id.toString().toInt()>=99990000){//관리자인 경우
             binding.textAdmin.visibility= View.VISIBLE
         }
         binding.root.setOnClickListener { binding.root.context.hideKeyboard(itemView) }
+
         //댓글 삭제 버튼
         if(commDetail.writerId==studentNum) {
             binding.textCommentDelete.visibility=View.VISIBLE
