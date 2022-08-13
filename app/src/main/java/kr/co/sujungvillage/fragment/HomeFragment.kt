@@ -79,6 +79,11 @@ class HomeFragment : Fragment() {
             binding.swipe.isRefreshing = false
         }
 
+        // 캘린더 좌우 버튼 연결
+        binding.calendar.setOnMonthChangedListener { widget, date ->
+            loadCalendarData(token, date.year.toString(), date.month.toString(), binding.calendar)
+        }
+
         // 학생 홈 화면 정보 조회 API 연결
         RetrofitBuilder.homeApi.homeInfo(token, binding.calendar.currentDate.year.toString(), binding.calendar.currentDate.month.toString()).enqueue(object: Callback<HomeInfoResultDTO> {
             override fun onResponse(call: Call<HomeInfoResultDTO>, response: Response<HomeInfoResultDTO>) {
@@ -125,11 +130,6 @@ class HomeFragment : Fragment() {
                 Log.d("HOME_INFO", t.message.toString())
             }
         })
-
-        // 캘린더 좌우 버튼 연결 (홈 화면 정보 조회 API 활용)
-        binding.calendar.setOnMonthChangedListener { widget, date ->
-            loadCalendarData(token, date.year.toString(), date.month.toString(), binding.calendar)
-        }
 
         // 날짜 클릭 이벤트
         binding.calendar.setOnDateChangedListener { widget, date, selected ->
