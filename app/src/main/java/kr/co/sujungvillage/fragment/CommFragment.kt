@@ -13,6 +13,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.sujungvillage.AlarmActivity
@@ -28,7 +29,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class CommFragment : Fragment() {
+
     companion object{var dormitory="전체"}
+    var commList: MutableList<CommDTO> = mutableListOf()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentCommBinding.inflate(inflater,container,false)
 
@@ -39,8 +43,9 @@ class CommFragment : Fragment() {
         val token = shared?.getString("token", "error").toString()
 
         // 키보드 내리기
-        binding.layoutToolbar.setOnClickListener { this.hideKeyboard() }
-        binding.linearPost.setOnClickListener { this.hideKeyboard() }
+        binding.frame.setOnClickListener { this.hideKeyboard() }
+        binding.linear.setOnClickListener { this.hideKeyboard() }
+
 
         // 알림 버튼 연결
         binding.btnAlarm.setOnClickListener {
@@ -49,10 +54,12 @@ class CommFragment : Fragment() {
         }
 
         // 검색 기능
-        binding.btnSearch.setOnClickListener{
+        binding.btnSearch.setOnClickListener{//돋보기 클릭
             binding.editSearch.visibility=View.VISIBLE
             binding.btnSearch.visibility=View.INVISIBLE
             binding.btnDelete.visibility=View.VISIBLE
+            searchText=""
+            binding.editSearch.text.clear()
             // 키보드 엔터 -> 검색으로 변경
            binding.editSearch.setOnKeyListener{view, keyCode, event->
                if(event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER){
@@ -61,42 +68,25 @@ class CommFragment : Fragment() {
                    else {
                        hideKeyboard()
                        // 검색 api 연결
-                       binding.editSearch.text.clear()
-                       RetrofitBuilder.communityApi.commSearch(token, dormitory, searchText)
-                           .enqueue(object : Callback<List<CommDTO>> {
-                               override fun onResponse(call: Call<List<CommDTO>>, response: Response<List<CommDTO>>) {
-                                   binding.textExist.visibility=View.GONE
-                                   if (response.body()?.size == 0) {
-                                       binding.textExist.visibility=View.VISIBLE
-                                   }
-                                   val commList: MutableList<CommDTO> = mutableListOf()
-                                   for (post in response.body()!!) {
-                                       var comm = CommDTO(post.id, post.title, post.content, post.regDate)
-                                       commList.add(comm)
-                                   }
-                                   val adapter = CommAdapter()
-                                   adapter.commList = commList
-                                   binding.recycleComm.adapter = adapter
-                                   binding.recycleComm.layoutManager = LinearLayoutManager(activity)//프래그먼트에선 this 대신 activity 써줌
-                                   Log.d("COMM_FRAG", response.body().toString())
-                               }
-
-                               override fun onFailure(call: Call<List<CommDTO>>, t: Throwable) {
-                                   Log.e("COMM_FRAG", "커뮤니티 프래그먼트 조회 실패")
-                                   Log.e("COMM_FRAG", t.message.toString())
-                               }
-
-                           })
+                       searchRefresh(token,binding,searchText)
                    }
                }
                true
            }
         }
 
+        binding.editSearch.addTextChangedListener {//검색창 입력 실시간
+            searchText = binding.editSearch.text.toString().trim()
+            searchRefresh(token,binding,searchText)
+        }
+
+        //검색 취소
         binding.btnDelete.setOnClickListener{
             binding.editSearch.visibility=View.INVISIBLE
             binding.btnSearch.visibility=View.VISIBLE
             binding.btnDelete.visibility=View.INVISIBLE
+            binding.editSearch.text.clear()
+            searchText=""
         }
 
         // 기숙사 스피너 연결 및 커스텀
@@ -107,49 +97,41 @@ class CommFragment : Fragment() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 dormitory=data.get(p2)
                 Log.d("COMM_FRAG",dormitory)
-                RetrofitBuilder.communityApi.comm(token,dormitory).enqueue(object: Callback<List<CommDTO>>{
-                    override fun onResponse(call: Call<List<CommDTO>>, response: Response<List<CommDTO>>) {
-                        binding.textExist.visibility=View.GONE
-                        if(response.body()?.size==0){
-                            binding.textExist.visibility=View.VISIBLE
-                        }
-
-                        val commList:MutableList<CommDTO> = mutableListOf()
-                        for(post in response.body()!!){
-                            var comm=CommDTO(post.id,post.title,post.content,post.regDate)
-                            commList.add(comm)
-                        }
-                        val adapter=CommAdapter()
-                        adapter.commList=commList
-                        binding.recycleComm.adapter=adapter
-                        binding.recycleComm.layoutManager=LinearLayoutManager(activity)//프래그먼트에선 this 대신 activity 써줌
-                        Log.d("COMM_FRAG", response.body().toString())
-                    }
-                    override fun onFailure(call: Call<List<CommDTO>>, t: Throwable) {
-                        Log.d("COMM_FRAG", "커뮤니티 프래그먼트 조회 실패")
-                    }
-                })
+                refresh(token, binding)
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
-
         }
 
-
         Log.d("COMM_FRAG",dormitory)
+        //리프레시
+        binding.swipe.setOnRefreshListener {
+            if(searchText.isEmpty()){//검색어가 없는 경우-> 그냥 refresh
+                refresh(token,binding)
+                binding.swipe.isRefreshing=false
+            }
+            else{//검색어가 있는 경우 searchRefresh
+                searchRefresh(token,binding,searchText)
+                binding.swipe.isRefreshing=false
+            }
+        }
         // 글 작성 버튼 연결
         binding.btnWrite.setOnClickListener {
             var intent = Intent(this.activity, CommWriteActivity::class.java)
             startActivity(intent)
         }
+        refresh(token,binding)
+        return binding.root
+    }
 
+    private fun refresh(token:String,binding: FragmentCommBinding){
         RetrofitBuilder.communityApi.comm(token,dormitory).enqueue(object: Callback<List<CommDTO>>{
             override fun onResponse(call: Call<List<CommDTO>>, response: Response<List<CommDTO>>) {
                 binding.textExist.visibility=View.GONE
                 if(response.body()?.size==0){
                     binding.textExist.visibility=View.VISIBLE
                 }
-                val commList:MutableList<CommDTO> = mutableListOf()
+                commList = mutableListOf()
                 for(post in response.body()!!){
                     var comm=CommDTO(post.id,post.title,post.content,post.regDate)
                     commList.add(comm)
@@ -165,6 +147,34 @@ class CommFragment : Fragment() {
                 Log.e("COMM_FRAG", t.message.toString())
             }
         })
-        return binding.root
+        return
+    }
+
+    private fun searchRefresh(token:String,binding: FragmentCommBinding,searchText:String){
+        RetrofitBuilder.communityApi.commSearch(token, CommFragment.dormitory, searchText)
+            .enqueue(object : Callback<List<CommDTO>> {
+                override fun onResponse(call: Call<List<CommDTO>>, response: Response<List<CommDTO>>) {
+                    binding.textExist.visibility=View.GONE
+                    if (response.body()?.size == 0) {
+                        binding.textExist.visibility=View.VISIBLE
+                    }
+                    commList = mutableListOf()
+                    for (post in response.body()!!) {
+                        var comm = CommDTO(post.id, post.title, post.content, post.regDate)
+                        commList.add(comm)
+                    }
+                    val adapter = CommAdapter()
+                    adapter.commList = commList
+                    binding.recycleComm.adapter = adapter
+                    binding.recycleComm.layoutManager = LinearLayoutManager(activity)//프래그먼트에선 this 대신 activity 써줌
+                    Log.d("COMM_FRAG", response.body().toString())
+                }
+
+                override fun onFailure(call: Call<List<CommDTO>>, t: Throwable) {
+                    Log.e("COMM_FRAG", "커뮤니티 프래그먼트 조회 실패")
+                    Log.e("COMM_FRAG", t.message.toString())
+                }
+
+            })
     }
 }

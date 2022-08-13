@@ -112,7 +112,6 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
         <TextView
             android:id="@+id/text_exist"
             android:layout_width="wrap_content"
@@ -122,29 +121,46 @@
             android:text="작성된 게시글이 없습니다."
             android:visibility="gone" />
 
-        <ScrollView
-            android:id="@+id/scroll"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/comm_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="-3dp">
+            android:layout_height="match_parent">
 
-            <LinearLayout
-                android:id="@+id/linear_post"
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipe"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" >
+
+            <ScrollView
+                android:id="@+id/scroll"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteY="610dp">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycle_comm"
+
+                <LinearLayout
+                    android:id="@+id/linear_post"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:clipToPadding="false"
-                    android:paddingHorizontal="16dp"
-                    android:paddingBottom="80dp"
-                    tools:listitem="@layout/listitem_comm" />
+                    android:layout_height="wrap_content">
 
-            </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycle_comm"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:clipToPadding="false"
+                        android:paddingHorizontal="16dp"
+                        android:paddingBottom="80dp"
+                        tools:listitem="@layout/listitem_comm" />
 
-        </ScrollView>
+                </LinearLayout>
+
+            </ScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </LinearLayout>
