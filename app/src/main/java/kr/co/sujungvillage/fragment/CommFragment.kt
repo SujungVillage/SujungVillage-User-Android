@@ -32,59 +32,58 @@ class CommFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentCommBinding.inflate(inflater,container,false)
 
+        var searchText=""
+
         // 재사생 학번 불러오기
         val shared = this.activity?.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
-        val studentNum = shared?.getString("studentNum", "20180001").toString()
         val token = shared?.getString("token", "error").toString()
-        var searchText=""
+
+        // 키보드 내리기
+        binding.layoutToolbar.setOnClickListener { this.hideKeyboard() }
+        binding.linearPost.setOnClickListener { this.hideKeyboard() }
+
         // 알림 버튼 연결
         binding.btnAlarm.setOnClickListener {
             var intent = Intent(this.activity, AlarmActivity::class.java)
             startActivity(intent)
         }
 
-        //검색 기능
+        // 검색 기능
         binding.btnSearch.setOnClickListener{
             binding.editSearch.visibility=View.VISIBLE
             binding.btnSearch.visibility=View.INVISIBLE
             binding.btnDelete.visibility=View.VISIBLE
-            //키보드 엔터->검색으로 변경
-           binding.editSearch.setOnKeyListener{view,keyCode,event->
-               if(event.action==KeyEvent.ACTION_DOWN && keyCode==KeyEvent.KEYCODE_ENTER){
-                   searchText=binding.editSearch.text.toString().trim()
-                   if(searchText.isEmpty()){
-                   }
+            // 키보드 엔터 -> 검색으로 변경
+           binding.editSearch.setOnKeyListener{view, keyCode, event->
+               if(event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER){
+                   searchText = binding.editSearch.text.toString().trim()
+                   if (searchText.isEmpty()) { }
                    else {
                        hideKeyboard()
-                       //검색 api 연결
+                       // 검색 api 연결
                        binding.editSearch.text.clear()
                        RetrofitBuilder.communityApi.commSearch(token, dormitory, searchText)
                            .enqueue(object : Callback<List<CommDTO>> {
-                               override fun onResponse(
-                                   call: Call<List<CommDTO>>,
-                                   response: Response<List<CommDTO>>
-                               ) {
+                               override fun onResponse(call: Call<List<CommDTO>>, response: Response<List<CommDTO>>) {
                                    binding.textExist.visibility=View.GONE
                                    if (response.body()?.size == 0) {
                                        binding.textExist.visibility=View.VISIBLE
                                    }
                                    val commList: MutableList<CommDTO> = mutableListOf()
                                    for (post in response.body()!!) {
-                                       var comm =
-                                           CommDTO(post.id, post.title, post.content, post.regDate)
+                                       var comm = CommDTO(post.id, post.title, post.content, post.regDate)
                                        commList.add(comm)
                                    }
                                    val adapter = CommAdapter()
                                    adapter.commList = commList
                                    binding.recycleComm.adapter = adapter
-                                   binding.recycleComm.layoutManager =
-                                       LinearLayoutManager(activity)//프래그먼트에선 this 대신 activity 써줌
+                                   binding.recycleComm.layoutManager = LinearLayoutManager(activity)//프래그먼트에선 this 대신 activity 써줌
                                    Log.d("COMM_FRAG", response.body().toString())
                                }
 
                                override fun onFailure(call: Call<List<CommDTO>>, t: Throwable) {
-                                   Log.d("COMM_FRAG", "커뮤니티 프래그먼트 조회 실패")
-
+                                   Log.e("COMM_FRAG", "커뮤니티 프래그먼트 조회 실패")
+                                   Log.e("COMM_FRAG", t.message.toString())
                                }
 
                            })
@@ -162,7 +161,8 @@ class CommFragment : Fragment() {
                 Log.d("COMM_FRAG", response.body().toString())
             }
             override fun onFailure(call: Call<List<CommDTO>>, t: Throwable) {
-                Log.d("COMM_FRAG", "커뮤니티 프래그먼트 조회 실패")
+                Log.e("COMM_FRAG", "커뮤니티 프래그먼트 조회 실패")
+                Log.e("COMM_FRAG", t.message.toString())
             }
         })
         return binding.root
