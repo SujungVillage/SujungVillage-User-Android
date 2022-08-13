@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.style.ForegroundColorSpan
 import android.util.Log
@@ -17,6 +16,7 @@ import androidx.fragment.app.Fragment
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import kr.co.sujungvillage.*
 import kr.co.sujungvillage.data.*
 import kr.co.sujungvillage.databinding.FragmentHomeBinding
@@ -24,6 +24,7 @@ import kr.co.sujungvillage.retrofit.RetrofitBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Math.abs
 
 class HomeFragment : Fragment() {
 
@@ -39,7 +40,6 @@ class HomeFragment : Fragment() {
 
         // 재사생 학번, 토큰 불러오기
         val shared = this.activity?.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
-        val studentNum = shared?.getString("studentNum", "error").toString()
         val token = shared?.getString("token", "error").toString()
 
         // lottie 이미지 회전
@@ -73,6 +73,12 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        // Swipe Refresh 버튼 연결
+        binding.swipe.setOnRefreshListener {
+            loadCalendarData(token, binding.calendar.currentDate.year.toString(), binding.calendar.currentDate.month.toString(), binding.calendar)
+            binding.swipe.isRefreshing = false
+        }
+
         // 학생 홈 화면 정보 조회 API 연결
         RetrofitBuilder.homeApi.homeInfo(token, binding.calendar.currentDate.year.toString(), binding.calendar.currentDate.month.toString()).enqueue(object: Callback<HomeInfoResultDTO> {
             override fun onResponse(call: Call<HomeInfoResultDTO>, response: Response<HomeInfoResultDTO>) {
@@ -103,7 +109,7 @@ class HomeFragment : Fragment() {
                 // 유저 정보 반영
                 binding.textName.text = response.body()?.residentInfo?.name
                 binding.textDormitory.text = response.body()?.residentInfo?.dormitory + " 기숙사 " + response.body()?.residentInfo?.address
-                binding.textRewards.text = "상점 : ${response.body()?.residentInfo?.plusLMP}점    |    벌점 : ${response.body()?.residentInfo?.minusLMP}점"
+                binding.textRewards.text = "상점 : ${response.body()?.residentInfo?.plusLMP}점    |    벌점 : ${abs(response.body()?.residentInfo?.minusLMP!!.toInt())}점"
 
                 // 캘린더 정보 반영
                 val defaultDecorator = DefaultDecorator(this@HomeFragment)
@@ -122,45 +128,7 @@ class HomeFragment : Fragment() {
 
         // 캘린더 좌우 버튼 연결 (홈 화면 정보 조회 API 활용)
         binding.calendar.setOnMonthChangedListener { widget, date ->
-            RetrofitBuilder.homeApi.homeInfo(token, date.year.toString(), date.month.toString()).enqueue(object: Callback<HomeInfoResultDTO> {
-                override fun onResponse(call: Call<HomeInfoResultDTO>, response: Response<HomeInfoResultDTO>) {
-                    Log.d("HOME_INFO", "캘린더 정보 조회 성공")
-                    Log.d("HOME_INFO", "roll-call days : " + response.body()?.rollcallDays.toString())
-                    Log.d("HOME_INFO", "applied roll-call days : " + response.body()?.appliedDays.toString())
-                    Log.d("HOME_INFO", "applied stayout days : " + response.body()?.stayoutDays.toString())
-                    dayRollcall?.clear()
-                    idRollcall?.clear()
-                    for (rollcallDay in response.body()?.rollcallDays!!) {
-                        dayRollcall?.add(rollcallDay.day)
-                        idRollcall?.add(rollcallDay.id)
-                    }
-                    dayStayout?.clear()
-                    idStayout?.clear()
-                    for (stayoutDay in response.body()?.stayoutDays!!) {
-                        dayStayout?.add(stayoutDay.day)
-                        idStayout?.add(stayoutDay.id)
-                    }
-                    dayApplied?.clear()
-                    idApplied?.clear()
-                    for (appliedDay in response.body()?.appliedDays!!) {
-                        dayApplied?.add(appliedDay.day)
-                        idApplied?.add(appliedDay.id)
-                    }
-
-                    // 캘린더 정보 반영
-                    val defaultDecorator = DefaultDecorator(this@HomeFragment)
-                    val todayDecorator = TodayDecorator(this@HomeFragment, dayStayout)
-                    val rollcallDecorator = RollcallDecorator(this@HomeFragment, dayRollcall, binding.calendar.currentDate.month)
-                    val stayoutDecorator = StayoutDecorator(this@HomeFragment, dayStayout, binding.calendar.currentDate.month)
-                    val missDecorator = MissDecorator(this@HomeFragment, dayRollcall, dayApplied, binding.calendar.currentDate.month)
-                    binding.calendar.addDecorators(defaultDecorator, todayDecorator, rollcallDecorator, stayoutDecorator, missDecorator)
-                }
-
-                override fun onFailure(call: Call<HomeInfoResultDTO>, t: Throwable) {
-                    Log.d("HOME_INFO", "캘린더 정보 조회 실패")
-                    Log.d("HOME_INFO", t.message.toString())
-                }
-            })
+            loadCalendarData(token, date.year.toString(), date.month.toString(), binding.calendar)
         }
 
         // 날짜 클릭 이벤트
@@ -194,6 +162,7 @@ class HomeFragment : Fragment() {
                                     override fun onResponse(call: Call<Void>, response: Response<Void>) {
                                         Log.d("STAYOUT_CANCEL", "외박 취소 성공")
                                         Log.d("STAYOUT_CANCEL", "response : " + response.body().toString())
+                                        loadCalendarData(token, date.year.toString(), date.month.toString(), binding.calendar)
                                         dialog.cancel()
                                         Toast.makeText(this@HomeFragment.activity, "외박이 취소되었습니다.", Toast.LENGTH_SHORT).show()
                                     }
@@ -294,6 +263,49 @@ class HomeFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    // 캘린더 정보 불러오기 함수
+    fun loadCalendarData(token: String, year: String, month: String, calendar: MaterialCalendarView) {
+        RetrofitBuilder.homeApi.homeInfo(token, year, month).enqueue(object: Callback<HomeInfoResultDTO> {
+            override fun onResponse(call: Call<HomeInfoResultDTO>, response: Response<HomeInfoResultDTO>) {
+                Log.d("HOME_INFO_LOAD", "홈 화면 정보 조회 성공")
+                Log.d("HOME_INFO_LOAD", "roll-call days : " + response.body()?.rollcallDays.toString())
+                Log.d("HOME_INFO_LOAD", "applied roll-call days : " + response.body()?.appliedDays.toString())
+                Log.d("HOME_INFO_LOAD", "applied stayout days : " + response.body()?.stayoutDays.toString())
+                dayRollcall?.clear()
+                idRollcall?.clear()
+                for (rollcallDay in response.body()?.rollcallDays!!) {
+                    dayRollcall?.add(rollcallDay.day)
+                    idRollcall?.add(rollcallDay.id)
+                }
+                dayStayout?.clear()
+                idStayout?.clear()
+                for (stayoutDay in response.body()?.stayoutDays!!) {
+                    dayStayout?.add(stayoutDay.day)
+                    idStayout?.add(stayoutDay.id)
+                }
+                dayApplied?.clear()
+                idApplied?.clear()
+                for (appliedDay in response.body()?.appliedDays!!) {
+                    dayApplied?.add(appliedDay.day)
+                    idApplied?.add(appliedDay.id)
+                }
+
+                // 캘린더 반영
+                val defaultDecorator = DefaultDecorator(this@HomeFragment)
+                val todayDecorator = TodayDecorator(this@HomeFragment, dayStayout)
+                val rollcallDecorator = RollcallDecorator(this@HomeFragment, dayRollcall, month.toInt())
+                val stayoutDecorator = StayoutDecorator(this@HomeFragment, dayStayout, month.toInt())
+                val missDecorator = MissDecorator(this@HomeFragment, dayRollcall, dayApplied, month.toInt())
+                calendar.addDecorators(defaultDecorator, todayDecorator, rollcallDecorator, stayoutDecorator, missDecorator)
+            }
+
+            override fun onFailure(call: Call<HomeInfoResultDTO>, t: Throwable) {
+                Log.e("HOME_INFO_LOAD", "홈 화면 정보 조회 실패")
+                Log.e("HOME_INFO_LOAD", t.message.toString())
+            }
+        })
     }
 }
 
