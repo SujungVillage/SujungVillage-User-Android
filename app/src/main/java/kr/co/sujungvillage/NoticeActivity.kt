@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import kr.co.sujungvillage.CommDetailActivity.Companion.token
 import kr.co.sujungvillage.adapter.NoticeAdapter
 import kr.co.sujungvillage.data.NoticeRequestResultDTO
 import kr.co.sujungvillage.databinding.ActivityNoticeBinding
@@ -25,12 +26,23 @@ class NoticeActivity : AppCompatActivity() {
 
         // 재사생 학번 불러오기
         val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
-        val studentNum = shared?.getString("studentNum", "error").toString()
         val token = shared?.getString("token", "error").toString()
 
         // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener { finish() }
 
+        // 공지사항 리스트 불러오기
+        loadNoticeData(token)
+
+        // Swipe Refresh 버튼 연결
+        binding.swipe.setOnRefreshListener {
+            loadNoticeData(token)
+            binding.swipe.isRefreshing = false
+        }
+    }
+
+    // 공지사항 리스트 불러오기 함수
+    fun loadNoticeData(token: String) {
         // 공지사항 리스트 조회 API 연결
         RetrofitBuilder.noticeApi.noticeRequest(token, "전체").enqueue(object: Callback<List<NoticeRequestResultDTO>> {
             override fun onResponse(call: Call<List<NoticeRequestResultDTO>>, response: Response<List<NoticeRequestResultDTO>>) {

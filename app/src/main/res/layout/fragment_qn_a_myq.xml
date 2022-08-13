@@ -7,28 +7,34 @@
     android:layout_height="match_parent"
     tools:context=".fragment.QnAMyqFragment">
 
-    <LinearLayout
-        android:id="@+id/linear"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#F5F5F5"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <ScrollView
-            android:id="@+id/scroll"
+        <LinearLayout
+            android:id="@+id/linear"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#F5F5F5"
+            android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycle_question"
+            <ScrollView
+                android:id="@+id/scroll"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="20dp"
-                android:paddingBottom="80dp"
-                android:clipToPadding="false"
-                tools:listitem="@layout/listitem_qna_myq" />
-        </ScrollView>
-    </LinearLayout>
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycle_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="80dp"
+                    tools:listitem="@layout/listitem_qna_myq" />
+            </ScrollView>
+        </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ImageButton
         android:id="@+id/btn_write"
@@ -38,7 +44,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="44dp"
         android:background="@drawable/style_qna_imagebutton"
-        android:src="@drawable/icon_qna_pencil"
         android:scaleType="center"
+        android:src="@drawable/icon_qna_pencil"
         tools:ignore="SpeakableTextPresentCheck" />
 </FrameLayout>

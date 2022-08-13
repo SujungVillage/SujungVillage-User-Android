@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kr.co.sujungvillage.QnAWriteActivity
 import kr.co.sujungvillage.adapter.QnAMyqAdapter
 import kr.co.sujungvillage.data.MyqGetResultDTO
@@ -22,11 +23,30 @@ class QnAMyqFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentQnAMyqBinding.inflate(layoutInflater, container, false)
 
-        // 재사생 학번 불러오기
+        // 재사생 정보 불러오기
         val shared = this.activity?.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
-        val studentNum = shared?.getString("studentNum", "error").toString()
         val token = shared?.getString("token", "error").toString()
 
+        // 내 질문 리스트 불러오기
+        loadQuestionData(token, binding.recycleQuestion)
+
+        // Swipe Refresh 버튼 연결
+        binding.swipe.setOnRefreshListener {
+            loadQuestionData(token, binding.recycleQuestion)
+            binding.swipe.isRefreshing = false
+        }
+
+        // 글쓰기 버튼 연결
+        binding.btnWrite.setOnClickListener {
+            var intent = Intent(this.activity, QnAWriteActivity::class.java)
+            startActivity(intent)
+        }
+
+        return binding.root
+    }
+
+    // 내 질문 리스트 조회 함수
+    fun loadQuestionData(token: String, recycleQuestion: RecyclerView) {
         // 내 질문 리스트 조회 API 연결
         RetrofitBuilder.qnaApi.myqGet(token).enqueue(object: Callback<List<MyqGetResultDTO>> {
             override fun onResponse(call: Call<List<MyqGetResultDTO>>, response: Response<List<MyqGetResultDTO>>) {
@@ -40,8 +60,8 @@ class QnAMyqFragment : Fragment() {
                 }
                 var adapter = QnAMyqAdapter()
                 adapter.myqList = myqList
-                binding.recycleQuestion.adapter = adapter
-                binding.recycleQuestion.layoutManager = LinearLayoutManager(activity)
+                recycleQuestion.adapter = adapter
+                recycleQuestion.layoutManager = LinearLayoutManager(activity)
             }
 
             override fun onFailure(call: Call<List<MyqGetResultDTO>>, t: Throwable) {
@@ -49,13 +69,5 @@ class QnAMyqFragment : Fragment() {
                 Log.e("MY_QUESTION_GET", t.message.toString())
             }
         })
-
-        // 글쓰기 버튼 연결
-        binding.btnWrite.setOnClickListener {
-            var intent = Intent(this.activity, QnAWriteActivity::class.java)
-            startActivity(intent)
-        }
-
-        return binding.root
     }
 }

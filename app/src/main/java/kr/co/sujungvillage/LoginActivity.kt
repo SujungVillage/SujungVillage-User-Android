@@ -4,12 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginStart
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import kr.co.sujungvillage.BuildConfig.CLIENT_ID
@@ -61,6 +65,8 @@ class LoginActivity : AppCompatActivity() {
 
         // 로그인 버튼 연결
         binding.btnSignIn.setOnClickListener { signIn() }
+        val googleTextView: TextView = binding.btnSignIn.getChildAt(0) as TextView
+        googleTextView.text = "성신 구글 계정으로 로그인"
     }
 
     // 구글 로그인 함수
@@ -119,8 +125,8 @@ class LoginActivity : AppCompatActivity() {
             // 성신 구글 계정이 아닌 경우
             else {
                 Toast.makeText(this, "성신 구글 계정으로만 로그인이 가능합니다.", Toast.LENGTH_SHORT).show()
+                // 로그아웃
                 mGoogleSignInClient?.signOut()?.addOnCompleteListener(this) {
-                    // 로그아웃
                     Log.d("GOOGLE_LOGOUT", "일반 구글 계정 로그아웃")
                 }
             }
