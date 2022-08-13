@@ -162,7 +162,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
                     android:layout_marginEnd="40dp"
-                    android:layout_marginTop="29dp"
+                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/light"
                     android:text="안녕하세요 김수룡 학생 :)\n403호 층간소음 문제 때문에 많이 스트레스 받으셨을 것 같습니다. 안 그래도 다른 학생들도 층간소음 문제로 많은 스트레스를 받고 있어, 따로 403호 학생들과 상담을 하기 로 했습니다. 만약 상담 이후에도 지속적인 층간소음이 발 생한다면, 벌점 부과 조치를 하겠습니다.\n감사합니다. "
                     android:textColor="#111111"

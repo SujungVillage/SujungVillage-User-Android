@@ -8,25 +8,31 @@
     android:background="#F5F5F5"
     tools:context=".fragment.QnAFaqFragment">
 
-    <ScrollView
-        android:id="@+id/scroll"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/linear"
+        <ScrollView
+            android:id="@+id/scroll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recylce_faq"
+            <LinearLayout
+                android:id="@+id/linear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:paddingTop="20dp"
-                android:paddingBottom="80dp"
-                tools:listitem="@layout/listitem_qna_faq" />
-        </LinearLayout>
-    </ScrollView>
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycle_faq"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="80dp"
+                    tools:listitem="@layout/listitem_qna_faq" />
+            </LinearLayout>
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </FrameLayout>
