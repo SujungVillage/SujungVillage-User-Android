@@ -43,9 +43,7 @@ class CommFragment : Fragment() {
         val token = shared?.getString("token", "error").toString()
 
         // 키보드 내리기
-        binding.frame.setOnClickListener { this.hideKeyboard() }
         binding.linear.setOnClickListener { this.hideKeyboard() }
-
 
         // 알림 버튼 연결
         binding.btnAlarm.setOnClickListener {
@@ -60,6 +58,10 @@ class CommFragment : Fragment() {
             binding.btnDelete.visibility=View.VISIBLE
             searchText=""
             binding.editSearch.text.clear()
+            searchText = binding.editSearch.text.toString().trim()
+            hideKeyboard()
+            // 검색 api 연결
+            searchRefresh(token,binding,searchText)
             // 키보드 엔터 -> 검색으로 변경
            binding.editSearch.setOnKeyListener{view, keyCode, event->
                if(event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER){
@@ -71,7 +73,7 @@ class CommFragment : Fragment() {
                        searchRefresh(token,binding,searchText)
                    }
                }
-               true
+               false
            }
         }
 
