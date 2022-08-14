@@ -6,6 +6,8 @@ import java.io.Serializable
 data class LoginDTO(
     @SerializedName("access_token")
     val token: String,
+    @SerializedName("fcm_token")
+    val fcm: String,
 ): Serializable {}
 
 data class LoginResultDTO(
