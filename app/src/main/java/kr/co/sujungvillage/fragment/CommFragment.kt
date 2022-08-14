@@ -155,7 +155,7 @@ class CommFragment : Fragment() {
                 }
                 commList = mutableListOf()
                 for(post in response.body()!!){
-                    var comm=CommDTO(post.id,post.title,post.content,post.regDate)
+                    var comm=CommDTO(post.id,post.title,post.content,post.writerId,post.regDate,post.numOfComments)
                     commList.add(comm)
                 }
                 val adapter=CommAdapter()
@@ -182,7 +182,7 @@ class CommFragment : Fragment() {
                     }
                     commList = mutableListOf()
                     for (post in response.body()!!) {
-                        var comm = CommDTO(post.id, post.title, post.content, post.regDate)
+                        var comm = CommDTO(post.id,post.title,post.content,post.writerId,post.regDate,post.numOfComments)
                         commList.add(comm)
                     }
                     val adapter = CommAdapter()

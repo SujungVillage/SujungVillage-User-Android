@@ -11,8 +11,12 @@ data class CommDTO(
     val title:String,
     @SerializedName("content")
     val content:String,
+    @SerializedName("writerId")
+    val writerId:String,
     @SerializedName("regDate")
-    val regDate:String
+    val regDate:String,
+    @SerializedName("numOfComments")
+    val numOfComments:Long
 ):Serializable{}
 
 //커뮤니티 댓글 쓰기
