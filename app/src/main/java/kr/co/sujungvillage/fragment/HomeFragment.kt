@@ -210,11 +210,11 @@ class HomeFragment : Fragment() {
 
                             // Alert Dialog 외박 정보 설정
                             // ★★★ 점호 사진 불러오기
-//                            try {
+                            try {
                                 dialogLayout.findViewById<ImageView>(R.id.img_rollcall).setImageBitmap(response.body()?.imgUrl?.toBitmap())
-//                            } catch (e: Exception) {
-//                                dialogLayout.findViewById<ImageView>(R.id.img_rollcall).setImageResource(R.drawable.img_home_calendar_img_error)
-//                            }
+                            } catch (e: Exception) {
+                                dialogLayout.findViewById<ImageView>(R.id.img_rollcall).setImageResource(R.drawable.img_home_calendar_img_error)
+                            }
                             dialogLayout.findViewById<TextView>(R.id.text_time).text = "참여 시각 : ${response.body()?.date?.subSequence(0, 10)} ${response.body()?.date?.subSequence(11, 19)}"
                             dialogLayout.findViewById<TextView>(R.id.text_location).text = "참여 위치 : ${response.body()?.location}"
                             dialogLayout.findViewById<TextView>(R.id.btn_confirm).setOnClickListener { dialog.dismiss() }

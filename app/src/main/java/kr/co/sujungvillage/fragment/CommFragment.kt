@@ -1,5 +1,8 @@
 package kr.co.sujungvillage.fragment
 
+import android.app.Activity
+import android.app.Activity.RESULT_OK
+import android.app.Instrumentation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +15,8 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -30,17 +35,28 @@ import retrofit2.Response
 
 class CommFragment : Fragment() {
 
-    companion object{var dormitory="전체"}
+    companion object{
+        var dormitory="전체"
+    }
     var commList: MutableList<CommDTO> = mutableListOf()
+    var token=""
+    var _binding: FragmentCommBinding? = null
+    val binding get() = _binding!!
 
+    private val startForResult=registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ){result: ActivityResult ->
+        if(result.resultCode==RESULT_OK){
+            refresh()
+        }
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding = FragmentCommBinding.inflate(inflater,container,false)
+        _binding = FragmentCommBinding.inflate(inflater,container,false)
 
         var searchText=""
-
         // 재사생 학번 불러오기
         val shared = this.activity?.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
-        val token = shared?.getString("token", "error").toString()
+        token = shared?.getString("token", "error").toString()
 
         // 키보드 내리기
         binding.linear.setOnClickListener { this.hideKeyboard() }
@@ -61,7 +77,7 @@ class CommFragment : Fragment() {
             searchText = binding.editSearch.text.toString().trim()
             hideKeyboard()
             // 검색 api 연결
-            searchRefresh(token,binding,searchText)
+            searchRefresh(searchText)
             // 키보드 엔터 -> 검색으로 변경
            binding.editSearch.setOnKeyListener{view, keyCode, event->
                if(event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER){
@@ -70,7 +86,7 @@ class CommFragment : Fragment() {
                    else {
                        hideKeyboard()
                        // 검색 api 연결
-                       searchRefresh(token,binding,searchText)
+                       searchRefresh(searchText)
                    }
                }
                false
@@ -79,7 +95,7 @@ class CommFragment : Fragment() {
 
         binding.editSearch.addTextChangedListener {//검색창 입력 실시간
             searchText = binding.editSearch.text.toString().trim()
-            searchRefresh(token,binding,searchText)
+            searchRefresh(searchText)
         }
 
         //검색 취소
@@ -100,7 +116,7 @@ class CommFragment : Fragment() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 dormitory=data.get(p2)
                 Log.d("COMM_FRAG",dormitory)
-                refresh(token, binding)
+                refresh()
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
@@ -110,24 +126,24 @@ class CommFragment : Fragment() {
         //리프레시
         binding.swipe.setOnRefreshListener {
             if(searchText.isEmpty()){//검색어가 없는 경우-> 그냥 refresh
-                refresh(token,binding)
+                refresh()
                 binding.swipe.isRefreshing=false
             }
             else{//검색어가 있는 경우 searchRefresh
-                searchRefresh(token,binding,searchText)
+                searchRefresh(searchText)
                 binding.swipe.isRefreshing=false
             }
         }
         // 글 작성 버튼 연결
         binding.btnWrite.setOnClickListener {
             var intent = Intent(this.activity, CommWriteActivity::class.java)
-            startActivity(intent)
+            startForResult.launch(intent)
         }
-        refresh(token,binding)
+        refresh()
+
         return binding.root
     }
-
-    private fun refresh(token:String,binding: FragmentCommBinding){
+    private fun refresh(){
         RetrofitBuilder.communityApi.comm(token,dormitory).enqueue(object: Callback<List<CommDTO>>{
             override fun onResponse(call: Call<List<CommDTO>>, response: Response<List<CommDTO>>) {
                 binding.textExist.visibility=View.GONE
@@ -153,7 +169,7 @@ class CommFragment : Fragment() {
         return
     }
 
-    private fun searchRefresh(token:String,binding: FragmentCommBinding,searchText:String){
+    private fun searchRefresh(searchText:String){
         RetrofitBuilder.communityApi.commSearch(token, CommFragment.dormitory, searchText)
             .enqueue(object : Callback<List<CommDTO>> {
                 override fun onResponse(call: Call<List<CommDTO>>, response: Response<List<CommDTO>>) {
