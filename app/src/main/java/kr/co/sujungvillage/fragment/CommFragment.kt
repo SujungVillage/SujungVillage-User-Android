@@ -84,6 +84,7 @@ class CommFragment : Fragment() {
 
         //검색 취소
         binding.btnDelete.setOnClickListener{
+            this.hideKeyboard()
             binding.editSearch.visibility=View.INVISIBLE
             binding.btnSearch.visibility=View.VISIBLE
             binding.btnDelete.visibility=View.INVISIBLE

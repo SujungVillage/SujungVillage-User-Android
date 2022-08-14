@@ -40,7 +40,7 @@ class CommDetailAdapter(val context:Context) :RecyclerView.Adapter<CommDetailHol
 }
 class CommDetailHolder(val binding:ListitemCommDetailBinding,val context: Context): RecyclerView.ViewHolder(binding.root){
     fun setCommDetail(commDetail: CommDetailCommentsRequest){
-        binding.textName.text="익명${commentIndex!!.indexOf(commDetail.writerId) + 1}" // 익명 처리해야함.
+        binding.textName.text="익명${commentIndex?.indexOf(commDetail.writerId)?.plus(1)}" // 익명 처리해야함.
         val hour=commDetail.regDate?.subSequence(11,13).toString().toInt()
         val min=(commDetail.regDate?.subSequence(14,16).toString().toInt())
 

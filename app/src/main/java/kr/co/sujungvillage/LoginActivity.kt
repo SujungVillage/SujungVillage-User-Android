@@ -15,7 +15,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
+import com.google.firebase.messaging.FirebaseMessaging
 import kr.co.sujungvillage.BuildConfig.CLIENT_ID
 import kr.co.sujungvillage.data.LoginDTO
 import kr.co.sujungvillage.data.LoginResultDTO
@@ -37,7 +39,7 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
         // 로그인이 되어있는 경우 로그아웃
         val account = GoogleSignIn.getLastSignedInAccount(this)
-        if (account != null){
+        if (account != null) {
             mGoogleSignInClient?.signOut()?.addOnCompleteListener(this) {
                 val shared = getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
                 val editor = shared.edit()
@@ -97,29 +99,45 @@ class LoginActivity : AppCompatActivity() {
                 Log.d("GOOGLE_LOGIN", "id : " + account.id)
                 Log.d("GOOGLE_LOGIN", "token : " + account.idToken)
 
-                // 재사생 로그인 API 연결
-                RetrofitBuilder.loginApi.login(LoginDTO(account.idToken.toString())).enqueue(object: Callback<LoginResultDTO> {
-                    override fun onResponse(call: Call<LoginResultDTO>, response: Response<LoginResultDTO>) {
-                        Log.d("LOGIN", "로그인 성공")
-                        Log.d("LOGIN", "token : " + response.body()?.token.toString())
-                        Log.d("LOGIN", "code : " + response.code())
-
-                        // 토큰, 학번 로컬에 저장하고 메인 화면으로 이동
-                        val shared = getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
-                        val editor = shared.edit()
-                        editor.putString("studentNum", account.email!!.subSequence(0, 8).toString())
-                        editor.putString("token", response.body()?.token)
-                        editor.apply()
-
-                        var intent = Intent(this@LoginActivity, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
+                // FCM 토큰 발급
+                FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        Log.d("FCM_TOKEN", "Fetching FCM registration token failed", task.exception)
+                        return@OnCompleteListener
                     }
 
-                    override fun onFailure(call: Call<LoginResultDTO>, t: Throwable) {
-                        Log.d("LOGIN", "로그인 실패")
-                        Log.d("LOGIN", t.message.toString())
-                    }
+                    // Get new FCM registration token
+                    val token = task.result
+
+                    // Log and toast
+                    val msg = token.toString()
+                    Log.d("FCM_TOKEN", msg)
+
+                    // 재사생 로그인 API 연결
+                    val loginInfo = LoginDTO(account.idToken.toString(), msg)
+                    RetrofitBuilder.loginApi.login(loginInfo).enqueue(object : Callback<LoginResultDTO> {
+                            override fun onResponse(call: Call<LoginResultDTO>, response: Response<LoginResultDTO>) {
+                                Log.d("LOGIN", "로그인 성공")
+                                Log.d("LOGIN", "token : " + response.body()?.token.toString())
+                                Log.d("LOGIN", "code : " + response.code())
+
+                                // 토큰, 학번 로컬에 저장하고 메인 화면으로 이동
+                                val shared = getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
+                                val editor = shared.edit()
+                                editor.putString("studentNum", account.email!!.subSequence(0, 8).toString())
+                                editor.putString("token", response.body()?.token)
+                                editor.apply()
+
+                                var intent = Intent(this@LoginActivity, MainActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+
+                            override fun onFailure(call: Call<LoginResultDTO>, t: Throwable) {
+                                Log.d("LOGIN", "로그인 실패")
+                                Log.d("LOGIN", t.message.toString())
+                            }
+                        })
                 })
             }
             // 성신 구글 계정이 아닌 경우
