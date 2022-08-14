@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class RollcallCreateDTO(
-    @SerializedName("imageURL")
-    val imgUrl: String,
+    @SerializedName("image")
+    val imgUrl: ByteArray,
     @SerializedName("location")
     val location: String,
 ): Serializable {}
@@ -15,8 +15,8 @@ data class RollcallCreateResultDTO(
     val id: Long,
     @SerializedName("userId")
     val userId: String,
-    @SerializedName("imageURL")
-    val imgUrl: String,
+    @SerializedName("image")
+    val imgUrl: ByteArray,
     @SerializedName("location")
     val location: String,
     @SerializedName("rollcallDateTime")
@@ -41,8 +41,8 @@ data class AppliedRollcallCheckResultDTO(
     val id: Long,
     @SerializedName("userId")
     val userId: String,
-    @SerializedName("imageURL")
-    val imgUrl: String,
+    @SerializedName("image")
+    val imgUrl: ByteArray,
     @SerializedName("location")
     val location: String,
     @SerializedName("rollcallDateTime")
