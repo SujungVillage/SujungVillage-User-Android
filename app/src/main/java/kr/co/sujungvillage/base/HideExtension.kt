@@ -35,6 +35,6 @@ fun Bitmap.toByteArray():ByteArray{
 
 
 // extension function to convert byte array to bitmap
-fun ByteArray.toBitmap():Bitmap{
+fun ByteArray.toBitmap():Bitmap {
     return BitmapFactory.decodeByteArray(this,0,size)
 }

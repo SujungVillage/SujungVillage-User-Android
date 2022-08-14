@@ -75,9 +75,9 @@ class RollcallActivity : BaseActivity() {
                 return@setOnClickListener
             }
 
-            val imgUrl = imgByteArr.toString()
+            val imgUrl = imgByteArr
             val location = binding.textLocation.text.toString()
-            var rollcallInfo = RollcallCreateDTO(imgUrl, location)
+            var rollcallInfo = RollcallCreateDTO(imgUrl!!, location)
 
             // 점호 신청 API 연결
             RetrofitBuilder.rollcallApi.rollcallCreate(token, rollcallInfo).enqueue(object : Callback<RollcallCreateResultDTO> {
