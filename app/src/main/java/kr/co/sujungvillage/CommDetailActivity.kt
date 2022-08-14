@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.sujungvillage.adapter.CommDetailAdapter
+import kr.co.sujungvillage.base.commDetailOnRefresh
 import kr.co.sujungvillage.base.hideKeyboard
 import kr.co.sujungvillage.data.*
 import kr.co.sujungvillage.databinding.ActivityCommDetailBinding
@@ -20,11 +21,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CommDetailActivity : AppCompatActivity() {
+class CommDetailActivity : AppCompatActivity(),commDetailOnRefresh {
     companion object{
         var studentNum=""
         var token=""
         var commentIndex: MutableList<String>? = null
+        var postId=0L
     }
 
     val binding by lazy { ActivityCommDetailBinding.inflate(layoutInflater) }
@@ -38,7 +40,7 @@ class CommDetailActivity : AppCompatActivity() {
         token = shared?.getString("token", "error").toString()
 
         // 이전 페이지 CommFragment 에서 postId 전달 받기
-        val postId = intent.getLongExtra("postId",-1)
+        postId = intent.getLongExtra("postId",-1)
         val dormitory=intent.getStringExtra("dormitory")
 
         // 키보드 내리기
@@ -47,6 +49,12 @@ class CommDetailActivity : AppCompatActivity() {
         binding.linearButton.setOnClickListener { this.hideKeyboard() }
         binding.linearComment.setOnClickListener { this.hideKeyboard() }
         binding.recyclerComment.setOnClickListener { this.hideKeyboard() }
+        //리프레시
+        binding.swipe.setOnRefreshListener {
+            refresh(token,studentNum,postId)
+            Log.d("REFRESH", "${studentNum},${postId}")
+            binding.swipe.isRefreshing=false
+        }
 
         //툴바 타이틀 설정
         binding.textToolbarTitle.text="${dormitory} 게시판"
@@ -102,6 +110,11 @@ class CommDetailActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onClick() {
+        refresh(token, studentNum, postId)
+    }
+
     private fun refresh(token:String,studentNum:String,postId:Long){
         RetrofitBuilder.communityApi.commDetail(token,postId).enqueue(object: Callback<CommDetailResultDTO>{
             override fun onResponse(call: Call<CommDetailResultDTO>, response: Response<CommDetailResultDTO>) {
@@ -155,4 +168,5 @@ class CommDetailActivity : AppCompatActivity() {
             }
         })
     }
+
 }

@@ -15,6 +15,7 @@ import kr.co.sujungvillage.base.hideKeyboard
 import kr.co.sujungvillage.data.CommDetailCommentsRequest
 import kr.co.sujungvillage.databinding.ListitemCommDetailBinding
 import kr.co.sujungvillage.retrofit.RetrofitBuilder
+import org.threeten.bp.zone.ZoneRulesProvider.refresh
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -66,7 +67,8 @@ class CommDetailHolder(val binding:ListitemCommDetailBinding,val context: Contex
                         Callback<Void> {
                         override fun onResponse(call: Call<Void>, response: Response<Void>) {
                             Log.d("COMM_DELETE",response.message().toString())
-                            //리프레시 필요.
+                            refresh()
+
                         }
                         override fun onFailure(call: Call<Void>, t: Throwable) {
                             Log.d("COMM_DELETE",t.message.toString())

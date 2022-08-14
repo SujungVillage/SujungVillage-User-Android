@@ -73,7 +73,7 @@
 
         <!-- FCM service 추가 -->
         <service
-            android:name=".firebase.MyFirebaseMessagingService"
+            android:name=".api.firebase.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

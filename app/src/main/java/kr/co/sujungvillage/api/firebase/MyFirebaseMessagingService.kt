@@ -1,4 +1,4 @@
-package kr.co.sujungvillage.firebase
+package kr.co.sujungvillage.api.firebase
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
