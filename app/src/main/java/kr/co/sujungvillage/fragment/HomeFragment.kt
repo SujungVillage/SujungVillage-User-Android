@@ -11,6 +11,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.prolificinteractive.materialcalendarview.CalendarDay
@@ -18,8 +21,10 @@ import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import kr.co.sujungvillage.*
+import kr.co.sujungvillage.base.toBitmap
 import kr.co.sujungvillage.data.*
 import kr.co.sujungvillage.databinding.FragmentHomeBinding
+import kr.co.sujungvillage.databinding.LayoutCalendarAppliedBinding
 import kr.co.sujungvillage.retrofit.RetrofitBuilder
 import retrofit2.Call
 import retrofit2.Callback
@@ -197,15 +202,22 @@ class HomeFragment : Fragment() {
                             Log.d("APPLIED_ROLLCALL_CHECK", "code : " + response.code().toString())
                             Log.d("APPLIED_ROLLCALL_CHECK", "message : " + response.message().toString())
 
-                            // 점호 참여 Alert Dialog 생성
-                            val builder = AlertDialog.Builder(context)
-                            builder.setTitle("${date.date} 점호")
-                            builder.setMessage("참여 시각 : ${response.body()?.date?.subSequence(0, 10)} ${response.body()?.date?.subSequence(11, 19)}" +
-                                "\n참여 위치 : ${response.body()?.location}")
-                            builder.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, i ->
-                                dialog.cancel()
-                            })
-                            builder.show()
+                            // 점호 참여 Alert Dialog 레이아웃 설정 및 생성
+                            val dialogLayout = layoutInflater.inflate(R.layout.layout_calendar_applied, null)
+                            val builder = AlertDialog.Builder(context).apply { setView(dialogLayout) }
+                            val dialog = builder.create()
+                            dialog.show()
+
+                            // Alert Dialog 외박 정보 설정
+                            // ★★★ 점호 사진 불러오기
+                            try {
+                                dialogLayout.findViewById<ImageView>(R.id.img_rollcall).setImageBitmap(response.body()?.imgUrl?.toBitmap())
+                            } catch (e: Exception) {
+                                dialogLayout.findViewById<ImageView>(R.id.img_rollcall).setImageResource(R.drawable.img_home_calendar_img_error)
+                            }
+                            dialogLayout.findViewById<TextView>(R.id.text_time).text = "참여 시각 : ${response.body()?.date?.subSequence(0, 10)} ${response.body()?.date?.subSequence(11, 19)}"
+                            dialogLayout.findViewById<TextView>(R.id.text_location).text = "참여 위치 : ${response.body()?.location}"
+                            dialogLayout.findViewById<TextView>(R.id.btn_confirm).setOnClickListener { dialog.dismiss() }
                         }
 
                         override fun onFailure(call: Call<AppliedRollcallCheckResultDTO>, t: Throwable) {
@@ -218,14 +230,15 @@ class HomeFragment : Fragment() {
 
                 // 무단 외박인 경우
                 if (date.isBefore(CalendarDay.today())) {
-                    // 무단 외박 Alert Dialog 생성
-                    val builder = AlertDialog.Builder(context)
-                    builder.setTitle("${date.date} 점호")
-                    builder.setMessage("해당 점호에 불참하셨습니다.")
-                    builder.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, i ->
-                        dialog.cancel()
-                    })
-                    builder.show()
+                    // 무단 외박 Alert Dialog 레이아웃 설정 및 생성
+                    val dialogLayout = layoutInflater.inflate(R.layout.layout_calendar_absent, null)
+                    val builder = AlertDialog.Builder(context).apply { setView(dialogLayout) }
+                    val dialog = builder.create()
+                    dialog.show()
+
+                    // Alert Dialog 확인 버튼 설정
+                    dialogLayout.findViewById<TextView>(R.id.btn_confirm).setOnClickListener { dialog.dismiss() }
+
                     return@setOnDateChangedListener
                 }
 

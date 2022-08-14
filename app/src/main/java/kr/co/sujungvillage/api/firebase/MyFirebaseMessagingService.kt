@@ -21,6 +21,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             Log.d("MESSAGE_RECEIVED", "message data payload: ${message.data}")
         }
 
+        // 알림 제목, 내용 설정
         var notificationInfo: Map<String, String> = mapOf()
         message.notification?.let {
             Log.d("MESSAGE_RECEIVED", "message notification body: ${it.body}")
@@ -30,19 +31,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             )
             sendNotification(notificationInfo)
         }
-    }
-
-    private fun scheduleJob() {
-        Log.d("SEHEDULE_JOB", "scheduleJob() 실행")
-
-        // [START dispatch_job]
-//        val work = OneTimeWorkRequest.Builder(MyWorker::class.java).build()
-//        WorkManager.getInstance(this).beginWith(work).enqueue()
-        // [END dispatch_job]
-    }
-
-    private fun handleNow() {
-        Log.d("HANDLE_NOW", "handleNow() 실행")
     }
 
     override fun onNewToken(token: String) {
@@ -64,6 +52,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val channelId = getString(R.string.default_notification_channel_id)
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
+        // 알림 설정
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(messageBody["title"])
@@ -77,9 +66,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         // 안드로이드 오레오 알림채널에 필요한 추가사항
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(channelId,
-                "Channel human readable title",
-                NotificationManager.IMPORTANCE_DEFAULT)
+            val channel = NotificationChannel(channelId, "Channel human readable title", NotificationManager.IMPORTANCE_DEFAULT)
             notificationManager.createNotificationChannel(channel)
         }
 
