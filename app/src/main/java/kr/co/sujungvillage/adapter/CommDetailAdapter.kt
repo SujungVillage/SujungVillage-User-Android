@@ -15,6 +15,7 @@ import kr.co.sujungvillage.base.hideKeyboard
 import kr.co.sujungvillage.data.CommDetailCommentsRequest
 import kr.co.sujungvillage.databinding.ListitemCommDetailBinding
 import kr.co.sujungvillage.retrofit.RetrofitBuilder
+import org.threeten.bp.zone.ZoneRulesProvider.refresh
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,7 +40,7 @@ class CommDetailAdapter(val context:Context) :RecyclerView.Adapter<CommDetailHol
 }
 class CommDetailHolder(val binding:ListitemCommDetailBinding,val context: Context): RecyclerView.ViewHolder(binding.root){
     fun setCommDetail(commDetail: CommDetailCommentsRequest){
-        binding.textName.text="익명${commentIndex.indexOf(commDetail.writerId) + 1}" // 익명 처리해야함.
+        binding.textName.text="익명${commentIndex!!.indexOf(commDetail.writerId) + 1}" // 익명 처리해야함.
         val hour=commDetail.regDate?.subSequence(11,13).toString().toInt()
         val min=(commDetail.regDate?.subSequence(14,16).toString().toInt())
 
@@ -66,7 +67,8 @@ class CommDetailHolder(val binding:ListitemCommDetailBinding,val context: Contex
                         Callback<Void> {
                         override fun onResponse(call: Call<Void>, response: Response<Void>) {
                             Log.d("COMM_DELETE",response.message().toString())
-                            //리프레시 필요.
+                            refresh()
+
                         }
                         override fun onFailure(call: Call<Void>, t: Throwable) {
                             Log.d("COMM_DELETE",t.message.toString())

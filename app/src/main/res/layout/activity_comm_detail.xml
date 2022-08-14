@@ -39,8 +39,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/comm_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="30dp">
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
@@ -155,13 +166,17 @@
                     tools:ignore="TouchTargetSizeCheck" />
 
             </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerComment"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:nestedScrollingEnabled="false"
-                tools:listitem="@layout/listitem_comm_detail" />
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:nestedScrollingEnabled="false"
+                    tools:listitem="@layout/listitem_comm_detail" />
+                </RelativeLayout>
 
             <TextView
                 android:id="@+id/textView17"
@@ -217,4 +232,6 @@
 
 
     </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
