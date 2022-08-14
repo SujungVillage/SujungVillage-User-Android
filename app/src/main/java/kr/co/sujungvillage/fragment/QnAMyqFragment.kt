@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.sujungvillage.QnAWriteActivity
@@ -28,11 +29,11 @@ class QnAMyqFragment : Fragment() {
         val token = shared?.getString("token", "error").toString()
 
         // 내 질문 리스트 불러오기
-        loadQuestionData(token, binding.recycleQuestion)
+        loadQuestionData(token, binding.recycleQuestion, binding.textExist)
 
         // Swipe Refresh 버튼 연결
         binding.swipe.setOnRefreshListener {
-            loadQuestionData(token, binding.recycleQuestion)
+            loadQuestionData(token, binding.recycleQuestion, binding.textExist)
             binding.swipe.isRefreshing = false
         }
 
@@ -46,12 +47,19 @@ class QnAMyqFragment : Fragment() {
     }
 
     // 내 질문 리스트 조회 함수
-    fun loadQuestionData(token: String, recycleQuestion: RecyclerView) {
+    fun loadQuestionData(token: String, recycleQuestion: RecyclerView, text: TextView) {
         // 내 질문 리스트 조회 API 연결
         RetrofitBuilder.qnaApi.myqGet(token).enqueue(object: Callback<List<MyqGetResultDTO>> {
             override fun onResponse(call: Call<List<MyqGetResultDTO>>, response: Response<List<MyqGetResultDTO>>) {
                 Log.d("MY_QUESTION_GET", "내 질문 리스트 조회 성공")
                 Log.d("MY_QUESTION_GET", "response : " + response.body().toString())
+
+                // 작성된 질문이 없는 경우
+                if (response.body()?.size == 0) {
+                    text.visibility = View.VISIBLE
+                } else {
+                    text.visibility = View.GONE
+                }
 
                 // 어댑터 연결
                 val myqList: MutableList<MyqGetResultDTO> = mutableListOf()

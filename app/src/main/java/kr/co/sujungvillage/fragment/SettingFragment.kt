@@ -37,7 +37,7 @@ class SettingFragment : Fragment() {
         }
 
         // 알람 버튼 초기화
-        if(shared!!.getBoolean("alarm", false)) {
+        if(shared!!.getBoolean("alarm", true)) {
             binding.switchAlarm.isChecked = true
         }
 
@@ -67,6 +67,7 @@ class SettingFragment : Fragment() {
             else editor?.putBoolean("alarm", false)
             editor?.apply()
         }
+
         // 성신 포탈 버튼 연결
         binding.layoutPortal.setOnClickListener {
             var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://portal.sungshin.ac.kr/sso/login.jsp"))

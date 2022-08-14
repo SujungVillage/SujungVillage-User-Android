@@ -64,8 +64,28 @@ class HomeFragment : Fragment() {
         }
         // 2. 점호 버튼 연결
         binding.btnRollCall.setOnClickListener {
-            var intent = Intent(this.activity, RollcallActivity::class.java)
-            startActivity(intent)
+            // 현재 점호 활성화 여부 조회 API 연결
+            RetrofitBuilder.rollcallApi.rollcallIsAvailable(token).enqueue(object: Callback<Boolean> {
+                override fun onResponse(call: Call<Boolean>, response: Response<Boolean>) {
+                    Log.d("ROLLCALL_IS_AVAILABLE", "점호 활성화 여부 조회 성공")
+                    Log.d("ROLLCALL_IS_AVAILABLE", "response : " + response.body())
+
+                    // 점호 활성화 시간인 경우
+                    if (response.body() == true) {
+                        var intent = Intent(activity, RollcallActivity::class.java)
+                        startActivity(intent)
+                    }
+                    // 점호 비활성화 시간인 경우
+                    else {
+                        Toast.makeText(activity, "현재 진행 중인 점호가 없습니다.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<Boolean>, t: Throwable) {
+                    Log.e("ROLLCALL_IS_AVAILABLE", "점호 활성화 여부 조회 실패")
+                    Log.e("ROLLCALL_IS_AVAILABLE", t.message.toString())
+                }
+            })
         }
         // 3. 공지사항 버튼 연결
         binding.btnNotice.setOnClickListener {

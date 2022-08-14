@@ -1,5 +1,5 @@
 package kr.co.sujungvillage.base
 
-interface commDetailOnRefresh {
+interface CommDetailOnRefresh {
     fun onClick()
 }

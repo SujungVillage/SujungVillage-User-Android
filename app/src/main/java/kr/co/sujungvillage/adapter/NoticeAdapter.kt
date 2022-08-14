@@ -30,8 +30,7 @@ class NoticeAdapter : RecyclerView.Adapter<NoticeHolder>() {
 class NoticeHolder(val binding: ListitemNoticePostBinding): RecyclerView.ViewHolder(binding.root) {
     fun setNotice(notice: NoticeRequestResultDTO) {
         binding.textId.text = "${notice.id}"
-        // ★★★ 기숙사 받아오기
-        binding.textDormitory.text = "전체"
+        binding.textDormitory.text = notice.dormitory
         binding.textTitle.text = "${notice.title}"
         binding.textDate.text = "${notice.date.subSequence(0, 4)}.${notice.date.subSequence(5, 7)}.${notice.date.subSequence(8, 10)}"
 
