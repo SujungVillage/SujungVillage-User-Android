@@ -2,20 +2,23 @@ package kr.co.sujungvillage.adapter
 
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import kr.co.sujungvillage.CommDetailActivity
 import kr.co.sujungvillage.CommDetailActivity.Companion.commentIndex
 import kr.co.sujungvillage.CommDetailActivity.Companion.studentNum
 import kr.co.sujungvillage.CommDetailActivity.Companion.token
 import kr.co.sujungvillage.base.hideKeyboard
 import kr.co.sujungvillage.data.CommDetailCommentsRequest
 import kr.co.sujungvillage.databinding.ListitemCommDetailBinding
+import kr.co.sujungvillage.fragment.CommFragment
 import kr.co.sujungvillage.retrofit.RetrofitBuilder
-import org.threeten.bp.zone.ZoneRulesProvider.refresh
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -67,7 +70,10 @@ class CommDetailHolder(val binding:ListitemCommDetailBinding,val context: Contex
                         Callback<Void> {
                         override fun onResponse(call: Call<Void>, response: Response<Void>) {
                             Log.d("COMM_DELETE",response.message().toString())
-                            refresh()
+                            /*val intent = Intent(binding.root.context, CommDetailActivity::class.java)
+                            intent.putExtra("postId", commDetail.postId)
+                            intent.putExtra("dormitory", CommFragment.dormitory)
+                            ContextCompat.startActivity(binding.root.context, intent, null)*/
 
                         }
                         override fun onFailure(call: Call<Void>, t: Throwable) {

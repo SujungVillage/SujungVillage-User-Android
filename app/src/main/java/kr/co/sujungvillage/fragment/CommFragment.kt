@@ -22,6 +22,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.sujungvillage.AlarmActivity
+import kr.co.sujungvillage.CommDetailActivity
 import kr.co.sujungvillage.CommWriteActivity
 import kr.co.sujungvillage.R
 import kr.co.sujungvillage.adapter.CommAdapter
@@ -37,6 +38,7 @@ class CommFragment : Fragment() {
 
     companion object{
         var dormitory="전체"
+        var studentNum=""
     }
     var commList: MutableList<CommDTO> = mutableListOf()
     var token=""
@@ -56,6 +58,7 @@ class CommFragment : Fragment() {
         var searchText=""
         // 재사생 학번 불러오기
         val shared = this.activity?.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
+        studentNum = shared?.getString("studentNum", "error").toString()
         token = shared?.getString("token", "error").toString()
 
         // 키보드 내리기
