@@ -65,7 +65,7 @@ class RollcallActivity : BaseActivity() {
         // 제출하기 버튼 연결 : 점호 신청 후 액티비티 종료
         binding.btnSubmit.setOnClickListener {
             // 이미지를 촬영하지 않은 경우
-            if (imgByteArr?.isEmpty() == true) {
+            if (imgByteArr == null) {
                 Toast.makeText(this, "점호 사진을 촬영해주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }

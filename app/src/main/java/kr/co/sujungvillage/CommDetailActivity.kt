@@ -8,20 +8,18 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.sujungvillage.adapter.CommDetailAdapter
-import kr.co.sujungvillage.base.commDetailOnRefresh
+import kr.co.sujungvillage.base.CommDetailOnRefresh
 import kr.co.sujungvillage.base.hideKeyboard
 import kr.co.sujungvillage.data.*
 import kr.co.sujungvillage.databinding.ActivityCommDetailBinding
-import kr.co.sujungvillage.databinding.ActivityNoticeBinding
 import kr.co.sujungvillage.retrofit.RetrofitBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CommDetailActivity : AppCompatActivity(),commDetailOnRefresh {
+class CommDetailActivity : AppCompatActivity(),CommDetailOnRefresh {
     companion object{
         var studentNum=""
         var token=""

@@ -27,4 +27,10 @@ interface StayoutService {
         @Header("jwt_token") token: String,
         @Query("exeatId") stayoutId: Long,
     ): Call<Void>
+
+    // 이번 달 외박 횟수 조회
+    @GET("/api/student/exeat/numOfExeats")
+    fun stayoutCount(
+        @Header("jwt_token") token: String,
+    ): Call<Int>
 }

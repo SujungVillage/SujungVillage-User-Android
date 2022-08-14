@@ -28,4 +28,10 @@ interface RollcallService {
         @Header("jwt_token") token: String,
         @Query("rollcallId") rollcallId: Long,
     ): Call<AppliedRollcallCheckResultDTO>
+
+    // 현재 점호 활성화 여부 조회
+    @GET("/api/common/rollcall/isRollcallAvailableNow")
+    fun rollcallIsAvailable(
+        @Header("jwt_token") token: String,
+    ): Call<Boolean>
 }

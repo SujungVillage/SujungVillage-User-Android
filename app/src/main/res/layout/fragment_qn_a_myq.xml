@@ -19,6 +19,15 @@
             android:background="#F5F5F5"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/text_exist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center_horizontal"
+                android:text="작성된 질문이 없습니다."
+                android:visibility="gone" />
+
             <ScrollView
                 android:id="@+id/scroll"
                 android:layout_width="match_parent"
@@ -27,7 +36,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycle_question"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:clipToPadding="false"
                     android:paddingTop="20dp"
                     android:paddingBottom="80dp"

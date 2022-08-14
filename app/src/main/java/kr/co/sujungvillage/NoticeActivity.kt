@@ -58,7 +58,7 @@ class NoticeActivity : AppCompatActivity() {
 
                 val noticeList: MutableList<NoticeRequestResultDTO> = mutableListOf()
                 for (info in response.body()!!) {
-                    var notice = NoticeRequestResultDTO(info.id, info.title, info.date)
+                    var notice = NoticeRequestResultDTO(info.id, info.title, info.dormitory, info.date)
                     noticeList.add(notice)
                 }
                 var adapter = NoticeAdapter()

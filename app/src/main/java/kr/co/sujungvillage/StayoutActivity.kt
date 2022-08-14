@@ -15,6 +15,7 @@ import kr.co.sujungvillage.base.hideKeyboard
 import kr.co.sujungvillage.data.StayoutCheckResultDTO
 import kr.co.sujungvillage.data.StayoutCreateDTO
 import kr.co.sujungvillage.databinding.ActivityStayoutBinding
+import kr.co.sujungvillage.fragment.HomeFragment
 import kr.co.sujungvillage.retrofit.RetrofitBuilder
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,6 +27,8 @@ class StayoutActivity : AppCompatActivity() {
 
     val binding by lazy { ActivityStayoutBinding.inflate(layoutInflater) }
 
+    var stayoutType = 0
+    var stayoutCount = 0
     var startDate = ""
     var endDate = ""
 
@@ -35,7 +38,6 @@ class StayoutActivity : AppCompatActivity() {
 
         // 재사생 학번 불러오기
         val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
-        val studentNum = shared?.getString("studentNum", "error").toString()
         val token = shared?.getString("token", "error").toString()
 
         // 키보드 내리기
@@ -45,13 +47,26 @@ class StayoutActivity : AppCompatActivity() {
         // 뒤로가기 버튼 클릭 시 액티비티 종료
         binding.btnBack.setOnClickListener { this.finish() }
 
+        // 이번 달 외박 횟수 조회 API 연결 (사전 계산)
+        RetrofitBuilder.stayoutApi.stayoutCount(token).enqueue(object : Callback<Int> {
+            override fun onResponse(call: Call<Int>, response: Response<Int>) {
+                Log.d("STAYOUT_COUNT", "이번 달 외박 횟수 조회 성공")
+                Log.d("STAYOUT_COUNT", "response : " + response.body().toString())
+
+                stayoutCount = response.body()!!.toInt()
+            }
+
+            override fun onFailure(call: Call<Int>, t: Throwable) {
+                Log.e("STAYOUT_COUNT", "이번 달 외박 횟수 조회 실패")
+                Log.e("STAYOUT_COUNT", t.message.toString())
+            }
+        })
+
         // 외박 유형 스피너 연결 및 커스텀
         binding.spinnerType.adapter = ArrayAdapter.createFromResource(this, R.array.stayout_type, R.layout.spinner_stayout_type)
         binding.spinnerType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                when(position) {
-                    // position - 0 : 단기 외박, 1 : 장기 외박
-                }
+                stayoutType = position
             }
             override fun onNothingSelected(p0: AdapterView<*>?) { }
         }
@@ -130,6 +145,11 @@ class StayoutActivity : AppCompatActivity() {
             // 종료일이 시작일보다 빠른 경우
             if (startDate.subSequence(8, 10).toString().toInt() > endDate.subSequence(8, 10).toString().toInt()) {
                 Toast.makeText(this, "잘못된 종료일입니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            // 이번 달 외박 사용 횟수를 초과한 경우
+            if (stayoutType == 0 && 4 - stayoutCount < endDate.subSequence(8, 10).toString().toInt() - startDate.subSequence(8, 10).toString().toInt()) {
+                Toast.makeText(this, "이번 달 사용 가능한 외박 횟수를 초과합니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 

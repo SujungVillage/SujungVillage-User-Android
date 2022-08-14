@@ -85,7 +85,7 @@
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/icon_comment_count"
             android:layout_gravity="center"
-            android:layout_marginRight="2dp"
+            android:layout_marginRight="4dp"
             />
 
         <TextView

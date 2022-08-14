@@ -43,6 +43,7 @@ class QnADetailActivity : AppCompatActivity() {
                 RetrofitBuilder.qnaApi.myqDelete(token, questionId).enqueue(object: Callback<Void> {
                     override fun onResponse(call: Call<Void>, response: Response<Void>) {
                         Log.d("MY_QUESTION_DELETE", "내 질문 삭제 성공")
+                        Log.d("MY_QUESTION_DELETE", "response : " + response.body())
 
                         Toast.makeText(this@QnADetailActivity, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
                         finish()
