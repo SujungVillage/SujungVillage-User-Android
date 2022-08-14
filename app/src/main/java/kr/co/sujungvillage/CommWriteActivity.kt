@@ -66,6 +66,7 @@ class CommWriteActivity : AppCompatActivity() {
                     RetrofitBuilder.communityApi.commWrite(token,commWriteInfo).enqueue(object: Callback<CommWriteResultDTO>{
                         override fun onResponse(call: Call<CommWriteResultDTO>, response: Response<CommWriteResultDTO>) {
                             Log.d("COMM_WRITE", response.body().toString())
+                            setResult(RESULT_OK)
                             finish()
                         }
 
