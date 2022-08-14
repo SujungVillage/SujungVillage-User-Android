@@ -72,6 +72,7 @@ class CommDetailActivity : AppCompatActivity(),commDetailOnRefresh {
                     RetrofitBuilder.communityApi.commDelete(token,postId).enqueue(object :Callback<Void>{
                         override fun onResponse(call: Call<Void>, response: Response<Void>) {
                             Log.d("COMM_DELETE",response.body().toString())
+
                             finish()
                         }
                         override fun onFailure(call: Call<Void>, t: Throwable) {
