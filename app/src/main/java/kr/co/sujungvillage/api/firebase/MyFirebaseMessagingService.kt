@@ -17,14 +17,14 @@ import kr.co.sujungvillage.R
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     // 메시지 수신 시 호출 함수
     override fun onMessageReceived(message: RemoteMessage) {
+        if (message.data.isNotEmpty()) {
+            Log.d("MESSAGE_RECEIVED", "message data: ${message.data}")
+        }
+
         // 알람 설정이 false일 경우 종료
         val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
         if (!shared?.getBoolean("alarm", true)!!) {
             return
-        }
-
-        if (message.data.isNotEmpty()) {
-            Log.d("MESSAGE_RECEIVED", "message data payload: ${message.data}")
         }
 
         // 알림 제목, 내용 설정
