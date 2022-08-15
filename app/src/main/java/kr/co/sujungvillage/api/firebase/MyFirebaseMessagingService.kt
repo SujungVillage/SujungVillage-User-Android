@@ -11,6 +11,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.prolificinteractive.materialcalendarview.CalendarDay
 import kr.co.sujungvillage.MainActivity
 import kr.co.sujungvillage.R
 
@@ -69,8 +70,32 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
+        // 로컬에 알림 추가
+        val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
+        val editor = shared.edit()
 
-        // 안드로이드 오레오 알림채널에 필요한 추가사항
+        // 커뮤니티 알림인 경우
+        if (messageBody["title"] == "새로운 댓글이 작성되었습니다.") {
+            val count = shared.getInt("commAlarm", 0) + 1
+            editor.putInt("commAlarm", count)
+            editor.putString("commAlarmTitle${count}", messageBody["title"])
+            editor.putString("commAlarmBody${count}", messageBody["body"])
+            editor.putBoolean("commAlarmRead${count}", false)
+            editor.putString("commAlarmDate${count}", "${CalendarDay.today().year}-${CalendarDay.today().month}-${CalendarDay.today().day}")
+            editor.apply()
+        }
+        // 앱 알림인 경우
+        else {
+            val count = shared.getInt("appAlarm", 0) + 1
+            editor.putInt("appAlarm", count)
+            editor.putString("appAlarmTitle${count}", messageBody["title"])
+            editor.putString("appAlarmBody${count}", messageBody["body"])
+            editor.putBoolean("appAlarmRead${count}", false)
+            editor.putString("appAlarmDate${count}", "${CalendarDay.today().year}-${CalendarDay.today().month}-${CalendarDay.today().day}")
+            editor.apply()
+        }
+
+        // 안드로이드 오레오 알림 채널에 필요한 추가사항
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(channelId, "Channel human readable title", NotificationManager.IMPORTANCE_DEFAULT)
             notificationManager.createNotificationChannel(channel)
