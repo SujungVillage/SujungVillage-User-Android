@@ -23,7 +23,7 @@ class AlarmCommFragment : Fragment() {
 
         val alarmList: MutableList<Alarm> = mutableListOf()
         if (count!! > 0) {
-            for (i: Int in 1..count!!) {
+            for (i: Int in count downTo 1) {
                 val title = shared.getString("commAlarmTitle${i}", "알림 제목 오류")
                 val content = shared.getString("commAlarmBody${i}", "알림 내용 오류")
                 val isRead = shared.getBoolean("commAlarmRead${i}", true)
