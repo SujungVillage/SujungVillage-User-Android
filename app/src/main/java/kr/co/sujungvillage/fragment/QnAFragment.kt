@@ -1,5 +1,6 @@
 package kr.co.sujungvillage.fragment
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -21,6 +22,10 @@ class QnAFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentQnABinding.inflate(inflater, container, false)
 
+        // 로컬에서 알림 읽음 여부 가져오기
+        val shared = this.activity?.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
+        val read = shared?.getBoolean("alarmRead", true)
+
         // 프래그먼트 전환 상황을 저장하지 않음 (아니면 오류 발생)
         binding.viewPager.isSaveEnabled = false
 
@@ -28,6 +33,13 @@ class QnAFragment : Fragment() {
         binding.btnAlarm.setOnClickListener {
             var intent = Intent(this.activity, AlarmActivity::class.java)
             startActivity(intent)
+        }
+
+        // 읽음/안 읽음 처리
+        if (!read!!) {
+            binding.imgUnread.visibility = View.VISIBLE
+        } else {
+            binding.imgUnread.visibility = View.INVISIBLE
         }
 
         // viewPager와 tabLayout 연결

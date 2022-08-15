@@ -119,14 +119,17 @@ class CommDetailActivity : AppCompatActivity() {
                     binding.textTitle.text=response.body()?.title
                     binding.textCalDate.text="${response.body()?.regDate?.subSequence(0,4)}/${response.body()?.regDate?.subSequence(5, 7)}/${response.body()?.regDate?.subSequence(8, 10)} ${response.body()?.regDate?.subSequence(11,13).toString()}:${response.body()?.regDate?.subSequence(14,16).toString()}"
                     binding.textContent.text=response.body()?.content
+                    if (response.body()?.writerId.toString().toInt()>=99990000){
+                        binding.textAdmin.visibility=View.VISIBLE
+                    }
 
                     //관리자이면 관리자 마크 보이게
-                    if(response.body()?.id.toString().toInt()>=99990000){//관리자인 경우
+                    if (response.body()?.id.toString().toInt()>=99990000){//관리자인 경우
                         binding.textAdmin.visibility=View.VISIBLE
                     }
 
                     //글 작성자 id 와 studentNum이 같으면 삭제 버튼 보이게
-                    if(studentNum==response.body()?.writerId){
+                    if (studentNum==response.body()?.writerId){
                         binding.btnDelete.visibility= View.VISIBLE
                     }
 

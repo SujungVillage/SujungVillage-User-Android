@@ -26,9 +26,12 @@ class AlarmCommFragment : Fragment() {
             for (i: Int in count downTo 1) {
                 val title = shared.getString("commAlarmTitle${i}", "알림 제목 오류")
                 val content = shared.getString("commAlarmBody${i}", "알림 내용 오류")
-                val isRead = shared.getBoolean("commAlarmRead${i}", true)
+                val isRead = shared.getBoolean("commAlarmRead${i}", false)
                 val date = shared.getString("commAlarmDate${i}", "날짜 오류")
                 alarmList.add(Alarm(i.toLong(), title.toString(), content.toString(), isRead, date.toString()))
+                val editor = shared.edit()
+                editor.putBoolean("commAlarmRead${i}", true)
+                editor.apply()
             }
 
             var adapter = AlarmAppAdapter()

@@ -44,10 +44,8 @@ class CommDetailAdapter(val context:Context) :RecyclerView.Adapter<CommDetailHol
 class CommDetailHolder(val binding:ListitemCommDetailBinding,val context: Context): RecyclerView.ViewHolder(binding.root){
     fun setCommDetail(commDetail: CommDetailCommentsRequest){
         binding.textName.text="익명${commentIndex?.indexOf(commDetail.writerId)?.plus(1)}" // 익명 처리해야함.
-        val hour=commDetail.regDate?.subSequence(11,13).toString().toInt()
-        val min=(commDetail.regDate?.subSequence(14,16).toString().toInt())
 
-        binding.textCalDate.text="${commDetail.regDate?.subSequence(0,4)}/${commDetail.regDate?.subSequence(5, 7)}/${commDetail.regDate?.subSequence(8, 10)} ${hour}:${min}"
+        binding.textCalDate.text="${commDetail.regDate?.subSequence(0,4)}/${commDetail.regDate?.subSequence(5, 7)}/${commDetail.regDate?.subSequence(8, 10)} ${commDetail.regDate?.subSequence(11,13).toString()}:${commDetail.regDate?.subSequence(14,16).toString()}"
         binding.textContent.text="${commDetail.content}"
 
         //관리자인지 아닌지 마크 띄우기

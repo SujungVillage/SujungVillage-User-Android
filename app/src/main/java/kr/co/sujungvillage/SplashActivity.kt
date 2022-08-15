@@ -42,6 +42,6 @@ class SplashActivity : AppCompatActivity() {
         }, 4600)
         android.os.Handler(Looper.getMainLooper()).postDelayed({
             finish()
-        }, 7000)
+        }, 9000)
     }
 }

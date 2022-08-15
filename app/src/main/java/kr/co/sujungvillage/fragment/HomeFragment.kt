@@ -46,6 +46,7 @@ class HomeFragment : Fragment() {
         // 재사생 학번, 토큰 불러오기
         val shared = this.activity?.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
         val token = shared?.getString("token", "error").toString()
+        val read = shared?.getBoolean("alarmRead", true)
 
         // lottie 이미지 회전
         binding.imgWave.rotationX = 180f
@@ -54,6 +55,13 @@ class HomeFragment : Fragment() {
         binding.btnAlarm.setOnClickListener {
             var intent = Intent(this.activity, AlarmActivity::class.java)
             startActivity(intent)
+        }
+
+        // 읽음/안 읽음 처리
+        if (!read!!) {
+            binding.imgUnread.visibility = View.VISIBLE
+        } else {
+            binding.imgUnread.visibility = View.INVISIBLE
         }
 
         // 홈화면 주요 기능 버튼 연결
@@ -286,6 +294,7 @@ class HomeFragment : Fragment() {
                         dialog.show()
 
                         // Alert Dialog 점호 정보 설정
+                        dialogLayout.findViewById<TextView>(R.id.text_title).text = "${date.date} 점호"
                         dialogLayout.findViewById<TextView>(R.id.text_dormitory).text = "•  점호 대상 : ${response.body()?.dormitory} 기숙사"
                         dialogLayout.findViewById<TextView>(R.id.btn_confirm).setOnClickListener { dialog.dismiss() }
                     }

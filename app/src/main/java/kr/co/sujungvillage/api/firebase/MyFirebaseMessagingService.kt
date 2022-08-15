@@ -61,7 +61,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         // 알림 설정
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.drawable.ic_main_background)
             .setContentTitle(messageBody["title"])
             .setContentText(messageBody["body"])
             .setAutoCancel(true)
@@ -74,6 +74,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         // 로컬에 알림 추가
         val shared = this.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
         val editor = shared.edit()
+        editor.putBoolean("alarmRead", false)
 
         // 커뮤니티 알림인 경우
         if (messageBody["title"] == "새로운 댓글이 작성되었습니다.") {
