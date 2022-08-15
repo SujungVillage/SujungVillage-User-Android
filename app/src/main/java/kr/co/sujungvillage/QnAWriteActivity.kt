@@ -57,6 +57,7 @@ class QnAWriteActivity : AppCompatActivity() {
                     Log.d("MY_QUESTION_WRITE", "질문 작성 성공")
                     Log.d("MY_QUESTION_WRITE", response.body().toString())
                     Toast.makeText(this@QnAWriteActivity, "질문이 등록되었습니다.", Toast.LENGTH_SHORT).show()
+                    setResult(RESULT_OK)
                     finish()
                 }
 
