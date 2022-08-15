@@ -12,6 +12,7 @@ class AlarmAppFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentAlarmAppBinding.inflate(inflater,container,false)
+
         return binding.root
     }
 }
