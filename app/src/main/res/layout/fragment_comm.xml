@@ -179,4 +179,16 @@
         android:src="@drawable/icon_comm_write"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <ImageView
+        android:id="@+id/img_unread"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="21dp"
+        android:visibility="invisible"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon_alarm_unread"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </FrameLayout>

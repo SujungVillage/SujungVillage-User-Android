@@ -1,8 +1,10 @@
 package kr.co.sujungvillage.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kr.co.sujungvillage.R
 import kr.co.sujungvillage.data.Alarm
 import kr.co.sujungvillage.databinding.ListitemAlarmCommBinding
 
@@ -29,5 +31,10 @@ class AlarmCommHolder(val binding: ListitemAlarmCommBinding): RecyclerView.ViewH
         binding.textTitle.text = alarm.title
         binding.textContent.text = alarm.content
         binding.textDate.text = alarm.date
+
+        // 아직 읽지 않은 알림인 경우
+        if (!alarm.isRead) {
+            binding.layout.setBackgroundResource(R.drawable.style_alarm_unread)
+        }
     }
 }

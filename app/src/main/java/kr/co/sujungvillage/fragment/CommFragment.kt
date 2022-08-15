@@ -60,6 +60,7 @@ class CommFragment : Fragment() {
         val shared = this.activity?.getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
         studentNum = shared?.getString("studentNum", "error").toString()
         token = shared?.getString("token", "error").toString()
+        val read = shared?.getBoolean("alarmRead", true)
 
         // 키보드 내리기
         binding.linear.setOnClickListener { this.hideKeyboard() }
@@ -68,6 +69,13 @@ class CommFragment : Fragment() {
         binding.btnAlarm.setOnClickListener {
             var intent = Intent(this.activity, AlarmActivity::class.java)
             startActivity(intent)
+        }
+
+        // 읽음/안 읽음 처리
+        if (!read!!) {
+            binding.imgUnread.visibility = View.VISIBLE
+        } else {
+            binding.imgUnread.visibility = View.INVISIBLE
         }
 
         // 검색 기능
