@@ -70,11 +70,6 @@ class CommDetailHolder(val binding:ListitemCommDetailBinding,val context: Contex
                         Callback<Void> {
                         override fun onResponse(call: Call<Void>, response: Response<Void>) {
                             Log.d("COMM_DELETE",response.message().toString())
-                            /*val intent = Intent(binding.root.context, CommDetailActivity::class.java)
-                            intent.putExtra("postId", commDetail.postId)
-                            intent.putExtra("dormitory", CommFragment.dormitory)
-                            ContextCompat.startActivity(binding.root.context, intent, null)*/
-
                         }
                         override fun onFailure(call: Call<Void>, t: Throwable) {
                             Log.d("COMM_DELETE",t.message.toString())

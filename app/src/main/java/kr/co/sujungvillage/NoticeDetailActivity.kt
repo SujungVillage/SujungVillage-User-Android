@@ -1,6 +1,7 @@
 package kr.co.sujungvillage
 
 import android.content.Context
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -34,17 +35,28 @@ class NoticeDetailActivity : AppCompatActivity() {
         // 공지사항 상세 조회 API 연결
         RetrofitBuilder.noticeApi.noticeDetailRequest(token, noticeId).enqueue(object: Callback<NoticeDetailResultDTO> {
             override fun onResponse(call: Call<NoticeDetailResultDTO>, response: Response<NoticeDetailResultDTO>) {
-                Log.d("NOTICE_DETAIL_REQUEST", "id : " + response.body()?.id)
-                Log.d("NOTICE_DETAIL_REQUEST", "user id : " + response.body()?.userId)
-                Log.d("NOTICE_DETAIL_REQUEST", "title : " + response.body()?.title)
-                Log.d("NOTICE_DETAIL_REQUEST", "content : " + response.body()?.content)
-                Log.d("NOTICE_DETAIL_REQUEST", "dormitory : " + response.body()?.dormitory)
-                Log.d("NOTICE_DETAIL_REQUEST", "register date : " + response.body()?.regDate)
-                Log.d("NOTICE_DETAIL_REQUEST", "modify date : " + response.body()?.modDate)
+                if (response.isSuccessful) {
+                    Log.d("NOTICE_DETAIL_REQUEST", "id : " + response.body()?.id)
+                    Log.d("NOTICE_DETAIL_REQUEST", "user id : " + response.body()?.userId)
+                    Log.d("NOTICE_DETAIL_REQUEST", "title : " + response.body()?.title)
+                    Log.d("NOTICE_DETAIL_REQUEST", "content : " + response.body()?.content)
+                    Log.d("NOTICE_DETAIL_REQUEST", "dormitory : " + response.body()?.dormitory)
+                    Log.d("NOTICE_DETAIL_REQUEST", "register date : " + response.body()?.regDate)
+                    Log.d("NOTICE_DETAIL_REQUEST", "modify date : " + response.body()?.modDate)
 
-                binding.textDormitory.text = response.body()?.dormitory
-                binding.textTitle.text = response.body()?.title
-                binding.textContent.text = response.body()?.content
+                    binding.textDormitory.text = response.body()?.dormitory
+                    binding.textTitle.text = response.body()?.title
+                    binding.textContent.text = response.body()?.content
+                }
+                else{
+                    val builder = androidx.appcompat.app.AlertDialog.Builder(this@NoticeDetailActivity)
+                    builder.setTitle("글이 존재하지 않습니다.")
+                        .setPositiveButton("확인", DialogInterface.OnClickListener { dialog, id ->
+                            Log.d("COMM_DETAIL", "글이 존재하지 않음")
+                            finish()
+                        })
+                    builder.show()
+                }
             }
 
             override fun onFailure(call: Call<NoticeDetailResultDTO>, t: Throwable) {
