@@ -113,7 +113,7 @@ class CommFragment : Fragment() {
 
         // 기숙사 스피너 연결 및 커스텀
         dormitory = binding.spinnerDormitory.getSelectedItem().toString()
-        var data=listOf("전체","성미료","성미관","풍림","엠시티","그레이스","이율","장수")
+        var data=listOf("전체","성미료","성미관","풍림","엠시티","그레이스","이율","장수","운정빌")
         binding.spinnerDormitory.adapter = ArrayAdapter.createFromResource(requireContext(), R.array.dormitory, R.layout.spinner_comm_dormitory)
         binding.spinnerDormitory.onItemSelectedListener=object:AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
