@@ -14,6 +14,7 @@ import com.google.firebase.messaging.RemoteMessage
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import kr.co.sujungvillage.MainActivity
 import kr.co.sujungvillage.R
+import kr.co.sujungvillage.SplashActivity
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     // 메시지 수신 시 호출 함수
@@ -51,11 +52,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     // 알림 전송 함수
     private fun sendNotification(messageBody: Map<String, String>) {
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, SplashActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-            PendingIntent.FLAG_ONE_SHOT)
-
+            PendingIntent.FLAG_IMMUTABLE)
         val channelId = getString(R.string.default_notification_channel_id)
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
@@ -67,6 +67,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             .setAutoCancel(true)
             .setSound(defaultSoundUri)
             .setContentIntent(pendingIntent)
+
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
