@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.sujungvillage.CommDetailActivity.Companion.token
@@ -29,23 +30,30 @@ class QnAFaqFragment : Fragment() {
         val token = shared?.getString("token", "error").toString()
 
         // FAQ 리스트 불러오기
-        loadFaqData(token, binding.recycleFaq)
+        loadFaqData(token, binding.recycleFaq, binding.textExist)
 
         // Swipe Refresh 버튼 연결
         binding.swipe.setOnRefreshListener {
-            loadFaqData(token, binding.recycleFaq)
+            loadFaqData(token, binding.recycleFaq, binding.textExist)
             binding.swipe.isRefreshing = false
         }
 
         return binding.root
     }
 
-    fun loadFaqData(token: String, recycleFaq: RecyclerView) {
+    fun loadFaqData(token: String, recycleFaq: RecyclerView, text: TextView) {
         // FAQ 리스트 조회 API 연결
         RetrofitBuilder.qnaApi.faqGet(token).enqueue(object : Callback<List<FaqGetResultDTO>> {
             override fun onResponse(call: Call<List<FaqGetResultDTO>>, response: Response<List<FaqGetResultDTO>>) {
                 Log.d("FAQ_GET", "FAQ 리스트 조회 성공")
                 Log.d("FAQ_GET", response.body().toString())
+
+                // 작성된 질문이 없는 경우
+                if (response.body()?.size == 0) {
+                    text.visibility = View.VISIBLE
+                } else {
+                    text.visibility = View.GONE
+                }
 
                 // 어댑터 연결
                 val faqList: MutableList<FaqGetResultDTO> = mutableListOf()
