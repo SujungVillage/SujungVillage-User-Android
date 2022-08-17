@@ -24,6 +24,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.app.Activity.RESULT_OK
+import androidx.core.view.marginEnd
 
 class QnAMyqFragment : Fragment() {
 
@@ -54,6 +55,9 @@ class QnAMyqFragment : Fragment() {
         binding.swipe.setOnRefreshListener {
             loadQuestionData(token, binding.recycleQuestion)
             binding.swipe.isRefreshing = false
+        }
+        binding.scroll.viewTreeObserver.addOnScrollChangedListener {
+            binding.swipe.isEnabled=(binding.scroll.scrollY==0)
         }
 
         // 글쓰기 버튼 연결

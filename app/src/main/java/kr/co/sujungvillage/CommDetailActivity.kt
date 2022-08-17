@@ -24,6 +24,7 @@ class CommDetailActivity : AppCompatActivity() {
         var token=""
         var commentIndex: MutableList<String>? = null
         var postId=0L
+        var postWriterId=0
     }
 
     val binding by lazy { ActivityCommDetailBinding.inflate(layoutInflater) }
@@ -49,10 +50,11 @@ class CommDetailActivity : AppCompatActivity() {
         //리프레시
         binding.swipe.setOnRefreshListener {
             refresh(token,studentNum,postId)
-            Log.d("REFRESH", "${studentNum},${postId}")
             binding.swipe.isRefreshing=false
         }
-
+        binding.scroll.viewTreeObserver.addOnScrollChangedListener {
+            binding.swipe.isEnabled=(binding.scroll.scrollY==0)
+        }
         //툴바 타이틀 설정
         binding.textToolbarTitle.text="${dormitory} 게시판"
         // 뒤로가기 버튼 연결
@@ -120,13 +122,14 @@ class CommDetailActivity : AppCompatActivity() {
                     binding.textCalDate.text="${response.body()?.regDate?.subSequence(0,4)}/${response.body()?.regDate?.subSequence(5, 7)}/${response.body()?.regDate?.subSequence(8, 10)} ${response.body()?.regDate?.subSequence(11,13).toString()}:${response.body()?.regDate?.subSequence(14,16).toString()}"
                     binding.textContent.text=response.body()?.content
                     //관리자 마크
-                    if (response.body()?.writerId.toString().toInt()>=99990000){
+                    postWriterId=response.body()?.writerId.toString().toInt()
+                    if (postWriterId>=99990000){
                         binding.textAdmin.visibility=View.VISIBLE
                     }
 
 
                     //글 작성자 id 와 studentNum이 같으면 삭제 버튼 보이게
-                    if (studentNum==response.body()?.writerId){
+                    if (studentNum==postWriterId.toString()){
                         binding.btnDelete.visibility= View.VISIBLE
                     }
 

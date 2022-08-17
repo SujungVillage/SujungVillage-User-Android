@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.sujungvillage.CommDetailActivity
 import kr.co.sujungvillage.CommDetailActivity.Companion.commentIndex
+import kr.co.sujungvillage.CommDetailActivity.Companion.postWriterId
 import kr.co.sujungvillage.CommDetailActivity.Companion.studentNum
 import kr.co.sujungvillage.CommDetailActivity.Companion.token
 import kr.co.sujungvillage.base.hideKeyboard
@@ -43,7 +44,7 @@ class CommDetailAdapter(val context:Context) :RecyclerView.Adapter<CommDetailHol
 }
 class CommDetailHolder(val binding:ListitemCommDetailBinding,val context: Context): RecyclerView.ViewHolder(binding.root){
     fun setCommDetail(commDetail: CommDetailCommentsRequest){
-        if(commDetail.writerId==studentNum){
+        if(postWriterId.toString()==commDetail.writerId){
             binding.textName.text="글쓴이"
         }
         else {

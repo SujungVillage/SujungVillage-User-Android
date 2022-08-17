@@ -39,6 +39,9 @@ class NoticeActivity : AppCompatActivity() {
             loadNoticeData(token)
             binding.swipe.isRefreshing = false
         }
+        binding.scroll.viewTreeObserver.addOnScrollChangedListener {
+            binding.swipe.isEnabled=(binding.scroll.scrollY==0)
+        }
     }
 
     // 공지사항 리스트 불러오기 함수
