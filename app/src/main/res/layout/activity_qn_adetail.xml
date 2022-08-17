@@ -112,13 +112,13 @@
 
                 <TextView
                     android:id="@+id/text_content"
-                    android:layout_width="323dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="41dp"
                     android:layout_marginTop="20dp"
+                    android:fontFamily="@font/light"
                     android:text="403호가 매일 밤마다 쿵쿵 뛰는 소리가 너무 심합니다.. 저번에 쪽지도 한 번 붙여봤는데 하루 이틀만 조용하더 니 지금 또 시끄럽습니다.. 403호에게 따로 주의주셨으 면 좋겠습니다."
                     android:textColor="#111111"
-                    android:fontFamily="@font/light"
                     android:textSize="13sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

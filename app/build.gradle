@@ -87,4 +87,7 @@ dependencies {
 
     // swipe refresh layout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    // touch mouse (시연 용도)
+//    implementation 'com.github.hongbeomi:TouchMouse:1.0.1'
 }

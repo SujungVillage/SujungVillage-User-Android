@@ -247,6 +247,7 @@ class HomeFragment : Fragment() {
                             } catch (e: Exception) {
                                 dialogLayout.findViewById<ImageView>(R.id.img_rollcall).setImageResource(R.drawable.img_home_calendar_img_error)
                             }
+                            dialogLayout.findViewById<TextView>(R.id.text_title).text = "${date.date} 점호"
                             dialogLayout.findViewById<TextView>(R.id.text_time).text = "참여 시각 : ${response.body()?.date?.subSequence(0, 10)} ${response.body()?.date?.subSequence(11, 19)}"
                             dialogLayout.findViewById<TextView>(R.id.text_location).text = "참여 위치 : ${response.body()?.location}"
                             dialogLayout.findViewById<TextView>(R.id.btn_confirm).setOnClickListener { dialog.dismiss() }
@@ -269,6 +270,7 @@ class HomeFragment : Fragment() {
                     dialog.show()
 
                     // Alert Dialog 확인 버튼 설정
+                    dialogLayout.findViewById<TextView>(R.id.text_title).text = "${date.date} 점호"
                     dialogLayout.findViewById<TextView>(R.id.btn_confirm).setOnClickListener { dialog.dismiss() }
 
                     return@setOnDateChangedListener
