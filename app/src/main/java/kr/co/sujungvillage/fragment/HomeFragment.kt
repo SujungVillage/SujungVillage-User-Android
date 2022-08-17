@@ -112,6 +112,10 @@ class HomeFragment : Fragment() {
             binding.swipe.isRefreshing = false
         }
 
+        binding.scrollView2.viewTreeObserver.addOnScrollChangedListener {
+            binding.swipe.isEnabled=(binding.scrollView2.scrollY==0)
+        }
+
         // 캘린더 좌우 버튼 연결
         binding.calendar.setOnMonthChangedListener { widget, date ->
             loadCalendarData(token, date.year.toString(), date.month.toString(), binding.calendar)

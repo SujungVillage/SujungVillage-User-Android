@@ -138,12 +138,14 @@ class CommFragment : Fragment() {
         binding.swipe.setOnRefreshListener {
             if(searchText.isEmpty()){//검색어가 없는 경우-> 그냥 refresh
                 refresh()
-                binding.swipe.isRefreshing=false
             }
             else{//검색어가 있는 경우 searchRefresh
                 searchRefresh(searchText)
-                binding.swipe.isRefreshing=false
             }
+            binding.swipe.isRefreshing=false
+        }
+        binding.scroll.viewTreeObserver.addOnScrollChangedListener {
+            binding.swipe.isEnabled=(binding.scroll.scrollY==0)
         }
         // 글 작성 버튼 연결
         binding.btnWrite.setOnClickListener {

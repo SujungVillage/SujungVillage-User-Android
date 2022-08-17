@@ -115,6 +115,7 @@
                         android:textColor="@color/gray_600"
                         android:textColorHint="#FF989898"
                         android:textSize="12sp"
+                        android:maxLength="30"
                         tools:ignore="TouchTargetSizeCheck" />
                 </LinearLayout>
             </LinearLayout>

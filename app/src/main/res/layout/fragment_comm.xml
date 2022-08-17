@@ -142,11 +142,14 @@
                 android:layout_height="match_parent"
                 tools:layout_editor_absoluteY="610dp">
 
-
                 <LinearLayout
                     android:id="@+id/linear_post"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycle_comm"
@@ -156,9 +159,8 @@
                         android:paddingHorizontal="16dp"
                         android:paddingBottom="80dp"
                         tools:listitem="@layout/listitem_comm" />
-
+                    </RelativeLayout>
                 </LinearLayout>
-
             </ScrollView>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
