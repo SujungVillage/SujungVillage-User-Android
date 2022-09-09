@@ -14,6 +14,14 @@
 - ⏪️ [RENAME] : 파일 이름 변경
 - ♻️ [REFACTOR] : 전면 수정
 
+<br>
+
+## 📌 References
+- [수정마을 발표 자료](https://github.com/b1urrrr/TheBluePlanet/files/9537863/default.pdf)
+- [▶ 수정마을 시연영상](https://user-images.githubusercontent.com/70993562/189418286-766a0428-2771-4b2f-a503-8f55df8673a2.mp4)
+
+<br>
+
 ## 📌 개인정보처리방침
 ```
 < 수정마을 >('https://github.com/SujungVillage/SujungVillage-Use'이하 '수정마을')은(는) 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.
