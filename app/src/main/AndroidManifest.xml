@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="kr.co.sujungvillage">
-
+    package="kr.co.sujungvillage" >
     <!-- 인터넷 권한 설정 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!-- 카메라 권한 설정 -->
-    <uses-permission android:name="android.permission.CAMERA" />
-    <!-- gps 위치 권한 설정 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 카메라 권한 설정 -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- gps 위치 권한 설정 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
@@ -21,7 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SujungVillage"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        tools:targetApi="31" >
+        <activity
+            android:name=".SignUpActivity"
+            android:exported="true" />
         <activity
             android:name=".QnAWriteActivity"
             android:exported="true"
@@ -56,7 +56,7 @@
             android:exported="true" />
         <activity
             android:name=".SplashActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -69,23 +69,14 @@
         <activity
             android:name=".StayoutActivity"
             android:exported="true"
-            android:windowSoftInputMode="stateHidden|adjustPan" />
-
-        <!-- FCM service 추가 -->
+            android:windowSoftInputMode="stateHidden|adjustPan" /> <!-- FCM service 추가 -->
         <service
             android:name=".api.firebase.MyFirebaseMessagingService"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-<!--        &lt;!&ndash; FCM 설정 &ndash;&gt;-->
-<!--        <meta-data-->
-<!--            android:name="com.google.firebase.messaging.default_notification_icon"-->
-<!--            android:resource="@drawable/icon_sujung_village" />-->
-<!--        <meta-data-->
-<!--            android:name="com.google.firebase.messaging.default_notification_color"-->
-<!--            android:resource="@color/primary" />-->
     </application>
+
 </manifest>
