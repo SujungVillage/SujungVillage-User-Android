@@ -198,6 +198,7 @@ class SignUpActivity : AppCompatActivity() {
                         RetrofitBuilder.signupApi.signUp(signUpInfo).enqueue(object :Callback<Void>{
                             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                                 Log.d("SIGN_UP",response.body().toString())
+                                finish()
                             }
                             override fun onFailure(call: Call<Void>, t: Throwable) {
                                 Log.e("SIGN_UP",t.message.toString())
