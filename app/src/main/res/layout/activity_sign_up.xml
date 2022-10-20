@@ -8,6 +8,7 @@
     tools:context=".SignUpActivity">
 
   <LinearLayout
+      android:id="@+id/linear"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:orientation="vertical"
@@ -35,18 +36,9 @@
           app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/comm_layout"
+        android:id="@+id/sign_up_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-      <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-          android:id="@+id/swipe"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          android:layout_marginTop="65dp">
       <ScrollView
           android:id="@+id/scroll"
           android:layout_width="match_parent"
@@ -54,7 +46,7 @@
           android:layout_marginTop="65dp">
 
       <LinearLayout
-          android:id="@+id/linear_post"
+          android:id="@+id/linear_sign_up"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:paddingLeft="40dp"
@@ -78,17 +70,18 @@
             android:gravity="center">
 
           <EditText
-              android:id="@+id/textView2"
+              android:id="@+id/edit_id"
               android:layout_width="wrap_content"
               android:layout_height="27dp"
               android:layout_weight="1"
-              android:padding="3dp"
-              android:textSize="12dp"
               android:background="@drawable/style_signup_unselected"
-              />
+              android:padding="3dp"
+              android:maxLength="255"
+              android:inputType="text"
+              android:textSize="12dp" />
 
           <TextView
-              android:id="@+id/textView3"
+              android:id="@+id/text_id_overlap_check"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_weight="0"
@@ -103,16 +96,15 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView23"
+            android:id="@+id/text_id_overlap_check_result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="12dp"
-            android:fontFamily="@font/regular"
-            android:textColor="@color/primary"
-            android:visibility="invisible"
             android:layout_marginTop="6dp"
-            android:text="사용 가능한 아이디입니다." />
+            android:layout_weight="1"
+            android:fontFamily="@font/regular"
+            android:text="중복확인을 해주세요."
+            android:textColor="#FF0000"
+            android:textSize="12dp" />
 
         <TextView
             android:id="@+id/textView4"
@@ -126,12 +118,14 @@
             android:layout_marginTop="39dp"/>
 
         <EditText
-            android:id="@+id/textView5"
+            android:id="@+id/edit_password"
             android:layout_width="match_parent"
             android:layout_height="27dp"
             android:background="@drawable/style_signup_unselected"
             android:padding="3dp"
             android:textSize="12dp"
+            android:maxLength="255"
+            android:inputType="textPassword"
             />
 
         <TextView
@@ -147,16 +141,18 @@
             />
 
         <EditText
-            android:id="@+id/textView7"
+            android:id="@+id/edit_password_check"
             android:layout_width="match_parent"
             android:layout_height="27dp"
             android:background="@drawable/style_signup_unselected"
             android:padding="3dp"
             android:textSize="12dp"
+            android:maxLength="255"
+            android:inputType="textPassword"
             />
 
         <TextView
-            android:id="@+id/textView24"
+            android:id="@+id/text_password_check_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="invisible"
@@ -192,9 +188,11 @@
                 android:layout_marginBottom="8dp"/>
 
             <EditText
-                android:id="@+id/textView9"
+                android:id="@+id/edit_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="255"
+                android:inputType="text"
                 android:background="@drawable/style_signup_unselected"
                 />
           </LinearLayout>
@@ -221,10 +219,12 @@
                 android:orientation="horizontal">
 
               <EditText
-                  android:id="@+id/textView12"
+                  android:id="@+id/edit_number1"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_weight="1"
+                  android:maxLength="3"
+                  android:inputType="number"
                   android:background="@drawable/style_signup_unselected"
                   />
 
@@ -240,10 +240,12 @@
                   android:src="@drawable/icon_signup_bar" />
 
               <EditText
-                  android:id="@+id/textView13"
+                  android:id="@+id/edit_number2"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_weight="1"
+                  android:maxLength="4"
+                  android:inputType="number"
                   android:background="@drawable/style_signup_unselected"
                   />
               <ImageButton
@@ -257,10 +259,12 @@
                   android:layout_marginHorizontal="3dp"
                   android:src="@drawable/icon_signup_bar" />
               <EditText
-                  android:id="@+id/textView14"
+                  android:id="@+id/edit_number3"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_weight="1"
+                  android:maxLength="4"
+                  android:inputType="number"
                   android:background="@drawable/style_signup_unselected"
                   />
             </LinearLayout>
@@ -291,9 +295,10 @@
                 android:text="기숙사" />
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/spinner_dormitory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:entries="@array/dormitory"
                 />
 
           </LinearLayout>
@@ -317,16 +322,18 @@
                 android:text="기숙사 호실" />
 
             <EditText
-                android:id="@+id/textView19"
+                android:id="@+id/edit_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="255"
+                android:inputType="text"
                 android:background="@drawable/style_signup_unselected"
                 />
           </LinearLayout>
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView22"
+            android:id="@+id/text_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="회원가입"
@@ -340,7 +347,6 @@
             android:background="@drawable/style_signup_submit"/>
       </LinearLayout>
       </ScrollView>
-      </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
       </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
