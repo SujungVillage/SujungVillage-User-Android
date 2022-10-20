@@ -1,25 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/p_light"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context=".LoginActivity">
 
-    <ImageView
-        android:id="@+id/img_icon"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginBottom="100dp"
-        android:src="@drawable/img_login_logo"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_icon"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="200">
+
+        <ImageView
+            android:id="@+id/img_icon"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/img_login_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_login"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="580"
+        android:background="@drawable/style_login_shadow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="TODO" />
+        app:layout_constraintStart_toStartOf="parent">
 
+        <TextView
+            android:id="@+id/text_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="67dp"
+            android:fontFamily="@font/semi_bold"
+            android:gravity="center"
+            android:text="LOGIN"
+            android:textColor="@color/black"
+            android:textSize="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edit_id"
+            android:layout_width="192dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/img_login_edittext"
+            android:fontFamily="@font/medium"
+            android:hint="ID"
+            android:lines="1"
+            android:paddingStart="15dp"
+            android:textColor="@color/gray_600"
+            android:textColorHint="#FF727272"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_login" />
+
+        <EditText
+            android:id="@+id/edit_password"
+            android:layout_width="192dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/img_login_edittext"
+            android:fontFamily="@font/medium"
+            android:hint="PW"
+            android:inputType="textPassword"
+            android:lines="1"
+            android:paddingStart="15dp"
+            android:textColor="@color/gray_600"
+            android:textColorHint="#FF727272"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_id" />
+
+        <CheckBox
+            android:id="@+id/check_autoLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:checked="false"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:layout_marginEnd="1dp"
+            android:gravity="center_vertical"
+            android:drawableLeft="@drawable/selector_icon_login_checkbox"
+            android:drawablePadding="5dp"
+            android:button="@null"
+            android:text="자동 로그인"
+            android:textColor="#FF000000"
+            android:fontFamily="@font/medium"
+            app:layout_constraintEnd_toEndOf="@id/edit_password"
+            app:layout_constraintTop_toBottomOf="@+id/edit_password" />
+
+        <TextView
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="78dp"
+            android:layout_marginHorizontal="32dp"
+            android:gravity="center"
+            android:backgroundTint="@color/primary"
+            android:background="@drawable/style_login_btn"
+            android:fontFamily="@font/bold"
+            android:text="로그인"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/check_autoLogin" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 구글 로그인 버튼 -->
+    <!--
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btn_signIn"
         android:layout_width="match_parent"
@@ -31,5 +139,5 @@
         android:outlineAmbientShadowColor="@color/nothing"
         android:layout_marginBottom="35dp"
         android:layout_marginHorizontal="35dp"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        -->
+</LinearLayout>

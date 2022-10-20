@@ -48,6 +48,8 @@ class HomeFragment : Fragment() {
         val token = shared?.getString("token", "error").toString()
         val read = shared?.getBoolean("alarmRead", true)
 
+        Log.d("TOKEN_TEST", token)
+
         // lottie 이미지 회전
         binding.imgWave.rotationX = 180f
 
