@@ -4,13 +4,17 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class LoginDTO(
-    @SerializedName("access_token")
-    val token: String,
+    @SerializedName("id")
+    val id: String,
+    @SerializedName("password")
+    val password: String,
     @SerializedName("fcm_token")
     val fcm: String,
-): Serializable {}
+): Serializable
 
 data class LoginResultDTO(
     @SerializedName("jwtToken")
     val token: String,
-): Serializable {}
+    @SerializedName("refreshToken")
+    val refreshToken: String,
+): Serializable
