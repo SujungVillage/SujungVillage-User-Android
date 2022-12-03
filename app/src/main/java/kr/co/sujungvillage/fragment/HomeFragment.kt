@@ -18,7 +18,7 @@ import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
-import kr.co.sujungvillage.*
+import kr.co.sujungvillage.* // ktlint-disable no-wildcard-imports
 import kr.co.sujungvillage.base.toBitmap
 import kr.co.sujungvillage.data.AppliedRollcallCheckResultDTO
 import kr.co.sujungvillage.data.HomeInfoResultDTO
