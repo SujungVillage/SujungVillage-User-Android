@@ -15,17 +15,12 @@
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/img_wave"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginLeft="-22dp"
-            android:layout_marginTop="-30dp"
+            android:layout_width="388.7dp"
+            android:layout_height="276.15dp"
             android:layout_marginRight="-7dp"
             android:layout_marginBottom="-45dp"
-            android:scaleType="fitCenter"
             app:layout_constraintBottom_toTopOf="@+id/layout_home"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/img_home_orange_wave" />
