@@ -78,6 +78,7 @@ class LoginActivity : AppCompatActivity() {
                             val editor = shared.edit()
                             editor.putString("studentNum", id)
                             editor.putString("token", response.body()?.token)
+                            editor.putString("refresh", response.body()?.refreshToken)
                             editor.apply()
 
                             var intent = Intent(this@LoginActivity, MainActivity::class.java)
