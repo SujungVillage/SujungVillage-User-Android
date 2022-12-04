@@ -2,13 +2,12 @@ package kr.co.sujungvillage.retrofit
 
 import com.google.gson.GsonBuilder
 import kr.co.sujungvillage.BuildConfig.BASE_URL
-import kr.co.sujungvillage.api.*
+import kr.co.sujungvillage.api.* // ktlint-disable no-wildcard-imports
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
     // 사용할 API 인터페이스 선언
-
     var communityApi: CommunityService
     var homeApi: HomeService
     var noticeApi: NoticeService
@@ -36,6 +35,6 @@ object RetrofitBuilder {
         stayoutApi = retrofit.create(StayoutService::class.java)
         loginApi = retrofit.create(LoginService::class.java)
         rewardApi = retrofit.create(RewardService::class.java)
-        signupApi=retrofit.create(SignUpService::class.java)
+        signupApi = retrofit.create(SignUpService::class.java)
     }
 }

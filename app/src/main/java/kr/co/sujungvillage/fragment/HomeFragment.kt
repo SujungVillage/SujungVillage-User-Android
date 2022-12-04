@@ -155,26 +155,29 @@ class HomeFragment : Fragment() {
                     "HOME_INFO",
                     "applied stayout days : " + response.body()?.stayoutDays.toString()
                 )
-                if (response.body()?.rollcallDays == null) return
-                dayRollcall?.clear()
-                idRollcall?.clear()
-                for (rollcallDay in response.body()?.rollcallDays!!) {
-                    dayRollcall?.add(rollcallDay.day)
-                    idRollcall?.add(rollcallDay.id)
+                if (response.body()?.rollcallDays != null) {
+                    dayRollcall?.clear()
+                    idRollcall?.clear()
+                    for (rollcallDay in response.body()?.rollcallDays!!) {
+                        dayRollcall?.add(rollcallDay.day)
+                        idRollcall?.add(rollcallDay.id)
+                    }
                 }
-                if (response.body()?.stayoutDays == null) return
-                dayStayout?.clear()
-                idStayout?.clear()
-                for (stayoutDay in response.body()?.stayoutDays!!) {
-                    dayStayout?.add(stayoutDay.day)
-                    idStayout?.add(stayoutDay.id)
+                if (response.body()?.stayoutDays != null) {
+                    dayStayout?.clear()
+                    idStayout?.clear()
+                    for (stayoutDay in response.body()?.stayoutDays!!) {
+                        dayStayout?.add(stayoutDay.day)
+                        idStayout?.add(stayoutDay.id)
+                    }
                 }
-                if (response.body()?.appliedDays == null) return
-                dayApplied?.clear()
-                idApplied?.clear()
-                for (appliedDay in response.body()?.appliedDays!!) {
-                    dayApplied?.add(appliedDay.day)
-                    idApplied?.add(appliedDay.id)
+                if (response.body()?.appliedDays != null) {
+                    dayApplied?.clear()
+                    idApplied?.clear()
+                    for (appliedDay in response.body()?.appliedDays!!) {
+                        dayApplied?.add(appliedDay.day)
+                        idApplied?.add(appliedDay.id)
+                    }
                 }
 
                 // 유저 정보 반영

@@ -3,25 +3,13 @@ package kr.co.sujungvillage
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.marginStart
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.SignInButton
-import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
 import com.google.firebase.messaging.FirebaseMessaging
-import kr.co.sujungvillage.BuildConfig.CLIENT_ID
 import kr.co.sujungvillage.base.hideKeyboard
 import kr.co.sujungvillage.base.showSnackbar
+import kr.co.sujungvillage.base.showToast
 import kr.co.sujungvillage.data.LoginDTO
 import kr.co.sujungvillage.data.LoginResultDTO
 import kr.co.sujungvillage.databinding.ActivityLoginBinding
@@ -51,47 +39,61 @@ class LoginActivity : AppCompatActivity() {
     fun loginBtnOnClick() {
         binding.btnLogin.setOnClickListener {
             // FCM 토큰 발급
-            FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    Log.d("FCM_TOKEN", "Fetching FCM registration token failed", task.exception)
-                    return@OnCompleteListener
+            FirebaseMessaging.getInstance().token.addOnCompleteListener(
+                OnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        Log.d("FCM_TOKEN", "Fetching FCM registration token failed", task.exception)
+                        return@OnCompleteListener
+                    }
+
+                    // Get new FCM registration token
+                    val token = task.result
+                    val msg = token.toString()
+                    Log.d("FCM_TOKEN", msg)
+
+                    // 재사생 로그인 API 연결
+                    val id = binding.editId.text.toString()
+                    val password = binding.editPassword.text.toString()
+                    RetrofitBuilder.loginApi.login(LoginDTO(id, password, token))
+                        .enqueue(object : Callback<LoginResultDTO> {
+                            override fun onResponse(
+                                call: Call<LoginResultDTO>,
+                                response: Response<LoginResultDTO>
+                            ) {
+                                if (response.isSuccessful) {
+                                    Log.d("LOGIN", "로그인 성공")
+                                    Log.d("LOGIN", "response : $response")
+                                    Log.d("LOGIN", "response body : ${response.body()}")
+
+                                    // 토큰, 학번 로컬에 저장하고 메인 화면으로 이동
+                                    val shared =
+                                        getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
+                                    val editor = shared.edit()
+                                    editor.putString("studentNum", id)
+                                    editor.putString("token", response.body()?.token)
+                                    editor.putString("refresh", response.body()?.refreshToken)
+                                    editor.apply()
+
+                                    showToast(getString(R.string.login_success_msg))
+                                    var intent =
+                                        Intent(this@LoginActivity, MainActivity::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                } else {
+                                    Log.e("LOGIN", "로그인 실패")
+                                    Log.e("LOGIN", "code : ${response.code()}")
+                                    Log.e("LOGIN", "message : ${response.message()}")
+                                    showSnackbar(binding.root, getString(R.string.login_fail_msg))
+                                }
+                            }
+
+                            override fun onFailure(call: Call<LoginResultDTO>, t: Throwable) {
+                                Log.e("LOGIN", "로그인 실패")
+                                showSnackbar(binding.root, getString(R.string.login_error_msg))
+                            }
+                        })
                 }
-
-                // Get new FCM registration token
-                val token = task.result
-                val msg = token.toString()
-                Log.d("FCM_TOKEN", msg)
-
-                // 재사생 로그인 API 연결
-                val id = binding.editId.text.toString()
-                val password = binding.editPassword.text.toString()
-                RetrofitBuilder.loginApi.login(LoginDTO(id, password, token))
-                    .enqueue(object : Callback<LoginResultDTO> {
-                        override fun onResponse(
-                            call: Call<LoginResultDTO>,
-                            response: Response<LoginResultDTO>
-                        ) {
-                            Log.d("LOGIN", "로그인 성공")
-
-                            // 토큰, 학번 로컬에 저장하고 메인 화면으로 이동
-                            val shared = getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
-                            val editor = shared.edit()
-                            editor.putString("studentNum", id)
-                            editor.putString("token", response.body()?.token)
-                            editor.putString("refresh", response.body()?.refreshToken)
-                            editor.apply()
-
-                            var intent = Intent(this@LoginActivity, MainActivity::class.java)
-                            startActivity(intent)
-                            finish()
-                        }
-
-                        override fun onFailure(call: Call<LoginResultDTO>, t: Throwable) {
-                            Log.e("LOGIN", "로그인 실패")
-                            showSnackbar(binding.root, "로그인 오류가 발생하였습니다.")
-                        }
-                    })
-            })
+            )
         }
     }
 

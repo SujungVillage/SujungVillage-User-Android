@@ -15,4 +15,7 @@
     <!-- Notification Strings -->
     <string name="default_notification_channel_id" translatable="false">수정마을</string>
     <string name="msg_token_fmt">dummy</string>
+    <string name="login_fail_msg">로그인에 실패하였습니다.</string>
+    <string name="login_error_msg">로그인 오류가 발생하였습니다.</string>
+    <string name="login_success_msg">로그인에 성공했습니다.</string>
 </resources>

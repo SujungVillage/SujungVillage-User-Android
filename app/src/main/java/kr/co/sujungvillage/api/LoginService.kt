@@ -17,9 +17,8 @@ interface LoginService {
  */
 
     // 재사생 로그인
-    @POST("/api/student/login")
+    @POST("api/student/login")
     fun login(
-        @Body loginInfo: LoginDTO,
+        @Body loginInfo: LoginDTO
     ): Call<LoginResultDTO>
 }
-
