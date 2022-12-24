@@ -24,7 +24,7 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        // 변수들
+
         var id_overlap_check = 0 // 0: 중복확인 필요, 1: 아이디 사용 가능, 2: 아이디 사용 불가능
         var id = ""
         var password = ""

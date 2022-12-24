@@ -28,6 +28,7 @@ class LoginActivity : AppCompatActivity() {
 
         initView()
         loginBtnOnClick()
+        signupBtnOnClick()
     }
 
     fun initView() {
@@ -94,6 +95,14 @@ class LoginActivity : AppCompatActivity() {
                         })
                 }
             )
+        }
+    }
+
+    fun signupBtnOnClick() {
+        binding.btnSignup.setOnClickListener {
+            var intent = Intent(this@LoginActivity, SignUpActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 

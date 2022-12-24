@@ -94,6 +94,11 @@ dependencies {
     // swipe refresh layout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
+    // logging intercepter
+    implementation platform('com.squareup.okhttp3:okhttp-bom:4.10.0')
+    implementation 'com.squareup.okhttp3:okhttp'
+    implementation 'com.squareup.okhttp3:logging-interceptor'
+
     // touch mouse (시연 용도)
 //    implementation 'com.github.hongbeomi:TouchMouse:1.0.1'
 }

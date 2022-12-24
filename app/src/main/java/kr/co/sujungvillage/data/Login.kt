@@ -16,3 +16,14 @@ data class LoginResultDTO(
     @SerializedName("refreshToken")
     val refreshToken: String
 ) : Serializable
+
+data class RequestTokenRefreshDto(
+    @SerializedName("user_id")
+    val userId: String,
+    @SerializedName("refresh_token")
+    val refreshToken: String
+) : Serializable
+
+data class ResponseTokenRefreshDto(
+    val jwtToken: String
+) : Serializable
