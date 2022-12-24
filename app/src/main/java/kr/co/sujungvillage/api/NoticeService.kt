@@ -19,6 +19,6 @@ interface NoticeService {
     @GET("/api/common/announcement/getAnnouncement")
     fun noticeDetailRequest(
         @Header("jwt_token") token: String,
-        @Query("announcementId") noticeId: Long
+        @Query("announcementId") noticeId: String
     ): Call<NoticeDetailResultDTO>
 }

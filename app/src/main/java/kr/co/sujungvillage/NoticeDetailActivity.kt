@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import kr.co.sujungvillage.base.showSnackbar
 import kr.co.sujungvillage.data.NoticeDetailResultDTO
 import kr.co.sujungvillage.databinding.ActivityNoticeDetailBinding
 import kr.co.sujungvillage.retrofit.RetrofitBuilder
@@ -27,13 +28,17 @@ class NoticeDetailActivity : AppCompatActivity() {
         val token = shared?.getString("token", "error").toString()
 
         // NoticeActivity에서 공지사항 ID 전달 받기
-        val noticeId = intent.getLongExtra("noticeId", -1)
+        val noticeId = intent.getStringExtra("noticeId")
+        if (noticeId == null) {
+            showSnackbar(binding.root, "공지사항 상세 조회에 실패하였습니다.")
+            finish()
+        }
 
         // 뒤로가기 버튼 연결
         binding.btnBack.setOnClickListener { finish() }
 
         // 공지사항 상세 조회 API 연결
-        RetrofitBuilder.noticeApi.noticeDetailRequest(token, noticeId)
+        RetrofitBuilder.noticeApi.noticeDetailRequest(token, noticeId!!)
             .enqueue(object : Callback<NoticeDetailResultDTO> {
                 override fun onResponse(
                     call: Call<NoticeDetailResultDTO>,
