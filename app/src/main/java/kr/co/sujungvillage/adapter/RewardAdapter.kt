@@ -8,10 +8,11 @@ import kr.co.sujungvillage.RewardActivity.Companion.rewardCount
 import kr.co.sujungvillage.data.RewardGetResultDTO
 import kr.co.sujungvillage.databinding.ListitemRewardTableBinding
 
-class RewardAdapter: RecyclerView.Adapter<RewardHolder>() {
+class RewardAdapter : RecyclerView.Adapter<RewardHolder>() {
     var rewardList = mutableListOf<RewardGetResultDTO>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RewardHolder {
-        val binding = ListitemRewardTableBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ListitemRewardTableBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RewardHolder(binding)
     }
 
@@ -25,7 +26,8 @@ class RewardAdapter: RecyclerView.Adapter<RewardHolder>() {
     }
 }
 
-class RewardHolder(val binding: ListitemRewardTableBinding): RecyclerView.ViewHolder(binding.root) {
+class RewardHolder(val binding: ListitemRewardTableBinding) :
+    RecyclerView.ViewHolder(binding.root) {
     fun setReward(reward: RewardGetResultDTO, position: Int) {
         if (reward.id == -1L) {
             binding.textDate.text = ""

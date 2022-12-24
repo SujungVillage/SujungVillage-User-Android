@@ -7,8 +7,8 @@ data class RollcallCreateDTO(
     @SerializedName("image")
     val imgUrl: ByteArray,
     @SerializedName("location")
-    val location: String,
-): Serializable {}
+    val location: String
+) : Serializable
 
 data class RollcallCreateResultDTO(
     @SerializedName("id")
@@ -22,8 +22,8 @@ data class RollcallCreateResultDTO(
     @SerializedName("rollcallDateTime")
     val time: String,
     @SerializedName("state")
-    val state: String,
-): Serializable {}
+    val state: String
+) : Serializable
 
 data class RollcallCheckResultDTO(
     @SerializedName("id")
@@ -33,8 +33,8 @@ data class RollcallCheckResultDTO(
     @SerializedName("end")
     val end: String,
     @SerializedName("dormitoryName")
-    val dormitory: String,
-): Serializable {}
+    val dormitory: String
+) : Serializable
 
 data class AppliedRollcallCheckResultDTO(
     @SerializedName("id")
@@ -48,5 +48,5 @@ data class AppliedRollcallCheckResultDTO(
     @SerializedName("rollcallDateTime")
     val date: String,
     @SerializedName("state")
-    val state: String,
-): Serializable {}
+    val state: String
+) : Serializable

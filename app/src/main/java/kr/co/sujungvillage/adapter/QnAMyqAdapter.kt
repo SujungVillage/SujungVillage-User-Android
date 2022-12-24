@@ -10,11 +10,12 @@ import kr.co.sujungvillage.R
 import kr.co.sujungvillage.data.MyqGetResultDTO
 import kr.co.sujungvillage.databinding.ListitemQnaMyqBinding
 
-class QnAMyqAdapter: RecyclerView.Adapter<QnAMyqHolder>() {
+class QnAMyqAdapter : RecyclerView.Adapter<QnAMyqHolder>() {
     var myqList = mutableListOf<MyqGetResultDTO>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QnAMyqHolder {
-        val binding = ListitemQnaMyqBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ListitemQnaMyqBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return QnAMyqHolder(binding)
     }
@@ -29,7 +30,7 @@ class QnAMyqAdapter: RecyclerView.Adapter<QnAMyqHolder>() {
     }
 }
 
-class QnAMyqHolder(val binding: ListitemQnaMyqBinding): RecyclerView.ViewHolder(binding.root) {
+class QnAMyqHolder(val binding: ListitemQnaMyqBinding) : RecyclerView.ViewHolder(binding.root) {
     fun setMyq(myq: MyqGetResultDTO) {
         binding.textTitle.text = myq.title
         binding.textState.text = if (myq.isAnswered) "답변 완료" else "미답변"

@@ -2,16 +2,14 @@ package kr.co.sujungvillage.fragment
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import kr.co.sujungvillage.AlarmActivity
 import kr.co.sujungvillage.adapter.QnAPagerAdapter
-import kr.co.sujungvillage.databinding.ActivityAlarmBinding
 import kr.co.sujungvillage.databinding.FragmentQnABinding
 
 class QnAFragment : Fragment() {
@@ -19,7 +17,11 @@ class QnAFragment : Fragment() {
 
     val binding by lazy { FragmentQnABinding.inflate(layoutInflater) }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val binding = FragmentQnABinding.inflate(inflater, container, false)
 
         // 로컬에서 알림 읽음 여부 가져오기
@@ -43,7 +45,8 @@ class QnAFragment : Fragment() {
         }
 
         // viewPager와 tabLayout 연결
-        binding.viewPager.adapter = this.activity?.let { QnAPagerAdapter(childFragmentManager, lifecycle) }
+        binding.viewPager.adapter =
+            this.activity?.let { QnAPagerAdapter(childFragmentManager, lifecycle) }
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = tabTitleArray[position]

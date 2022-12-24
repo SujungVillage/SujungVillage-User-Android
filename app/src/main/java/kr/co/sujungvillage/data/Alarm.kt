@@ -13,5 +13,5 @@ data class Alarm(
     @SerializedName("isRead")
     val isRead: Boolean,
     @SerializedName("date")
-    val date: String,
-): Serializable {}
+    val date: String
+) : Serializable

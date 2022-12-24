@@ -15,8 +15,8 @@ data class FaqGetResultDTO(
     @SerializedName("regDate")
     val date: String,
     @SerializedName("modDate")
-    val modDate: String,
-): Serializable {}
+    val modDate: String
+) : Serializable
 
 data class MyqGetResultDTO(
     @SerializedName("questionId")
@@ -26,15 +26,15 @@ data class MyqGetResultDTO(
     @SerializedName("redDate")
     val date: String,
     @SerializedName("answered")
-    val isAnswered: Boolean,
-): Serializable {}
+    val isAnswered: Boolean
+) : Serializable
 
 data class MyqDetailGetResultDTO(
     @SerializedName("question")
     val question: QnAQuestion,
     @SerializedName("answer")
-    val answer: QnAAnswer,
-): Serializable {}
+    val answer: QnAAnswer
+) : Serializable
 
 data class QnAQuestion(
     @SerializedName("id")
@@ -52,8 +52,8 @@ data class QnAQuestion(
     @SerializedName("reqDate")
     val reqDate: String,
     @SerializedName("modDate")
-    val modDate: String,
-): Serializable {}
+    val modDate: String
+) : Serializable
 
 data class QnAAnswer(
     @SerializedName("id")
@@ -65,8 +65,8 @@ data class QnAAnswer(
     @SerializedName("regDate")
     val regDate: String,
     @SerializedName("modDate")
-    val modDate: String,
-): Serializable {}
+    val modDate: String
+) : Serializable
 
 data class MyqWriteDTO(
     @SerializedName("title")
@@ -74,8 +74,8 @@ data class MyqWriteDTO(
     @SerializedName("content")
     val content: String,
     @SerializedName("anonymous")
-    val isAnonymous: Boolean,
-): Serializable {}
+    val isAnonymous: Boolean
+) : Serializable
 
 data class MyqWriteResultDTO(
     @SerializedName("id")
@@ -93,5 +93,5 @@ data class MyqWriteResultDTO(
     @SerializedName("reqDate")
     val reqDate: String,
     @SerializedName("modDate")
-    val modDate: String,
-): Serializable {}
+    val modDate: String
+) : Serializable

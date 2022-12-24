@@ -1,13 +1,13 @@
 package kr.co.sujungvillage
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import kr.co.sujungvillage.databinding.ActivityMainBinding
 import kr.co.sujungvillage.fragment.CommFragment
 import kr.co.sujungvillage.fragment.HomeFragment
 import kr.co.sujungvillage.fragment.QnAFragment
 import kr.co.sujungvillage.fragment.SettingFragment
-import kr.co.sujungvillage.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         binding.navigationBar.itemIconTintList = null // 아이콘 색상 그대로 유지
         binding.navigationBar.run {
             setOnNavigationItemSelectedListener {
-                when(it.itemId) {
+                when (it.itemId) {
                     R.id.home -> {
                         changeFragment(fragmentHome)
                     }

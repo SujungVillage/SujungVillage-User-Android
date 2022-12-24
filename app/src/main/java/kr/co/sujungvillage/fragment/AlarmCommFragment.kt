@@ -2,19 +2,22 @@ package kr.co.sujungvillage.fragment
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import kr.co.sujungvillage.R
 import kr.co.sujungvillage.adapter.AlarmAppAdapter
 import kr.co.sujungvillage.data.Alarm
 import kr.co.sujungvillage.databinding.FragmentAlarmCommBinding
 
 class AlarmCommFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val binding = FragmentAlarmCommBinding.inflate(inflater, container, false)
 
         // 알림 불러오기
@@ -24,13 +27,21 @@ class AlarmCommFragment : Fragment() {
         val alarmList: MutableList<Alarm> = mutableListOf()
         if (count!! > 0) {
             for (i: Int in count downTo 1) {
-                val title = shared.getString("commAlarmTitle${i}", "알림 제목 오류")
-                val content = shared.getString("commAlarmBody${i}", "알림 내용 오류")
-                val isRead = shared.getBoolean("commAlarmRead${i}", false)
-                val date = shared.getString("commAlarmDate${i}", "날짜 오류")
-                alarmList.add(Alarm(i.toLong(), title.toString(), content.toString(), isRead, date.toString()))
+                val title = shared.getString("commAlarmTitle$i", "알림 제목 오류")
+                val content = shared.getString("commAlarmBody$i", "알림 내용 오류")
+                val isRead = shared.getBoolean("commAlarmRead$i", false)
+                val date = shared.getString("commAlarmDate$i", "날짜 오류")
+                alarmList.add(
+                    Alarm(
+                        i.toLong(),
+                        title.toString(),
+                        content.toString(),
+                        isRead,
+                        date.toString()
+                    )
+                )
                 val editor = shared.edit()
-                editor.putBoolean("commAlarmRead${i}", true)
+                editor.putBoolean("commAlarmRead$i", true)
                 editor.apply()
             }
 

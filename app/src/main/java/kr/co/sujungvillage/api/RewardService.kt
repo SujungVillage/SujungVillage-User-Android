@@ -9,6 +9,6 @@ interface RewardService {
     // 상벌점 내역 리스트 조회
     @GET("/api/student/lmp/getLmpHistory")
     fun rewardGet(
-        @Header("jwt_token") token: String,
+        @Header("jwt_token") token: String
     ): Call<List<RewardGetResultDTO>>
 }

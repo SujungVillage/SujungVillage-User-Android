@@ -11,8 +11,8 @@ data class HomeInfoResultDTO(
     @SerializedName("appliedRollcallDays") // 점호 완료일 (점호 예정일과 비교 필요)
     val appliedDays: List<HomeDay>,
     @SerializedName("appliedExeatDays") // 외박 신청일
-    val stayoutDays: List<HomeDay>,
-): Serializable {}
+    val stayoutDays: List<HomeDay>
+) : Serializable
 
 data class HomeResidentInfo(
     @SerializedName("name")
@@ -24,12 +24,12 @@ data class HomeResidentInfo(
     @SerializedName("plusLMP")
     val plusLMP: Long,
     @SerializedName("minusLMP")
-    val minusLMP: Long,
-): Serializable {}
+    val minusLMP: Long
+) : Serializable
 
 data class HomeDay(
     @SerializedName("id")
     val id: Long,
     @SerializedName("day")
-    val day: Int,
-): Serializable {}
+    val day: Int
+) : Serializable

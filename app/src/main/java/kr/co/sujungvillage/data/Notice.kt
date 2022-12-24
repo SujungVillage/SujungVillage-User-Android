@@ -5,18 +5,18 @@ import java.io.Serializable
 
 data class NoticeRequestResultDTO(
     @SerializedName("id")
-    val id: Long,
+    val id: String,
     @SerializedName("title")
     val title: String,
     @SerializedName("dormitoryName")
     val dormitory: String,
     @SerializedName("regDate")
-    val date: String,
-): Serializable {}
+    val date: String
+) : Serializable
 
 data class NoticeDetailResultDTO(
     @SerializedName("id")
-    val id: Long,
+    val id: String,
     @SerializedName("writerId")
     val userId: String,
     @SerializedName("title")
@@ -28,5 +28,5 @@ data class NoticeDetailResultDTO(
     @SerializedName("modDate")
     val modDate: String,
     @SerializedName("dormitoryName")
-    val dormitory: String,
-): Serializable {}
+    val dormitory: String
+) : Serializable
