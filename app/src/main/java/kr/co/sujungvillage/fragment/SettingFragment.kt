@@ -22,7 +22,11 @@ import java.util.*
 
 class SettingFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val binding = FragmentSettingBinding.inflate(layoutInflater)
 
         // 재사생 학번 불러오기
@@ -45,28 +49,33 @@ class SettingFragment : Fragment() {
         }
 
         // 알람 버튼 초기화
-        if(shared!!.getBoolean("alarm", true)) {
+        if (shared!!.getBoolean("alarm", true)) {
             binding.switchAlarm.isChecked = true
         }
 
         // 설정 화면 정보 조회 API 연결 (홈 화면 정보 조회 API 활용)
-        RetrofitBuilder.homeApi.homeInfo(token, Calendar.YEAR.toString(), Calendar.MONTH.toString()).enqueue(object:
-            Callback<HomeInfoResultDTO> {
-            override fun onResponse(call: Call<HomeInfoResultDTO>, response: Response<HomeInfoResultDTO>) {
-                Log.d("SETTING_INFO", "설정 화면 정보 조회 성공")
-                Log.d("SETTING_INFO", "user : " + response.body()?.residentInfo.toString())
+        RetrofitBuilder.homeApi.homeInfo(token, Calendar.YEAR.toString(), Calendar.MONTH.toString())
+            .enqueue(object :
+                    Callback<HomeInfoResultDTO> {
+                    override fun onResponse(
+                        call: Call<HomeInfoResultDTO>,
+                        response: Response<HomeInfoResultDTO>
+                    ) {
+                        Log.d("SETTING_INFO", "설정 화면 정보 조회 성공")
+                        Log.d("SETTING_INFO", "user : " + response.body()?.residentInfo.toString())
 
-                // 유저 정보 반영
-                binding.textName.text = response.body()?.residentInfo?.name
-                binding.textEmail.text = studentNum + "@sungshin.ac.kr"
-                binding.textAddress.text = response.body()?.residentInfo?.dormitory + " | " + response.body()?.residentInfo?.address
-                }
+                        // 유저 정보 반영
+                        binding.textName.text = response.body()?.residentInfo?.name
+                        binding.textEmail.text = studentNum + "@sungshin.ac.kr"
+                        binding.textAddress.text =
+                            response.body()?.residentInfo?.dormitory + " | " + response.body()?.residentInfo?.address
+                    }
 
-            override fun onFailure(call: Call<HomeInfoResultDTO>, t: Throwable) {
-                Log.d("HOME_INFO", "설정 화면 정보 조회 실패")
-                Log.d("HOME_INFO", t.message.toString())
-            }
-        })
+                    override fun onFailure(call: Call<HomeInfoResultDTO>, t: Throwable) {
+                        Log.d("HOME_INFO", "설정 화면 정보 조회 실패")
+                        Log.d("HOME_INFO", t.message.toString())
+                    }
+                })
 
         // 알람 설정 버튼 연결
         binding.switchAlarm.setOnCheckedChangeListener { button, check ->
@@ -78,7 +87,8 @@ class SettingFragment : Fragment() {
 
         // 성신 포탈 버튼 연결
         binding.layoutPortal.setOnClickListener {
-            var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://portal.sungshin.ac.kr/sso/login.jsp"))
+            var intent =
+                Intent(Intent.ACTION_VIEW, Uri.parse("https://portal.sungshin.ac.kr/sso/login.jsp"))
             startActivity(intent)
         }
         // 앱 사용법 버튼 연결

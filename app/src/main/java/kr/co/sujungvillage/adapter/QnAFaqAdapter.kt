@@ -8,11 +8,12 @@ import kr.co.sujungvillage.R
 import kr.co.sujungvillage.data.FaqGetResultDTO
 import kr.co.sujungvillage.databinding.ListitemQnaFaqBinding
 
-class QnAFaqAdapter: RecyclerView.Adapter<QnAFaqHolder>() {
+class QnAFaqAdapter : RecyclerView.Adapter<QnAFaqHolder>() {
     var faqList = mutableListOf<FaqGetResultDTO>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QnAFaqHolder {
-        val binding = ListitemQnaFaqBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ListitemQnaFaqBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return QnAFaqHolder(binding)
     }
@@ -27,7 +28,7 @@ class QnAFaqAdapter: RecyclerView.Adapter<QnAFaqHolder>() {
     }
 }
 
-class QnAFaqHolder(val binding: ListitemQnaFaqBinding): RecyclerView.ViewHolder(binding.root) {
+class QnAFaqHolder(val binding: ListitemQnaFaqBinding) : RecyclerView.ViewHolder(binding.root) {
     fun setFaq(faq: FaqGetResultDTO) {
         binding.textQuestion.text = faq.question
         binding.textAnswer.text = faq.answer

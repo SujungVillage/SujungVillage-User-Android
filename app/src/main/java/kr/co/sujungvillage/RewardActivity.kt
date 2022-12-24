@@ -1,9 +1,9 @@
 package kr.co.sujungvillage
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.sujungvillage.adapter.RewardAdapter
 import kr.co.sujungvillage.data.RewardGetResultDTO
@@ -35,42 +35,54 @@ class RewardActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener { finish() }
 
         // 상벌점 내역 리스트 조회 API 연결
-        RetrofitBuilder.rewardApi.rewardGet(token).enqueue(object: Callback<List<RewardGetResultDTO>> {
-            override fun onResponse(call: Call<List<RewardGetResultDTO>>, response: Response<List<RewardGetResultDTO>>) {
-                Log.d("REWARD_GET", "상벌점 내역 리스트 조회 성공")
+        RetrofitBuilder.rewardApi.rewardGet(token)
+            .enqueue(object : Callback<List<RewardGetResultDTO>> {
+                override fun onResponse(
+                    call: Call<List<RewardGetResultDTO>>,
+                    response: Response<List<RewardGetResultDTO>>
+                ) {
+                    Log.d("REWARD_GET", "상벌점 내역 리스트 조회 성공")
 
-                val rewardList: MutableList<RewardGetResultDTO> = mutableListOf()
+                    val rewardList: MutableList<RewardGetResultDTO> = mutableListOf()
 
-                // 상벌점 내역이 존재하지 않는 경우
-                if (response.body()?.size == 0) {
-                    rewardList.add(RewardGetResultDTO(-1L, "", 0, "상벌점 내역이 없습니다.", ""))
-                }
-                // 상벌점 내역이 존재하는 경우
-                else {
-                    rewardCount = response.body()?.size!!
+                    // 상벌점 내역이 존재하지 않는 경우
+                    if (response.body()?.size == 0) {
+                        rewardList.add(RewardGetResultDTO(-1L, "", 0, "상벌점 내역이 없습니다.", ""))
+                    }
+                    // 상벌점 내역이 존재하는 경우
+                    else {
+                        rewardCount = response.body()?.size!!
 
-                    for (reward in response.body()!!) {
-                        if (reward.score < 0) totalPenalty -= reward.score
-                        else totalReward += reward.score
-                        rewardList.add(RewardGetResultDTO(reward.id, reward.userId, reward.score, reward.reason, reward.date))
+                        for (reward in response.body()!!) {
+                            if (reward.score < 0) totalPenalty -= reward.score
+                            else totalReward += reward.score
+                            rewardList.add(
+                                RewardGetResultDTO(
+                                    reward.id,
+                                    reward.userId,
+                                    reward.score,
+                                    reward.reason,
+                                    reward.date
+                                )
+                            )
+                        }
+
+                        // 상점 벌점 초기화
+                        binding.textReward.text = "${totalReward}점"
+                        binding.textPenalty.text = "${totalPenalty}점"
                     }
 
-                    // 상점 벌점 초기화
-                    binding.textReward.text = "${totalReward}점"
-                    binding.textPenalty.text = "${totalPenalty}점"
+                    var adapter = RewardAdapter()
+                    adapter.rewardList = rewardList
+                    binding.recyclerReward.adapter = adapter
+                    binding.recyclerReward.layoutManager = LinearLayoutManager(this@RewardActivity)
                 }
 
-                var adapter = RewardAdapter()
-                adapter.rewardList = rewardList
-                binding.recyclerReward.adapter = adapter
-                binding.recyclerReward.layoutManager = LinearLayoutManager(this@RewardActivity)
-            }
-
-            override fun onFailure(call: Call<List<RewardGetResultDTO>>, t: Throwable) {
-                Log.e("REWARD_GET", "상벌점 내역 리스트 조회 실패")
-                Log.e("REWARD_GET", t.message.toString())
-            }
-        })
+                override fun onFailure(call: Call<List<RewardGetResultDTO>>, t: Throwable) {
+                    Log.e("REWARD_GET", "상벌점 내역 리스트 조회 실패")
+                    Log.e("REWARD_GET", t.message.toString())
+                }
+            })
 
         setContentView(binding.root)
     }

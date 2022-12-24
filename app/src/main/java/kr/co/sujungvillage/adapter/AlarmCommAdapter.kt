@@ -1,6 +1,5 @@
 package kr.co.sujungvillage.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,11 +7,12 @@ import kr.co.sujungvillage.R
 import kr.co.sujungvillage.data.Alarm
 import kr.co.sujungvillage.databinding.ListitemAlarmCommBinding
 
-class AlarmCommAdapter: RecyclerView.Adapter<AlarmCommHolder>() {
+class AlarmCommAdapter : RecyclerView.Adapter<AlarmCommHolder>() {
     var alarmList = mutableListOf<Alarm>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlarmCommHolder {
-        val binding = ListitemAlarmCommBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ListitemAlarmCommBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return AlarmCommHolder(binding)
     }
 
@@ -26,7 +26,8 @@ class AlarmCommAdapter: RecyclerView.Adapter<AlarmCommHolder>() {
     }
 }
 
-class AlarmCommHolder(val binding: ListitemAlarmCommBinding): RecyclerView.ViewHolder(binding.root) {
+class AlarmCommHolder(val binding: ListitemAlarmCommBinding) :
+    RecyclerView.ViewHolder(binding.root) {
     fun setAlarm(alarm: Alarm) {
         binding.textTitle.text = alarm.title
         binding.textContent.text = alarm.content

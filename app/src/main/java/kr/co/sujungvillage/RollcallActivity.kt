@@ -1,31 +1,30 @@
 package kr.co.sujungvillage
 
-import android.content.Context
-import android.content.pm.PackageManager
-import androidx.core.app.ActivityCompat
-import kr.co.sujungvillage.databinding.ActivityRollcallBinding
-import java.io.IOException
-import java.util.*
 import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.location.*
+import android.location.Address
+import android.location.Geocoder
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Base64
 import android.util.Log
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import kr.co.sujungvillage.base.BaseActivity
-import kr.co.sujungvillage.base.toBitmap
 import kr.co.sujungvillage.base.toByteArray
 import kr.co.sujungvillage.data.RollcallCreateDTO
 import kr.co.sujungvillage.data.RollcallCreateResultDTO
+import kr.co.sujungvillage.databinding.ActivityRollcallBinding
 import kr.co.sujungvillage.retrofit.RetrofitBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.ByteArrayOutputStream
-
+import java.io.IOException
+import java.util.*
 
 class RollcallActivity : BaseActivity() {
 
@@ -35,7 +34,7 @@ class RollcallActivity : BaseActivity() {
     private val REQ_CAMERA = 101 // 카메라 촬영 요청
     private val REQUEST_CODE_LOCATION: Int = 2 // 위치 반환 요청
 
-    var imgByteArr : ByteArray? = null
+    var imgByteArr: ByteArray? = null
     var currentLocation: String = ""
     var latitude: Double? = null
     var longitude: Double? = null
@@ -80,8 +79,12 @@ class RollcallActivity : BaseActivity() {
             var rollcallInfo = RollcallCreateDTO(imgUrl!!, location)
 
             // 점호 신청 API 연결
-            RetrofitBuilder.rollcallApi.rollcallCreate(token, rollcallInfo).enqueue(object : Callback<RollcallCreateResultDTO> {
-                    override fun onResponse(call: Call<RollcallCreateResultDTO>, response: Response<RollcallCreateResultDTO>) {
+            RetrofitBuilder.rollcallApi.rollcallCreate(token, rollcallInfo)
+                .enqueue(object : Callback<RollcallCreateResultDTO> {
+                    override fun onResponse(
+                        call: Call<RollcallCreateResultDTO>,
+                        response: Response<RollcallCreateResultDTO>
+                    ) {
                         Log.d("ROLLCALL_CREATE", "점호 신청 성공")
                         Log.d("ROLLCALL_CREATE", "code : " + response.code().toString())
                         Log.d("ROLLCALL_CREATE", "error body : " + response.errorBody().toString())
@@ -102,7 +105,6 @@ class RollcallActivity : BaseActivity() {
                 })
         }
     }
-
 
     // 권한 승인
     override fun permissionGranted(requestCode: Int) {
@@ -130,7 +132,7 @@ class RollcallActivity : BaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_OK)
+        if (resultCode == RESULT_OK) {
             when (requestCode) {
                 REQ_CAMERA -> {
                     if (data?.extras?.get("data") != null) {
@@ -151,6 +153,7 @@ class RollcallActivity : BaseActivity() {
                     }
                 }
             }
+        }
     }
 
     // 현재 위치 반환 함수
@@ -167,7 +170,6 @@ class RollcallActivity : BaseActivity() {
             try {
                 mResultList = mGeocoder.getFromLocation(latitude!!, longitude!!, 1)
                 Log.d("CheckCurrentLocation", "mResultList : $mResultList")
-
             } catch (e: IOException) {
                 e.printStackTrace()
                 Log.d("CheckCurrentLocation", "오류발생")
@@ -190,11 +192,13 @@ class RollcallActivity : BaseActivity() {
     private fun getLatLng(): Location? {
         var currentLatLng: Location? = null
         if (ActivityCompat.checkSelfPermission(
-                applicationContext, android.Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-            && ActivityCompat.checkSelfPermission(
-                applicationContext, android.Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
+                applicationContext,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                    applicationContext,
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
                 this,
@@ -213,4 +217,3 @@ class RollcallActivity : BaseActivity() {
         return currentLatLng
     }
 }
-

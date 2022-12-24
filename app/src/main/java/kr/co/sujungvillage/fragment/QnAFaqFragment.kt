@@ -3,15 +3,13 @@ package kr.co.sujungvillage.fragment
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.sujungvillage.CommDetailActivity.Companion.token
-import kr.co.sujungvillage.R
 import kr.co.sujungvillage.adapter.QnAFaqAdapter
 import kr.co.sujungvillage.data.FaqGetResultDTO
 import kr.co.sujungvillage.databinding.FragmentQnAFaqBinding
@@ -22,7 +20,11 @@ import retrofit2.Response
 
 class QnAFaqFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val binding = FragmentQnAFaqBinding.inflate(layoutInflater, container, false)
 
         // 재사생 학번 불러오기
@@ -38,7 +40,7 @@ class QnAFaqFragment : Fragment() {
             binding.swipe.isRefreshing = false
         }
         binding.scroll.viewTreeObserver.addOnScrollChangedListener {
-            binding.swipe.isEnabled=(binding.scroll.scrollY==0)
+            binding.swipe.isEnabled = (binding.scroll.scrollY == 0)
         }
         return binding.root
     }
@@ -46,7 +48,10 @@ class QnAFaqFragment : Fragment() {
     fun loadFaqData(token: String, recycleFaq: RecyclerView, text: TextView) {
         // FAQ 리스트 조회 API 연결
         RetrofitBuilder.qnaApi.faqGet(token).enqueue(object : Callback<List<FaqGetResultDTO>> {
-            override fun onResponse(call: Call<List<FaqGetResultDTO>>, response: Response<List<FaqGetResultDTO>>) {
+            override fun onResponse(
+                call: Call<List<FaqGetResultDTO>>,
+                response: Response<List<FaqGetResultDTO>>
+            ) {
                 Log.d("FAQ_GET", "FAQ 리스트 조회 성공")
                 Log.d("FAQ_GET", response.body().toString())
 
@@ -60,7 +65,16 @@ class QnAFaqFragment : Fragment() {
                 // 어댑터 연결
                 val faqList: MutableList<FaqGetResultDTO> = mutableListOf()
                 for (info in response.body()!!) {
-                    faqList.add(FaqGetResultDTO(info.id, info.userId, info.question, info.answer, info.date, info.modDate))
+                    faqList.add(
+                        FaqGetResultDTO(
+                            info.id,
+                            info.userId,
+                            info.question,
+                            info.answer,
+                            info.date,
+                            info.modDate
+                        )
+                    )
                 }
                 val adapter = QnAFaqAdapter()
                 adapter.faqList = faqList

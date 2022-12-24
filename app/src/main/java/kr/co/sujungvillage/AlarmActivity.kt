@@ -1,8 +1,7 @@
 package kr.co.sujungvillage
 
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import kr.co.sujungvillage.adapter.AlarmPagerAdapter
 import kr.co.sujungvillage.databinding.ActivityAlarmBinding

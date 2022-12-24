@@ -13,5 +13,5 @@ data class RewardGetResultDTO(
     @SerializedName("reason")
     val reason: String,
     @SerializedName("regDate")
-    val date: String,
-): Serializable {}
+    val date: String
+) : Serializable

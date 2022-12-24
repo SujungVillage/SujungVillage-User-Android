@@ -15,13 +15,11 @@ import kr.co.sujungvillage.base.hideKeyboard
 import kr.co.sujungvillage.data.StayoutCheckResultDTO
 import kr.co.sujungvillage.data.StayoutCreateDTO
 import kr.co.sujungvillage.databinding.ActivityStayoutBinding
-import kr.co.sujungvillage.fragment.HomeFragment
 import kr.co.sujungvillage.retrofit.RetrofitBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
-
 
 class StayoutActivity : AppCompatActivity() {
 
@@ -63,12 +61,22 @@ class StayoutActivity : AppCompatActivity() {
         })
 
         // 외박 유형 스피너 연결 및 커스텀
-        binding.spinnerType.adapter = ArrayAdapter.createFromResource(this, R.array.stayout_type, R.layout.spinner_stayout_type)
+        binding.spinnerType.adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.stayout_type,
+            R.layout.spinner_stayout_type
+        )
         binding.spinnerType.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 stayoutType = position
             }
-            override fun onNothingSelected(p0: AdapterView<*>?) { }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
         }
 
         // 시작일 캘린터 버튼 연결 (팝업 캘린더에서 날짜 선택)
@@ -76,11 +84,11 @@ class StayoutActivity : AppCompatActivity() {
             val cal = Calendar.getInstance() // 캘린더뷰 생성
             val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, day ->
                 // month 두 자릿수로 저장
-                if (month < 10) startDate = "${year}-0${month + 1}"
-                else startDate = "${year}-${month + 1}"
+                if (month < 10) startDate = "$year-0${month + 1}"
+                else startDate = "$year-${month + 1}"
                 // day 두 자릿수로 저장
-                if (day < 10) startDate += "-0${day}"
-                else startDate += "-${day}"
+                if (day < 10) startDate += "-0$day"
+                else startDate += "-$day"
                 binding.textStartDate.text = startDate
                 binding.textStartDate.setTextColor(ContextCompat.getColor(this, R.color.gray_600))
                 if (endDate.isEmpty()) {
@@ -89,7 +97,13 @@ class StayoutActivity : AppCompatActivity() {
                     binding.textEndDate.setTextColor(ContextCompat.getColor(this, R.color.gray_600))
                 }
             }
-            DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
+            DatePickerDialog(
+                this,
+                dateSetListener,
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)
+            ).show()
         }
 
         // 종료일 캘린더 버튼 연결 (팝업 캘린더에서 날짜 선택)
@@ -97,15 +111,21 @@ class StayoutActivity : AppCompatActivity() {
             val cal = Calendar.getInstance() // 캘린더뷰 생성
             val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, day ->
                 // month 두 자릿수로 저장
-                if (month < 10) endDate = "${year}-0${month + 1}"
-                else endDate = "${year}-${month + 1}"
+                if (month < 10) endDate = "$year-0${month + 1}"
+                else endDate = "$year-${month + 1}"
                 // day 두 자릿수로 저장
-                if (day < 10) endDate += "-0${day}"
-                else endDate += "-${day}"
+                if (day < 10) endDate += "-0$day"
+                else endDate += "-$day"
                 binding.textEndDate.text = endDate
                 binding.textEndDate.setTextColor(ContextCompat.getColor(this, R.color.gray_600))
             }
-            DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show()
+            DatePickerDialog(
+                this,
+                dateSetListener,
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)
+            ).show()
         }
 
         // 기본 정보 기억하기 초기화
@@ -143,12 +163,16 @@ class StayoutActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             // 종료일이 시작일보다 빠른 경우
-            if (startDate.subSequence(8, 10).toString().toInt() > endDate.subSequence(8, 10).toString().toInt()) {
+            if (startDate.subSequence(8, 10).toString().toInt() > endDate.subSequence(8, 10)
+                .toString().toInt()
+            ) {
                 Toast.makeText(this, "잘못된 종료일입니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             // 이번 달 외박 사용 횟수를 초과한 경우
-            if (stayoutType == 0 && 4 - stayoutCount < endDate.subSequence(8, 10).toString().toInt() - startDate.subSequence(8, 10).toString().toInt()) {
+            if (stayoutType == 0 && 4 - stayoutCount < endDate.subSequence(8, 10).toString()
+                .toInt() - startDate.subSequence(8, 10).toString().toInt()
+            ) {
                 Toast.makeText(this, "이번 달 사용 가능한 외박 횟수를 초과합니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -161,36 +185,45 @@ class StayoutActivity : AppCompatActivity() {
             val endDate = binding.textEndDate.text.toString()
             val stayoutInfo = StayoutCreateDTO(destination, reason, emergency, startDate, endDate)
 
-            RetrofitBuilder.stayoutApi.stayoutCreate(token, stayoutInfo).enqueue(object: Callback<List<StayoutCheckResultDTO>> {
-                override fun onResponse(call: Call<List<StayoutCheckResultDTO>>, response: Response<List<StayoutCheckResultDTO>>) {
-                    Log.d("STAYOUT_CREATE", "외박 신청 성공")
-                    Log.d("STAYOUT_CREATE", "result : " + response.body())
+            RetrofitBuilder.stayoutApi.stayoutCreate(token, stayoutInfo)
+                .enqueue(object : Callback<List<StayoutCheckResultDTO>> {
+                    override fun onResponse(
+                        call: Call<List<StayoutCheckResultDTO>>,
+                        response: Response<List<StayoutCheckResultDTO>>
+                    ) {
+                        Log.d("STAYOUT_CREATE", "외박 신청 성공")
+                        Log.d("STAYOUT_CREATE", "result : " + response.body())
 
-                    // 기본 정보(행선지, 사유, 긴급 전화번호) 로컬에 저장
-                    // 기본 정보를 기억하는 경우
-                    val editor = shared?.edit()
-                    if (binding.checkRemember.isChecked) {
-                        editor?.putBoolean("stayout", true)
-                        editor?.putString("stayoutDestination", binding.editDestination.text.toString())
-                        editor?.putString("stayoutReason", binding.editReason.text.toString())
-                        editor?.putString("stayoutNumber", binding.editNumber.text.toString())
+                        // 기본 정보(행선지, 사유, 긴급 전화번호) 로컬에 저장
+                        // 기본 정보를 기억하는 경우
+                        val editor = shared?.edit()
+                        if (binding.checkRemember.isChecked) {
+                            editor?.putBoolean("stayout", true)
+                            editor?.putString(
+                                "stayoutDestination",
+                                binding.editDestination.text.toString()
+                            )
+                            editor?.putString("stayoutReason", binding.editReason.text.toString())
+                            editor?.putString("stayoutNumber", binding.editNumber.text.toString())
+                        }
+                        // 기본 정보를 기억하지 않는 경우
+                        else {
+                            editor?.putBoolean("stayout", false)
+                        }
+                        editor?.apply()
+
+                        Toast.makeText(this@StayoutActivity, "외박 신청되었습니다.", Toast.LENGTH_SHORT)
+                            .show()
+                        finish()
                     }
-                    // 기본 정보를 기억하지 않는 경우
-                    else {
-                        editor?.putBoolean("stayout", false)
+
+                    override fun onFailure(call: Call<List<StayoutCheckResultDTO>>, t: Throwable) {
+                        Toast.makeText(this@StayoutActivity, "오류가 발생하였습니다.", Toast.LENGTH_SHORT)
+                            .show()
+                        Log.d("STAYOUT_CREATE", "외박 신청 생성 실패")
+                        Log.d("STAYOUT_CREATE", t.message.toString())
                     }
-                    editor?.apply()
-
-                    Toast.makeText(this@StayoutActivity, "외박 신청되었습니다.", Toast.LENGTH_SHORT).show()
-                    finish()
-                }
-
-                override fun onFailure(call: Call<List<StayoutCheckResultDTO>>, t: Throwable) {
-                    Toast.makeText(this@StayoutActivity, "오류가 발생하였습니다.", Toast.LENGTH_SHORT).show()
-                    Log.d("STAYOUT_CREATE", "외박 신청 생성 실패")
-                    Log.d("STAYOUT_CREATE", t.message.toString())
-                }
-            })
+                })
         }
     }
 }

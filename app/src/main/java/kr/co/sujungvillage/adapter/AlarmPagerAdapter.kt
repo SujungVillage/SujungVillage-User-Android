@@ -9,7 +9,8 @@ import kr.co.sujungvillage.fragment.AlarmCommFragment
 
 private const val NUM_TABS = 2
 
-class AlarmPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager,lifecycle) {
+class AlarmPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+    FragmentStateAdapter(fragmentManager, lifecycle) {
 
     override fun getItemCount(): Int {
         return NUM_TABS

@@ -4,11 +4,11 @@ import android.annotation.SuppressLint
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.view.WindowInsets
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import kr.co.sujungvillage.databinding.ActivitySplashBinding
 
 @SuppressLint("CustomSplashScreen")
@@ -36,7 +36,9 @@ class SplashActivity : AppCompatActivity() {
             // ★★★ 만료되지 않은 로그인 토큰이 존재하면 MainActivity로 바로 이동
             val intent = Intent(this, LoginActivity::class.java)
             val options: ActivityOptions = ActivityOptions.makeSceneTransitionAnimation(
-                this, binding.splashLogo, "main_icon"
+                this,
+                binding.splashLogo,
+                "main_icon"
             )
             startActivity(intent, options.toBundle())
         }, 4600)

@@ -13,7 +13,8 @@ class NoticeAdapter : RecyclerView.Adapter<NoticeHolder>() {
     var noticeList = mutableListOf<NoticeRequestResultDTO>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoticeHolder {
-        val binding = ListitemNoticePostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ListitemNoticePostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return NoticeHolder(binding)
     }
 
@@ -27,11 +28,11 @@ class NoticeAdapter : RecyclerView.Adapter<NoticeHolder>() {
     }
 }
 
-class NoticeHolder(val binding: ListitemNoticePostBinding): RecyclerView.ViewHolder(binding.root) {
+class NoticeHolder(val binding: ListitemNoticePostBinding) : RecyclerView.ViewHolder(binding.root) {
     fun setNotice(notice: NoticeRequestResultDTO) {
-        binding.textId.text = "${notice.id}"
+        binding.textId.text = notice.id
         binding.textDormitory.text = notice.dormitory
-        binding.textTitle.text = "${notice.title}"
+        binding.textTitle.text = notice.title
         binding.textDate.text = "${notice.date.subSequence(0, 4)}.${notice.date.subSequence(5, 7)}.${notice.date.subSequence(8, 10)}"
 
         // 공지사항 클릭 시 상세 액티비티 생성
