@@ -51,9 +51,11 @@ class CommDetailHolder(val binding: ListitemCommDetailBinding, val context: Cont
         binding.textContent.text = "${commDetail.content}"
 
         // 관리자인지 아닌지 마크 띄우기
-        if (commDetail.writerId.toInt() >= 99990000) { // 관리자인 경우
-            binding.textAdmin.visibility = View.VISIBLE
-        }
+        try {
+            if (commDetail.writerId.toInt() >= 99990000) { // 관리자인 경우
+                binding.textAdmin.visibility = View.VISIBLE
+            }
+        } catch (e: NumberFormatException) { }
         binding.root.setOnClickListener { binding.root.context.hideKeyboard(itemView) }
 
         // 댓글 삭제 버튼
