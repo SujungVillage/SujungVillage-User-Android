@@ -4,6 +4,7 @@ import android.content.Intent
 import android.util.Log
 import kr.co.sujungvillage.App
 import kr.co.sujungvillage.LoginActivity
+import kr.co.sujungvillage.base.showSnackbar
 import kr.co.sujungvillage.data.RequestTokenRefreshDto
 import kr.co.sujungvillage.data.ResponseTokenRefreshDto
 import kr.co.sujungvillage.retrofit.RetrofitBuilder.loginApi
@@ -22,7 +23,11 @@ class AuthInterceptor : Interceptor {
 
         when (response.code) {
             EXPIRED_TOKEN_CODE -> {
-                if (userId == null || refreshToken == null) return response
+                if (userId == null || refreshToken == null) {
+                    intentToLoginActivity()
+                    return response
+                }
+
                 loginApi.tokenRefresh(RequestTokenRefreshDto(userId, refreshToken)).enqueue(object :
                         Callback<ResponseTokenRefreshDto> {
                         override fun onResponse(
@@ -33,6 +38,7 @@ class AuthInterceptor : Interceptor {
                                 App.prefs.token = response.body()?.jwtToken
                             } else {
                                 Log.e("REFRESH_TOKEN_FAIL", "response : $response")
+                                intentToLoginActivity()
                             }
                         }
 
@@ -41,14 +47,16 @@ class AuthInterceptor : Interceptor {
                         }
                     })
             }
-            INVALID_TOKEN_CODE -> {
-                val intent = Intent(App.context, LoginActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                App.context.startActivity(intent)
-            }
+            INVALID_TOKEN_CODE -> intentToLoginActivity()
         }
 
         return response
+    }
+
+    fun intentToLoginActivity() {
+        val intent = Intent(App.context, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        App.context.startActivity(intent)
     }
 
     companion object {

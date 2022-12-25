@@ -27,6 +27,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initView()
+        initCheckbox()
         loginBtnOnClick()
         signupBtnOnClick()
     }
@@ -35,6 +36,16 @@ class LoginActivity : AppCompatActivity() {
         // 키보드 내리기
         binding.layoutIcon.setOnClickListener { this.hideKeyboard() }
         binding.layoutLogin.setOnClickListener { this.hideKeyboard() }
+    }
+
+    fun initCheckbox() {
+        // 자동 로그인 체크박스 초기화
+        val shared = getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
+        if (shared.getBoolean("autoLogin", false)) {
+            binding.checkAutoLogin.isChecked = true
+            binding.editId.setText(shared.getString("loginID", ""))
+            binding.editPassword.setText(shared.getString("loginPassword", ""))
+        }
     }
 
     fun loginBtnOnClick() {
@@ -70,9 +81,25 @@ class LoginActivity : AppCompatActivity() {
                                     val shared =
                                         getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
                                     val editor = shared.edit()
+                                    editor.putBoolean("autoLogin", true)
                                     editor.putString("studentNum", id)
                                     editor.putString("token", response.body()?.token)
                                     editor.putString("refresh", response.body()?.refreshToken)
+
+                                    // 자동 로그인을 설정하는 경우
+                                    if (binding.checkAutoLogin.isChecked) {
+                                        editor.putBoolean("autoLogin", true)
+                                        editor.putString("loginID", binding.editId.text.toString())
+                                        editor.putString(
+                                            "loginPassword",
+                                            binding.editPassword.text.toString()
+                                        )
+                                    }
+                                    // 자동 로그인을 설정하지 않는 경우
+                                    else {
+                                        editor.putBoolean("autoLogin", false)
+                                    }
+
                                     editor.apply()
 
                                     showToast(getString(R.string.login_success_msg))
