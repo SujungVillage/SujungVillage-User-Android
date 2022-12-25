@@ -70,6 +70,7 @@ class LoginActivity : AppCompatActivity() {
                                     val shared =
                                         getSharedPreferences("SujungVillage", Context.MODE_PRIVATE)
                                     val editor = shared.edit()
+                                    editor.putBoolean("autoLogin", true)
                                     editor.putString("studentNum", id)
                                     editor.putString("token", response.body()?.token)
                                     editor.putString("refresh", response.body()?.refreshToken)
