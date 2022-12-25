@@ -102,7 +102,6 @@ class LoginActivity : AppCompatActivity() {
         binding.btnSignup.setOnClickListener {
             var intent = Intent(this@LoginActivity, SignUpActivity::class.java)
             startActivity(intent)
-            finish()
         }
     }
 
