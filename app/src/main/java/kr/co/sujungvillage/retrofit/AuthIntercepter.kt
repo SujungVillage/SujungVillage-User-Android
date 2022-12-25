@@ -1,4 +1,4 @@
-package kr.co.sujungvillage.retrofit
+package kr.co.sujungvillage.retrofit // ktlint-disable filename
 
 import android.content.Intent
 import android.util.Log
