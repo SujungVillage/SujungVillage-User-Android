@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.CheckBox
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -36,7 +37,9 @@ class SignUpActivity : AppCompatActivity() {
         var number3 = ""
         var dormitory = ""
         var address = ""
-
+        var agreement=false
+        var agreement1=false
+        var agreement2=false
         // 키보드 내리기
         binding.signUpLayout.setOnClickListener { hideKeyboard() }
         binding.linearSignUp.setOnClickListener { hideKeyboard() }
@@ -190,6 +193,55 @@ class SignUpActivity : AppCompatActivity() {
                 override fun onNothingSelected(p0: AdapterView<*>?) {
                 }
             }
+        //이용약관
+        binding.checkboxAgreement.setOnClickListener {
+            if(binding.checkboxAgreement.isChecked){
+                changeAgreement12(binding.checkboxAgreement1,true)
+                changeAgreement12(binding.checkboxAgreement2,true)
+                changeAgreement(binding.checkboxAgreement,true)
+            }
+            else{
+                changeAgreement12(binding.checkboxAgreement1,false)
+                changeAgreement12(binding.checkboxAgreement2,false)
+                changeAgreement(binding.checkboxAgreement,false)
+            }
+        }
+        binding.checkboxAgreement1.setOnClickListener{
+            changeAgreement(binding.checkboxAgreement,binding.checkboxAgreement1.isChecked&&binding.checkboxAgreement2.isChecked)
+            if(binding.checkboxAgreement1.isChecked)
+                changeAgreement12(binding.checkboxAgreement1,true)
+            else
+                changeAgreement12(binding.checkboxAgreement1,false)
+        }
+        binding.checkboxAgreement2.setOnClickListener{
+            changeAgreement(binding.checkboxAgreement,binding.checkboxAgreement1.isChecked&&binding.checkboxAgreement2.isChecked)
+            if(binding.checkboxAgreement2.isChecked)
+                changeAgreement12(binding.checkboxAgreement2,true)
+            else
+                changeAgreement12(binding.checkboxAgreement2,false)
+        }
+
+
+        binding.btnAgreement1Detail.setOnClickListener{
+            if(agreement1){
+                binding.textAgreement1Content.visibility=View.GONE
+                agreement1=false
+            }
+            else{
+                binding.textAgreement1Content.visibility=View.VISIBLE
+                agreement1=true
+            }
+        }
+        binding.btnAgreement2Detail.setOnClickListener{
+            if(agreement2){
+                binding.textAgreement2Content.visibility=View.GONE
+                agreement2=false
+            }
+            else{
+                binding.textAgreement2Content.visibility=View.VISIBLE
+                agreement2=true
+            }
+        }
         // 회원가입 버튼
         binding.textSubmit.setOnClickListener {
             name = binding.editName.text.toString().trim()
@@ -198,36 +250,57 @@ class SignUpActivity : AppCompatActivity() {
             number3 = binding.editNumber3.text.toString().trim()
             number = number1 + number2 + number3
             address = binding.editAddress.text.toString().trim()
+            agreement=binding.checkboxAgreement.isChecked
             if (id_overlap_check == 1) {
                 if (binding.textPasswordCheckResult.visibility.toString() != "0") {
                     if (password != "" && name != "" && number1 != "" && number2 != "" && number3 != "" && address != "") {
-                        val signUpInfo = SignUpDTO(id, password, name, dormitory, address, number)
-                        RetrofitBuilder.signupApi.signUp(signUpInfo)
-                            .enqueue(object : Callback<Void> {
-                                override fun onResponse(
-                                    call: Call<Void>,
-                                    response: Response<Void>
-                                ) {
-                                    Log.d("SIGN_UP", response.body().toString())
-                                    finish()
-                                }
+                        if(agreement){
+                            val signUpInfo = SignUpDTO(id, password, name, dormitory, address, number)
+                            RetrofitBuilder.signupApi.signUp(signUpInfo)
+                                .enqueue(object : Callback<Void> {
+                                    override fun onResponse(
+                                        call: Call<Void>,
+                                        response: Response<Void>
+                                    ) {
+                                        Log.d("SIGN_UP", response.body().toString())
+                                        Toast.makeText(this@SignUpActivity,"회원가입이 성공적으로 완료되었습니다.",Toast.LENGTH_SHORT).show()
+                                        finish()
+                                    }
 
-                                override fun onFailure(call: Call<Void>, t: Throwable) {
-                                    Log.e("SIGN_UP", t.message.toString())
-                                }
-                            })
+                                    override fun onFailure(call: Call<Void>, t: Throwable) {
+                                        Log.e("SIGN_UP", t.message.toString())
+                                    }
+                                })
+                        }else{
+                            Log.d("SIGN_UP", "필수 이용약관을 모두 동의해주세요.")
+                            Toast.makeText(this@SignUpActivity,"필수 이용약관을 모두 동의해주세요.",Toast.LENGTH_SHORT).show()
+                        }
                     } else {
                         Log.d("SIGN_UP", "모든 칸을 작성해주세요.")
+                        Toast.makeText(this@SignUpActivity,"모든 칸을 작성해주세요.",Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Log.d("SIGN_UP", "비밀번호를 확인해주세요")
+                    Log.d("SIGN_UP", "비밀번호를 확인해주세요.")
+                    Toast.makeText(this@SignUpActivity,"비밀번호를 확인해주세요.",Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Log.d("SIGN_UP", "id를 확인해주세요")
+                Log.d("SIGN_UP", "id를 확인해주세요.")
+                Toast.makeText(this@SignUpActivity,"id를 확인해주세요.",Toast.LENGTH_SHORT).show()
             }
         }
     }
+    fun changeAgreement(content: CheckBox, checked:Boolean){
+        val color=if(checked)ContextCompat.getColor(this,R.color.primary)else ContextCompat.getColor(this,R.color.gray_350)
+        content.isChecked=checked
+        content.background=if(checked)ContextCompat.getDrawable(this@SignUpActivity, R.drawable.style_signup_selected)else ContextCompat.getDrawable(this@SignUpActivity, R.drawable.style_signup_unselected)
+        content.setTextColor(color)
+    }
 
+    fun changeAgreement12(content: CheckBox,checked:Boolean){
+        val color=if(checked)ContextCompat.getColor(this,R.color.primary)else ContextCompat.getColor(this,R.color.gray_350)
+        content.isChecked=checked
+        content.setTextColor(color)
+    }
     fun passwordCheck(a: String, b: String) {
         if (a.equals(b)) { // 비밀번호 일치
             binding.textPasswordCheckResult.visibility = View.INVISIBLE
