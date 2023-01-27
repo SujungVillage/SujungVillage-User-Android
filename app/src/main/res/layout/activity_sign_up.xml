@@ -416,8 +416,8 @@
                     </LinearLayout>
                     <TextView
                         android:id="@+id/text_agreement1_content"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
                         android:text="@string/agreement1"
                         android:textSize="14sp"
                         android:textColor="@color/black"
@@ -425,6 +425,8 @@
                         android:background="@drawable/style_text_agreement_content"
                         android:padding="22dp"
                         android:visibility="gone"
+                        android:scrollbars="vertical"
+
                         />
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -469,8 +471,8 @@
                     </LinearLayout>
                     <TextView
                         android:id="@+id/text_agreement2_content"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
                         android:text="@string/agreement2"
                         android:textSize="14sp"
                         android:textColor="@color/black"
@@ -478,6 +480,7 @@
                         android:background="@drawable/style_text_agreement_content"
                         android:padding="22dp"
                         android:visibility="gone"
+                        android:scrollbars="vertical"
                         />
                     <TextView
                         android:id="@+id/text_submit"

@@ -1,9 +1,12 @@
 package kr.co.sujungvillage
 
+import android.content.Context
+import android.content.res.AssetManager
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -19,6 +22,10 @@ import kr.co.sujungvillage.retrofit.RetrofitBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
 
 class SignUpActivity : AppCompatActivity() {
     val binding by lazy { ActivitySignUpBinding.inflate(layoutInflater) }
@@ -194,6 +201,19 @@ class SignUpActivity : AppCompatActivity() {
                 }
             }
         //이용약관
+        binding.textAgreement1Content.text=getAssetsTextString(this,"agreement1")
+        binding.textAgreement2Content.text=getAssetsTextString(this,"agreement2")
+        binding.textAgreement1Content.movementMethod= ScrollingMovementMethod()
+        binding.textAgreement2Content.movementMethod= ScrollingMovementMethod()
+        binding.textAgreement1Content.setOnTouchListener { view, motionEvent ->
+            binding.scroll.requestDisallowInterceptTouchEvent(true)
+            return@setOnTouchListener false
+        }
+        binding.textAgreement2Content.setOnTouchListener { view, motionEvent ->
+            binding.scroll.requestDisallowInterceptTouchEvent(true)
+            return@setOnTouchListener false
+        }
+
         binding.checkboxAgreement.setOnClickListener {
             if(binding.checkboxAgreement.isChecked){
                 changeAgreement12(binding.checkboxAgreement1,true)
@@ -289,6 +309,28 @@ class SignUpActivity : AppCompatActivity() {
             }
         }
     }
+    //이용약관, 개인정보처리방침 txt 파일 읽어오기
+    fun getAssetsTextString(mContext: Context, fileName:String):String{
+        val termsString=StringBuilder()
+        val reader:BufferedReader
+
+        try {
+            reader= BufferedReader(
+                InputStreamReader(mContext.resources.assets.open("$fileName.txt"))
+            )
+            var str:String?
+            while(reader.readLine().also { str=it }!=null){
+                termsString.append(str)
+                termsString.append('\n')//줄변경
+            }
+            reader.close()
+            return termsString.toString()
+        }catch (e:IOException){
+            e.printStackTrace()
+        }
+        return "fail"
+    }
+
     fun changeAgreement(content: CheckBox, checked:Boolean){
         val color=if(checked)ContextCompat.getColor(this,R.color.primary)else ContextCompat.getColor(this,R.color.gray_350)
         content.isChecked=checked

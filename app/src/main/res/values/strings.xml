@@ -18,6 +18,6 @@
     <string name="login_fail_msg">로그인에 실패하였습니다.</string>
     <string name="login_error_msg">로그인 오류가 발생하였습니다.</string>
     <string name="login_success_msg">로그인에 성공했습니다.</string>
-    <string name="agreement1">이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관ㅍ이용약관이용약관이용약관이용약관이용약관</string>
-    <string name="agreement2">개인정보처리방침개인정보처리방침개인정보처리방침개인정보처리방침개인정보처리방침개인정보처리방침개인정보처리방침개인정보처리방침개인정보처리방침개인정보처리방침개인정보처리방침</string>
+    <string name="agreement1">이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관이용약관</string>
+    <string name="agreement2">개인정보처리방침개인정보처리방침개인정보처리방침개인정보처리방침개인정보처리방침개인정보처리방침개인정보처리방침개인정보처리방침개인정보처리방침</string>
 </resources>
