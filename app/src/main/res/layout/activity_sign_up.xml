@@ -164,7 +164,7 @@
                         android:textSize="12dp"
                         android:visibility="invisible" />
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="14dp"
@@ -173,117 +173,117 @@
                         android:textColor="@color/black"
                         android:textSize="16dp">
 
-                        <LinearLayout
+                        <TextView
+                            android:id="@+id/textView8"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginRight="29dp"
-                            android:layout_weight="2"
-                            android:orientation="vertical">
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/semi_bold"
+                            android:text="이름"
+                            android:textColor="@color/black"
+                            android:textSize="16dp"
+                            app:layout_constraintBottom_toTopOf="@+id/edit_name"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                            <TextView
-                                android:id="@+id/textView8"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="8dp"
-                                android:fontFamily="@font/semi_bold"
-                                android:text="이름"
-                                android:textColor="@color/black"
-                                android:textSize="16dp" />
+                        <EditText
+                            android:id="@+id/edit_name"
+                            android:layout_width="80dp"
+                            android:layout_height="27dp"
+                            android:background="@drawable/style_signup_unselected"
+                            android:inputType="text"
+                            android:maxLength="255"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="6dp"
+                            android:textSize="12sp"
+                            android:layout_marginTop="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView8" />
 
-                            <EditText
-                                android:id="@+id/edit_name"
-                                android:layout_width="100dp"
-                                android:layout_height="27dp"
-                                android:background="@drawable/style_signup_unselected"
-                                android:inputType="text"
-                                android:maxLength="255"
-                                android:paddingHorizontal="8dp"
-                                android:paddingVertical="6dp"
-                                android:textSize="12sp" />
-                        </LinearLayout>
 
-                        <LinearLayout
+                        <TextView
+                            android:id="@+id/textView10"
                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/semi_bold"
+                            android:text="전화번호"
+                            android:textColor="@color/black"
+                            android:textSize="16dp"
+                            app:layout_constraintEnd_toStartOf="@+id/imageButton"
+                            app:layout_constraintStart_toStartOf="@+id/edit_number1"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <EditText
+                            android:id="@+id/edit_number1"
+                            android:layout_width="42dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="4"
-                            android:orientation="vertical">
+                            android:background="@drawable/style_signup_unselected"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="6dp"
+                            android:textSize="12sp"
+                            android:layout_marginTop="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/imageButton"
+                            app:layout_constraintTop_toBottomOf="@id/textView10" />
 
-                            <TextView
-                                android:id="@+id/textView10"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="8dp"
-                                android:fontFamily="@font/semi_bold"
-                                android:text="전화번호"
-                                android:textColor="@color/black"
-                                android:textSize="16dp" />
+                        <ImageButton
+                            android:id="@+id/imageButton"
+                            android:layout_width="7dp"
+                            android:layout_height="1dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/nothing"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/icon_signup_bar"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/edit_number2"
+                            app:layout_constraintTop_toBottomOf="@id/textView10" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal">
+                        <EditText
+                            android:id="@+id/edit_number2"
+                            android:layout_width="50dp"
+                            android:layout_height="27dp"
+                            android:background="@drawable/style_signup_unselected"
+                            android:inputType="number"
+                            android:maxLength="4"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="6dp"
+                            android:textSize="12sp"
+                            android:layout_marginTop="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+                            app:layout_constraintTop_toBottomOf="@id/textView10" />
 
-                                <EditText
-                                    android:id="@+id/edit_number1"
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:background="@drawable/style_signup_unselected"
-                                    android:inputType="number"
-                                    android:maxLength="3"
-                                    android:paddingHorizontal="8dp"
-                                    android:paddingVertical="6dp"
-                                    android:textSize="12sp" />
+                        <ImageButton
+                            android:id="@+id/imageButton2"
+                            android:layout_width="7dp"
+                            android:layout_height="1dp"
+                            android:layout_gravity="center"
+                            android:background="@color/nothing"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/icon_signup_bar"
+                            android:layout_marginTop="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/edit_number3"
+                            app:layout_constraintTop_toBottomOf="@id/textView10" />
 
-                                <ImageButton
-                                    android:id="@+id/imageButton"
-                                    android:layout_width="7dp"
-                                    android:layout_height="1dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginHorizontal="4dp"
-                                    android:layout_weight="0"
-                                    android:background="@color/nothing"
-                                    android:scaleType="fitCenter"
-                                    android:src="@drawable/icon_signup_bar" />
-
-                                <EditText
-                                    android:id="@+id/edit_number2"
-                                    android:layout_width="0dp"
-                                    android:layout_height="27dp"
-                                    android:layout_weight="1"
-                                    android:background="@drawable/style_signup_unselected"
-                                    android:inputType="number"
-                                    android:maxLength="4"
-                                    android:paddingHorizontal="8dp"
-                                    android:paddingVertical="6dp"
-                                    android:textSize="12sp" />
-
-                                <ImageButton
-                                    android:id="@+id/imageButton2"
-                                    android:layout_width="7dp"
-                                    android:layout_height="1dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginHorizontal="4dp"
-                                    android:layout_weight="0"
-                                    android:background="@color/nothing"
-                                    android:scaleType="fitCenter"
-                                    android:src="@drawable/icon_signup_bar" />
-
-                                <EditText
-                                    android:id="@+id/edit_number3"
-                                    android:layout_width="0dp"
-                                    android:layout_height="27dp"
-                                    android:layout_weight="1"
-                                    android:background="@drawable/style_signup_unselected"
-                                    android:inputType="number"
-                                    android:maxLength="4"
-                                    android:paddingHorizontal="8dp"
-                                    android:paddingVertical="6dp"
-                                    android:textSize="12sp" />
-                            </LinearLayout>
-
-                        </LinearLayout>
-                    </LinearLayout>
+                        <EditText
+                            android:id="@+id/edit_number3"
+                            android:layout_width="50dp"
+                            android:layout_height="27dp"
+                            android:background="@drawable/style_signup_unselected"
+                            android:inputType="number"
+                            android:maxLength="4"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="6dp"
+                            android:textSize="12sp"
+                            android:layout_marginTop="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView10" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -372,7 +372,7 @@
                         android:button="@null"
                         android:background="@drawable/style_signup_unselected"/>
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
@@ -387,9 +387,12 @@
                             android:textColor="#818181"
                             android:textSize="14sp"
                             android:drawableStart="@drawable/selector_signup_agreement"
-                            android:paddingHorizontal="10dp"
+                            android:paddingStart="10dp"
                             android:drawablePadding="10dp"
-                            android:button="@null"/>
+                            android:button="@null"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:id="@+id/text_agreement1"
@@ -399,12 +402,10 @@
                             android:text="(필수)"
                             android:textColor="@color/p_dark"
                             android:textSize="14sp"
-                            android:gravity="center"/>
-                        <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"/>
-
+                            android:gravity="center"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/checkbox_agreement1"
+                            app:layout_constraintTop_toTopOf="parent"/>
                         <Button
                             android:id="@+id/btn_agreement1_detail"
                             android:layout_width="wrap_content"
@@ -412,8 +413,11 @@
                             android:fontFamily="@font/regular"
                             android:text="[더보기]"
                             android:textColor="@color/p_dark"
-                            android:background="@color/nothing"/>
-                    </LinearLayout>
+                            android:background="@color/nothing"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                     <TextView
                         android:id="@+id/text_agreement1_content"
                         android:layout_width="match_parent"
@@ -428,7 +432,7 @@
                         android:scrollbars="vertical"
 
                         />
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
@@ -437,38 +441,43 @@
                             android:id="@+id/checkbox_agreement2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:button="@null"
+                            android:drawableStart="@drawable/selector_signup_agreement"
+                            android:drawablePadding="10dp"
                             android:fontFamily="@font/regular"
+                            android:paddingStart="10dp"
                             android:text="개인정보 처리 방침 동의 "
                             android:textColor="#818181"
                             android:textSize="14sp"
-                            android:drawableStart="@drawable/selector_signup_agreement"
-                            android:paddingHorizontal="10dp"
-                            android:drawablePadding="10dp"
-                            android:button="@null"/>
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
                             android:id="@+id/text_agreement2"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:fontFamily="@font/regular"
+                            android:gravity="center"
                             android:text="(필수)"
                             android:textColor="@color/p_dark"
                             android:textSize="14sp"
-                            android:gravity="center"/>
-                        <View
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"/>
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/checkbox_agreement2"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <Button
                             android:id="@+id/btn_agreement2_detail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:background="@color/nothing"
                             android:fontFamily="@font/regular"
                             android:text="[더보기]"
                             android:textColor="@color/p_dark"
-                            android:background="@color/nothing"/>
-                    </LinearLayout>
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                     <TextView
                         android:id="@+id/text_agreement2_content"
                         android:layout_width="match_parent"
