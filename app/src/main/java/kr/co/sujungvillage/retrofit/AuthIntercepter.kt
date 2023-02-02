@@ -4,7 +4,6 @@ import android.content.Intent
 import android.util.Log
 import kr.co.sujungvillage.App
 import kr.co.sujungvillage.LoginActivity
-import kr.co.sujungvillage.base.showSnackbar
 import kr.co.sujungvillage.data.RequestTokenRefreshDto
 import kr.co.sujungvillage.data.ResponseTokenRefreshDto
 import kr.co.sujungvillage.retrofit.RetrofitBuilder.loginApi

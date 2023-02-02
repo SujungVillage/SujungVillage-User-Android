@@ -1,5 +1,6 @@
 package kr.co.sujungvillage.fragment
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -12,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kr.co.sujungvillage.AlarmActivity
 import kr.co.sujungvillage.LoginActivity
+import kr.co.sujungvillage.base.showToast
 import kr.co.sujungvillage.data.HomeInfoResultDTO
 import kr.co.sujungvillage.databinding.FragmentSettingBinding
 import kr.co.sujungvillage.retrofit.RetrofitBuilder
@@ -108,7 +110,29 @@ class SettingFragment : Fragment() {
             Toast.makeText(this.activity, "로그아웃되었습니다.", Toast.LENGTH_SHORT).show()
             var intent = Intent(this.activity, LoginActivity::class.java)
             startActivity(intent)
-            this.activity?.finish()
+            requireActivity().finish()
+        }
+        // 탈퇴하기 버튼 연결
+        binding.layoutDelete.setOnClickListener {
+            RetrofitBuilder.userApi.deleteUse(token).enqueue(object : Callback<Unit> {
+                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                    val dialogBuilder = AlertDialog.Builder(context)
+                    dialogBuilder.setTitle("탈퇴하시겠습니까?")
+                        .setPositiveButton("확인") { dialog, id ->
+                            val intent = Intent(activity, LoginActivity::class.java)
+                            requireContext().showToast("탈퇴가 완료되었습니다.")
+                            startActivity(intent)
+                            requireActivity().finish()
+                        }
+                        .setNegativeButton("취소") { dialog, id -> }
+                    dialogBuilder.show()
+                }
+
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
+                    Log.e("SETTING_DELETE_ACCOUNT", "회원 탈퇴 실패")
+                    Log.e("SETTING_DELETE_ACCOUNT", t.message.toString())
+                }
+            })
         }
 
         return binding.root
