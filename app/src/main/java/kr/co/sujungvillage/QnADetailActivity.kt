@@ -46,7 +46,11 @@ class QnADetailActivity : AppCompatActivity() {
                                 Log.d("MY_QUESTION_DELETE", "내 질문 삭제 성공")
                                 Log.d("MY_QUESTION_DELETE", "response : " + response.body())
 
-                                Toast.makeText(this@QnADetailActivity, "삭제되었습니다.", Toast.LENGTH_SHORT)
+                                Toast.makeText(
+                                    this@QnADetailActivity,
+                                    "삭제되었습니다.",
+                                    Toast.LENGTH_SHORT
+                                )
                                     .show()
                                 finish()
                             }
