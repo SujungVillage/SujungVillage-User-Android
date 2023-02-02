@@ -33,7 +33,12 @@ class NoticeHolder(val binding: ListitemNoticePostBinding) : RecyclerView.ViewHo
         binding.textId.text = notice.id
         binding.textDormitory.text = notice.dormitory
         binding.textTitle.text = notice.title
-        binding.textDate.text = "${notice.date.subSequence(0, 4)}.${notice.date.subSequence(5, 7)}.${notice.date.subSequence(8, 10)}"
+        binding.textDate.text = "${notice.date.subSequence(0, 4)}.${
+        notice.date.subSequence(
+            5,
+            7
+        )
+        }.${notice.date.subSequence(8, 10)}"
 
         // 공지사항 클릭 시 상세 액티비티 생성
         binding.root.setOnClickListener {

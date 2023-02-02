@@ -143,22 +143,22 @@ class CommDetailActivity : AppCompatActivity() {
 
                         binding.textTitle.text = response.body()?.title
                         binding.textCalDate.text = "${
-                            response.body()?.regDate?.subSequence(
-                                0,
-                                4
-                            )
+                        response.body()?.regDate?.subSequence(
+                            0,
+                            4
+                        )
                         }/${
-                            response.body()?.regDate?.subSequence(
-                                5,
-                                7
-                            )
+                        response.body()?.regDate?.subSequence(
+                            5,
+                            7
+                        )
                         }/${
-                            response.body()?.regDate?.subSequence(
-                                8,
-                                10
-                            )
+                        response.body()?.regDate?.subSequence(
+                            8,
+                            10
+                        )
                         } ${
-                            response.body()?.regDate?.subSequence(11, 13)
+                        response.body()?.regDate?.subSequence(11, 13)
                         }:${response.body()?.regDate?.subSequence(14, 16)}"
                         binding.textContent.text = response.body()?.content
                         // 관리자 마크
@@ -167,7 +167,8 @@ class CommDetailActivity : AppCompatActivity() {
                             if (postWriterId >= 99990000) {
                                 binding.textAdmin.visibility = View.VISIBLE
                             }
-                        } catch (e: NumberFormatException) { }
+                        } catch (e: NumberFormatException) {
+                        }
 
                         // 글 작성자 id 와 studentNum이 같으면 삭제 버튼 보이게
                         if (studentNum == postWriterId.toString()) {

@@ -11,15 +11,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
     // 사용할 API 인터페이스 선언
-    var communityApi: CommunityService
-    var homeApi: HomeService
-    var noticeApi: NoticeService
-    var qnaApi: QnAService
-    var rollcallApi: RollcallService
-    var stayoutApi: StayoutService
-    var loginApi: LoginService
-    var rewardApi: RewardService
-    var signupApi: SignUpService
+    val communityApi: CommunityService
+    val homeApi: HomeService
+    val noticeApi: NoticeService
+    val qnaApi: QnAService
+    val rollcallApi: RollcallService
+    val stayoutApi: StayoutService
+    val loginApi: LoginService
+    val rewardApi: RewardService
+    val signupApi: SignUpService
+    val userApi: UserService
 
     val gson: Gson = GsonBuilder().setLenient().create()
 
@@ -50,5 +51,6 @@ object RetrofitBuilder {
         loginApi = retrofit.create(LoginService::class.java)
         rewardApi = retrofit.create(RewardService::class.java)
         signupApi = retrofit.create(SignUpService::class.java)
+        userApi = retrofit.create(UserService::class.java)
     }
 }

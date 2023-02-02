@@ -5,26 +5,26 @@
     android:id="@+id/frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.SettingFragment" >
+    tools:context=".fragment.SettingFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout"
-        android:background="#FFFBFBFB"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#FFFBFBFB">
 
         <LinearLayout
             android:id="@+id/linear_userInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/style_setting_user_info"
             android:orientation="vertical"
             android:paddingLeft="42dp"
             android:paddingRight="25dp"
             android:paddingBottom="50dp"
-            android:background="@drawable/style_setting_user_info"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,10 +49,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="17dp"
+                    android:fontFamily="@font/semi_bold"
                     android:text="설정"
                     android:textColor="@color/black_800"
                     android:textSize="20dp"
-                    android:fontFamily="@font/semi_bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -71,18 +71,18 @@
                     android:id="@+id/text_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/semi_bold"
                     android:text=""
                     android:textColor="@color/gray_600"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/semi_bold" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/text_grade"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
-                    android:text="재사생"
                     android:fontFamily="@font/medium"
+                    android:text="재사생"
                     android:textColor="@color/gray_330" />
             </LinearLayout>
 
@@ -92,8 +92,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
                 android:layout_marginRight="17dp"
-                android:text=""
                 android:fontFamily="@font/medium"
+                android:text=""
                 android:textColor="@color/gray_330" />
 
             <LinearLayout
@@ -117,8 +117,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text=""
-                    android:fontFamily="@font/medium" />
+                    android:fontFamily="@font/medium"
+                    android:text="" />
             </LinearLayout>
         </LinearLayout>
 
@@ -153,8 +153,8 @@
                         android:id="@+id/text_alarm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="알람 설정"
                         android:fontFamily="@font/medium"
+                        android:text="알람 설정"
                         android:textColor="@color/gray_600"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -182,8 +182,8 @@
                         android:id="@+id/text_portal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="성신 포탈"
                         android:fontFamily="@font/medium"
+                        android:text="성신 포탈"
                         android:textColor="@color/gray_600"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -214,8 +214,8 @@
                         android:id="@+id/text_manual"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="앱 사용법"
                         android:fontFamily="@font/medium"
+                        android:text="앱 사용법"
                         android:textColor="@color/gray_600"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -246,8 +246,8 @@
                         android:id="@+id/text_inquire"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="앱 문의하기"
                         android:fontFamily="@font/medium"
+                        android:text="앱 문의하기"
                         android:textColor="@color/gray_600"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -298,6 +298,38 @@
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="82dp"
+                    android:background="@drawable/style_setting_menu"
+                    android:paddingHorizontal="40dp">
+
+                    <TextView
+                        android:id="@+id/text_delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/medium"
+                        android:text="탈퇴하기"
+                        android:textColor="@color/gray_600"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/btn_delete"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:background="@color/nothing"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/icon_setting_right_arrow"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </ScrollView>
 
@@ -310,9 +342,9 @@
         android:layout_gravity="right"
         android:layout_marginTop="39dp"
         android:layout_marginEnd="21dp"
-        android:visibility="invisible"
         android:scaleType="fitXY"
         android:src="@drawable/icon_alarm_black_unread"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </FrameLayout>

@@ -33,7 +33,12 @@ class CommAdapter : RecyclerView.Adapter<CommHolder>() {
 class CommHolder(val binding: ListitemCommBinding) : RecyclerView.ViewHolder(binding.root) {
     fun setComm(comm: CommDTO) {
         binding.textTitle.text = comm.title
-        binding.textDate.text = "${comm.regDate.subSequence(0, 4)}.${comm.regDate.subSequence(5, 7)}.${comm.regDate.subSequence(8, 10)}"
+        binding.textDate.text = "${comm.regDate.subSequence(0, 4)}.${
+        comm.regDate.subSequence(
+            5,
+            7
+        )
+        }.${comm.regDate.subSequence(8, 10)}"
         binding.textContent.text = comm.content
         binding.commentCount.text = "${comm.numOfComments}"
 
@@ -42,7 +47,8 @@ class CommHolder(val binding: ListitemCommBinding) : RecyclerView.ViewHolder(bin
             if (comm.writerId.toInt() >= 99990000) { // 관리자인 경우
                 binding.textAdmin.visibility = View.VISIBLE
             }
-        } catch (e: NumberFormatException) { }
+        } catch (e: NumberFormatException) {
+        }
 
         // 게시글 클릭 시 상세 액티비티 생성
         binding.root.setOnClickListener {
