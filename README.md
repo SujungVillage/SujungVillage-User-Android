@@ -19,6 +19,7 @@
 ## 📌 References
 - [수정마을 발표 자료](https://github.com/b1urrrr/TheBluePlanet/files/9537863/default.pdf)
 - [▶ 수정마을 시연영상](https://user-images.githubusercontent.com/70993562/189418286-766a0428-2771-4b2f-a503-8f55df8673a2.mp4)
+- [수정마을 플레이 스토어](https://play.google.com/store/apps/details?id=kr.co.sujungvillage)
 
 <br>
 
