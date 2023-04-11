@@ -6,7 +6,8 @@
 |전채연|신민선|김민경|
 |------|---|---|
 |[b1urrrr](https://github.com/b1urrrr)|[flora7883](https://github.com/flora7883)|[cloudwoon](https://github.com/cloudwoon)|
-|팀장, 로그인, 홈, |회원가입, 커뮤니티, 점호 확인, |디자인, |
+|팀장, 로그인, 홈|회원가입, 커뮤니티, 점호 확인|디자인|
+<br>
 
 ## 📌 References
 - [수정마을 플레이 스토어](https://play.google.com/store/apps/details?id=kr.co.sujungvillage)
@@ -17,14 +18,26 @@
 
 ## 📌 Project Introduction
 ### ✏️Explain
-수정마을은 여러 서비스를 거쳐 복잡하게 이루어지던 기존 성신여대의기숙사 관리 시스템을 하나의 서비스로 통합하여 기숙사 관리자의부담을 덜고 재사생들이 더욱 편리하게 생활할 수 있도록 지원하는 것을목표로 한다.
+수정마을은 여러 서비스를 거쳐 복잡하게 이루어지던 기존 성신여대의기숙사 관리 시스템을 하나의 서비스로 통합하여 기숙사 관리자의부담을 덜고 재사생들이 더욱 편리하게 생활할 수 있도록 지원하는 것을 목표로 합니다.
+
 <br>
+
 <img src="https://user-images.githubusercontent.com/65242294/231141897-b1e389f0-184b-41b8-9d6c-1f9a4c99f90a.png" width="50%" height="50%"/>
 
+<br>
+
 ### ✏️Technical Stack
-Android Studio, Kotlin, Retrofit, Firebase, coroutine
+<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white"> <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+<img src="https://img.shields.io/badge/android-3DDC84?style=for-the-badge&logo=android&logoColor=white">
+<img src="https://img.shields.io/badge/kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white">
+<img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=Firebase&logoColor=black">
+
+<br>
+
 ### ✏️Service Architecture
 <img src="https://user-images.githubusercontent.com/65242294/231144831-0dc2acc4-0bc9-45ac-893e-367264d65130.png" width="80%" height="80%"/>
+
+<br>
 
 ### ✏️Crucial function
 외박
