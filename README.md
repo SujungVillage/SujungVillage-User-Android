@@ -6,7 +6,7 @@
 |전채연|신민선|김민경|
 |------|---|---|
 |[b1urrrr](https://github.com/b1urrrr)|[flora7883](https://github.com/flora7883)|[cloudwoon](https://github.com/cloudwoon)|
-|팀장, 로그인, 홈|회원가입, 커뮤니티, 점호 확인|디자인|
+|팀장, 로그인, 홈(캘린더), 외박, 점호 및 점호 확인, 공지사항, 상벌점 조회 및 부여, FAQ, QnA, 설정, 알림|회원가입, 커뮤니티, 점호 확인|디자인|
 <br>
 
 ## 📌 References
