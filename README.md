@@ -1,29 +1,56 @@
 # 우리들이 꿈 꾸는 공간, 수정마을 🏡
-
-## 📌 Commit Message Convention
-- ➕ [ADD] : FEAT 이외의 부수적인 코드, 라이브러리, 파일 추가
-- ✅ [MOD] : 코드 수정 및 내부 파일 수정
-- ✨ [FEAT] : 새로운 기능 구현
-- 🔀 [MERGE] : 다른 브랜치와 MERGE
-- 🔨 [FIX] : 버그 및 오류 해결
-- 🚑️ [HOTFIX] : issue에서 문의된 급한 버그 및 오류 해결
-- ⚰️ [DEL] : 쓸모없는 코드나 파일 삭제
-- 📝 [DOCS] : README 등의 문서 개정
-- ✏️ [CORRECT] : 문법의 오류나 타입의 변경, 이름 변경 등의 작은 수정
-- 🚚 [MOVE] : 프로젝트 내 파일 또는 코드의 이동
-- ⏪️ [RENAME] : 파일 이름 변경
-- ♻️ [REFACTOR] : 전면 수정
-
+## 📌 프로젝트 기간
+2022.04~2023.03
 <br>
+## 📌 Contributors
+|전채연|신민선|김민경|
+|------|---|---|
+|[b1urrrr](https://github.com/b1urrrr)|[flora7883](https://github.com/flora7883)|[cloudwoon](https://github.com/cloudwoon)|
+|팀장, 로그인, 홈, |회원가입, 커뮤니티, 점호 확인, |디자인, |
 
 ## 📌 References
-- [수정마을 발표 자료](https://github.com/b1urrrr/TheBluePlanet/files/9537863/default.pdf)
-- [▶ 수정마을 시연영상](https://user-images.githubusercontent.com/70993562/189418286-766a0428-2771-4b2f-a503-8f55df8673a2.mp4)
 - [수정마을 플레이 스토어](https://play.google.com/store/apps/details?id=kr.co.sujungvillage)
+- [수정마을 발표 자료](https://github.com/b1urrrr/TheBluePlanet/files/9537863/default.pdf)
+- [▶ 수정마을 시연영상 ver1](https://user-images.githubusercontent.com/70993562/189418286-766a0428-2771-4b2f-a503-8f55df8673a2.mp4)
 
 <br>
 
-## 📌 개인정보처리방침
+## 📌 Project Introduction
+### Explain
+수정마을은 여러 서비스를 거쳐 복잡하게 이루어지던 기존 성신여대의기숙사 관리 시스템을 하나의 서비스로 통합하여 기숙사 관리자의부담을 덜고 재사생들이 더욱 편리하게 생활할 수 있도록 지원하는 것을목표로 한다. 수정마을에는 두 가지 버전이 존재한다. 기숙사에서생활하는 학생들이 사용하는 “재사생 버전”과 재사생을 모니터링하고기숙사를 운영 및 관리하는 “관리자 버전”이 있다. 두 앱은 기능과 데이터베이스 접근 권한이 다르며 서로상호작용하며 운영된다.
+<br>
+<img src="https://user-images.githubusercontent.com/65242294/231141897-b1e389f0-184b-41b8-9d6c-1f9a4c99f90a.png width="200" height="400"/>
+<br>
+본 시스템은 재사생과 관리자가 위와 같은 형태로 상호작용 하도록 구현된다. 관리자는 기존 기숙사 시스템을 조사한 결과를 바탕으로 기숙사 담당 관리자와 전체 관리자로 구분한다. 기숙사 담당 관리자는자신이 담당한 기숙사 재사생들의 QnA, 점호를 처리한다. 이 모든 처리 과정을 전체 관리자가 한눈에조회할 수 있으며 직접 재사생의 QnA에 답변하거나 점호를 처리할 수 있다.
+### Technical Stack
+Android Studio, Kotlin, Retrofit, Firebase, coroutine
+### Service Architecture
+이미지
+### Crucial function
+이미지
+
+<details>
+<summary>📌 Commit Message Convention </summary>
+<div markdown="1">       
+- ➕ [ADD] : FEAT 이외의 부수적인 코드, 라이브러리, 파일 추가<br>
+- ✅ [MOD] : 코드 수정 및 내부 파일 수정<br>
+- ✨ [FEAT] : 새로운 기능 구현<br>
+- 🔀 [MERGE] : 다른 브랜치와 MERGE<br>
+- 🔨 [FIX] : 버그 및 오류 해결<br>
+- 🚑️ [HOTFIX] : issue에서 문의된 급한 버그 및 오류 해결<br>
+- ⚰️ [DEL] : 쓸모없는 코드나 파일 삭제<br>
+- 📝 [DOCS] : README 등의 문서 개정<br>
+- ✏️ [CORRECT] : 문법의 오류나 타입의 변경, 이름 변경 등의 작은 수정<br>
+- 🚚 [MOVE] : 프로젝트 내 파일 또는 코드의 이동<br>
+- ⏪️ [RENAME] : 파일 이름 변경<br>
+- ♻️ [REFACTOR] : 전면 수정<br>
+
+</div>
+</details>
+<details>
+<summary>📌 개인정보처리방침</summary>
+<div markdown="1">       
+
 ```
 < 수정마을 >('https://github.com/SujungVillage/SujungVillage-Use'이하 '수정마을')은(는) 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.
 
@@ -191,3 +218,7 @@
 
 예시 ) - 20XX. X. X ~ 20XX. X. X 적용 (클릭)
 ```
+
+</div>
+</details>
+
