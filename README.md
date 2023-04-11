@@ -16,19 +16,29 @@
 <br>
 
 ## 📌 Project Introduction
-### Explain
-수정마을은 여러 서비스를 거쳐 복잡하게 이루어지던 기존 성신여대의기숙사 관리 시스템을 하나의 서비스로 통합하여 기숙사 관리자의부담을 덜고 재사생들이 더욱 편리하게 생활할 수 있도록 지원하는 것을목표로 한다. 수정마을에는 두 가지 버전이 존재한다. 기숙사에서생활하는 학생들이 사용하는 “재사생 버전”과 재사생을 모니터링하고기숙사를 운영 및 관리하는 “관리자 버전”이 있다. 두 앱은 기능과 데이터베이스 접근 권한이 다르며 서로상호작용하며 운영된다.
+### ✏️Explain
+수정마을은 여러 서비스를 거쳐 복잡하게 이루어지던 기존 성신여대의기숙사 관리 시스템을 하나의 서비스로 통합하여 기숙사 관리자의부담을 덜고 재사생들이 더욱 편리하게 생활할 수 있도록 지원하는 것을목표로 한다.
 <br>
-<img src="https://user-images.githubusercontent.com/65242294/231141897-b1e389f0-184b-41b8-9d6c-1f9a4c99f90a.png width="200" height="400"/>
-<br>
-본 시스템은 재사생과 관리자가 위와 같은 형태로 상호작용 하도록 구현된다. 관리자는 기존 기숙사 시스템을 조사한 결과를 바탕으로 기숙사 담당 관리자와 전체 관리자로 구분한다. 기숙사 담당 관리자는자신이 담당한 기숙사 재사생들의 QnA, 점호를 처리한다. 이 모든 처리 과정을 전체 관리자가 한눈에조회할 수 있으며 직접 재사생의 QnA에 답변하거나 점호를 처리할 수 있다.
-### Technical Stack
-Android Studio, Kotlin, Retrofit, Firebase, coroutine
-### Service Architecture
-이미지
-### Crucial function
-이미지
+<img src="https://user-images.githubusercontent.com/65242294/231141897-b1e389f0-184b-41b8-9d6c-1f9a4c99f90a.png" width="50%" height="50%"/>
 
+### ✏️Technical Stack
+Android Studio, Kotlin, Retrofit, Firebase, coroutine
+### ✏️Service Architecture
+<img src="https://user-images.githubusercontent.com/65242294/231144831-0dc2acc4-0bc9-45ac-893e-367264d65130.png" width="80%" height="80%"/>
+
+### ✏️Crucial function
+외박
+<br>
+점호
+<br>
+공지사항
+<br>
+상벌점
+<br>
+익명
+커뮤니티
+<br>
+FAQ QnA 
 <details>
 <summary>📌 Commit Message Convention </summary>
 <div markdown="1">       
@@ -47,6 +57,7 @@ Android Studio, Kotlin, Retrofit, Firebase, coroutine
 
 </div>
 </details>
+
 <details>
 <summary>📌 개인정보처리방침</summary>
 <div markdown="1">       
