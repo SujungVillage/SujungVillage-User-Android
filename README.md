@@ -6,13 +6,14 @@
 |전채연|신민선|김민경|
 |------|---|---|
 |[b1urrrr](https://github.com/b1urrrr)|[flora7883](https://github.com/flora7883)|[cloudwoon](https://github.com/cloudwoon)|
-|팀장, 로그인, 홈(캘린더), 외박, 점호 및 점호 확인, 공지사항, 상벌점 조회 및 부여, FAQ, QnA, 설정, 알림|회원가입, 커뮤니티, 점호 확인|디자인|
+|팀장, 로그인, 홈(캘린더), 외박, 점호 및 점호 확인, 공지사항, 상벌점 조회 및 부여, FAQ, QnA, 설정, 알림|회원가입, 커뮤니티, 점호 및 점호 확인|디자인|
 <br>
 
 ## 📌 References
 - [수정마을 플레이 스토어](https://play.google.com/store/apps/details?id=kr.co.sujungvillage)
 - [수정마을 발표 자료](https://github.com/b1urrrr/TheBluePlanet/files/9537863/default.pdf)
-- [▶ 수정마을 시연영상 ver1](https://user-images.githubusercontent.com/70993562/189418286-766a0428-2771-4b2f-a503-8f55df8673a2.mp4)
+- [▶ 수정마을 시연영상 릴리즈 버전](https://user-images.githubusercontent.com/65242294/231415807-a68f83c6-5034-4182-a3e7-22da6a95240e.mp4)
+- [▶ 수정마을 시연영상 베타 버전](https://user-images.githubusercontent.com/70993562/189418286-766a0428-2771-4b2f-a503-8f55df8673a2.mp4)
 
 <br>
 
@@ -31,7 +32,10 @@
 <img src="https://img.shields.io/badge/android-3DDC84?style=for-the-badge&logo=android&logoColor=white">
 <img src="https://img.shields.io/badge/kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white">
 <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=Firebase&logoColor=black">
-
+#### - Retrofit
+#### - Logging intercepter
+#### - Material-Calendarview
+#### - Item Decorator
 <br>
 
 ### ✏️Service Architecture
